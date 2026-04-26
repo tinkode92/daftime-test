@@ -242,107 +242,17 @@ function AccountingContent() {
   );
 }
 
-type CFOPlan = {
-  name: string;
-  features: string[];
-};
-
-const cfoPlans: CFOPlan[] = [
-  {
-    name: "Financial reporting\nand management (UAE)",
-    features: [
-      "KPI dashboards",
-      "Cost & Margin Analysis",
-      "Break-even point",
-      "Steering committee meetings",
-    ],
-  },
-  {
-    name: "Office Management Dubai",
-    features: [
-      "Dedicated administrative assistant",
-      "Administrative management, purchasing, sales & banking",
-      "Recruitment support",
-      "Executive schedule management",
-    ],
-  },
-  {
-    name: "CFO Part-Time UAE",
-    features: [
-      "Financial reporting, cost analysis",
-      "Digitization of the finance function",
-      "Strategic support",
-      "Due diligence",
-    ],
-  },
-];
-
 function CFOContent() {
   return (
-    <>
-      {/* Title + description */}
-      <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_376px]">
-        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
-          <h3 className="max-w-[471px] text-[28px] leading-tight tracking-tight text-black">
-            Strategic consulting &amp; Flexible financial management
-          </h3>
-        </div>
-        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
-          <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
-            Our advisory and part-time CFO (fractional CFO) services provide you with the expertise you need to drive growth, optimize performance, and improve financial visibility in the United Arab Emirates.
-          </p>
-        </div>
-      </div>
-
-      {/* Subtitle bar */}
-      <div className="rounded-2xl bg-white px-8 py-6">
-        <p className="text-[18px] tracking-tight text-black">Our accounting packages</p>
-      </div>
-
-      {/* 3 cards */}
-      <div className="grid grid-cols-1 gap-1 md:grid-cols-3">
-        {cfoPlans.map((plan) => (
-          <CFOCard key={plan.name} plan={plan} />
-        ))}
-      </div>
-
-      {/* Empty footer bar */}
-      <div className="h-[82px] rounded-2xl bg-white" />
-    </>
-  );
-}
-
-function CFOCard({ plan }: { plan: CFOPlan }) {
-  return (
-    <div className="flex h-[318px] flex-col gap-6 rounded-2xl bg-white p-2">
-      <div className="flex flex-col gap-3 px-2 pt-2">
-        <div className="flex size-10 items-center justify-center rounded-xl bg-daftime-yellow">
-          <BuildingIcon />
-        </div>
-        <p className="label-mono whitespace-pre-line text-black">{plan.name}</p>
-      </div>
-
-      <ul className="flex flex-col gap-4 px-2 pb-2">
-        {plan.features.map((feature) => (
-          <li key={feature} className="flex items-start gap-3">
-            <CheckCircle className="mt-0.5 size-5 shrink-0 fill-black" />
-            <span className="text-[14px] leading-tight tracking-tight text-black">
-              {feature}
-            </span>
-          </li>
-        ))}
-      </ul>
+    <div className="rounded-2xl bg-white px-8 py-16 text-center">
+      <p className="label-mono text-daftime-gray-text">CFO &amp; Advisory services</p>
+      <p className="mt-4 text-[20px] tracking-tight text-black">
+        Strategic finance leadership tailored to your scale.
+      </p>
+      <p className="mx-auto mt-3 max-w-[560px] text-[14px] leading-relaxed text-daftime-gray-mute">
+        From budget design to investor reporting, our CFO &amp; advisory services provide the rigor and clarity your business needs to grow with confidence. Detailed packages are available on request.
+      </p>
     </div>
-  );
-}
-
-function BuildingIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="size-5 fill-none stroke-white" strokeWidth="1.5" aria-hidden>
-      <path d="M3 21V7a2 2 0 0 1 2-2h6V3h8v18" strokeLinejoin="round" />
-      <path d="M3 21h18" strokeLinecap="round" />
-      <path d="M7 9h2M7 13h2M7 17h2M14 9h2M14 13h2M14 17h2" strokeLinecap="round" />
-    </svg>
   );
 }
 
