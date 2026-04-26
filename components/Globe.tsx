@@ -13,9 +13,9 @@ type Props = {
 };
 
 const MARKERS: COBEOptions["markers"] = [
-  { location: [25.276987, 55.296249], size: 0.08 }, // Dubai
-  { location: [48.8566, 2.3522], size: 0.06 }, // Paris (France)
-  { location: [38.7223, -9.1393], size: 0.06 }, // Lisbon (Portugal)
+  { location: [25.276987, 55.296249], size: 0.04 }, // Dubai
+  { location: [48.8566, 2.3522], size: 0.035 }, // Paris (France)
+  { location: [38.7223, -9.1393], size: 0.035 }, // Lisbon (Portugal)
 ];
 
 export default function Globe({
@@ -68,6 +68,7 @@ export default function Globe({
       markerColor: [214 / 255, 179 / 255, 3 / 255],
       glowColor: [1, 1, 1],
       markers: MARKERS,
+      markerElevation: 0,
       ...config,
       width: widthRef.current * dpr,
       height: widthRef.current * dpr,

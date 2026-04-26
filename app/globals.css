@@ -6,17 +6,21 @@ html,
 body {
   background: #ffffff;
   color: #0d0d0d;
+  width: 100%;
+  max-width: 100%;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
+  position: relative;
 }
 
 @layer components {
@@ -104,10 +108,18 @@ body {
   transform: scale(0.96);
 }
 .reveal[data-variant="left"] {
-  transform: translateX(-32px);
+  transform: translate3d(-16px, 0, 0);
 }
 .reveal[data-variant="right"] {
-  transform: translateX(32px);
+  transform: translate3d(16px, 0, 0);
+}
+@media (min-width: 768px) {
+  .reveal[data-variant="left"] {
+    transform: translate3d(-32px, 0, 0);
+  }
+  .reveal[data-variant="right"] {
+    transform: translate3d(32px, 0, 0);
+  }
 }
 .reveal[data-shown="true"] {
   opacity: 1;
