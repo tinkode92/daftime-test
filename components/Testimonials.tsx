@@ -16,22 +16,21 @@ type Testimonial = {
   year: string;
 };
 
-const featured: Testimonial = {
-  id: "imrane",
-  title: "We work with the Daftime firm for all of our companies based in Dubai",
-  avatar: "/assets/testi-1-avatar.png",
-  bgImage: "/assets/testi-1-bg.png",
-  quote:
-    "We work with the Daftime firm for all of our companies based in Dubai, and we would like to highlight the exceptional quality of their support. A very professional and proactive team, Accessible, precise, and competent follow-up, Clear, tailored, and business-oriented advice. Special mention to Sami, a dedicated person who always stays up to date with regulatory developments and supports us with seriousness and responsiveness.",
-  closing:
-    "We highly recommend Daftime without hesitation and truly appreciate their human and expert approach.",
-  founder: "Imrane Haniff",
-  brand: "Café Crème",
-  location: "Dubai",
-  year: "2019",
-};
-
-const collapsed: Testimonial[] = [
+const testimonials: Testimonial[] = [
+  {
+    id: "imrane",
+    title: "We work with the Daftime firm for all of our companies based in Dubai",
+    avatar: "/assets/testi-1-avatar.png",
+    bgImage: "/assets/testi-1-bg.png",
+    quote:
+      "We work with the Daftime firm for all of our companies based in Dubai, and we would like to highlight the exceptional quality of their support. A very professional and proactive team, Accessible, precise, and competent follow-up, Clear, tailored, and business-oriented advice. Special mention to Sami, a dedicated person who always stays up to date with regulatory developments and supports us with seriousness and responsiveness.",
+    closing:
+      "We highly recommend Daftime without hesitation and truly appreciate their human and expert approach.",
+    founder: "Imrane Haniff",
+    brand: "Café Crème",
+    location: "Dubai",
+    year: "2019",
+  },
   {
     id: "rashid",
     title: "Was struggling to find a good accounting company",
@@ -77,7 +76,7 @@ const collapsed: Testimonial[] = [
 ];
 
 export default function Testimonials() {
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>("imrane");
 
   return (
     <section className="bg-white px-12 py-16">
@@ -99,20 +98,20 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Featured testimonial (always open) */}
-        <div className="mt-16">
-          <FeaturedTestimonial t={featured} />
-        </div>
-
-        {/* Collapsible testimonials */}
-        <div className="mt-10 flex flex-col">
-          {collapsed.map((t) => {
+        {/* Testimonial accordion */}
+        <div className="mt-16 flex flex-col">
+          {testimonials.map((t, idx) => {
             const isOpen = openId === t.id;
             return (
-              <div key={t.id} className="border-t border-black/10 py-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-5">
-                    <div className="size-11 overflow-hidden rounded-md">
+              <div
+                key={t.id}
+                className={
+                  "py-6 " + (idx > 0 ? "border-t border-black/10" : "")
+                }
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex min-w-0 items-center gap-5">
+                    <div className="size-11 shrink-0 overflow-hidden rounded-md">
                       <Image
                         src={t.avatar}
                         alt=""
@@ -130,7 +129,7 @@ export default function Testimonials() {
                     aria-expanded={isOpen}
                     aria-controls={`testimonial-${t.id}`}
                     onClick={() => setOpenId(isOpen ? null : t.id)}
-                    className="flex size-12 items-center justify-center rounded-xl border border-daftime-yellow bg-daftime-cream transition-colors hover:bg-daftime-cream/80"
+                    className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-daftime-yellow bg-daftime-cream transition-colors hover:bg-daftime-cream/80"
                   >
                     {isOpen ? <MinusIcon /> : <PlusIcon />}
                   </button>
@@ -146,7 +145,7 @@ export default function Testimonials() {
                   }
                 >
                   <div className="min-h-0">
-                    <FeaturedTestimonial t={t} />
+                    <ExpandedTestimonial t={t} />
                   </div>
                 </div>
               </div>
@@ -158,7 +157,7 @@ export default function Testimonials() {
   );
 }
 
-function FeaturedTestimonial({ t }: { t: Testimonial }) {
+function ExpandedTestimonial({ t }: { t: Testimonial }) {
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
