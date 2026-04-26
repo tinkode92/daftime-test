@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Reveal from "./Reveal";
 
 type Testimonial = {
   id: string;
@@ -79,39 +80,43 @@ export default function Testimonials() {
   const [openId, setOpenId] = useState<string | null>("imrane");
 
   return (
-    <section className="bg-white px-12 py-16">
+    <section className="bg-white px-4 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
       <div className="mx-auto max-w-[1176px]">
         {/* Header */}
-        <div className="flex flex-col gap-3">
+        <Reveal className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
             <div className="size-1 bg-black" />
             <p className="label-mono text-[#070a33]">Testimonial</p>
           </div>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <h2 className="h-display max-w-[700px] text-black">
-              Trusted by entrepreneurs<br />
-              around the world
+              Trusted by entrepreneurs
+              <br className="hidden sm:block" />
+              {" around the world"}
             </h2>
-            <p className="max-w-[412px] text-[16px] leading-relaxed tracking-tight text-daftime-gray-text">
-              Every mission is a collaboration, every achievement, a shared effort. Their positive feedback reminds us why we do what we do: to create trust, clarity, and long-term value.
+            <p className="max-w-[412px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text sm:text-[16px]">
+              Every mission is a collaboration, every achievement, a shared
+              effort. Their positive feedback reminds us why we do what we do:
+              to create trust, clarity, and long-term value.
             </p>
           </div>
-        </div>
+        </Reveal>
 
         {/* Testimonial accordion */}
-        <div className="mt-16 flex flex-col">
+        <div className="mt-12 flex flex-col sm:mt-16">
           {testimonials.map((t, idx) => {
             const isOpen = openId === t.id;
             return (
-              <div
+              <Reveal
                 key={t.id}
+                delay={idx * 80}
                 className={
-                  "py-6 " + (idx > 0 ? "border-t border-black/10" : "")
+                  "py-5 sm:py-6 " + (idx > 0 ? "border-t border-black/10" : "")
                 }
               >
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex min-w-0 items-center gap-5">
-                    <div className="size-11 shrink-0 overflow-hidden rounded-md">
+                  <div className="flex min-w-0 items-center gap-4 sm:gap-5">
+                    <div className="size-10 shrink-0 overflow-hidden rounded-md sm:size-11">
                       <Image
                         src={t.avatar}
                         alt=""
@@ -120,7 +125,7 @@ export default function Testimonials() {
                         className="size-full object-cover"
                       />
                     </div>
-                    <p className="text-[24px] leading-tight tracking-tight text-black">
+                    <p className="text-[18px] leading-tight tracking-tight text-black sm:text-[22px] md:text-[24px]">
                       {t.title}
                     </p>
                   </div>
@@ -129,16 +134,21 @@ export default function Testimonials() {
                     aria-expanded={isOpen}
                     aria-controls={`testimonial-${t.id}`}
                     onClick={() => setOpenId(isOpen ? null : t.id)}
-                    className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-daftime-yellow bg-daftime-cream transition-colors hover:bg-daftime-cream/80"
+                    className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-daftime-yellow bg-daftime-cream transition-all duration-300 hover:scale-110 hover:bg-daftime-cream/80 sm:size-12"
                   >
-                    {isOpen ? <MinusIcon /> : <PlusIcon />}
+                    <span
+                      className="inline-flex transition-transform duration-300"
+                      style={{ transform: isOpen ? "rotate(180deg)" : "none" }}
+                    >
+                      {isOpen ? <MinusIcon /> : <PlusIcon />}
+                    </span>
                   </button>
                 </div>
 
                 <div
                   id={`testimonial-${t.id}`}
                   className={
-                    "grid overflow-hidden transition-all duration-300 ease-out " +
+                    "grid overflow-hidden transition-all duration-500 ease-out " +
                     (isOpen
                       ? "mt-6 grid-rows-[1fr] opacity-100"
                       : "grid-rows-[0fr] opacity-0")
@@ -148,7 +158,7 @@ export default function Testimonials() {
                     <ExpandedTestimonial t={t} />
                   </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
@@ -161,21 +171,21 @@ function ExpandedTestimonial({ t }: { t: Testimonial }) {
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
-        <div className="relative h-[377px] overflow-hidden rounded-xl">
+        <div className="relative h-[260px] overflow-hidden rounded-xl sm:h-[330px] lg:h-[377px]">
           <Image
             src={t.bgImage}
             alt=""
             fill
             sizes="(min-width: 1024px) 580px, 100vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
         </div>
-        <div className="relative h-[377px] overflow-hidden rounded-xl bg-[#f4f4f4] p-6">
-          <span className="absolute left-6 top-1 text-[64px] leading-none text-black">
+        <div className="relative min-h-[300px] overflow-hidden rounded-xl bg-[#f4f4f4] p-5 sm:p-6 lg:h-[377px]">
+          <span className="absolute left-5 top-1 text-[56px] leading-none text-black sm:left-6 sm:text-[64px]">
             &ldquo;
           </span>
-          <p className="absolute bottom-6 left-6 right-6 text-[18px] leading-relaxed tracking-tight text-daftime-gray-text">
+          <p className="mt-12 text-[15px] leading-relaxed tracking-tight text-daftime-gray-text sm:mt-14 sm:text-[17px] lg:absolute lg:bottom-6 lg:left-6 lg:right-6 lg:mt-0 lg:text-[18px]">
             &ldquo;{t.quote}
             <br />
             <br />
@@ -184,20 +194,20 @@ function ExpandedTestimonial({ t }: { t: Testimonial }) {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-6 text-[24px] tracking-tight">
-        <div className="flex items-center gap-6">
+      <div className="grid grid-cols-2 gap-y-4 text-[16px] tracking-tight sm:flex sm:flex-wrap sm:items-center sm:justify-between sm:gap-6 sm:text-[20px] md:text-[24px]">
+        <div className="flex items-center gap-3 sm:gap-6">
           <span className="text-[#919191]">Founder</span>
           <span className="text-black">{t.founder}</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <span className="text-[#919191]">Brand</span>
           <span className="text-black">{t.brand}</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <span className="text-[#919191]">Location</span>
           <span className="text-black">{t.location}</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <span className="text-[#919191]">Year</span>
           <span className="text-black">{t.year}</span>
         </div>

@@ -15,20 +15,20 @@ const brands = [
 export default function BrandMarquee() {
   return (
     <div className="overflow-hidden">
-      <div className="marquee-track gap-12 px-6">
+      <div className="marquee-track gap-8 px-4 sm:gap-12 sm:px-6">
         {[...brands, ...brands].map((brand, idx) => (
           <div
             key={`${brand.name}-${idx}`}
-            className="flex shrink-0 items-center gap-2 px-3 py-3"
+            className="flex shrink-0 items-center gap-2 px-2 py-2 transition-transform duration-300 hover:scale-110 sm:px-3 sm:py-3"
           >
             <Image
               src={brand.icon}
               alt=""
               width={22}
               height={22}
-              className="h-[22px] w-[22px] object-contain"
+              className="h-[20px] w-[20px] object-contain sm:h-[22px] sm:w-[22px]"
             />
-            <span className="whitespace-nowrap text-[18px] font-medium text-white">
+            <span className="whitespace-nowrap text-[16px] font-medium text-white sm:text-[18px]">
               {brand.name}
               <span className="ml-0.5 align-super text-[10px]">™</span>
             </span>

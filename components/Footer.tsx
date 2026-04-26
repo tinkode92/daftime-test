@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-white p-4">
-      <div className="relative h-[254px] overflow-hidden rounded-2xl bg-daftime-yellow px-6 py-10">
+    <footer className="bg-white p-2 sm:p-4">
+      <div className="relative overflow-hidden rounded-2xl bg-daftime-yellow px-5 py-8 sm:px-6 sm:py-10 md:h-[254px]">
         <div className="pointer-events-none absolute inset-0 -translate-y-[40%] opacity-[0.06]">
           <Image
             src="/assets/logo-daftime.png"
@@ -14,29 +14,39 @@ export default function Footer() {
           />
         </div>
 
-        <div className="relative flex h-full flex-col justify-between">
-          <div className="flex items-center justify-between">
+        <div className="relative flex h-full flex-col justify-between gap-8 md:gap-0">
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
             <Image
               src="/assets/logo-wordmark.png"
               alt="Daftime"
               width={144}
               height={40}
-              className="h-10 w-auto object-contain"
+              className="h-9 w-auto object-contain sm:h-10"
             />
-            <p className="text-[16px] uppercase tracking-wider text-black">
+            <p className="text-[12px] uppercase tracking-wider text-black sm:text-[14px] md:text-[16px]">
               © 2026 Daftime All Rights Reserved
             </p>
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-6 text-[16px] uppercase tracking-wider text-black md:flex-row md:items-end">
-            <div className="flex items-center gap-12">
-              <a href="#" className="hover:underline">Instagram</a>
-              <a href="#" className="hover:underline">LinkedIn</a>
-              <a href="#" className="hover:underline">Youtube</a>
+          <div className="flex flex-col items-start justify-between gap-6 text-[14px] uppercase tracking-wider text-black sm:text-[16px] md:flex-row md:items-end">
+            <div className="flex flex-wrap items-center gap-6 sm:gap-12">
+              <a href="#" className="transition-opacity hover:opacity-60">
+                Instagram
+              </a>
+              <a href="#" className="transition-opacity hover:opacity-60">
+                LinkedIn
+              </a>
+              <a href="#" className="transition-opacity hover:opacity-60">
+                Youtube
+              </a>
             </div>
-            <div className="flex items-center gap-12">
-              <a href="#" className="hover:underline">Privacy Policy</a>
-              <a href="#" className="hover:underline">Terms &amp; Conditions</a>
+            <div className="flex flex-wrap items-center gap-6 sm:gap-12">
+              <a href="#" className="transition-opacity hover:opacity-60">
+                Privacy Policy
+              </a>
+              <a href="#" className="transition-opacity hover:opacity-60">
+                Terms &amp; Conditions
+              </a>
               <span>© 2025 Daftime</span>
             </div>
           </div>

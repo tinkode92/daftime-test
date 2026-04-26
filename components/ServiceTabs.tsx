@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Reveal from "./Reveal";
 
 type TabKey = "legal" | "accounting" | "cfo";
 
@@ -137,42 +138,51 @@ export default function ServiceTabs() {
   const [active, setActive] = useState<TabKey>("legal");
 
   return (
-    <section id="services" className="bg-daftime-gray-bg px-12 py-20">
+    <section
+      id="services"
+      className="bg-daftime-gray-bg px-4 py-12 sm:px-6 sm:py-16 md:px-12 md:py-20"
+    >
       <div className="mx-auto max-w-[1176px]">
         {/* Header */}
-        <div className="flex flex-col items-start justify-between gap-12 md:flex-row md:items-end">
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end md:gap-12">
+          <Reveal className="flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <div className="size-1 bg-black" />
               <p className="label-mono text-black">Services</p>
             </div>
-            <p className="max-w-[506px] text-[16px] leading-relaxed tracking-tight text-daftime-gray-text">
-              Every mission is a collaboration, every achievement, a shared effort. Their positive feedback reminds us why we do what we do: to create trust, clarity, and long-term value.
+            <p className="max-w-[506px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text sm:text-[16px]">
+              Every mission is a collaboration, every achievement, a shared
+              effort. Their positive feedback reminds us why we do what we do:
+              to create trust, clarity, and long-term value.
             </p>
-          </div>
-          <h2 className="h-display max-w-[555px] text-black">
-            Supporting entrepreneurs<br />
-            wherever they operate
-          </h2>
+          </Reveal>
+          <Reveal as="h2" delay={120} className="block">
+            <span className="h-display block max-w-[555px] text-black">
+              Supporting entrepreneurs
+              <br />
+              wherever they operate
+            </span>
+          </Reveal>
         </div>
 
         {/* Tabs */}
-        <div className="mt-12 flex flex-col gap-1">
-          <div className="flex items-center gap-5 rounded-2xl bg-white px-8 py-6">
+        <div className="mt-8 flex flex-col gap-1 sm:mt-12">
+          <Reveal className="flex flex-wrap items-center gap-2 rounded-2xl bg-white px-4 py-4 sm:gap-5 sm:px-8 sm:py-6">
             {tabs.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActive(tab.key)}
                 className={
-                  active === tab.key
-                    ? "flex items-center justify-center rounded-xl bg-black px-5 py-2.5 text-[18px] tracking-tight text-white transition-colors"
-                    : "flex items-center justify-center rounded-md px-2.5 py-2.5 text-[18px] tracking-tight text-daftime-dark transition-colors hover:bg-black/[0.04]"
+                  "transition-all duration-300 " +
+                  (active === tab.key
+                    ? "flex items-center justify-center rounded-xl bg-black px-4 py-2 text-[15px] tracking-tight text-white sm:px-5 sm:py-2.5 sm:text-[18px]"
+                    : "flex items-center justify-center rounded-md px-2.5 py-2 text-[15px] tracking-tight text-daftime-dark hover:bg-black/5 sm:py-2.5 sm:text-[18px]")
                 }
               >
                 {tab.label}
               </button>
             ))}
-          </div>
+          </Reveal>
 
           {active === "legal" && <LegalContent />}
           {active === "accounting" && <AccountingContent />}
@@ -187,26 +197,39 @@ function LegalContent() {
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_358px]">
-        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
-          <h3 className="max-w-[434px] text-[28px] leading-tight tracking-tight text-black">
-            Create and structure your company in the Emirates securely and compliantly
+        <Reveal className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]">
+          <h3 className="max-w-[434px] text-[22px] leading-tight tracking-tight text-black sm:text-[26px] md:text-[28px]">
+            Create and structure your company in the Emirates securely and
+            compliantly
           </h3>
-        </div>
-        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
+        </Reveal>
+        <Reveal
+          delay={120}
+          className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]"
+        >
           <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
-            At Daftime, we support entrepreneurs through every stage of setting up a business in Dubai: analyzing your project, choosing the best structure (Mainland/Freezone), legal and tax optimization, and full compliance.
+            At Daftime, we support entrepreneurs through every stage of setting
+            up a business in Dubai: analyzing your project, choosing the best
+            structure (Mainland/Freezone), legal and tax optimization, and full
+            compliance.
           </p>
-        </div>
+        </Reveal>
       </div>
 
-      <div className="rounded-2xl bg-white px-8 py-6">
-        <p className="text-[18px] tracking-tight text-black">Our Business Setup services include:</p>
-      </div>
+      <Reveal className="rounded-2xl bg-white px-5 py-4 sm:px-8 sm:py-6">
+        <p className="text-[16px] tracking-tight text-black sm:text-[18px]">
+          Our Business Setup services include:
+        </p>
+      </Reveal>
 
       <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
-        {legalCards.map((c) => (
-          <div key={c.title} className="flex flex-col rounded-2xl bg-white p-2">
-            <div className="relative h-[170px] overflow-hidden rounded-xl bg-[#f7f7f7]">
+        {legalCards.map((c, idx) => (
+          <Reveal
+            key={c.title}
+            delay={idx * 100}
+            className="card-hover flex flex-col rounded-2xl bg-white p-2"
+          >
+            <div className="relative h-[160px] overflow-hidden rounded-xl bg-[#f7f7f7] sm:h-[170px]">
               <Illustration kind={c.illustration} />
             </div>
             <div className="flex flex-col gap-2 px-2 pt-4 pb-3">
@@ -223,18 +246,20 @@ function LegalContent() {
                 {c.description}
               </p>
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white px-8 py-4">
-        <span className="rounded-full border border-daftime-cream-border bg-daftime-cream px-4 py-2 text-[16px] tracking-tight text-[#776509]">
+      <Reveal className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white px-5 py-4 sm:px-8">
+        <span className="rounded-full border border-daftime-cream-border bg-daftime-cream px-4 py-2 text-[15px] tracking-tight text-[#776509] sm:text-[16px]">
           Tailored support
         </span>
-        <p className="max-w-[504px] text-[16px] leading-relaxed tracking-tight text-[#010101]">
-          All our services are offered on a quote basis, ensuring a secure, compliant, and perfectly tailored establishment in Dubai that meets your objectives.
+        <p className="max-w-[504px] text-[15px] leading-relaxed tracking-tight text-[#010101] sm:text-[16px]">
+          All our services are offered on a quote basis, ensuring a secure,
+          compliant, and perfectly tailored establishment in Dubai that meets
+          your objectives.
         </p>
-      </div>
+      </Reveal>
     </>
   );
 }
@@ -243,29 +268,41 @@ function AccountingContent() {
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_482px]">
-        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
-          <h3 className="max-w-[471px] text-[28px] leading-tight tracking-tight text-black">
-            Compliant, optimized accounting and tax management tailored to UAE standards
+        <Reveal className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]">
+          <h3 className="max-w-[471px] text-[22px] leading-tight tracking-tight text-black sm:text-[26px] md:text-[28px]">
+            Compliant, optimized accounting and tax management tailored to UAE
+            standards
           </h3>
-        </div>
-        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
+        </Reveal>
+        <Reveal
+          delay={120}
+          className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]"
+        >
           <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
-            At Daftime, we provide comprehensive accounting and tax management services in accordance with UAE requirements: financial statements in accordance with local standards, VAT (UAE VAT), corporate tax, reporting, and operational monitoring. Our services are tailored to the volume of transactions and the level of support required.
+            At Daftime, we provide comprehensive accounting and tax management
+            services in accordance with UAE requirements: financial statements
+            in accordance with local standards, VAT (UAE VAT), corporate tax,
+            reporting, and operational monitoring. Our services are tailored to
+            the volume of transactions and the level of support required.
           </p>
-        </div>
+        </Reveal>
       </div>
 
-      <div className="rounded-2xl bg-white px-8 py-6">
-        <p className="text-[18px] tracking-tight text-black">Our accounting packages</p>
-      </div>
+      <Reveal className="rounded-2xl bg-white px-5 py-4 sm:px-8 sm:py-6">
+        <p className="text-[16px] tracking-tight text-black sm:text-[18px]">
+          Our accounting packages
+        </p>
+      </Reveal>
 
       <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
-        {accountingPlans.map((plan) => (
-          <PricingCard key={plan.name} plan={plan} />
+        {accountingPlans.map((plan, idx) => (
+          <Reveal key={plan.name} delay={idx * 100}>
+            <PricingCard plan={plan} />
+          </Reveal>
         ))}
       </div>
 
-      <div className="h-[82px] rounded-2xl bg-white" />
+      <div className="h-[60px] rounded-2xl bg-white sm:h-[82px]" />
     </>
   );
 }
@@ -274,29 +311,38 @@ function CFOContent() {
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_376px]">
-        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
-          <h3 className="max-w-[471px] text-[28px] leading-tight tracking-tight text-black">
+        <Reveal className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]">
+          <h3 className="max-w-[471px] text-[22px] leading-tight tracking-tight text-black sm:text-[26px] md:text-[28px]">
             Strategic consulting &amp; Flexible financial management
           </h3>
-        </div>
-        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
+        </Reveal>
+        <Reveal
+          delay={120}
+          className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]"
+        >
           <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
-            Our advisory and part-time CFO (fractional CFO) services provide you with the expertise you need to drive growth, optimize performance, and improve financial visibility in the United Arab Emirates.
+            Our advisory and part-time CFO (fractional CFO) services provide you
+            with the expertise you need to drive growth, optimize performance,
+            and improve financial visibility in the United Arab Emirates.
           </p>
-        </div>
+        </Reveal>
       </div>
 
-      <div className="rounded-2xl bg-white px-8 py-6">
-        <p className="text-[18px] tracking-tight text-black">Our accounting packages</p>
-      </div>
+      <Reveal className="rounded-2xl bg-white px-5 py-4 sm:px-8 sm:py-6">
+        <p className="text-[16px] tracking-tight text-black sm:text-[18px]">
+          Our accounting packages
+        </p>
+      </Reveal>
 
       <div className="grid grid-cols-1 gap-1 md:grid-cols-3">
-        {cfoPlans.map((plan) => (
-          <CFOCard key={plan.name} plan={plan} />
+        {cfoPlans.map((plan, idx) => (
+          <Reveal key={plan.name} delay={idx * 100}>
+            <CFOCard plan={plan} />
+          </Reveal>
         ))}
       </div>
 
-      <div className="h-[82px] rounded-2xl bg-white" />
+      <div className="h-[60px] rounded-2xl bg-white sm:h-[82px]" />
     </>
   );
 }
@@ -324,15 +370,21 @@ function PricingCard({ plan }: { plan: AccountingPlan }) {
   }[plan.variant];
 
   return (
-    <div className={`flex h-[318px] flex-col gap-6 rounded-2xl p-2 ${palette.bg}`}>
+    <div
+      className={`card-hover flex min-h-[300px] flex-col gap-6 rounded-2xl p-2 sm:h-[318px] ${palette.bg}`}
+    >
       <div className="flex flex-col gap-3 px-2 pt-2">
         <div className="flex items-center gap-3">
-          <div className={`flex size-10 items-center justify-center rounded-xl ${palette.iconBg}`}>
+          <div
+            className={`flex size-10 items-center justify-center rounded-xl ${palette.iconBg}`}
+          >
             <RocketIcon />
           </div>
           <p className={`label-mono ${palette.titleColor}`}>{plan.name}</p>
         </div>
-        <p className={`text-[16px] tracking-tight ${palette.rangeColor}`}>{plan.range}</p>
+        <p className={`text-[16px] tracking-tight ${palette.rangeColor}`}>
+          {plan.range}
+        </p>
       </div>
 
       <ul className="flex flex-col gap-4 px-2 pb-2">
@@ -351,7 +403,7 @@ function PricingCard({ plan }: { plan: AccountingPlan }) {
 
 function CFOCard({ plan }: { plan: CFOPlan }) {
   return (
-    <div className="flex h-[318px] flex-col gap-6 rounded-2xl bg-white p-2">
+    <div className="card-hover flex min-h-[300px] flex-col gap-6 rounded-2xl bg-white p-2 sm:h-[318px]">
       <div className="flex flex-col gap-3 px-2 pt-2">
         <div className="flex size-10 items-center justify-center rounded-xl bg-daftime-yellow">
           <BuildingIcon />
@@ -383,10 +435,18 @@ function RocketIcon() {
 
 function BuildingIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="size-5 fill-none stroke-white" strokeWidth="1.5" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className="size-5 fill-none stroke-white"
+      strokeWidth="1.5"
+      aria-hidden
+    >
       <path d="M3 21V7a2 2 0 0 1 2-2h6V3h8v18" strokeLinejoin="round" />
       <path d="M3 21h18" strokeLinecap="round" />
-      <path d="M7 9h2M7 13h2M7 17h2M14 9h2M14 13h2M14 17h2" strokeLinecap="round" />
+      <path
+        d="M7 9h2M7 13h2M7 17h2M14 9h2M14 13h2M14 17h2"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -433,7 +493,7 @@ function Illustration({ kind }: { kind: IllustrationKind }) {
     return (
       <div className="absolute inset-0 flex items-end justify-center pb-0">
         <div className="relative h-[110px] w-[200px] rounded-t-2xl rounded-b-3xl bg-daftime-yellow/30 shadow-[0_0_0_4px_rgba(235,198,10,0.5)] backdrop-blur-md">
-          <div className="absolute -top-3 left-1/2 size-12 -translate-x-1/2 rounded-full border-4 border-daftime-yellow bg-white shadow-md" />
+          <div className="absolute -top-3 left-1/2 size-12 -translate-x-1/2 rounded-full border-4 border-daftime-yellow bg-white shadow-md spin-slow" />
           <div className="absolute bottom-2 left-1/2 size-7 -translate-x-1/2 rounded-full border-2 border-daftime-yellow bg-white" />
         </div>
       </div>
@@ -442,7 +502,7 @@ function Illustration({ kind }: { kind: IllustrationKind }) {
   return (
     <div className="absolute inset-0 flex items-center justify-center">
       <div className="relative">
-        <div className="absolute -inset-3 rounded-full bg-[#f6efcc] blur-md" />
+        <div className="halo-pulse absolute -inset-3 rounded-full bg-[#f6efcc] blur-md" />
         <div className="relative flex size-[60px] items-center justify-center rounded-full bg-[#f6efcc]">
           <svg viewBox="0 0 24 24" className="size-7 fill-daftime-yellow-dark">
             <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" />
