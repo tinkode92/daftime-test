@@ -1,26 +1,48 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import Reveal from "./Reveal";
 
-const services = [
+type ServiceKey = "legal" | "advisory" | "accounting";
+
+const services: {
+  key: ServiceKey;
+  icon: string;
+  title: string;
+  description: string;
+}[] = [
   {
+    key: "legal",
     icon: "/assets/icon-legal.svg",
     title: "Legal",
     description:
       "From setup to scale: legal solutions that secure your assets and simplify your operations across borders managed by lawyers.",
   },
   {
+    key: "advisory",
     icon: "/assets/icon-advisory.svg",
     title: "Advisory",
     description:
       "Strategy meets execution. We help you make smart decisions, optimize performance, and scale sustainably.",
   },
   {
+    key: "accounting",
     icon: "/assets/icon-accounting.svg",
     title: "Accounting",
     description:
       "Reliable, compliant, and forward-thinking accounting and taxation managed by real chartered accountants, so you can focus on growth while we handle the numbers.",
   },
 ];
+
+// Compass needle natural direction is south-west (lower-left).
+// Rotating counterclockwise (negative deg) moves the tip clockwise around
+// the dial: SW (legal) → S (advisory) → SE (accounting).
+const compassRotation: Record<ServiceKey, number> = {
+  legal: 0,
+  advisory: -45,
+  accounting: -90,
+};
 
 const marqueeWords = [
   "Legal",
@@ -32,6 +54,8 @@ const marqueeWords = [
 ];
 
 export default function Services() {
+  const [active, setActive] = useState<ServiceKey>("legal");
+
   return (
     <section id="what" className="bg-white px-2 pt-3 sm:px-4 sm:pt-4">
       {/* Yellow card with marquee */}
@@ -62,15 +86,25 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Leaf logo */}
+        {/* Compass (interactive: rotates toward the active service card) */}
         <div className="absolute left-1/2 top-[26%] -translate-x-1/2 sm:top-[28%]">
-          <Image
-            src="/assets/yellow-leaf.png"
-            alt=""
-            width={309}
-            height={309}
-            className="size-[140px] object-contain sm:size-[200px] md:size-[309px]"
-          />
+          <div
+            className="size-[140px] sm:size-[200px] md:size-[309px]"
+            style={{
+              transform: `rotate(${compassRotation[active]}deg)`,
+              transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
+              willChange: "transform",
+            }}
+          >
+            <Image
+              src="/assets/compass.svg"
+              alt=""
+              width={309}
+              height={309}
+              className="size-full object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
+              priority={false}
+            />
+          </div>
         </div>
 
         {/* Header */}
@@ -105,23 +139,43 @@ export default function Services() {
             delay={idx * 120}
             className="flex flex-col gap-5 sm:gap-6"
           >
-            <div className="flex items-center gap-4 sm:gap-6">
-              <div className="flex size-16 items-center justify-center overflow-hidden rounded-xl border border-daftime-gray-border transition-transform duration-300 hover:scale-105 sm:size-20">
-                <Image
-                  src={s.icon}
-                  alt=""
-                  width={48}
-                  height={48}
-                  className="size-10 object-contain sm:size-12"
-                />
+            <div
+              role="button"
+              tabIndex={0}
+              onMouseEnter={() => setActive(s.key)}
+              onFocus={() => setActive(s.key)}
+              className={
+                "flex flex-col gap-5 transition-all duration-300 sm:gap-6 " +
+                (active === s.key
+                  ? "opacity-100"
+                  : "opacity-80 hover:opacity-100")
+              }
+            >
+              <div className="flex items-center gap-4 sm:gap-6">
+                <div
+                  className={
+                    "flex size-16 items-center justify-center overflow-hidden rounded-xl border transition-all duration-300 sm:size-20 " +
+                    (active === s.key
+                      ? "scale-105 border-daftime-yellow bg-daftime-yellow/15"
+                      : "border-daftime-gray-border")
+                  }
+                >
+                  <Image
+                    src={s.icon}
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="size-10 object-contain sm:size-12"
+                  />
+                </div>
+                <h3 className="text-[22px] tracking-tight text-black sm:text-[25px]">
+                  {s.title}
+                </h3>
               </div>
-              <h3 className="text-[22px] tracking-tight text-black sm:text-[25px]">
-                {s.title}
-              </h3>
+              <p className="text-[15px] leading-relaxed tracking-tight text-black sm:text-[16px]">
+                {s.description}
+              </p>
             </div>
-            <p className="text-[15px] leading-relaxed tracking-tight text-black sm:text-[16px]">
-              {s.description}
-            </p>
           </Reveal>
         ))}
       </div>
