@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const dotPattern = {
   backgroundImage:
-    "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0)",
-  backgroundSize: "16px 16px",
+    "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.06) 1px, transparent 0)",
+  backgroundSize: "14px 14px",
 };
 
 export default function GuideAudience() {
@@ -12,7 +12,7 @@ export default function GuideAudience() {
       <div className="mx-auto flex max-w-[1152px] flex-col gap-10">
         {/* Header */}
         <div className="flex max-w-[494px] flex-col gap-4">
-          <span className="flex items-center gap-3 text-[12px] font-mono uppercase tracking-[0.18em] text-daftime-dark">
+          <span className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-daftime-dark">
             <span className="size-1 bg-daftime-dark" />
             Who It for
           </span>
@@ -65,7 +65,7 @@ function Card({
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl bg-white">
       <div
-        className="relative aspect-[16/11] overflow-hidden"
+        className="relative aspect-[568/405] overflow-hidden bg-white"
         style={dotPattern}
       >
         {illustration}
@@ -82,33 +82,28 @@ function Card({
   );
 }
 
-/* ----------- UAE flag SVG ----------- */
-function UAEFlag({ className = "size-6" }: { className?: string }) {
+/* ============= UAE Flag (circle) ============= */
+function UAEFlagCircle({ size = 28 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden>
-      <rect width="6" height="24" fill="#FF0000" />
-      <rect x="6" width="18" height="8" fill="#00732F" />
-      <rect x="6" y="8" width="18" height="8" fill="white" />
-      <rect x="6" y="16" width="18" height="8" fill="black" />
-    </svg>
-  );
-}
-
-function FloatingTile({
-  children,
-  className = "",
-  size = "size-[80px]",
-}: {
-  children: React.ReactNode;
-  className?: string;
-  size?: string;
-}) {
-  return (
-    <div
-      className={`flex ${size} items-center justify-center rounded-[18px] border-[1.5px] border-white/60 bg-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12),0_2px_0_-1px_rgba(0,0,0,0.08)] ${className}`}
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      aria-hidden
+      style={{ borderRadius: "50%", overflow: "hidden" }}
     >
-      {children}
-    </div>
+      <defs>
+        <clipPath id="uae-circle">
+          <circle cx="12" cy="12" r="12" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#uae-circle)">
+        <rect width="6" height="24" fill="#E2231A" />
+        <rect x="6" width="18" height="8" fill="#159040" />
+        <rect x="6" y="8" width="18" height="8" fill="#FFFFFF" />
+        <rect x="6" y="16" width="18" height="8" fill="#000000" />
+      </g>
+    </svg>
   );
 }
 
@@ -116,9 +111,9 @@ function FloatingTile({
 function EntrepreneursViz() {
   return (
     <div className="absolute inset-0">
-      {/* Avatar pill */}
-      <div className="absolute left-1/2 top-8 flex -translate-x-1/2 items-center gap-2 rounded-xl border border-white/60 bg-white/70 p-2 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.1)] backdrop-blur-md">
-        <div className="size-7 overflow-hidden rounded-full bg-daftime-gray-light">
+      {/* Top avatar pill */}
+      <div className="absolute left-1/2 top-[14%] flex -translate-x-1/2 items-center gap-2.5 rounded-xl border border-white/80 bg-white/90 py-2 pl-2 pr-6 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] backdrop-blur-md">
+        <span className="size-7 overflow-hidden rounded-full bg-daftime-gray-light">
           <Image
             src="/assets/avatar-1.png"
             alt=""
@@ -126,39 +121,62 @@ function EntrepreneursViz() {
             height={28}
             className="h-full w-full object-cover"
           />
-        </div>
-        <div className="pr-2 text-left leading-tight">
-          <p className="text-[10px] font-medium text-daftime-dark">
-            Entrepreneur
-          </p>
-          <p className="text-[9px] text-daftime-gray-mute">
+        </span>
+        <span className="flex flex-col text-left leading-tight">
+          <span className="text-[10px] font-medium text-daftime-dark">
+            Enterpreneur
+          </span>
+          <span className="text-[9px] text-daftime-gray-mute">
             16:32<span className="text-daftime-gray-muter">:24</span>
-          </p>
-        </div>
-        <span className="absolute -right-1 -top-1 size-2 rounded-full bg-emerald-500 ring-2 ring-white" />
+          </span>
+        </span>
       </div>
 
-      {/* Row of icon tiles */}
-      <div className="absolute inset-x-0 bottom-10 flex items-center justify-center gap-3 px-6">
-        <FloatingTile size="size-[44px]" className="rounded-full">
+      {/* Top-right green dot */}
+      <span className="absolute right-[14%] top-[12%] size-2 rounded-full bg-emerald-500" />
+
+      {/* Outer rounded frame for the tiles */}
+      <div className="absolute inset-x-[18%] bottom-[8%] top-[44%] rounded-[28px] border-[1.5px] border-daftime-gray-border/60" />
+
+      {/* Center cluster: 3 large tiles + 2 small side circles */}
+      <div className="absolute inset-x-0 bottom-[14%] flex items-center justify-center gap-3">
+        {/* Left small circle - calendar */}
+        <span className="flex size-[44px] items-center justify-center rounded-full border border-daftime-gray-border bg-white shadow-[0_4px_10px_-4px_rgba(0,0,0,0.08)]">
           <CalendarIcon />
-        </FloatingTile>
-        <FloatingTile size="size-[64px]">
-          <span className="text-[22px] font-semibold text-emerald-600">
-            A<span className="text-rose-500">a</span>
+        </span>
+
+        {/* Aa tile */}
+        <FloatingTile>
+          <span className="text-[28px] font-semibold leading-none">
+            <span className="text-emerald-600">A</span>
+            <span className="text-rose-500">a</span>
           </span>
         </FloatingTile>
-        <FloatingTile size="size-[64px]" className="ring-1 ring-daftime-yellow/30">
-          <UAEFlag className="h-7 w-7" />
+
+        {/* UAE flag tile */}
+        <FloatingTile>
+          <UAEFlagCircle size={34} />
         </FloatingTile>
-        <FloatingTile size="size-[64px]">
-          <span className="block size-6 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-700 ring-2 ring-white" />
+
+        {/* Green sphere tile */}
+        <FloatingTile>
+          <span className="block size-9 overflow-hidden rounded-full bg-gradient-to-br from-white via-emerald-300 to-emerald-700 shadow-[inset_0_-4px_8px_rgba(0,0,0,0.15),inset_0_4px_6px_rgba(255,255,255,0.4)]" />
         </FloatingTile>
-        <FloatingTile size="size-[44px]" className="rounded-full">
+
+        {/* Right small circle - chart */}
+        <span className="flex size-[44px] items-center justify-center rounded-full border border-daftime-gray-border bg-white shadow-[0_4px_10px_-4px_rgba(0,0,0,0.08)]">
           <ChartIcon />
-        </FloatingTile>
+        </span>
       </div>
     </div>
+  );
+}
+
+function FloatingTile({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="flex size-[72px] items-center justify-center rounded-[18px] border-[1.5px] border-white bg-white shadow-[0_8px_20px_-6px_rgba(0,0,0,0.12),0_2px_0_-1px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)]">
+      {children}
+    </span>
   );
 }
 
@@ -166,124 +184,150 @@ function EntrepreneursViz() {
 function ExecutivesViz() {
   return (
     <div className="absolute inset-0">
-      {/* Center hero card */}
-      <div className="absolute left-1/2 top-1/2 flex h-[170px] w-[120px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center overflow-hidden rounded-[20px] border-[1.5px] border-daftime-gray-border bg-gradient-to-br from-pink-300 via-fuchsia-400 to-orange-300 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.18)]">
-        <UAEFlag className="h-9 w-9 drop-shadow-md" />
-        <div className="mt-auto h-2 w-full bg-daftime-yellow" />
+      {/* Connector lines */}
+      <svg
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        viewBox="0 0 568 405"
+        preserveAspectRatio="none"
+      >
+        {/* Left side connectors */}
+        <path
+          d="M150 100 Q220 130 240 200"
+          stroke="rgba(0,0,0,0.08)"
+          strokeWidth="1.2"
+          strokeDasharray="3 4"
+          fill="none"
+        />
+        <path
+          d="M130 200 Q200 200 240 200"
+          stroke="rgba(0,0,0,0.08)"
+          strokeWidth="1.2"
+          strokeDasharray="3 4"
+          fill="none"
+        />
+        <path
+          d="M150 305 Q220 280 240 220"
+          stroke="rgba(0,0,0,0.08)"
+          strokeWidth="1.2"
+          strokeDasharray="3 4"
+          fill="none"
+        />
+        {/* Right side connectors */}
+        <path
+          d="M420 100 Q360 130 330 200"
+          stroke="rgba(0,0,0,0.08)"
+          strokeWidth="1.2"
+          strokeDasharray="3 4"
+          fill="none"
+        />
+        <path
+          d="M440 200 Q380 200 330 200"
+          stroke="rgba(0,0,0,0.08)"
+          strokeWidth="1.2"
+          strokeDasharray="3 4"
+          fill="none"
+        />
+        <path
+          d="M420 305 Q360 280 330 220"
+          stroke="rgba(0,0,0,0.08)"
+          strokeWidth="1.2"
+          strokeDasharray="3 4"
+          fill="none"
+        />
+      </svg>
+
+      {/* Center vertical card */}
+      <div className="absolute left-1/2 top-1/2 flex h-[80%] w-[120px] -translate-x-1/2 -translate-y-1/2 flex-col gap-2 rounded-[24px] border-[1.5px] border-daftime-gray-border bg-white p-2 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.12)]">
+        {/* Gradient image with flag */}
+        <div className="flex h-[100px] items-center justify-center overflow-hidden rounded-[16px] bg-[radial-gradient(ellipse_at_top_left,#f9a8d4_0%,#c084fc_45%,#fb923c_100%)]">
+          <UAEFlagCircle size={36} />
+        </div>
+        {/* Placeholder lines */}
+        <div className="flex flex-col gap-1.5 px-2 pt-1">
+          <span className="h-1 w-8 rounded bg-daftime-gray-mute/20" />
+          <span className="h-1 w-full rounded bg-daftime-gray-mute/15" />
+          <span className="h-1 w-full rounded bg-daftime-gray-mute/15" />
+        </div>
+        {/* Yellow CTA */}
+        <span className="mt-auto h-6 rounded-full bg-gradient-to-b from-[#f9e99c] to-[#d6b303]" />
       </div>
 
-      {/* Left side: Idea pills */}
+      {/* Left: Idea pills */}
       <SidePill
-        className="left-4 top-6"
-        color="bg-fuchsia-100 ring-fuchsia-300/40"
+        className="left-[6%] top-[14%]"
+        icon={<BrainIcon />}
+        iconBg="bg-fuchsia-100 ring-fuchsia-300/40"
         dot="bg-fuchsia-500"
         label="Idea 1"
-        icon={<BrainIcon />}
       />
       <SidePill
-        className="left-2 top-1/2 -translate-y-1/2"
-        color="bg-sky-100 ring-sky-300/40"
+        className="left-[2%] top-1/2 -translate-y-1/2"
+        icon={<ImageIcon />}
+        iconBg="bg-sky-100 ring-sky-300/40"
         dot="bg-sky-500"
         label="Idea 2"
-        icon={<ImageIcon />}
         active
       />
       <SidePill
-        className="bottom-6 left-4"
-        color="bg-emerald-100 ring-emerald-300/40"
+        className="bottom-[14%] left-[6%]"
+        icon={<CodeIcon />}
+        iconBg="bg-emerald-100 ring-emerald-300/40"
         dot="bg-emerald-500"
         label="Idea 3"
-        icon={<CodeIcon />}
       />
 
-      {/* Right side: Step pills */}
+      {/* Right: Step pills */}
       <SidePill
-        className="right-4 top-6"
-        color="bg-daftime-gray-bg ring-daftime-gray-border"
+        className="right-[6%] top-[14%]"
+        icon={<FlagIcon />}
+        iconBg="bg-daftime-gray-bg ring-daftime-gray-border"
         dot="bg-daftime-dark/30"
         label="Legal"
-        icon={<FlagIcon />}
       />
       <SidePill
-        className="right-2 top-1/2 -translate-y-1/2"
-        color="bg-daftime-gray-bg ring-daftime-gray-border"
+        className="right-[2%] top-1/2 -translate-y-1/2"
+        icon={<TextIcon />}
+        iconBg="bg-daftime-gray-bg ring-daftime-gray-border"
         dot="bg-daftime-dark/30"
         label="Fiscal"
-        icon={<TextIcon />}
       />
       <SidePill
-        className="bottom-6 right-4"
-        color="bg-daftime-gray-bg ring-daftime-gray-border"
+        className="bottom-[14%] right-[6%]"
+        icon={<ChartSmallIcon />}
+        iconBg="bg-daftime-gray-bg ring-daftime-gray-border"
         dot="bg-daftime-dark/30"
         label="Governance"
-        icon={<ChartSmallIcon />}
       />
-
-      {/* Connecting lines */}
-      <svg
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        viewBox="0 0 400 280"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M120 50 L160 100 L200 140"
-          stroke="rgba(0,0,0,0.08)"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="3 3"
-        />
-        <path
-          d="M120 230 L160 180 L200 140"
-          stroke="rgba(0,0,0,0.08)"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="3 3"
-        />
-        <path
-          d="M280 50 L240 100 L200 140"
-          stroke="rgba(0,0,0,0.08)"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="3 3"
-        />
-        <path
-          d="M280 230 L240 180 L200 140"
-          stroke="rgba(0,0,0,0.08)"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="3 3"
-        />
-      </svg>
     </div>
   );
 }
 
 function SidePill({
   className,
-  color,
+  icon,
+  iconBg,
   dot,
   label,
-  icon,
   active = false,
 }: {
   className: string;
-  color: string;
+  icon: React.ReactNode;
+  iconBg: string;
   dot: string;
   label: string;
-  icon: React.ReactNode;
   active?: boolean;
 }) {
   return (
     <div
-      className={`absolute flex items-center gap-2 rounded-xl border border-white/80 bg-white/95 p-1.5 pr-3 shadow-[0_12px_24px_-12px_rgba(0,0,0,0.18)] ${active ? "ring-1 ring-daftime-dark/10" : ""} ${className}`}
+      className={`absolute flex w-[110px] items-center gap-2 rounded-xl border border-white/80 bg-white p-1.5 pr-3 shadow-[0_12px_24px_-12px_rgba(0,0,0,0.18)] ${active ? "scale-105 ring-1 ring-daftime-dark/10" : ""} ${className}`}
     >
       <span
-        className={`flex size-7 items-center justify-center rounded-lg ring-[1.5px] ${color}`}
+        className={`flex size-7 shrink-0 items-center justify-center rounded-lg ring-[1.5px] ${iconBg}`}
       >
         {icon}
       </span>
-      <span className="flex flex-col text-left">
-        <span className={`size-1.5 rounded-full ${dot}`} aria-hidden />
+      <span className="flex flex-1 flex-col gap-1">
+        <span className={`block size-1.5 rounded-full ${dot}`} />
         <span className="text-[10px] text-daftime-gray-mute">{label}</span>
       </span>
     </div>
@@ -293,11 +337,24 @@ function SidePill({
 /* ============= 3. Investors ============= */
 function InvestorsViz() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center p-6">
-      <div className="w-full max-w-[260px] rounded-2xl border-[1.5px] border-daftime-gray-border bg-daftime-gray-light p-3 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
+    <div className="absolute inset-0 flex items-center justify-center">
+      {/* Top stack: small dot + 2 ghost cards */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-col items-center">
+        <span className="mt-2 size-2 rounded-full bg-daftime-gray-border" />
+        <span className="mx-auto mt-1 h-1 w-px bg-daftime-gray-border" />
+        <span className="mt-1 h-px w-12 bg-daftime-gray-border" />
+        {/* Two stacked ghost card outlines */}
+        <div className="relative mt-2 h-12 w-[68%]">
+          <div className="absolute inset-x-6 top-0 h-12 rounded-2xl border-[1.5px] border-daftime-gray-border/70" />
+          <div className="absolute inset-x-2 top-2 h-12 rounded-2xl border-[1.5px] border-daftime-gray-border/40" />
+        </div>
+      </div>
+
+      {/* Main card */}
+      <div className="absolute inset-x-[14%] top-[20%] rounded-2xl border-[1.5px] border-daftime-gray-border bg-daftime-gray-light p-3 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
         {/* Search bar */}
-        <div className="flex h-10 items-center gap-2 rounded-full border border-white/60 bg-white px-2 shadow-inner">
-          <span className="flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-daftime-gray-light to-daftime-gray-border">
+        <div className="flex h-9 items-center gap-2 rounded-full border border-white/80 bg-white px-2 shadow-inner">
+          <span className="flex size-6 items-center justify-center rounded-full bg-gradient-to-b from-daftime-gray-light to-daftime-gray-border">
             <SearchIcon />
           </span>
           <span className="text-[10px] tracking-tight text-daftime-gray-muter">
@@ -305,30 +362,28 @@ function InvestorsViz() {
           </span>
         </div>
 
-        {/* Counter */}
-        <div className="mt-3 flex items-center gap-2 px-1">
+        {/* 128 Business */}
+        <div className="mt-3 flex items-center gap-2">
           <span className="size-1.5 rounded-full bg-emerald-500" />
           <span className="text-[10px] font-medium text-daftime-dark">
             128 Business
           </span>
-          <span className="ml-auto h-1 w-10 rounded-full bg-daftime-gray-border" />
-          <span className="size-3 rounded-full bg-daftime-yellow ring-1 ring-white" />
         </div>
 
         {/* 2x2 article grid */}
-        <div className="mt-3 grid grid-cols-2 gap-2">
+        <div className="mt-2 grid grid-cols-2 gap-2">
           {[0, 1, 2, 3].map((i) => (
             <div
               key={i}
-              className="flex items-center gap-1.5 rounded-lg bg-white p-1"
+              className="flex items-center gap-1.5 rounded-lg border border-white bg-white p-1 shadow-[0_2px_6px_-2px_rgba(0,0,0,0.06)]"
             >
-              <span className="flex h-7 w-9 items-center justify-center overflow-hidden rounded-md bg-gradient-to-br from-rose-100 via-yellow-100 to-emerald-100">
-                <UAEFlag className="h-4 w-4" />
+              <span className="flex h-7 w-9 items-center justify-center overflow-hidden rounded-md bg-[radial-gradient(ellipse_at_top_left,#fda4af_0%,#fed7aa_50%,#fef3c7_100%)]">
+                <UAEFlagCircle size={14} />
               </span>
               <span className="flex flex-1 flex-col gap-1">
-                <span className="h-1 w-3 rounded bg-daftime-gray-mute/30" />
-                <span className="h-1 w-full rounded bg-daftime-gray-mute/15" />
-                <span className="h-1 w-1/2 rounded bg-daftime-gray-mute/15" />
+                <span className="block h-1 w-3 rounded bg-daftime-gray-mute/30" />
+                <span className="block h-1 w-full rounded bg-daftime-gray-mute/15" />
+                <span className="block h-1 w-1/2 rounded bg-daftime-gray-mute/15" />
               </span>
             </div>
           ))}
@@ -342,33 +397,45 @@ function InvestorsViz() {
 function FoundersViz() {
   return (
     <div className="absolute inset-0">
-      {/* Top "Founder" pill */}
-      <div className="absolute left-1/2 top-8 flex h-12 w-[200px] -translate-x-1/2 items-center justify-between rounded-xl border border-white/70 bg-white/85 px-4 shadow-[0_12px_24px_-12px_rgba(0,0,0,0.1)] backdrop-blur-md">
-        <span className="h-1 w-7 rounded bg-daftime-dark/15" />
-        <span className="text-[10px] text-daftime-gray-mute">Founder</span>
-        <span className="h-1 w-7 rounded bg-daftime-dark/15" />
+      {/* Top "Founder" pill with side dashes */}
+      <div className="absolute inset-x-0 top-[8%] flex justify-center">
+        <div className="flex h-10 w-[200px] items-center justify-between rounded-xl border border-white/80 bg-white/90 px-3 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.1)] backdrop-blur-md">
+          <span className="h-1 w-7 rounded bg-daftime-dark/15" />
+          <span className="flex h-6 items-center justify-center rounded-full border border-daftime-gray-border px-3 text-[10px] text-daftime-gray-mute">
+            Founder
+          </span>
+          <span className="h-1 w-7 rounded bg-daftime-dark/15" />
+        </div>
+      </div>
+
+      {/* Outer ghost frames */}
+      <div className="pointer-events-none absolute inset-x-[16%] top-[22%] h-12 rounded-2xl border-[1.5px] border-daftime-gray-border/40" />
+
+      {/* Vertical connecting line */}
+      <span
+        className="pointer-events-none absolute left-1/2 top-[18%] h-[6%] w-px -translate-x-1/2 bg-daftime-gray-border"
+        aria-hidden
+      />
+
+      {/* Side connecting horizontal lines */}
+      <div className="pointer-events-none absolute left-[3%] top-[58%] flex items-center gap-1">
+        <span className="block h-px w-3 bg-daftime-gray-border" />
+        <span className="block size-1 -rotate-45 border-l border-t border-daftime-gray-border" />
+      </div>
+      <div className="pointer-events-none absolute right-[3%] top-[58%] flex items-center gap-1">
+        <span className="block size-1 rotate-45 border-r border-t border-daftime-gray-border" />
+        <span className="block h-px w-3 bg-daftime-gray-border" />
       </div>
 
       {/* Three plan cards */}
-      <div className="absolute inset-x-6 bottom-6 flex items-end justify-center gap-2">
+      <div className="absolute inset-x-[10%] bottom-[8%] flex items-end justify-center gap-2">
         <PlanCard label="Business A" />
         <PlanCard label="Business B" highlighted />
         <PlanCard label="Business C" />
       </div>
 
-      {/* Connecting line from top to middle */}
-      <svg
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        viewBox="0 0 400 280"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M200 60 L200 130"
-          stroke="rgba(0,0,0,0.1)"
-          strokeWidth="1"
-          fill="none"
-        />
-      </svg>
+      {/* Bottom ghost card outline */}
+      <div className="pointer-events-none absolute inset-x-[16%] bottom-[4%] h-3 rounded-xl border-b border-l border-r border-daftime-gray-border/40" />
     </div>
   );
 }
@@ -382,29 +449,31 @@ function PlanCard({
 }) {
   return (
     <div
-      className={`flex w-[88px] flex-col gap-3 rounded-2xl border-[1.5px] p-3 shadow-[0_12px_24px_-12px_rgba(0,0,0,0.1)] ${
+      className={`relative flex w-[28%] flex-col gap-2 rounded-2xl border-[1.5px] p-3 transition-transform ${
         highlighted
-          ? "border-daftime-yellow bg-white scale-110 z-10"
+          ? "z-10 -translate-y-2 scale-110 border-transparent bg-white shadow-[0_24px_48px_-16px_rgba(0,0,0,0.18),0_0_0_2px_rgba(247,165,167,0.6)]"
           : "border-daftime-gray-border bg-daftime-gray-light"
       }`}
     >
-      <UAEFlag className="h-4 w-4" />
-      <div className="flex flex-col gap-1">
-        <span className="text-[9px] font-medium text-daftime-dark">
-          {label}
-        </span>
-        <span className="h-1 w-12 rounded bg-daftime-gray-mute/15" />
-      </div>
+      {highlighted && (
+        <span className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-pink-200/30 via-transparent to-orange-200/30" />
+      )}
+      <UAEFlagCircle size={18} />
+      <span className="text-[10px] font-medium text-daftime-dark">{label}</span>
       <span
-        className={`h-5 rounded-full ${highlighted ? "bg-daftime-yellow" : "bg-gradient-to-b from-daftime-gray-light to-daftime-gray-border"}`}
+        className={`mt-1 h-5 rounded-full ${
+          highlighted
+            ? "bg-gradient-to-b from-[#f9e99c] to-[#d6b303]"
+            : "bg-gradient-to-b from-daftime-gray-light to-daftime-gray-border"
+        }`}
       />
-      <div className="flex items-center gap-1.5">
-        <span className="flex size-4 items-center justify-center rounded-full bg-daftime-gray-bg ring-1 ring-white">
+      <div className="mt-1 flex items-center gap-1.5">
+        <span className="flex size-4 items-center justify-center rounded-full bg-white ring-1 ring-daftime-gray-border">
           <CheckIcon />
         </span>
         <span className="flex flex-1 flex-col gap-0.5">
-          <span className="h-0.5 w-3 rounded bg-daftime-dark/15" />
-          <span className="h-0.5 w-full rounded bg-daftime-gray-mute/15" />
+          <span className="block h-0.5 w-3 rounded bg-daftime-dark/15" />
+          <span className="block h-0.5 w-full rounded bg-daftime-gray-mute/15" />
         </span>
       </div>
     </div>
@@ -421,16 +490,14 @@ function CalendarIcon() {
         width="12"
         height="11"
         rx="2"
-        stroke="currentColor"
+        stroke="#727272"
         strokeWidth="1.2"
-        className="text-daftime-gray-mute"
       />
       <path
         d="M5 1.5v3M11 1.5v3M2 6h12"
-        stroke="currentColor"
+        stroke="#727272"
         strokeWidth="1.2"
         strokeLinecap="round"
-        className="text-daftime-gray-mute"
       />
     </svg>
   );
@@ -440,10 +507,9 @@ function ChartIcon() {
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d="M3 13V8M8 13V4M13 13V10"
-        stroke="currentColor"
+        stroke="#727272"
         strokeWidth="1.5"
         strokeLinecap="round"
-        className="text-daftime-gray-mute"
       />
     </svg>
   );
@@ -493,11 +559,10 @@ function FlagIcon() {
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d="M3 14V2m0 0h7l1 2h3v6H8l-1-2H3"
-        stroke="currentColor"
+        stroke="#727272"
         strokeWidth="1.2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-daftime-gray-mute"
       />
     </svg>
   );
@@ -507,11 +572,11 @@ function TextIcon() {
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d="M2 4h12M4 8h8M2 12h12"
-        stroke="currentColor"
+        stroke="#727272"
         strokeWidth="1.2"
         strokeLinecap="round"
-        className="text-daftime-gray-mute"
       />
+      <path d="M13 3.5L14 2M14 3l-1-.5" stroke="#727272" strokeWidth="1" />
     </svg>
   );
 }
@@ -520,10 +585,9 @@ function ChartSmallIcon() {
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d="M2 14h12M4 11v3M8 7v7M12 4v10"
-        stroke="currentColor"
+        stroke="#727272"
         strokeWidth="1.2"
         strokeLinecap="round"
-        className="text-daftime-gray-mute"
       />
     </svg>
   );
@@ -531,21 +595,8 @@ function ChartSmallIcon() {
 function SearchIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <circle
-        cx="7"
-        cy="7"
-        r="4.5"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        className="text-daftime-gray-mute"
-      />
-      <path
-        d="M11 11l3 3"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        className="text-daftime-gray-mute"
-      />
+      <circle cx="7" cy="7" r="4.5" stroke="#727272" strokeWidth="1.2" />
+      <path d="M11 11l3 3" stroke="#727272" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -555,7 +606,7 @@ function CheckIcon() {
       <path
         d="M2 4l1.5 1.5L6.5 2.5"
         stroke="#10b981"
-        strokeWidth="1.2"
+        strokeWidth="1.4"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
