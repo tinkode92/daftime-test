@@ -18,15 +18,20 @@ export default function Navigation() {
   return (
     <nav className="flex w-full items-start gap-2 md:w-auto">
       {/* Logo pill */}
-      <div className="flex shrink-0 items-center justify-center rounded-[10px] border border-white/10 bg-white/[0.14] p-2.5 backdrop-blur-md md:p-3">
+      <a
+        href="#"
+        aria-label="Daftime"
+        className="flex shrink-0 items-center justify-center rounded-[10px] border border-white/10 bg-white/[0.14] p-2.5 backdrop-blur-md transition-transform duration-300 hover:scale-105 md:p-3"
+      >
         <Image
-          src="/assets/logo-daftime.png"
+          src="/assets/daftime-logo.svg"
           alt="Daftime"
           width={24}
           height={24}
           className="h-6 w-6 object-contain"
+          priority
         />
-      </div>
+      </a>
 
       {/* Desktop nav */}
       <div className="hidden w-full max-w-[510px] items-center justify-between rounded-xl border border-white/10 bg-white/[0.14] p-1 backdrop-blur-md md:flex">
@@ -93,7 +98,7 @@ export default function Navigation() {
           >
             <div className="flex items-center justify-between">
               <Image
-                src="/assets/logo-daftime.png"
+                src="/assets/daftime-logo.svg"
                 alt="Daftime"
                 width={28}
                 height={28}
