@@ -96,9 +96,9 @@ export default function GuideCTA() {
             </div>
           </div>
           <div className="absolute left-5 top-5 flex items-center gap-3 sm:left-10 sm:top-10">
-            <div className="flex items-center justify-center rounded-xl border border-[rgba(218,195,78,0.2)] bg-[rgba(255,233,123,0.3)] p-2.5 backdrop-blur sm:p-3">
+            <div className="flex items-center justify-center rounded-xl border border-[rgba(22,21,53,0.15)] bg-white/70 p-2.5 backdrop-blur sm:p-3">
               <Image
-                src="/assets/logo-daftime.png"
+                src="/assets/daftime-logo-blue.svg"
                 alt="Daftime"
                 width={26}
                 height={26}
@@ -106,10 +106,10 @@ export default function GuideCTA() {
               />
             </div>
             <div className="flex flex-col gap-0.5 sm:gap-1">
-              <p className="text-[12px] leading-tight tracking-tight text-[#9e9e9e] sm:text-[14px]">
+              <p className="text-[12px] font-medium leading-tight tracking-tight text-[#161535]/70 sm:text-[14px]">
                 2026 Edition
               </p>
-              <p className="text-[18px] leading-tight tracking-tight text-black sm:text-[22px] md:text-[24px]">
+              <p className="text-[18px] leading-tight tracking-tight text-[#161535] sm:text-[22px] md:text-[24px]">
                 The 2026 Daftime Guide
               </p>
             </div>
