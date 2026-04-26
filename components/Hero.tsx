@@ -24,7 +24,7 @@ export default function Hero() {
       <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
         {/* Interactive globe (drag to rotate, auto-spins when idle) */}
         <div className="absolute inset-x-0 top-[12%] flex justify-center sm:top-[14%]">
-          <div className="aspect-square w-[120%] max-w-none sm:w-[100%] md:w-[90%] lg:w-[80%]">
+          <div className="aspect-square w-[110%] max-w-[820px] sm:w-[95%] md:w-[80%] lg:w-[70%]">
             <Globe className="size-full" />
           </div>
         </div>

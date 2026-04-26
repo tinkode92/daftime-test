@@ -12,25 +12,11 @@ type Props = {
   config?: Partial<COBEOptions>;
 };
 
-const DEFAULT_CONFIG: Omit<COBEOptions, "width" | "height"> = {
-  devicePixelRatio: 2,
-  phi: 0,
-  theta: 0.28,
-  dark: 1,
-  diffuse: 1.1,
-  mapSamples: 18000,
-  mapBrightness: 5,
-  baseColor: [1, 1, 1],
-  markerColor: [214 / 255, 179 / 255, 3 / 255],
-  glowColor: [1, 1, 1],
-  markers: [
-    { location: [25.276987, 55.296249], size: 0.07 }, // Dubai
-    { location: [48.8566, 2.3522], size: 0.05 }, // Paris
-    { location: [40.7128, -74.006], size: 0.05 }, // New York
-    { location: [1.3521, 103.8198], size: 0.05 }, // Singapore
-    { location: [51.5074, -0.1278], size: 0.05 }, // London
-  ],
-};
+const MARKERS: COBEOptions["markers"] = [
+  { location: [25.276987, 55.296249], size: 0.08 }, // Dubai
+  { location: [48.8566, 2.3522], size: 0.06 }, // Paris (France)
+  { location: [38.7223, -9.1393], size: 0.06 }, // Lisbon (Portugal)
+];
 
 export default function Globe({
   className = "",
@@ -38,16 +24,31 @@ export default function Globe({
   config,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const pointerStart = useRef<number | null>(null);
   const accumulatedDelta = useRef(0);
   const phiRef = useRef(0);
   const targetR = useRef(0);
   const currentR = useRef(0);
   const widthRef = useRef(0);
+  const visibleRef = useRef(true);
+  const reduceMotionRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const wrapper = wrapperRef.current;
+    if (!canvas || !wrapper) return;
+
+    // Honor user's reduced-motion preference
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reduceMotionRef.current = mq.matches;
+    const onMq = (e: MediaQueryListEvent) => {
+      reduceMotionRef.current = e.matches;
+    };
+    mq.addEventListener("change", onMq);
+
+    // Cap DPR to reduce pixel pressure on retina screens
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
     const measure = () => {
       widthRef.current = canvas.offsetWidth;
@@ -56,25 +57,41 @@ export default function Globe({
     window.addEventListener("resize", measure);
 
     const initial: COBEOptions = {
-      ...DEFAULT_CONFIG,
+      devicePixelRatio: dpr,
+      phi: 0,
+      theta: 0.28,
+      dark: 1,
+      diffuse: 1.1,
+      mapSamples: 10000,
+      mapBrightness: 4.5,
+      baseColor: [1, 1, 1],
+      markerColor: [214 / 255, 179 / 255, 3 / 255],
+      glowColor: [1, 1, 1],
+      markers: MARKERS,
       ...config,
-      width: widthRef.current * 2,
-      height: widthRef.current * 2,
+      width: widthRef.current * dpr,
+      height: widthRef.current * dpr,
     };
 
     const globe = createGlobe(canvas, initial);
 
     let raf = 0;
     const tick = () => {
-      if (pointerStart.current === null) {
-        phiRef.current += autoRotate;
+      const paused =
+        !visibleRef.current ||
+        document.hidden ||
+        widthRef.current === 0;
+      if (!paused) {
+        if (pointerStart.current === null && !reduceMotionRef.current) {
+          phiRef.current += autoRotate;
+        }
+        currentR.current += (targetR.current - currentR.current) * 0.08;
+        globe.update({
+          phi: phiRef.current + currentR.current,
+          width: widthRef.current * dpr,
+          height: widthRef.current * dpr,
+        });
       }
-      currentR.current += (targetR.current - currentR.current) * 0.08;
-      globe.update({
-        phi: phiRef.current + currentR.current,
-        width: widthRef.current * 2,
-        height: widthRef.current * 2,
-      });
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -83,10 +100,29 @@ export default function Globe({
       canvas.style.opacity = "1";
     });
 
+    // Pause when not visible
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visibleRef.current = entry.isIntersecting;
+        }
+      },
+      { threshold: 0.05 },
+    );
+    io.observe(wrapper);
+
+    const onVisibility = () => {
+      // No-op: handled inside the rAF tick via document.hidden
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
     return () => {
       cancelAnimationFrame(raf);
       globe.destroy();
+      io.disconnect();
       window.removeEventListener("resize", measure);
+      mq.removeEventListener("change", onMq);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [autoRotate, config]);
 
@@ -97,7 +133,10 @@ export default function Globe({
   };
 
   return (
-    <div className={"relative aspect-square w-full " + className}>
+    <div
+      ref={wrapperRef}
+      className={"relative aspect-square w-full " + className}
+    >
       <canvas
         ref={canvasRef}
         className="size-full select-none opacity-0 transition-opacity duration-1000"
