@@ -1,40 +1,105 @@
-const tabs = [
-  { label: "Legal Services", active: true },
-  { label: "Accounting and tax", active: false },
-  { label: "CFO & Advisory services", active: false },
+"use client";
+
+import { useState } from "react";
+
+type TabKey = "legal" | "accounting" | "cfo";
+
+const tabs: { key: TabKey; label: string }[] = [
+  { key: "legal", label: "Legal Services" },
+  { key: "accounting", label: "Accounting and tax" },
+  { key: "cfo", label: "CFO & Advisory services" },
 ];
 
-const cards = [
+const legalCards = [
   {
     title: "Business setup",
     subtitle: "(Mainland & Free Zone)",
     description:
       "Company structuring, license acquisition, corporate amendments, with legal guidance provided by lawyers.",
-    illustration: "folders",
+    illustration: "folders" as const,
   },
   {
     title: "Opening a business",
     subtitle: "bank account",
     description:
       "Assistance in choosing a bank, preparing KYC documents, and managing the account opening process.",
-    illustration: "card",
+    illustration: "card" as const,
   },
   {
     title: "Creation and structuring of investment vehicles (SPVs, holdings, trusts)",
     subtitle: "",
     description:
       "Structures designed to secure your investments, optimize governance, and support your long-term strategy.",
-    illustration: "vault",
+    illustration: "vault" as const,
   },
   {
     title: "Corporate secretarial",
     subtitle: "services in the UAE",
     description: "Emirates ID, residence visas, Golden Visa, family sponsorship.",
-    illustration: "shield",
+    illustration: "shield" as const,
+  },
+];
+
+type AccountingPlanVariant = "white" | "yellow" | "gray";
+type AccountingPlan = {
+  name: string;
+  range: string;
+  features: string[];
+  variant: AccountingPlanVariant;
+};
+
+const accountingPlans: AccountingPlan[] = [
+  {
+    name: "Basic",
+    range: "0 to 50 transactions/month",
+    variant: "white",
+    features: [
+      "Financial statements (UAE standards)",
+      "VAT & Corporate Tax Management UAE",
+      "Phone support",
+      "Management tool",
+    ],
+  },
+  {
+    name: "Intermediate",
+    range: "51 to 100 transactions/month",
+    variant: "yellow",
+    features: [
+      "UAE financial statements",
+      "VAT & Corporate Tax",
+      "Phone support",
+      "Dedicated Customer Success",
+      "Multi-currency management tool",
+    ],
+  },
+  {
+    name: "Premium",
+    range: "0 to 50 transactions/month",
+    variant: "gray",
+    features: [
+      "UAE financial statements",
+      "VAT & Corporate Tax",
+      "Dedicated Customer Success",
+      "Multi-currency tool",
+      "Regular strategic review meetings",
+    ],
+  },
+  {
+    name: "Large entreprises",
+    range: "0 to 50 transactions/month",
+    variant: "white",
+    features: [
+      "Financial statements (UAE standards)",
+      "VAT & Corporate Tax Management UAE",
+      "Phone support",
+      "Management tool",
+    ],
   },
 ];
 
 export default function ServiceTabs() {
+  const [active, setActive] = useState<TabKey>("legal");
+
   return (
     <section id="services" className="bg-daftime-gray-bg px-12 py-20">
       <div className="mx-auto max-w-[1176px]">
@@ -60,11 +125,12 @@ export default function ServiceTabs() {
           <div className="flex items-center gap-5 rounded-2xl bg-white px-8 py-6">
             {tabs.map((tab) => (
               <button
-                key={tab.label}
+                key={tab.key}
+                onClick={() => setActive(tab.key)}
                 className={
-                  tab.active
-                    ? "flex items-center justify-center rounded-xl bg-black px-5 py-2.5 text-[18px] tracking-tight text-white"
-                    : "flex items-center justify-center rounded-md px-2.5 py-2.5 text-[18px] tracking-tight text-daftime-dark"
+                  active === tab.key
+                    ? "flex items-center justify-center rounded-xl bg-black px-5 py-2.5 text-[18px] tracking-tight text-white transition-colors"
+                    : "flex items-center justify-center rounded-md px-2.5 py-2.5 text-[18px] tracking-tight text-daftime-dark transition-colors hover:bg-black/[0.04]"
                 }
               >
                 {tab.label}
@@ -72,62 +138,191 @@ export default function ServiceTabs() {
             ))}
           </div>
 
-          {/* Big title card */}
-          <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_358px]">
-            <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
-              <h3 className="max-w-[434px] text-[28px] leading-tight tracking-tight text-black">
-                Create and structure your company in the Emirates securely and compliantly
-              </h3>
-            </div>
-            <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
-              <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
-                At Daftime, we support entrepreneurs through every stage of setting up a business in Dubai: analyzing your project, choosing the best structure (Mainland/Freezone), legal and tax optimization, and full compliance.
-              </p>
-            </div>
-          </div>
-
-          {/* Subtitle bar */}
-          <div className="rounded-2xl bg-white px-8 py-6">
-            <p className="text-[18px] tracking-tight text-black">Our Business Setup services include:</p>
-          </div>
-
-          {/* 4 cards with illustrations */}
-          <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
-            {cards.map((c) => (
-              <div key={c.title} className="flex flex-col rounded-2xl bg-white p-2">
-                <div className="relative h-[170px] overflow-hidden rounded-xl bg-[#f7f7f7]">
-                  <Illustration kind={c.illustration as IllustrationKind} />
-                </div>
-                <div className="flex flex-col gap-2 px-2 pt-4 pb-3">
-                  <p className="text-[16px] leading-tight tracking-tight text-black">
-                    {c.title}
-                    {c.subtitle && (
-                      <>
-                        <br />
-                        {c.subtitle}
-                      </>
-                    )}
-                  </p>
-                  <p className="text-[14px] leading-relaxed tracking-tight text-[#9e9e9e]">
-                    {c.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Tailored support footer */}
-          <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white px-8 py-4">
-            <span className="rounded-full border border-daftime-cream-border bg-daftime-cream px-4 py-2 text-[16px] tracking-tight text-[#776509]">
-              Tailored support
-            </span>
-            <p className="max-w-[504px] text-[16px] leading-relaxed tracking-tight text-[#010101]">
-              All our services are offered on a quote basis, ensuring a secure, compliant, and perfectly tailored establishment in Dubai that meets your objectives.
-            </p>
-          </div>
+          {active === "legal" && <LegalContent />}
+          {active === "accounting" && <AccountingContent />}
+          {active === "cfo" && <CFOContent />}
         </div>
       </div>
     </section>
+  );
+}
+
+function LegalContent() {
+  return (
+    <>
+      {/* Big title card */}
+      <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_358px]">
+        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
+          <h3 className="max-w-[434px] text-[28px] leading-tight tracking-tight text-black">
+            Create and structure your company in the Emirates securely and compliantly
+          </h3>
+        </div>
+        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
+          <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
+            At Daftime, we support entrepreneurs through every stage of setting up a business in Dubai: analyzing your project, choosing the best structure (Mainland/Freezone), legal and tax optimization, and full compliance.
+          </p>
+        </div>
+      </div>
+
+      {/* Subtitle bar */}
+      <div className="rounded-2xl bg-white px-8 py-6">
+        <p className="text-[18px] tracking-tight text-black">Our Business Setup services include:</p>
+      </div>
+
+      {/* 4 cards with illustrations */}
+      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
+        {legalCards.map((c) => (
+          <div key={c.title} className="flex flex-col rounded-2xl bg-white p-2">
+            <div className="relative h-[170px] overflow-hidden rounded-xl bg-[#f7f7f7]">
+              <Illustration kind={c.illustration} />
+            </div>
+            <div className="flex flex-col gap-2 px-2 pt-4 pb-3">
+              <p className="text-[16px] leading-tight tracking-tight text-black">
+                {c.title}
+                {c.subtitle && (
+                  <>
+                    <br />
+                    {c.subtitle}
+                  </>
+                )}
+              </p>
+              <p className="text-[14px] leading-relaxed tracking-tight text-[#9e9e9e]">
+                {c.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Tailored support footer */}
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white px-8 py-4">
+        <span className="rounded-full border border-daftime-cream-border bg-daftime-cream px-4 py-2 text-[16px] tracking-tight text-[#776509]">
+          Tailored support
+        </span>
+        <p className="max-w-[504px] text-[16px] leading-relaxed tracking-tight text-[#010101]">
+          All our services are offered on a quote basis, ensuring a secure, compliant, and perfectly tailored establishment in Dubai that meets your objectives.
+        </p>
+      </div>
+    </>
+  );
+}
+
+function AccountingContent() {
+  return (
+    <>
+      {/* Title + description */}
+      <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_482px]">
+        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
+          <h3 className="max-w-[471px] text-[28px] leading-tight tracking-tight text-black">
+            Compliant, optimized accounting and tax management tailored to UAE standards
+          </h3>
+        </div>
+        <div className="flex h-[153px] items-center rounded-2xl bg-white px-8 py-6">
+          <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
+            At Daftime, we provide comprehensive accounting and tax management services in accordance with UAE requirements: financial statements in accordance with local standards, VAT (UAE VAT), corporate tax, reporting, and operational monitoring. Our services are tailored to the volume of transactions and the level of support required.
+          </p>
+        </div>
+      </div>
+
+      {/* Subtitle bar */}
+      <div className="rounded-2xl bg-white px-8 py-6">
+        <p className="text-[18px] tracking-tight text-black">Our accounting packages</p>
+      </div>
+
+      {/* 4 pricing cards */}
+      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
+        {accountingPlans.map((plan) => (
+          <PricingCard key={plan.name} plan={plan} />
+        ))}
+      </div>
+
+      {/* Empty footer bar (matches Figma) */}
+      <div className="h-[82px] rounded-2xl bg-white" />
+    </>
+  );
+}
+
+function CFOContent() {
+  return (
+    <div className="rounded-2xl bg-white px-8 py-16 text-center">
+      <p className="label-mono text-daftime-gray-text">CFO &amp; Advisory services</p>
+      <p className="mt-4 text-[20px] tracking-tight text-black">
+        Strategic finance leadership tailored to your scale.
+      </p>
+      <p className="mx-auto mt-3 max-w-[560px] text-[14px] leading-relaxed text-daftime-gray-mute">
+        From budget design to investor reporting, our CFO &amp; advisory services provide the rigor and clarity your business needs to grow with confidence. Detailed packages are available on request.
+      </p>
+    </div>
+  );
+}
+
+function PricingCard({ plan }: { plan: AccountingPlan }) {
+  const palette = {
+    white: {
+      bg: "bg-white",
+      titleColor: "text-black",
+      rangeColor: "text-daftime-gray-mute",
+      iconBg: "bg-daftime-yellow",
+      checkColor: "fill-black",
+      featureColor: "text-black",
+    },
+    yellow: {
+      bg: "bg-daftime-yellow",
+      titleColor: "text-black",
+      rangeColor: "text-black",
+      iconBg: "bg-[#b79b0b]",
+      checkColor: "fill-black",
+      featureColor: "text-black",
+    },
+    gray: {
+      bg: "bg-[#e6e6e6]",
+      titleColor: "text-black",
+      rangeColor: "text-daftime-gray-mute",
+      iconBg: "bg-daftime-yellow",
+      checkColor: "fill-black",
+      featureColor: "text-black",
+    },
+  }[plan.variant];
+
+  return (
+    <div className={`flex h-[318px] flex-col gap-6 rounded-2xl p-2 ${palette.bg}`}>
+      <div className="flex flex-col gap-3 px-2 pt-2">
+        <div className="flex items-center gap-3">
+          <div className={`flex size-10 items-center justify-center rounded-xl ${palette.iconBg}`}>
+            <RocketIcon />
+          </div>
+          <p className={`label-mono ${palette.titleColor}`}>{plan.name}</p>
+        </div>
+        <p className={`text-[16px] tracking-tight ${palette.rangeColor}`}>{plan.range}</p>
+      </div>
+
+      <ul className="flex flex-col gap-4 px-2 pb-2">
+        {plan.features.map((feature) => (
+          <li key={feature} className="flex items-start gap-3">
+            <CheckCircle className={`mt-0.5 size-5 shrink-0 ${palette.checkColor}`} />
+            <span className={`text-[14px] leading-tight tracking-tight ${palette.featureColor}`}>
+              {feature}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function RocketIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="size-5 fill-white" aria-hidden>
+      <path d="M14.65 2.36c-.94.31-1.84.74-2.65 1.27-2.96 1.93-4.96 4.83-5.81 8.07L4 11l-2 2 4 2 .9.45a18.4 18.4 0 0 0 0 3.1L6 19l1 1 .55-.9c.99.13 2 .13 3 0L11 20l1-1-.55-.9.45-.9 2 4 2-2-.7-2.18a13.4 13.4 0 0 0 8.07-5.82c.53-.81.96-1.71 1.27-2.65A14.7 14.7 0 0 0 14.65 2.36zM15.5 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
+    </svg>
+  );
+}
+
+function CheckCircle({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 14.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7z" />
+    </svg>
   );
 }
 
@@ -138,11 +333,8 @@ function Illustration({ kind }: { kind: IllustrationKind }) {
     return (
       <div className="absolute inset-0 flex items-end justify-center pb-2">
         <div className="relative h-[140px] w-[80%]">
-          {/* Back folder */}
           <div className="absolute inset-x-2 top-3 h-[100px] rounded-xl bg-daftime-yellow/40 shadow-[inset_0_0_20px_rgba(255,255,255,0.4)] backdrop-blur" />
-          {/* Mid folder */}
           <div className="absolute inset-x-1 top-6 h-[100px] rounded-xl bg-white/80 shadow-[0_8px_20px_-8px_rgba(0,0,0,0.1)] backdrop-blur" />
-          {/* Front folder with yellow tab */}
           <div className="absolute inset-x-0 bottom-0 h-[100px] overflow-hidden rounded-xl bg-white shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)]">
             <div className="absolute left-0 top-0 h-1/3 w-1/3 rounded-br-md bg-daftime-yellow/80" />
           </div>
