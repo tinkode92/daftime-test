@@ -144,8 +144,15 @@ export default function Services() {
               tabIndex={0}
               onMouseEnter={() => setActive(s.key)}
               onFocus={() => setActive(s.key)}
+              onClick={() => setActive(s.key)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setActive(s.key);
+                }
+              }}
               className={
-                "flex flex-col gap-5 transition-all duration-300 sm:gap-6 " +
+                "flex cursor-pointer flex-col gap-5 transition-all duration-300 sm:gap-6 " +
                 (active === s.key
                   ? "opacity-100"
                   : "opacity-80 hover:opacity-100")

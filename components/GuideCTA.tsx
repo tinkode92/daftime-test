@@ -84,7 +84,7 @@ export default function GuideCTA() {
           delay={120}
           className="relative min-h-[320px] overflow-hidden bg-[#f3f3f3] sm:min-h-[400px] lg:min-h-[500px]"
         >
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-x-0 bottom-0 top-[140px] flex items-center justify-center sm:top-[160px]">
             <div className="float-slow rotate-[14deg]">
               <Image
                 src="/assets/guide-book.png"
