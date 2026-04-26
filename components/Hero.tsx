@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Navigation from "./Navigation";
 import BrandMarquee from "./BrandMarquee";
+import LearnMoreModal from "./LearnMoreModal";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -12,6 +16,8 @@ const avatars = [
 ];
 
 export default function Hero() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
@@ -88,13 +94,14 @@ export default function Hero() {
               className="fade-up mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4"
               style={{ animationDelay: "360ms" }}
             >
-              <a
-                href="#what"
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
                 className="btn-pill cta-shimmer bg-daftime-yellow text-black hover:opacity-90"
               >
                 Learn More
                 <ArrowRight />
-              </a>
+              </button>
               <a
                 href="#contact"
                 className="btn-pill border border-white/10 bg-black/10 text-white backdrop-blur hover:bg-white/10"
@@ -110,6 +117,8 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      <LearnMoreModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }
