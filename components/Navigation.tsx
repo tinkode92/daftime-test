@@ -1,10 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const resourcesRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -14,6 +17,20 @@ export default function Navigation() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+
+  useEffect(() => {
+    if (!resourcesOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (
+        resourcesRef.current &&
+        !resourcesRef.current.contains(e.target as Node)
+      ) {
+        setResourcesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [resourcesOpen]);
 
   return (
     <nav className="flex w-full items-start gap-2 md:w-auto">
@@ -42,9 +59,43 @@ export default function Navigation() {
           <li className="rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
             <a href="#services" className="whitespace-nowrap">Services</a>
           </li>
-          <li className="flex items-center gap-2 rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
-            <a href="#blog" className="whitespace-nowrap">Resources</a>
-            <ChevronDown />
+          <li
+            ref={resourcesRef}
+            className="relative rounded-lg text-[15px] tracking-tight lg:text-[16px]"
+          >
+            <button
+              type="button"
+              onClick={() => setResourcesOpen((v) => !v)}
+              aria-expanded={resourcesOpen}
+              aria-haspopup="menu"
+              className="flex items-center gap-2 whitespace-nowrap rounded-lg px-2 py-1 transition-colors hover:bg-white/10"
+            >
+              Resources
+              <ChevronDown />
+            </button>
+            {resourcesOpen && (
+              <div
+                role="menu"
+                className="absolute left-0 top-[calc(100%+8px)] z-50 w-48 overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0d]/95 p-1 shadow-2xl backdrop-blur-md"
+              >
+                <Link
+                  role="menuitem"
+                  href="/resources/podcast"
+                  onClick={() => setResourcesOpen(false)}
+                  className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
+                >
+                  Podcast
+                </Link>
+                <a
+                  role="menuitem"
+                  href="#blog"
+                  onClick={() => setResourcesOpen(false)}
+                  className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
+                >
+                  Blog
+                </a>
+              </div>
+            )}
           </li>
         </ul>
         <div className="flex shrink-0 items-center gap-3 pr-1 lg:gap-4">
@@ -140,6 +191,15 @@ export default function Navigation() {
                 >
                   Resources
                 </a>
+              </li>
+              <li>
+                <Link
+                  onClick={() => setOpen(false)}
+                  href="/resources/podcast"
+                  className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
+                >
+                  → Podcast
+                </Link>
               </li>
             </ul>
             <a
