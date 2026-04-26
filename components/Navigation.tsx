@@ -86,6 +86,14 @@ export default function Navigation() {
                 >
                   Podcast
                 </Link>
+                <Link
+                  role="menuitem"
+                  href="/resources/guide-2026"
+                  onClick={() => setResourcesOpen(false)}
+                  className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
+                >
+                  2026 Daftime Guide
+                </Link>
                 <a
                   role="menuitem"
                   href="#blog"
@@ -199,6 +207,15 @@ export default function Navigation() {
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
                   → Podcast
+                </Link>
+              </li>
+              <li>
+                <Link
+                  onClick={() => setOpen(false)}
+                  href="/resources/guide-2026"
+                  className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
+                >
+                  → 2026 Daftime Guide
                 </Link>
               </li>
             </ul>
