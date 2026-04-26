@@ -34,23 +34,23 @@ export default function Navigation() {
       </a>
 
       {/* Desktop nav */}
-      <div className="hidden w-full max-w-[510px] items-center justify-between rounded-xl border border-white/10 bg-white/[0.14] p-1 backdrop-blur-md md:flex">
-        <ul className="flex items-center gap-1 px-2 text-white">
-          <li className="rounded-lg px-2 py-1 text-[16px] tracking-tight transition-colors hover:bg-white/10">
-            <a href="#what">What we do</a>
+      <div className="hidden w-full max-w-[560px] items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.14] p-1 backdrop-blur-md md:flex">
+        <ul className="flex shrink items-center gap-1 px-2 text-white">
+          <li className="rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
+            <a href="#what" className="whitespace-nowrap">What we do</a>
           </li>
-          <li className="rounded-lg px-2 py-1 text-[16px] tracking-tight transition-colors hover:bg-white/10">
-            <a href="#services">Services</a>
+          <li className="rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
+            <a href="#services" className="whitespace-nowrap">Services</a>
           </li>
-          <li className="flex items-center gap-2 rounded-lg px-2 py-1 text-[16px] tracking-tight transition-colors hover:bg-white/10">
-            <a href="#blog">Resources</a>
+          <li className="flex items-center gap-2 rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
+            <a href="#blog" className="whitespace-nowrap">Resources</a>
             <ChevronDown />
           </li>
         </ul>
-        <div className="flex items-center gap-4 pr-1">
+        <div className="flex shrink-0 items-center gap-3 pr-1 lg:gap-4">
           <button
             type="button"
-            className="flex items-center gap-1 text-[16px] text-white"
+            className="flex items-center gap-1 text-[15px] text-white lg:text-[16px]"
           >
             <GlobeIcon />
             <span>EN</span>
@@ -58,7 +58,7 @@ export default function Navigation() {
           </button>
           <a
             href="#contact"
-            className="flex h-10 items-center justify-center rounded-lg bg-daftime-yellow px-4 text-[14px] tracking-tight text-black transition-all duration-300 hover:opacity-90 hover:scale-[1.03]"
+            className="flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-daftime-yellow px-4 text-[14px] tracking-tight text-black transition-all duration-300 hover:scale-[1.03] hover:opacity-90"
           >
             Contact Us
           </a>

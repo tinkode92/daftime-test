@@ -108,13 +108,13 @@ export default function Services() {
         </div>
 
         {/* Header */}
-        <div className="relative flex flex-col items-start justify-between gap-6 px-5 pt-10 pb-[260px] sm:gap-8 sm:px-8 sm:pt-12 sm:pb-[340px] md:flex-row md:flex-wrap md:px-10 md:pt-14 md:pb-[420px]">
-          <Reveal className="flex items-center gap-2">
+        <div className="relative flex flex-col items-start justify-between gap-6 px-5 pt-10 pb-[260px] sm:gap-8 sm:px-8 sm:pt-12 sm:pb-[340px] md:flex-row md:items-center md:px-10 md:pt-14 md:pb-[420px]">
+          <Reveal className="flex shrink-0 items-center gap-2">
             <div className="size-1 rounded-full bg-[#070a33]" />
             <p className="label-mono text-[#070a33]">What We Do</p>
           </Reveal>
-          <Reveal as="h2" delay={120} className="block">
-            <span className="h-display block max-w-[874px] flex-1 text-black md:text-right">
+          <Reveal as="h2" delay={120} className="min-w-0 flex-1">
+            <span className="h-display block text-balance text-black md:text-right">
               Everything you need to grow with confidence
             </span>
           </Reveal>
