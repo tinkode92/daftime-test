@@ -87,9 +87,9 @@ export default function Services() {
         </div>
 
         {/* Compass (interactive: rotates toward the active service card) */}
-        <div className="absolute left-1/2 top-[26%] -translate-x-1/2 sm:top-[28%]">
+        <div className="pointer-events-none absolute left-1/2 top-[46%] -translate-x-1/2 sm:top-[36%] md:top-[28%]">
           <div
-            className="size-[140px] sm:size-[200px] md:size-[309px]"
+            className="size-[120px] sm:size-[180px] md:size-[260px] lg:size-[309px]"
             style={{
               transform: `rotate(${compassRotation[active]}deg)`,
               transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
