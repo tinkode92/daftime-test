@@ -5,6 +5,7 @@ import Image from "next/image";
 import Navigation from "./Navigation";
 import BrandMarquee from "./BrandMarquee";
 import LearnMoreModal from "./LearnMoreModal";
+import Globe from "./Globe";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -21,17 +22,10 @@ export default function Hero() {
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
-        {/* Planet background (with subtle floating) */}
-        <div className="pointer-events-none absolute inset-x-0 top-[6%] flex justify-center sm:top-[8%]">
-          <div className="float-slow w-[140%] sm:w-[120%] md:w-[110%]">
-            <Image
-              src="/assets/hero-planet.png"
-              alt=""
-              width={1379}
-              height={1332}
-              priority
-              className="w-full max-w-none object-contain opacity-90"
-            />
+        {/* Interactive globe (drag to rotate, auto-spins when idle) */}
+        <div className="absolute inset-x-0 top-[12%] flex justify-center sm:top-[14%]">
+          <div className="aspect-square w-[120%] max-w-none sm:w-[100%] md:w-[90%] lg:w-[80%]">
+            <Globe className="size-full" />
           </div>
         </div>
 
