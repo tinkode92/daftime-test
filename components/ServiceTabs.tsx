@@ -473,7 +473,7 @@ function FolderIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Soft yellow gradient backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fffced_0%,#fff6c4_60%,#f6e98a_100%)]" />
+      <div className="absolute inset-0 bg-[#F1F1F1]" />
 
       {/* Folder back tab */}
       <div className="absolute left-1/2 top-[10%] h-[78%] w-[64%] -translate-x-1/2">
@@ -500,7 +500,7 @@ function CardIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Soft yellow gradient backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fffced_0%,#fff6c4_60%,#f6e98a_100%)]" />
+      <div className="absolute inset-0 bg-[#F1F1F1]" />
 
       {/* Card body */}
       <div className="absolute left-1/2 top-1/2 h-[68%] w-[78%] -translate-x-1/2 -translate-y-[45%] rounded-[20px] border-[1.5px] border-[#e9d04b]/70 bg-gradient-to-b from-[#f9e891] via-[#f4dd66] to-[#eccd2a] shadow-[0_18px_36px_-18px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.6)]">
@@ -544,7 +544,7 @@ function PlantIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Soft yellow gradient backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fffced_0%,#fff6c4_60%,#f6e98a_100%)]" />
+      <div className="absolute inset-0 bg-[#F1F1F1]" />
 
       {/* Bottom pocket */}
       <div className="absolute inset-x-[12%] bottom-[6%] h-[42%] rounded-[18px] border-[1.5px] border-white/60 bg-gradient-to-b from-[#fff8d4]/40 to-[#f3d24b]/30 shadow-[inset_0_0_22px_rgba(255,255,255,0.45)] backdrop-blur-[12px]" />
@@ -630,7 +630,7 @@ function SealIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Soft yellow gradient backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fffced_0%,#fff6c4_60%,#f6e98a_100%)]" />
+      <div className="absolute inset-0 bg-[#F1F1F1]" />
 
       {/* Bottom pocket */}
       <div className="absolute inset-x-[6%] bottom-[6%] h-[42%] rounded-[18px] border-[1.5px] border-white/60 bg-gradient-to-b from-[#fff8d4]/40 to-[#f3d24b]/30 shadow-[inset_0_0_22px_rgba(255,255,255,0.45)] backdrop-blur-[12px]" />
