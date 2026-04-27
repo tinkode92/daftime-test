@@ -73,19 +73,15 @@ export default function GuideDownload() {
 
         {/* Right: gray panel with magazine image (6194:3084) */}
         <div className="relative min-h-[420px] overflow-hidden bg-[#f3f3f3] md:min-h-[672px]">
-          {/* Magazine image — positioned to overflow per Figma:
-              Figma: image 1304x881 at left calc(50%-30px), top 62px
-              inside a 640x672 container (≈ 204% width, top inset ~9.2%) */}
-          <div className="absolute left-[calc(50%-30px)] top-[62px] h-auto w-[204%] max-w-none">
-            <Image
-              src="/assets/guide-book.png"
-              alt="Open Daftime 2026 magazine"
-              width={1962}
-              height={1262}
-              className="h-auto w-full object-cover"
-              priority={false}
-            />
-          </div>
+          {/* Magazine fills the whole panel */}
+          <Image
+            src="/assets/guide-book.png"
+            alt="Open Daftime 2026 magazine"
+            fill
+            priority={false}
+            className="object-cover object-center"
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
 
           {/* Floating badge top-left */}
           <div className="absolute left-10 top-[42px] z-10 flex items-center gap-3">
