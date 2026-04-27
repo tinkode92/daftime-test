@@ -462,58 +462,204 @@ function CheckCircle({ className }: { className?: string }) {
 type IllustrationKind = "folders" | "card" | "vault" | "shield";
 
 function Illustration({ kind }: { kind: IllustrationKind }) {
-  if (kind === "folders") {
-    return (
-      <div className="absolute inset-0 flex items-end justify-center pb-2">
-        <div className="relative h-[140px] w-[80%]">
-          <div className="absolute inset-x-2 top-3 h-[100px] rounded-xl bg-daftime-yellow/40 shadow-[inset_0_0_20px_rgba(255,255,255,0.4)] backdrop-blur" />
-          <div className="absolute inset-x-1 top-6 h-[100px] rounded-xl bg-white/80 shadow-[0_8px_20px_-8px_rgba(0,0,0,0.1)] backdrop-blur" />
-          <div className="absolute inset-x-0 bottom-0 h-[100px] overflow-hidden rounded-xl bg-white shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)]">
-            <div className="absolute left-0 top-0 h-1/3 w-1/3 rounded-br-md bg-daftime-yellow/80" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (kind === "card") {
-    return (
-      <div className="absolute inset-0 flex items-end justify-center pb-0">
-        <div className="relative h-[110px] w-[78%] rounded-3xl bg-daftime-yellow/30 shadow-[0_0_0_4px_rgba(235,198,10,0.5)] backdrop-blur-md">
-          <div className="absolute bottom-3 left-4 flex items-center gap-1">
-            <div className="h-1 w-4 rounded-full bg-white/80" />
-            <div className="h-1 w-4 rounded-full bg-white/80" />
-            <div className="h-1 w-9 rounded-full bg-white/80" />
-          </div>
-          <div className="absolute right-3 top-3 h-7 w-12 rounded-md bg-[#262419]" />
-        </div>
-      </div>
-    );
-  }
-  if (kind === "vault") {
-    return (
-      <div className="absolute inset-0 flex items-end justify-center pb-0">
-        <div className="relative h-[110px] w-[200px] rounded-t-2xl rounded-b-3xl bg-daftime-yellow/30 shadow-[0_0_0_4px_rgba(235,198,10,0.5)] backdrop-blur-md">
-          <div className="absolute -top-3 left-1/2 size-12 -translate-x-1/2 rounded-full border-4 border-daftime-yellow bg-white shadow-md spin-slow" />
-          <div className="absolute bottom-2 left-1/2 size-7 -translate-x-1/2 rounded-full border-2 border-daftime-yellow bg-white" />
-        </div>
-      </div>
-    );
-  }
+  if (kind === "folders") return <FolderIllustration />;
+  if (kind === "card") return <CardIllustration />;
+  if (kind === "vault") return <PlantIllustration />;
+  return <SealIllustration />;
+}
+
+/* ============= 6194:518 — Folder with paper ============= */
+function FolderIllustration() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="relative">
-        <div className="halo-pulse absolute -inset-3 rounded-full bg-[#f6efcc] blur-md" />
-        <div className="relative flex size-[60px] items-center justify-center rounded-full bg-[#f6efcc]">
-          <svg viewBox="0 0 24 24" className="size-7 fill-daftime-yellow-dark">
-            <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" />
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Soft yellow gradient backdrop */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fffced_0%,#fff6c4_60%,#f6e98a_100%)]" />
+
+      {/* Folder back tab */}
+      <div className="absolute left-1/2 top-[10%] h-[78%] w-[64%] -translate-x-1/2">
+        {/* Tab on top-left of folder */}
+        <div className="absolute left-0 top-0 h-[18%] w-[42%] rounded-tl-[18px] rounded-tr-[14px] bg-[#e9d04b]" />
+        {/* Folder body (back) */}
+        <div className="absolute inset-0 rounded-[18px] border-[1.5px] border-[#e9d04b]/70 bg-gradient-to-b from-[#f9e07a] via-[#f3d24b] to-[#e6bd2a] shadow-[0_18px_36px_-18px_rgba(0,0,0,0.18)]" />
+
+        {/* Paper sticking out from top - tilted, glassy white */}
+        <div className="absolute -top-3 left-[35%] h-[58%] w-[55%] rotate-[-22deg] rounded-[14px] border-[1.5px] border-white bg-white/75 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.18)] backdrop-blur-md" />
+
+        {/* Folder front (lower) */}
+        <div className="absolute inset-x-[3%] bottom-0 h-[60%] rounded-[16px] border-[1.5px] border-white/60 bg-gradient-to-b from-[#fff7d2]/40 via-[#fdeb9a]/30 to-[#f6d23d]/20 shadow-[inset_0_0_24px_rgba(255,255,255,0.45)] backdrop-blur-[12px]" />
+
+        {/* Bottom slot indicator */}
+        <div className="absolute bottom-[14%] left-1/2 h-[3px] w-[26%] -translate-x-1/2 rounded-full bg-[#c9a418]/60" />
+      </div>
+    </div>
+  );
+}
+
+/* ============= 6194:545 — Credit card with chip ============= */
+function CardIllustration() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Soft yellow gradient backdrop */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fffced_0%,#fff6c4_60%,#f6e98a_100%)]" />
+
+      {/* Card body */}
+      <div className="absolute left-1/2 top-1/2 h-[68%] w-[78%] -translate-x-1/2 -translate-y-[45%] rounded-[20px] border-[1.5px] border-[#e9d04b]/70 bg-gradient-to-b from-[#f9e891] via-[#f4dd66] to-[#eccd2a] shadow-[0_18px_36px_-18px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.6)]">
+        {/* Hexagon coin (top-left) */}
+        <svg
+          viewBox="0 0 32 32"
+          className="absolute left-4 top-4 size-7 sm:size-8"
+          aria-hidden
+        >
+          <polygon
+            points="16,2 28,9 28,23 16,30 4,23 4,9"
+            fill="#b48e0a"
+            stroke="#8d6f06"
+            strokeWidth="0.6"
+          />
+          <circle cx="16" cy="16" r="3" fill="#7a5e04" />
+        </svg>
+
+        {/* Card chip (top-right) */}
+        <div className="absolute right-4 top-4 flex h-7 w-12 items-center justify-center rounded-[6px] border border-black/30 bg-[#1f1d12] shadow-inner sm:h-8 sm:w-14">
+          <div className="grid grid-cols-2 gap-[2px]">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <span key={i} className="size-[3px] bg-[#3a3320]" />
+            ))}
+          </div>
+        </div>
+
+        {/* Card number stripes (bottom-left) */}
+        <div className="absolute bottom-4 left-4 flex items-center gap-1.5">
+          <span className="h-1 w-5 rounded-full bg-white/85" />
+          <span className="h-1 w-5 rounded-full bg-white/85" />
+          <span className="h-1 w-10 rounded-full bg-white/85" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============= 6194:560 — Plant in pot (investment growth) ============= */
+function PlantIllustration() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Soft yellow gradient backdrop */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fffced_0%,#fff6c4_60%,#f6e98a_100%)]" />
+
+      {/* Bottom pocket */}
+      <div className="absolute inset-x-[12%] bottom-[6%] h-[42%] rounded-[18px] border-[1.5px] border-white/60 bg-gradient-to-b from-[#fff8d4]/40 to-[#f3d24b]/30 shadow-[inset_0_0_22px_rgba(255,255,255,0.45)] backdrop-blur-[12px]" />
+
+      {/* White spotlight circle with plant */}
+      <div className="absolute left-1/2 top-[14%] flex size-[56%] -translate-x-1/2 items-center justify-center rounded-full bg-gradient-to-b from-white via-white to-[#fff5b8] shadow-[0_18px_36px_-18px_rgba(0,0,0,0.12),inset_0_-6px_18px_rgba(245,210,75,0.18)]">
+        <PlantIcon />
+      </div>
+    </div>
+  );
+}
+
+function PlantIcon() {
+  return (
+    <svg viewBox="0 0 64 64" className="size-[58%]" aria-hidden>
+      {/* Coin with $ sign at top */}
+      <circle
+        cx="32"
+        cy="14"
+        r="7"
+        fill="none"
+        stroke="#c9a418"
+        strokeWidth="2"
+      />
+      <text
+        x="32"
+        y="18"
+        textAnchor="middle"
+        fontSize="9"
+        fontWeight="700"
+        fill="#c9a418"
+        fontFamily="system-ui"
+      >
+        $
+      </text>
+      {/* Stem */}
+      <path
+        d="M32 21 L32 46"
+        stroke="#c9a418"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      {/* Left leaf */}
+      <path
+        d="M32 32 Q22 28 16 32 Q22 38 32 36 Z"
+        fill="#e9d04b"
+        stroke="#c9a418"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      {/* Right leaf */}
+      <path
+        d="M32 32 Q42 28 48 32 Q42 38 32 36 Z"
+        fill="#e9d04b"
+        stroke="#c9a418"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      {/* Pot */}
+      <path
+        d="M22 46 L42 46 L40 56 Q40 58 38 58 L26 58 Q24 58 24 56 Z"
+        fill="#f3d24b"
+        stroke="#c9a418"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      {/* Pot rim */}
+      <line
+        x1="20"
+        y1="46"
+        x2="44"
+        y2="46"
+        stroke="#c9a418"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/* ============= 6194:577 — Corporate seal / hexagon badge ============= */
+function SealIllustration() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Soft yellow gradient backdrop */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fffced_0%,#fff6c4_60%,#f6e98a_100%)]" />
+
+      {/* Bottom pocket */}
+      <div className="absolute inset-x-[6%] bottom-[6%] h-[42%] rounded-[18px] border-[1.5px] border-white/60 bg-gradient-to-b from-[#fff8d4]/40 to-[#f3d24b]/30 shadow-[inset_0_0_22px_rgba(255,255,255,0.45)] backdrop-blur-[12px]" />
+
+      {/* Frame around the white card */}
+      <div className="absolute inset-x-[14%] top-[8%] h-[60%] rounded-[16px] border-[1.5px] border-[#e9d04b]/60 bg-transparent" />
+
+      {/* White vertical card with seal */}
+      <div className="absolute left-1/2 top-[6%] flex h-[64%] w-[44%] -translate-x-1/2 flex-col items-center justify-center gap-3 rounded-[14px] border-[1.5px] border-white bg-white shadow-[0_18px_36px_-18px_rgba(0,0,0,0.15)]">
+        {/* Yellow halo + hexagon coin */}
+        <div className="relative flex items-center justify-center">
+          <div className="absolute size-[64px] rounded-full bg-[#fff5b8]" />
+          <div className="absolute -left-3 top-1/2 size-1.5 -translate-y-1/2 rounded-full bg-[#c9a418]/70" />
+          <div className="absolute -right-3 top-1/2 size-1.5 -translate-y-1/2 rounded-full bg-[#c9a418]/70" />
+          <svg viewBox="0 0 32 32" className="relative size-7" aria-hidden>
+            <polygon
+              points="16,2 28,9 28,23 16,30 4,23 4,9"
+              fill="#c9a418"
+              stroke="#8d6f06"
+              strokeWidth="0.6"
+            />
+            <circle cx="16" cy="16" r="3" fill="#7a5e04" />
           </svg>
         </div>
-        <div className="absolute -inset-x-8 -bottom-6 h-12 rounded-2xl border border-white bg-white/80 backdrop-blur-sm">
-          <div className="mt-2 flex items-center justify-center gap-1">
-            <div className="h-1 w-3.5 rounded-full bg-daftime-yellow/70" />
-            <div className="h-1 w-3.5 rounded-full bg-daftime-yellow/70" />
-            <div className="h-1 w-9 rounded-full bg-daftime-yellow/70" />
-          </div>
+        {/* Three yellow lines */}
+        <div className="flex items-center gap-1.5 px-3">
+          <span className="h-1 w-4 rounded-full bg-[#f3d24b]/70" />
+          <span className="h-1 w-4 rounded-full bg-[#f3d24b]/70" />
+          <span className="h-1 w-6 rounded-full bg-[#f3d24b]/70" />
         </div>
       </div>
     </div>
