@@ -492,7 +492,7 @@ function CardIllustration() {
         src="/assets/opening-a-business.svg"
         alt=""
         width={234}
-        height={133}
+        height={161}
         className="absolute left-1/2 top-1/2 h-auto w-[78%] max-w-[234px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
@@ -506,9 +506,9 @@ function PlantIllustration() {
       <Image
         src="/assets/creation-structuring.svg"
         alt=""
-        width={275}
-        height={170}
-        className="absolute left-1/2 top-1/2 h-auto w-[80%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        width={234}
+        height={187}
+        className="absolute left-1/2 top-1/2 h-auto w-[78%] max-w-[234px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
   );
@@ -521,9 +521,9 @@ function SealIllustration() {
       <Image
         src="/assets/corporate-secretarial.svg"
         alt=""
-        width={275}
-        height={170}
-        className="absolute left-1/2 top-1/2 h-auto w-[80%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        width={234}
+        height={184}
+        className="absolute left-1/2 top-1/2 h-auto w-[78%] max-w-[234px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
   );
