@@ -491,9 +491,9 @@ function CardIllustration() {
       <Image
         src="/assets/opening-a-business.svg"
         alt=""
-        width={275}
-        height={170}
-        className="absolute left-1/2 top-1/2 h-auto w-[80%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        width={234}
+        height={133}
+        className="absolute left-1/2 top-1/2 h-auto w-[78%] max-w-[234px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
   );
