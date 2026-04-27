@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import Reveal from "./Reveal";
 
@@ -471,26 +472,14 @@ function Illustration({ kind }: { kind: IllustrationKind }) {
 /* ============= 6194:518 — Folder with paper ============= */
 function FolderIllustration() {
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Soft yellow gradient backdrop */}
-      <div className="absolute inset-0 bg-[#F1F1F1]" />
-
-      {/* Folder back tab */}
-      <div className="absolute left-1/2 top-[10%] h-[78%] w-[64%] -translate-x-1/2">
-        {/* Tab on top-left of folder */}
-        <div className="absolute left-0 top-0 h-[18%] w-[42%] rounded-tl-[18px] rounded-tr-[14px] bg-[#e9d04b]" />
-        {/* Folder body (back) */}
-        <div className="absolute inset-0 rounded-[18px] border-[1.5px] border-[#e9d04b]/70 bg-gradient-to-b from-[#f9e07a] via-[#f3d24b] to-[#e6bd2a] shadow-[0_18px_36px_-18px_rgba(0,0,0,0.18)]" />
-
-        {/* Paper sticking out from top - tilted, glassy white */}
-        <div className="absolute -top-3 left-[35%] h-[58%] w-[55%] rotate-[-22deg] rounded-[14px] border-[1.5px] border-white bg-white/75 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.18)] backdrop-blur-md" />
-
-        {/* Folder front (lower) */}
-        <div className="absolute inset-x-[3%] bottom-0 h-[60%] rounded-[16px] border-[1.5px] border-white/60 bg-gradient-to-b from-[#fff7d2]/40 via-[#fdeb9a]/30 to-[#f6d23d]/20 shadow-[inset_0_0_24px_rgba(255,255,255,0.45)] backdrop-blur-[12px]" />
-
-        {/* Bottom slot indicator */}
-        <div className="absolute bottom-[14%] left-1/2 h-[3px] w-[26%] -translate-x-1/2 rounded-full bg-[#c9a418]/60" />
-      </div>
+    <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
+      <Image
+        src="/assets/folder.svg"
+        alt=""
+        width={218}
+        height={170}
+        className="absolute left-1/2 top-1/2 h-auto w-[80%] max-w-[218px] -translate-x-1/2 -translate-y-1/2 object-contain"
+      />
     </div>
   );
 }
