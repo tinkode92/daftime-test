@@ -1,8 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Reveal from "./Reveal";
+
+function isAEPath(path: string | null): boolean {
+  if (!path) return true;
+  if (path === "/fr" || path.startsWith("/fr/")) return false;
+  if (path === "/pt" || path.startsWith("/pt/")) return false;
+  return true;
+}
 
 type TabKey = "legal" | "accounting" | "cfo";
 
@@ -270,6 +278,8 @@ function LegalContent() {
 }
 
 function AccountingContent() {
+  const pathname = usePathname();
+  const showPrice = isAEPath(pathname);
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_482px]">
@@ -302,7 +312,7 @@ function AccountingContent() {
       <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
         {accountingPlans.map((plan, idx) => (
           <Reveal key={plan.name} delay={idx * 100}>
-            <PricingCard plan={plan} />
+            <PricingCard plan={plan} showPrice={showPrice} />
           </Reveal>
         ))}
       </div>
@@ -352,7 +362,13 @@ function CFOContent() {
   );
 }
 
-function PricingCard({ plan }: { plan: AccountingPlan }) {
+function PricingCard({
+  plan,
+  showPrice,
+}: {
+  plan: AccountingPlan;
+  showPrice: boolean;
+}) {
   const palette = {
     white: {
       bg: "bg-white",
@@ -391,7 +407,7 @@ function PricingCard({ plan }: { plan: AccountingPlan }) {
           <p className={`text-[16px] tracking-tight ${palette.rangeColor}`}>
             {plan.range}
           </p>
-          {plan.price && (
+          {showPrice && plan.price && (
             <p
               className={`text-[15px] font-semibold tracking-tight ${palette.titleColor}`}
             >

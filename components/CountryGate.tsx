@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const STORAGE_KEY = "daftime-country";
+export const OPEN_GATE_EVENT = "daftime-open-country-gate";
+
+export function openCountryGate() {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent(OPEN_GATE_EVENT));
+}
 
 type Country = {
   code: "AE" | "FR" | "PT";
@@ -54,11 +60,23 @@ export default function CountryGate() {
     }
   }, [pathname, router]);
 
+  // Re-open from anywhere via window.dispatchEvent(new CustomEvent("daftime-open-country-gate"))
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener(OPEN_GATE_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_GATE_EVENT, onOpen);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
@@ -81,10 +99,36 @@ export default function CountryGate() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="country-gate-title"
+      onClick={() => setOpen(false)}
       className="fade-up fixed inset-0 z-[110] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
     >
-      <div className="relative w-full max-w-[520px] overflow-hidden rounded-3xl bg-daftime-yellow-light shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)]">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-[520px] overflow-hidden rounded-3xl bg-daftime-yellow-light shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)]"
+      >
         <div className="pointer-events-none absolute -right-10 -top-10 size-44 rounded-full bg-daftime-yellow/30 blur-3xl" />
+
+        <button
+          type="button"
+          aria-label="Close"
+          onClick={() => setOpen(false)}
+          className="absolute right-4 top-4 z-10 flex size-9 items-center justify-center rounded-full text-black/70 transition-colors hover:bg-black/[0.06]"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            aria-hidden
+          >
+            <path
+              d="M2 2l10 10M12 2L2 12"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
 
         <div className="relative px-6 pt-8 sm:px-10 sm:pt-10">
           <div className="flex items-center gap-2">

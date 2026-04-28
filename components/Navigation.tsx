@@ -2,12 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { openCountryGate } from "./CountryGate";
+
+function localeFromPath(path: string): "EN" | "FR" | "PT" {
+  if (path === "/fr" || path.startsWith("/fr/")) return "FR";
+  if (path === "/pt" || path.startsWith("/pt/")) return "PT";
+  return "EN";
+}
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const resourcesRef = useRef<HTMLLIElement>(null);
+  const pathname = usePathname();
+  const currentLocale = localeFromPath(pathname || "/");
 
   useEffect(() => {
     if (!open) return;
@@ -109,10 +119,12 @@ export default function Navigation() {
         <div className="flex shrink-0 items-center gap-3 pr-1 lg:gap-4">
           <button
             type="button"
-            className="flex items-center gap-1 text-[15px] text-white lg:text-[16px]"
+            onClick={openCountryGate}
+            aria-label="Change country"
+            className="flex items-center gap-1 rounded-lg px-1.5 py-0.5 text-[15px] text-white transition-colors hover:bg-white/10 lg:text-[16px]"
           >
             <GlobeIcon />
-            <span>EN</span>
+            <span>{currentLocale}</span>
             <ChevronDown />
           </button>
           <Link
@@ -219,10 +231,21 @@ export default function Navigation() {
                 </Link>
               </li>
             </ul>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                openCountryGate();
+              }}
+              className="mt-4 flex h-11 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] text-[14px] text-white transition-colors hover:bg-white/[0.12]"
+            >
+              <GlobeIcon />
+              <span>Country: {currentLocale}</span>
+            </button>
             <Link
               onClick={() => setOpen(false)}
               href="/#contact"
-              className="mt-4 flex h-12 items-center justify-center rounded-xl bg-daftime-yellow text-[15px] text-black"
+              className="mt-2 flex h-12 items-center justify-center rounded-xl bg-daftime-yellow text-[15px] text-black"
             >
               Contact Us
             </Link>
