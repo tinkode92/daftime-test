@@ -493,7 +493,7 @@ function CardIllustration() {
         alt=""
         width={234}
         height={161}
-        className="absolute left-1/2 top-1/2 h-auto w-[78%] max-w-[234px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[260px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
   );
