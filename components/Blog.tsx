@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
+import { t, type Locale } from "@/lib/translations";
 
 const articles = [
   {
@@ -40,13 +41,13 @@ const articles = [
   },
 ];
 
-const filters = [
-  { label: "All", active: true },
-  { label: "English", active: false },
-  { label: "Français", active: false },
-];
-
-export default function Blog() {
+export default function Blog({ locale = "en" }: { locale?: Locale }) {
+  const tr = t(locale).blog;
+  const filters = [
+    { label: tr.filters.all, active: true },
+    { label: tr.filters.english, active: false },
+    { label: tr.filters.french, active: false },
+  ];
   return (
     <section
       id="blog"
@@ -58,14 +59,13 @@ export default function Blog() {
           <Reveal className="flex flex-col gap-5 sm:gap-6">
             <div className="flex items-center gap-3">
               <div className="size-1 bg-[#131313]" />
-              <p className="label-mono text-[#070a33]">Blog</p>
+              <p className="label-mono text-[#070a33]">{tr.eyebrow}</p>
             </div>
             <h2 className="h-display max-w-[668px] text-black">
-              Built for business without borders
+              {tr.heading}
             </h2>
             <p className="max-w-[482px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text sm:text-[16px]">
-              Built on collaboration and shared success, our work is guided by a
-              clear purpose: delivering trust, clarity, and long-term value.
+              {tr.subtitle}
             </p>
           </Reveal>
 
@@ -130,7 +130,7 @@ export default function Blog() {
                   {a.description}
                 </p>
                 <button className="mt-4 inline-flex items-center gap-2 rounded-xl border border-black/10 bg-black/[0.04] px-5 py-3 text-[14px] tracking-tight text-black transition-colors hover:bg-black/10">
-                  Read More
+                  {tr.readMore}
                   <svg
                     width="8"
                     height="6"
@@ -155,7 +155,7 @@ export default function Blog() {
 
         <div className="mt-10 flex justify-center sm:mt-12">
           <button className="flex h-11 items-center justify-center rounded-lg bg-black px-5 text-[14px] tracking-tight text-white transition-all duration-300 hover:scale-[1.03] hover:opacity-90">
-            Load More
+            {tr.loadMore}
           </button>
         </div>
       </div>

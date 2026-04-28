@@ -6,6 +6,7 @@ import Navigation from "./Navigation";
 import BrandMarquee from "./BrandMarquee";
 import LearnMoreModal from "./LearnMoreModal";
 import Globe from "./Globe";
+import { t, type Locale } from "@/lib/translations";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -16,8 +17,9 @@ const avatars = [
   { src: "/assets/avatar-6.png", bg: "#ffc0c5" },
 ];
 
-export default function Hero() {
+export default function Hero({ locale = "en" }: { locale?: Locale }) {
   const [modalOpen, setModalOpen] = useState(false);
+  const tr = t(locale).hero;
 
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
@@ -65,7 +67,7 @@ export default function Hero() {
                 ))}
               </div>
               <p className="text-[15px] tracking-tight text-white sm:text-[18px] md:text-[20px]">
-                12k+ Client Collaboration
+                {tr.counter}
               </p>
             </div>
 
@@ -74,13 +76,13 @@ export default function Hero() {
               className="h-hero fade-up max-w-[760px] text-balance text-white"
               style={{ animationDelay: "120ms" }}
             >
-              Your international partner for structuring your business
+              {tr.title}
             </h1>
             <p
               className="fade-up mt-4 max-w-[600px] text-[16px] tracking-tight text-white/90 sm:mt-6 sm:text-[18px] md:text-[20px]"
               style={{ animationDelay: "240ms" }}
             >
-              Where law meets accounting, and strategy drives growth.
+              {tr.subtitle}
             </p>
 
             {/* Buttons */}
@@ -93,14 +95,14 @@ export default function Hero() {
                 onClick={() => setModalOpen(true)}
                 className="btn-pill cta-shimmer bg-daftime-yellow text-black hover:opacity-90"
               >
-                Learn More
+                {tr.learnMore}
                 <ArrowRight />
               </button>
               <a
                 href="#contact"
                 className="btn-pill border border-white/10 bg-black/10 text-white backdrop-blur hover:bg-white/10"
               >
-                Lets Talk
+                {tr.letsTalk}
               </a>
             </div>
           </div>

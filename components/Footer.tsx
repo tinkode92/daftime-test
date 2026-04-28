@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { t, type Locale } from "@/lib/translations";
 
-export default function Footer() {
+export default function Footer({ locale = "en" }: { locale?: Locale }) {
+  const tr = t(locale).footer;
   return (
     <footer className="bg-white p-2 sm:p-4">
       <div className="relative overflow-hidden rounded-2xl bg-daftime-yellow px-5 py-8 sm:px-6 sm:py-10 md:h-[254px]">
@@ -24,7 +26,7 @@ export default function Footer() {
               className="h-9 w-auto object-contain sm:h-10"
             />
             <p className="text-[12px] uppercase tracking-wider text-black sm:text-[14px] md:text-[16px]">
-              © 2026 Daftime All Rights Reserved
+              {tr.rights}
             </p>
           </div>
 
@@ -52,12 +54,12 @@ export default function Footer() {
             </div>
             <div className="flex flex-wrap items-center gap-6 sm:gap-12">
               <a href="#" className="transition-opacity hover:opacity-60">
-                Privacy Policy
+                {tr.privacy}
               </a>
               <a href="#" className="transition-opacity hover:opacity-60">
-                Terms &amp; Conditions
+                {tr.terms}
               </a>
-              <span>© 2026 BigBrowser</span>
+              <span>{tr.copyright}</span>
             </div>
           </div>
         </div>

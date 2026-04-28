@@ -4,6 +4,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Reveal from "./Reveal";
+import { t, type Locale } from "@/lib/translations";
 
 function isAEPath(path: string | null): boolean {
   if (!path) return true;
@@ -13,142 +14,49 @@ function isAEPath(path: string | null): boolean {
 }
 
 type TabKey = "legal" | "accounting" | "cfo";
+const TAB_KEYS: TabKey[] = ["legal", "accounting", "cfo"];
 
-const tabs: { key: TabKey; label: string }[] = [
-  { key: "legal", label: "Legal Services" },
-  { key: "accounting", label: "Accounting and tax" },
-  { key: "cfo", label: "CFO & Advisory services" },
+type LegalCardKey = "businessSetup" | "openBank" | "spv" | "corporate";
+const LEGAL_CARD_KEYS: LegalCardKey[] = [
+  "businessSetup",
+  "openBank",
+  "spv",
+  "corporate",
 ];
-
-const legalCards = [
-  {
-    title: "Business setup",
-    subtitle: "(Mainland & Free Zone)",
-    description:
-      "Company structuring, license acquisition, corporate amendments, with legal guidance provided by lawyers.",
-    illustration: "folders" as const,
-  },
-  {
-    title: "Opening a business",
-    subtitle: "bank account",
-    description:
-      "Assistance in choosing a bank, preparing KYC documents, and managing the account opening process.",
-    illustration: "card" as const,
-  },
-  {
-    title: "Creation and structuring of investment vehicles (SPVs, holdings, trusts)",
-    subtitle: "",
-    description:
-      "Structures designed to secure your investments, optimize governance, and support your long-term strategy.",
-    illustration: "vault" as const,
-  },
-  {
-    title: "Corporate secretarial",
-    subtitle: "services in the UAE",
-    description:
-      "Emirates ID, residence visas, Golden Visa, family sponsorship.",
-    illustration: "shield" as const,
-  },
-];
+type IllustrationKind = "folders" | "card" | "vault" | "shield";
+const LEGAL_ILLUSTRATIONS: Record<LegalCardKey, IllustrationKind> = {
+  businessSetup: "folders",
+  openBank: "card",
+  spv: "vault",
+  corporate: "shield",
+};
 
 type AccountingPlanVariant = "white" | "yellow" | "gray";
-type AccountingPlan = {
-  name: string;
-  range: string;
-  price?: string;
-  features: string[];
-  variant: AccountingPlanVariant;
-};
-
-const accountingPlans: AccountingPlan[] = [
-  {
-    name: "Basic",
-    range: "0 to 50 transactions/month",
-    price: "Starting at AED 999.99/month",
-    variant: "white",
-    features: [
-      "Financial statements (UAE standards)",
-      "VAT & Corporate Tax Management UAE",
-      "Phone support",
-      "Management tool",
-    ],
-  },
-  {
-    name: "Intermediate",
-    range: "51 to 100 transactions/month",
-    price: "Starting at AED 1,999.99/month",
-    variant: "yellow",
-    features: [
-      "UAE financial statements",
-      "VAT & Corporate Tax",
-      "Phone support",
-      "Dedicated Customer Success",
-      "Multi-currency management tool",
-    ],
-  },
-  {
-    name: "Premium",
-    range: "101 to 250 transactions/month",
-    price: "Starting at AED 2,999.99/month",
-    variant: "gray",
-    features: [
-      "UAE financial statements",
-      "VAT & Corporate Tax",
-      "Dedicated Customer Success",
-      "Multi-currency tool",
-      "Regular strategic review meetings",
-    ],
-  },
-  {
-    name: "Large entreprises",
-    range: "Personalized support",
-    variant: "white",
-    features: [
-      "Advanced reporting",
-      "Tax optimization UAE",
-      "Consolidation",
-      "Strategic advice",
-    ],
-  },
+type AccountingPlanKey = "basic" | "intermediate" | "premium" | "large";
+const ACCOUNTING_PLAN_KEYS: AccountingPlanKey[] = [
+  "basic",
+  "intermediate",
+  "premium",
+  "large",
 ];
-
-type CFOPlan = {
-  name: string;
-  features: string[];
-};
-
-const cfoPlans: CFOPlan[] = [
+const ACCOUNTING_PLAN_VARIANTS: Record<AccountingPlanKey, AccountingPlanVariant> =
   {
-    name: "Financial reporting\nand management (UAE)",
-    features: [
-      "KPI dashboards",
-      "Cost & Margin Analysis",
-      "Break-even point",
-      "Steering committee meetings",
-    ],
-  },
-  {
-    name: "Office Management Dubai",
-    features: [
-      "Dedicated administrative assistant",
-      "Administrative management, purchasing, sales & banking",
-      "Recruitment support",
-      "Executive schedule management",
-    ],
-  },
-  {
-    name: "CFO Part-Time UAE",
-    features: [
-      "Financial reporting, cost analysis",
-      "Digitization of the finance function",
-      "Strategic support",
-      "Due diligence",
-    ],
-  },
-];
+    basic: "white",
+    intermediate: "yellow",
+    premium: "gray",
+    large: "white",
+  };
 
-export default function ServiceTabs() {
+type CFOPlanKey = "reporting" | "office" | "fractional";
+const CFO_PLAN_KEYS: CFOPlanKey[] = ["reporting", "office", "fractional"];
+
+export default function ServiceTabs({
+  locale = "en",
+}: {
+  locale?: Locale;
+}) {
   const [active, setActive] = useState<TabKey>("legal");
+  const tr = t(locale).serviceTabs;
 
   return (
     <section
@@ -161,19 +69,17 @@ export default function ServiceTabs() {
           <Reveal className="flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <div className="size-1 bg-black" />
-              <p className="label-mono text-black">Services</p>
+              <p className="label-mono text-black">{tr.eyebrow}</p>
             </div>
             <p className="max-w-[506px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text sm:text-[16px]">
-              Every mission is a collaboration, every achievement, a shared
-              effort. Their positive feedback reminds us why we do what we do:
-              to create trust, clarity, and long-term value.
+              {tr.intro}
             </p>
           </Reveal>
           <Reveal as="h2" delay={120} className="block">
             <span className="h-display block max-w-[555px] text-black">
-              Supporting entrepreneurs
+              {tr.heading[0]}
               <br />
-              wherever they operate
+              {tr.heading[1]}
             </span>
           </Reveal>
         </div>
@@ -181,39 +87,39 @@ export default function ServiceTabs() {
         {/* Tabs */}
         <div className="mt-8 flex flex-col gap-1 sm:mt-12">
           <Reveal className="flex flex-wrap items-center gap-2 rounded-2xl bg-white px-4 py-4 sm:gap-5 sm:px-8 sm:py-6">
-            {tabs.map((tab) => (
+            {TAB_KEYS.map((key) => (
               <button
-                key={tab.key}
-                onClick={() => setActive(tab.key)}
+                key={key}
+                onClick={() => setActive(key)}
                 className={
                   "transition-all duration-300 " +
-                  (active === tab.key
+                  (active === key
                     ? "flex items-center justify-center rounded-xl bg-black px-4 py-2 text-[15px] tracking-tight text-white sm:px-5 sm:py-2.5 sm:text-[18px]"
                     : "flex items-center justify-center rounded-md px-2.5 py-2 text-[15px] tracking-tight text-daftime-dark hover:bg-black/5 sm:py-2.5 sm:text-[18px]")
                 }
               >
-                {tab.label}
+                {tr.tabs[key]}
               </button>
             ))}
           </Reveal>
 
-          {active === "legal" && <LegalContent />}
-          {active === "accounting" && <AccountingContent />}
-          {active === "cfo" && <CFOContent />}
+          {active === "legal" && <LegalContent locale={locale} />}
+          {active === "accounting" && <AccountingContent locale={locale} />}
+          {active === "cfo" && <CFOContent locale={locale} />}
         </div>
       </div>
     </section>
   );
 }
 
-function LegalContent() {
+function LegalContent({ locale }: { locale: Locale }) {
+  const tr = t(locale).serviceTabs.legal;
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_358px]">
         <Reveal className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]">
           <h3 className="max-w-[434px] text-[22px] leading-tight tracking-tight text-black sm:text-[26px] md:text-[28px]">
-            Create and structure your company in the Emirates securely and
-            compliantly
+            {tr.heading}
           </h3>
         </Reveal>
         <Reveal
@@ -221,72 +127,70 @@ function LegalContent() {
           className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]"
         >
           <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
-            At Daftime, we support entrepreneurs through every stage of setting
-            up a business in Dubai: analyzing your project, choosing the best
-            structure (Mainland/Freezone), legal and tax optimization, and full
-            compliance.
+            {tr.body}
           </p>
         </Reveal>
       </div>
 
       <Reveal className="rounded-2xl bg-white px-5 py-4 sm:px-8 sm:py-6">
         <p className="text-[16px] tracking-tight text-black sm:text-[18px]">
-          Our Business Setup services include:
+          {tr.listLabel}
         </p>
       </Reveal>
 
       <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
-        {legalCards.map((c, idx) => (
-          <Reveal
-            key={c.title}
-            delay={idx * 100}
-            className="card-hover flex flex-col rounded-2xl bg-white p-2"
-          >
-            <div className="relative h-[160px] overflow-hidden rounded-xl bg-[#f7f7f7] sm:h-[170px]">
-              <Illustration kind={c.illustration} />
-            </div>
-            <div className="flex flex-col gap-2 px-2 pt-4 pb-3">
-              <p className="text-[16px] leading-tight tracking-tight text-black">
-                {c.title}
-                {c.subtitle && (
-                  <>
-                    <br />
-                    {c.subtitle}
-                  </>
-                )}
-              </p>
-              <p className="text-[14px] leading-relaxed tracking-tight text-[#9e9e9e]">
-                {c.description}
-              </p>
-            </div>
-          </Reveal>
-        ))}
+        {LEGAL_CARD_KEYS.map((cardKey, idx) => {
+          const card = tr.cards[cardKey];
+          return (
+            <Reveal
+              key={cardKey}
+              delay={idx * 100}
+              className="card-hover flex flex-col rounded-2xl bg-white p-2"
+            >
+              <div className="relative h-[160px] overflow-hidden rounded-xl bg-[#f7f7f7] sm:h-[170px]">
+                <Illustration kind={LEGAL_ILLUSTRATIONS[cardKey]} />
+              </div>
+              <div className="flex flex-col gap-2 px-2 pt-4 pb-3">
+                <p className="text-[16px] leading-tight tracking-tight text-black">
+                  {card.title}
+                  {card.subtitle && (
+                    <>
+                      <br />
+                      {card.subtitle}
+                    </>
+                  )}
+                </p>
+                <p className="text-[14px] leading-relaxed tracking-tight text-[#9e9e9e]">
+                  {card.description}
+                </p>
+              </div>
+            </Reveal>
+          );
+        })}
       </div>
 
       <Reveal className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white px-5 py-4 sm:px-8">
         <span className="rounded-full border border-daftime-cream-border bg-daftime-cream px-4 py-2 text-[15px] tracking-tight text-[#776509] sm:text-[16px]">
-          Tailored support
+          {tr.tailored}
         </span>
         <p className="max-w-[504px] text-[15px] leading-relaxed tracking-tight text-[#010101] sm:text-[16px]">
-          All our services are offered on a quote basis, ensuring a secure,
-          compliant, and perfectly tailored establishment in Dubai that meets
-          your objectives.
+          {tr.tailoredText}
         </p>
       </Reveal>
     </>
   );
 }
 
-function AccountingContent() {
+function AccountingContent({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const showPrice = isAEPath(pathname);
+  const tr = t(locale).serviceTabs.accounting;
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_482px]">
         <Reveal className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]">
           <h3 className="max-w-[471px] text-[22px] leading-tight tracking-tight text-black sm:text-[26px] md:text-[28px]">
-            Compliant, optimized accounting and tax management tailored to UAE
-            standards
+            {tr.heading}
           </h3>
         </Reveal>
         <Reveal
@@ -294,25 +198,25 @@ function AccountingContent() {
           className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]"
         >
           <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
-            At Daftime, we provide comprehensive accounting and tax management
-            services in accordance with UAE requirements: financial statements
-            in accordance with local standards, VAT (UAE VAT), corporate tax,
-            reporting, and operational monitoring. Our services are tailored to
-            the volume of transactions and the level of support required.
+            {tr.body}
           </p>
         </Reveal>
       </div>
 
       <Reveal className="rounded-2xl bg-white px-5 py-4 sm:px-8 sm:py-6">
         <p className="text-[16px] tracking-tight text-black sm:text-[18px]">
-          Our accounting packages
+          {tr.listLabel}
         </p>
       </Reveal>
 
       <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
-        {accountingPlans.map((plan, idx) => (
-          <Reveal key={plan.name} delay={idx * 100}>
-            <PricingCard plan={plan} showPrice={showPrice} />
+        {ACCOUNTING_PLAN_KEYS.map((planKey, idx) => (
+          <Reveal key={planKey} delay={idx * 100}>
+            <PricingCard
+              plan={tr.plans[planKey]}
+              variant={ACCOUNTING_PLAN_VARIANTS[planKey]}
+              showPrice={showPrice}
+            />
           </Reveal>
         ))}
       </div>
@@ -322,13 +226,14 @@ function AccountingContent() {
   );
 }
 
-function CFOContent() {
+function CFOContent({ locale }: { locale: Locale }) {
+  const tr = t(locale).serviceTabs.cfo;
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_376px]">
         <Reveal className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]">
           <h3 className="max-w-[471px] text-[22px] leading-tight tracking-tight text-black sm:text-[26px] md:text-[28px]">
-            Strategic consulting &amp; Flexible financial management
+            {tr.heading}
           </h3>
         </Reveal>
         <Reveal
@@ -336,23 +241,21 @@ function CFOContent() {
           className="flex min-h-[120px] items-center rounded-2xl bg-white px-5 py-5 sm:min-h-[140px] sm:px-8 sm:py-6 lg:h-[153px]"
         >
           <p className="text-[14px] leading-relaxed tracking-tight text-daftime-gray-mute">
-            Our advisory and part-time CFO (fractional CFO) services provide you
-            with the expertise you need to drive growth, optimize performance,
-            and improve financial visibility in the United Arab Emirates.
+            {tr.body}
           </p>
         </Reveal>
       </div>
 
       <Reveal className="rounded-2xl bg-white px-5 py-4 sm:px-8 sm:py-6">
         <p className="text-[16px] tracking-tight text-black sm:text-[18px]">
-          Our accounting packages
+          {tr.listLabel}
         </p>
       </Reveal>
 
       <div className="grid grid-cols-1 gap-1 md:grid-cols-3">
-        {cfoPlans.map((plan, idx) => (
-          <Reveal key={plan.name} delay={idx * 100}>
-            <CFOCard plan={plan} />
+        {CFO_PLAN_KEYS.map((planKey, idx) => (
+          <Reveal key={planKey} delay={idx * 100}>
+            <CFOCard plan={tr.plans[planKey]} />
           </Reveal>
         ))}
       </div>
@@ -362,11 +265,20 @@ function CFOContent() {
   );
 }
 
+type AccountingPlanData = {
+  name: string;
+  range: string;
+  price?: string;
+  features: string[];
+};
+
 function PricingCard({
   plan,
+  variant,
   showPrice,
 }: {
-  plan: AccountingPlan;
+  plan: AccountingPlanData;
+  variant: AccountingPlanVariant;
   showPrice: boolean;
 }) {
   const palette = {
@@ -388,7 +300,7 @@ function PricingCard({
       rangeColor: "text-daftime-gray-mute",
       iconBg: "bg-daftime-yellow",
     },
-  }[plan.variant];
+  }[variant];
 
   return (
     <div
@@ -431,7 +343,9 @@ function PricingCard({
   );
 }
 
-function CFOCard({ plan }: { plan: CFOPlan }) {
+type CFOPlanData = { name: string; features: string[] };
+
+function CFOCard({ plan }: { plan: CFOPlanData }) {
   return (
     <div className="card-hover flex min-h-[300px] flex-col gap-6 rounded-2xl bg-white p-2 sm:h-[318px]">
       <div className="flex flex-col gap-3 px-2 pt-2">
@@ -488,8 +402,6 @@ function CheckCircle({ className }: { className?: string }) {
     </svg>
   );
 }
-
-type IllustrationKind = "folders" | "card" | "vault" | "shield";
 
 function Illustration({ kind }: { kind: IllustrationKind }) {
   if (kind === "folders") return <FolderIllustration />;

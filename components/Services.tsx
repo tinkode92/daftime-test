@@ -3,37 +3,15 @@
 import Image from "next/image";
 import { useState } from "react";
 import Reveal from "./Reveal";
+import { t, type Locale } from "@/lib/translations";
 
 type ServiceKey = "legal" | "advisory" | "accounting";
 
-const services: {
-  key: ServiceKey;
-  icon: string;
-  title: string;
-  description: string;
-}[] = [
-  {
-    key: "legal",
-    icon: "/assets/icon-legal.svg",
-    title: "Legal",
-    description:
-      "From setup to scale: legal solutions that secure your assets and simplify your operations across borders managed by lawyers.",
-  },
-  {
-    key: "advisory",
-    icon: "/assets/icon-advisory.svg",
-    title: "Advisory",
-    description:
-      "Strategy meets execution. We help you make smart decisions, optimize performance, and scale sustainably.",
-  },
-  {
-    key: "accounting",
-    icon: "/assets/icon-accounting.svg",
-    title: "Accounting",
-    description:
-      "Reliable, compliant, and forward-thinking accounting and taxation managed by real chartered accountants, so you can focus on growth while we handle the numbers.",
-  },
-];
+const serviceIcons: Record<ServiceKey, string> = {
+  legal: "/assets/icon-legal.svg",
+  advisory: "/assets/icon-advisory.svg",
+  accounting: "/assets/icon-accounting.svg",
+};
 
 // Compass needle natural direction is south-west (lower-left).
 // Rotating counterclockwise (negative deg) moves the tip clockwise around
@@ -44,17 +22,18 @@ const compassRotation: Record<ServiceKey, number> = {
   accounting: -90,
 };
 
-const marqueeWords = [
-  "Legal",
-  "Advisory",
-  "Accounting",
-  "Advisory",
-  "Legal",
-  "Accounting",
-];
-
-export default function Services() {
+export default function Services({ locale = "en" }: { locale?: Locale }) {
   const [active, setActive] = useState<ServiceKey>("legal");
+  const tr = t(locale).services;
+  const orderedServices: ServiceKey[] = ["legal", "advisory", "accounting"];
+  const marqueeWords = [
+    tr.cards.legal.title,
+    tr.cards.advisory.title,
+    tr.cards.accounting.title,
+    tr.cards.advisory.title,
+    tr.cards.legal.title,
+    tr.cards.accounting.title,
+  ];
 
   return (
     <section id="what" className="bg-white px-2 pt-3 sm:px-4 sm:pt-4">
@@ -111,11 +90,11 @@ export default function Services() {
         <div className="relative flex flex-col items-start justify-between gap-6 px-5 pt-10 pb-[260px] sm:gap-8 sm:px-8 sm:pt-12 sm:pb-[340px] md:flex-row md:items-center md:px-10 md:pt-14 md:pb-[420px]">
           <Reveal className="flex shrink-0 items-center gap-2">
             <div className="size-1 rounded-full bg-[#070a33]" />
-            <p className="label-mono text-[#070a33]">What We Do</p>
+            <p className="label-mono text-[#070a33]">{tr.eyebrow}</p>
           </Reveal>
           <Reveal as="h2" delay={120} className="min-w-0 flex-1">
             <span className="h-display block text-balance text-black md:text-right">
-              Everything you need to grow with confidence
+              {tr.heading}
             </span>
           </Reveal>
         </div>
@@ -124,8 +103,7 @@ export default function Services() {
         <div className="relative px-5 pb-8 sm:px-8 sm:pb-10 md:px-10 md:pb-12">
           <Reveal>
             <p className="text-[18px] leading-snug tracking-tight text-black sm:text-[20px] md:text-[24px]">
-              Accounting, legal, and advisory support designed to help
-              entrepreneurs thrive — locally and abroad.
+              {tr.subtitle}
             </p>
           </Reveal>
         </div>
@@ -133,27 +111,27 @@ export default function Services() {
 
       {/* Three cards below */}
       <div className="grid grid-cols-1 gap-10 px-2 py-12 sm:px-4 md:grid-cols-3 md:gap-12 md:px-12 md:py-16">
-        {services.map((s, idx) => (
+        {orderedServices.map((key, idx) => (
           <Reveal
-            key={s.title}
+            key={key}
             delay={idx * 120}
             className="flex flex-col gap-5 sm:gap-6"
           >
             <div
               role="button"
               tabIndex={0}
-              onMouseEnter={() => setActive(s.key)}
-              onFocus={() => setActive(s.key)}
-              onClick={() => setActive(s.key)}
+              onMouseEnter={() => setActive(key)}
+              onFocus={() => setActive(key)}
+              onClick={() => setActive(key)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  setActive(s.key);
+                  setActive(key);
                 }
               }}
               className={
                 "flex cursor-pointer flex-col gap-5 transition-all duration-300 sm:gap-6 " +
-                (active === s.key
+                (active === key
                   ? "opacity-100"
                   : "opacity-80 hover:opacity-100")
               }
@@ -162,13 +140,13 @@ export default function Services() {
                 <div
                   className={
                     "flex size-16 items-center justify-center overflow-hidden rounded-xl border transition-all duration-300 sm:size-20 " +
-                    (active === s.key
+                    (active === key
                       ? "scale-105 border-daftime-yellow bg-daftime-yellow/15"
                       : "border-daftime-gray-border")
                   }
                 >
                   <Image
-                    src={s.icon}
+                    src={serviceIcons[key]}
                     alt=""
                     width={48}
                     height={48}
@@ -176,11 +154,11 @@ export default function Services() {
                   />
                 </div>
                 <h3 className="text-[22px] tracking-tight text-black sm:text-[25px]">
-                  {s.title}
+                  {tr.cards[key].title}
                 </h3>
               </div>
               <p className="text-[15px] leading-relaxed tracking-tight text-black sm:text-[16px]">
-                {s.description}
+                {tr.cards[key].description}
               </p>
             </div>
           </Reveal>

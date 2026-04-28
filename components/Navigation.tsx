@@ -5,11 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { openCountryGate } from "./CountryGate";
+import { t, type Locale } from "@/lib/translations";
 
-function localeFromPath(path: string): "EN" | "FR" | "PT" {
-  if (path === "/fr" || path.startsWith("/fr/")) return "FR";
-  if (path === "/pt" || path.startsWith("/pt/")) return "PT";
-  return "EN";
+function localeFromPath(path: string): Locale {
+  if (path === "/fr" || path.startsWith("/fr/")) return "fr";
+  if (path === "/pt" || path.startsWith("/pt/")) return "pt";
+  return "en";
+}
+
+function homeForLocale(locale: Locale): string {
+  if (locale === "fr") return "/fr";
+  if (locale === "pt") return "/pt";
+  return "/";
 }
 
 export default function Navigation() {
@@ -17,7 +24,10 @@ export default function Navigation() {
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const resourcesRef = useRef<HTMLLIElement>(null);
   const pathname = usePathname();
-  const currentLocale = localeFromPath(pathname || "/");
+  const locale = localeFromPath(pathname || "/");
+  const home = homeForLocale(locale);
+  const tr = t(locale).nav;
+  const currentLocale = locale.toUpperCase();
 
   useEffect(() => {
     if (!open) return;
@@ -46,8 +56,8 @@ export default function Navigation() {
     <nav className="flex w-full items-start gap-2 md:w-auto">
       {/* Logo pill */}
       <Link
-        href="/"
-        aria-label="Daftime — back to home"
+        href={home}
+        aria-label="Daftime"
         className="flex shrink-0 items-center justify-center rounded-[10px] border border-white/10 bg-white/[0.14] p-2.5 backdrop-blur-md transition-transform duration-300 hover:scale-105 md:p-3"
       >
         <Image
@@ -64,10 +74,14 @@ export default function Navigation() {
       <div className="hidden w-full max-w-[560px] items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.14] p-1 backdrop-blur-md md:flex">
         <ul className="flex shrink items-center gap-1 px-2 text-white">
           <li className="rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
-            <Link href="/#what" className="whitespace-nowrap">What we do</Link>
+            <Link href={`${home}#what`} className="whitespace-nowrap">
+              {tr.whatWeDo}
+            </Link>
           </li>
           <li className="rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
-            <Link href="/#services" className="whitespace-nowrap">Services</Link>
+            <Link href={`${home}#services`} className="whitespace-nowrap">
+              {tr.services}
+            </Link>
           </li>
           <li
             ref={resourcesRef}
@@ -80,7 +94,7 @@ export default function Navigation() {
               aria-haspopup="menu"
               className="flex items-center gap-2 whitespace-nowrap rounded-lg px-2 py-1 transition-colors hover:bg-white/10"
             >
-              Resources
+              {tr.resources}
               <ChevronDown />
             </button>
             {resourcesOpen && (
@@ -94,7 +108,7 @@ export default function Navigation() {
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
-                  Podcast
+                  {tr.podcast}
                 </Link>
                 <Link
                   role="menuitem"
@@ -102,15 +116,15 @@ export default function Navigation() {
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
-                  2026 Daftime Guide
+                  {tr.guide2026}
                 </Link>
                 <Link
                   role="menuitem"
-                  href="/#blog"
+                  href={`${home}#blog`}
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
-                  Blog
+                  {tr.blog}
                 </Link>
               </div>
             )}
@@ -128,10 +142,10 @@ export default function Navigation() {
             <ChevronDown />
           </button>
           <Link
-            href="/#contact"
+            href={`${home}#contact`}
             className="flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-daftime-yellow px-4 text-[14px] tracking-tight text-black transition-all duration-300 hover:scale-[1.03] hover:opacity-90"
           >
-            Contact Us
+            {tr.contactUs}
           </Link>
         </div>
       </div>
@@ -139,10 +153,10 @@ export default function Navigation() {
       {/* Mobile burger */}
       <div className="ml-auto flex items-center gap-2 md:hidden">
         <Link
-          href="/#contact"
+          href={`${home}#contact`}
           className="flex h-10 items-center justify-center rounded-lg bg-daftime-yellow px-3 text-[13px] tracking-tight text-black"
         >
-          Contact
+          {tr.contact}
         </Link>
         <button
           type="button"
@@ -188,28 +202,28 @@ export default function Navigation() {
               <li>
                 <Link
                   onClick={() => setOpen(false)}
-                  href="/#what"
+                  href={`${home}#what`}
                   className="block rounded-lg px-3 py-3 hover:bg-white/10"
                 >
-                  What we do
+                  {tr.whatWeDo}
                 </Link>
               </li>
               <li>
                 <Link
                   onClick={() => setOpen(false)}
-                  href="/#services"
+                  href={`${home}#services`}
                   className="block rounded-lg px-3 py-3 hover:bg-white/10"
                 >
-                  Services
+                  {tr.services}
                 </Link>
               </li>
               <li>
                 <Link
                   onClick={() => setOpen(false)}
-                  href="/#blog"
+                  href={`${home}#blog`}
                   className="block rounded-lg px-3 py-3 hover:bg-white/10"
                 >
-                  Resources
+                  {tr.resources}
                 </Link>
               </li>
               <li>
@@ -218,7 +232,7 @@ export default function Navigation() {
                   href="/resources/podcast"
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
-                  → Podcast
+                  → {tr.podcast}
                 </Link>
               </li>
               <li>
@@ -227,7 +241,7 @@ export default function Navigation() {
                   href="/resources/guide-2026"
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
-                  → 2026 Daftime Guide
+                  → {tr.guide2026}
                 </Link>
               </li>
             </ul>
@@ -244,10 +258,10 @@ export default function Navigation() {
             </button>
             <Link
               onClick={() => setOpen(false)}
-              href="/#contact"
+              href={`${home}#contact`}
               className="mt-2 flex h-12 items-center justify-center rounded-xl bg-daftime-yellow text-[15px] text-black"
             >
-              Contact Us
+              {tr.contactUs}
             </Link>
           </div>
         </div>

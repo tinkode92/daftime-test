@@ -16,14 +16,14 @@ export const metadata = {
 export default function HomeFR() {
   return (
     <main className="min-h-screen w-full bg-white">
-      <Hero />
-      <Services />
-      <ServiceTabs />
-      <Blog />
-      <Testimonials />
-      <GuideCTA />
-      <BookConsultationCTA />
-      <Footer />
+      <Hero locale="fr" />
+      <Services locale="fr" />
+      <ServiceTabs locale="fr" />
+      <Blog locale="fr" />
+      <Testimonials locale="fr" />
+      <GuideCTA locale="fr" />
+      <BookConsultationCTA locale="fr" />
+      <Footer locale="fr" />
     </main>
   );
 }

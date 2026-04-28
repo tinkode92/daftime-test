@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { t, type Locale as ContentLocale } from "@/lib/translations";
 
 const STORAGE_KEY = "daftime-country";
 export const OPEN_GATE_EVENT = "daftime-open-country-gate";
@@ -32,10 +33,17 @@ function getLocaleFromPath(path: string): "AE" | "FR" | "PT" {
   return "AE";
 }
 
+function localeFromPath(path: string): ContentLocale {
+  if (path === "/fr" || path.startsWith("/fr/")) return "fr";
+  if (path === "/pt" || path.startsWith("/pt/")) return "pt";
+  return "en";
+}
+
 export default function CountryGate() {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const tr = t(localeFromPath(pathname || "/")).countryGate;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -133,17 +141,16 @@ export default function CountryGate() {
         <div className="relative px-6 pt-8 sm:px-10 sm:pt-10">
           <div className="flex items-center gap-2">
             <span className="size-1 rounded-full bg-black" />
-            <p className="label-mono text-black">Welcome</p>
+            <p className="label-mono text-black">{tr.eyebrow}</p>
           </div>
           <h2
             id="country-gate-title"
             className="h-display mt-4 text-balance text-black"
           >
-            Choose your country
+            {tr.heading}
           </h2>
           <p className="mt-3 max-w-[420px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text">
-            Pick your region to browse Daftime in the version closest to your
-            market.
+            {tr.subtitle}
           </p>
         </div>
 

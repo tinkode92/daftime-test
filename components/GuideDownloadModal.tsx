@@ -6,15 +6,22 @@ import {
   type FormEvent,
   type ChangeEvent,
 } from "react";
+import { t, type Locale } from "@/lib/translations";
 
 type Props = {
   open: boolean;
   onClose: () => void;
+  locale?: Locale;
 };
 
 const PDF_URL = "/assets/daftime-guide-2026.pdf";
 
-export default function GuideDownloadModal({ open, onClose }: Props) {
+export default function GuideDownloadModal({
+  open,
+  onClose,
+  locale = "en",
+}: Props) {
+  const tr = t(locale).download;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -99,18 +106,18 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
         <div className="relative px-6 pt-8 sm:px-10 sm:pt-10">
           <div className="flex items-center gap-2">
             <span className="size-1 rounded-full bg-black" />
-            <p className="label-mono text-black">Download</p>
+            <p className="label-mono text-black">{tr.eyebrow}</p>
           </div>
           <h2
             id="guide-download-title"
             className="h-display mt-4 text-black"
           >
-            Access the 2026
+            {tr.title[0]}
             <br />
-            Daftime Guide
+            {tr.title[1]}
           </h2>
           <p className="mt-3 max-w-[420px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text">
-            Enter your details to receive the full edition in PDF format.
+            {tr.subtitle}
           </p>
         </div>
 
@@ -122,7 +129,7 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field
               id="firstName"
-              label="First Name"
+              label={tr.firstName}
               placeholder="Jane"
               value={firstName}
               onChange={setter(setFirstName)}
@@ -130,7 +137,7 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
             />
             <Field
               id="lastName"
-              label="Last Name"
+              label={tr.lastName}
               placeholder="Smith"
               value={lastName}
               onChange={setter(setLastName)}
@@ -139,7 +146,7 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
           </div>
           <Field
             id="email"
-            label="Email"
+            label={tr.email}
             type="email"
             placeholder="jane@email.com"
             value={email}
@@ -149,13 +156,13 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <p className="text-[12px] text-daftime-gray-mute">
-              We never share your email.
+              {tr.privacy}
             </p>
             <button
               type="submit"
               className="btn-pill cta-shimmer bg-daftime-yellow text-black hover:opacity-90"
             >
-              {submitted ? "Downloaded" : "Get access"}
+              {submitted ? tr.submitted : tr.submit}
               {submitted ? <CheckIcon /> : <ArrowRight />}
             </button>
           </div>

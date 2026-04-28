@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Reveal from "./Reveal";
 import GuideDownloadModal from "./GuideDownloadModal";
+import { t, type Locale } from "@/lib/translations";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -14,8 +15,9 @@ const avatars = [
   { src: "/assets/avatar-6.png", bg: "#ffc0c5" },
 ];
 
-export default function GuideCTA() {
+export default function GuideCTA({ locale = "en" }: { locale?: Locale }) {
   const [open, setOpen] = useState(false);
+  const tr = t(locale).guide;
 
   return (
     <section className="bg-white">
@@ -28,18 +30,13 @@ export default function GuideCTA() {
           <div className="flex flex-col gap-8 md:gap-10">
             <div className="flex items-center gap-2">
               <div className="size-1 bg-black" />
-              <p className="label-mono text-black">Guide</p>
+              <p className="label-mono text-black">{tr.eyebrow}</p>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="h-display text-black">
-                Introducing the 2026 Daftime Guide
-              </h2>
+              <h2 className="h-display text-black">{tr.heading}</h2>
               <p className="text-[15px] leading-relaxed tracking-tight text-black sm:text-[16px]">
-                Designed for entrepreneurs, executives, and investors, the
-                Daftime Guide provides a clear and methodical reading of the
-                regulatory and fiscal frameworks shaping business operations in
-                the Emirates.
+                {tr.description}
               </p>
             </div>
 
@@ -48,7 +45,7 @@ export default function GuideCTA() {
               onClick={() => setOpen(true)}
               className="btn-pill cta-shimmer self-start bg-daftime-yellow text-black hover:opacity-90"
             >
-              Explore the Guide
+              {tr.cta}
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                 <path
                   d="M3 7h8m0 0L7.5 3.5M11 7L7.5 10.5"
@@ -80,7 +77,7 @@ export default function GuideCTA() {
               ))}
             </div>
             <p className="text-[16px] tracking-tight text-black sm:text-[18px] md:text-[20px]">
-              12k+ Client Collaboration
+              {tr.counter}
             </p>
           </div>
         </Reveal>
@@ -114,17 +111,21 @@ export default function GuideCTA() {
             </div>
             <div className="flex flex-col gap-0.5 sm:gap-1">
               <p className="text-[12px] font-medium leading-tight tracking-tight text-[#161535]/70 sm:text-[14px]">
-                2026 Edition
+                {tr.bookEdition}
               </p>
               <p className="text-[18px] leading-tight tracking-tight text-[#161535] sm:text-[22px] md:text-[24px]">
-                The 2026 Daftime Guide
+                {tr.bookTitle}
               </p>
             </div>
           </div>
         </Reveal>
       </div>
 
-      <GuideDownloadModal open={open} onClose={() => setOpen(false)} />
+      <GuideDownloadModal
+        open={open}
+        onClose={() => setOpen(false)}
+        locale={locale}
+      />
     </section>
   );
 }

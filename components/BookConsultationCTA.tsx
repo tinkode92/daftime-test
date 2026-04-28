@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
+import { t, type Locale } from "@/lib/translations";
 
-export default function BookConsultationCTA() {
+export default function BookConsultationCTA({
+  locale = "en",
+}: {
+  locale?: Locale;
+}) {
+  const tr = t(locale).book;
   return (
     <section id="contact" className="bg-white px-2 pt-3 sm:px-4 sm:pt-4">
       <Reveal
@@ -22,17 +28,17 @@ export default function BookConsultationCTA() {
         <div className="relative flex min-h-[320px] flex-col justify-between gap-8 sm:min-h-[380px] md:h-[417px]">
           <div className="flex items-center gap-2">
             <div className="size-1 rounded-full bg-white" />
-            <p className="label-mono text-white">Ready to take the next step?</p>
+            <p className="label-mono text-white">{tr.eyebrow}</p>
           </div>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <h2 className="h-display whitespace-pre-line text-white">
-              {"Let's talk — book\na free consultation"}
+              {tr.heading}
             </h2>
             <a
               href="#schedule"
               className="btn-pill cta-shimmer bg-white text-black hover:opacity-90"
             >
-              Schedule a meeting
+              {tr.cta}
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                 <path
                   d="M3 7h8m0 0L7.5 3.5M11 7L7.5 10.5"

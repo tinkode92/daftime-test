@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import Reveal from "./Reveal";
+import { t as tr, type Locale } from "@/lib/translations";
 
 type Testimonial = {
   id: string;
@@ -76,8 +77,13 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-export default function Testimonials() {
+export default function Testimonials({
+  locale = "en",
+}: {
+  locale?: Locale;
+}) {
   const [openId, setOpenId] = useState<string | null>("imrane");
+  const trans = tr(locale).testimonials;
 
   return (
     <section className="bg-white px-4 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">
@@ -86,29 +92,27 @@ export default function Testimonials() {
         <Reveal className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
             <div className="size-1 bg-black" />
-            <p className="label-mono text-[#070a33]">Testimonial</p>
+            <p className="label-mono text-[#070a33]">{trans.eyebrow}</p>
           </div>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <h2 className="h-display max-w-[700px] text-black">
-              Trusted by entrepreneurs
+              {trans.heading[0]}
               <br className="hidden sm:block" />
-              {" around the world"}
+              {" " + trans.heading[1]}
             </h2>
             <p className="max-w-[412px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text sm:text-[16px]">
-              Every mission is a collaboration, every achievement, a shared
-              effort. Their positive feedback reminds us why we do what we do:
-              to create trust, clarity, and long-term value.
+              {trans.subtitle}
             </p>
           </div>
         </Reveal>
 
         {/* Testimonial accordion */}
         <div className="mt-12 flex flex-col sm:mt-16">
-          {testimonials.map((t, idx) => {
-            const isOpen = openId === t.id;
+          {testimonials.map((item, idx) => {
+            const isOpen = openId === item.id;
             return (
               <Reveal
-                key={t.id}
+                key={item.id}
                 delay={idx * 80}
                 className={
                   "py-5 sm:py-6 " + (idx > 0 ? "border-t border-black/10" : "")
@@ -118,7 +122,7 @@ export default function Testimonials() {
                   <div className="flex min-w-0 items-center gap-4 sm:gap-5">
                     <div className="size-10 shrink-0 overflow-hidden rounded-md sm:size-11">
                       <Image
-                        src={t.avatar}
+                        src={item.avatar}
                         alt=""
                         width={44}
                         height={44}
@@ -126,14 +130,14 @@ export default function Testimonials() {
                       />
                     </div>
                     <p className="text-[18px] leading-tight tracking-tight text-black sm:text-[22px] md:text-[24px]">
-                      {t.title}
+                      {item.title}
                     </p>
                   </div>
                   <button
                     type="button"
                     aria-expanded={isOpen}
-                    aria-controls={`testimonial-${t.id}`}
-                    onClick={() => setOpenId(isOpen ? null : t.id)}
+                    aria-controls={`testimonial-${item.id}`}
+                    onClick={() => setOpenId(isOpen ? null : item.id)}
                     className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-daftime-yellow bg-daftime-cream transition-all duration-300 hover:scale-110 hover:bg-daftime-cream/80 sm:size-12"
                   >
                     <span
@@ -146,7 +150,7 @@ export default function Testimonials() {
                 </div>
 
                 <div
-                  id={`testimonial-${t.id}`}
+                  id={`testimonial-${item.id}`}
                   className={
                     "grid overflow-hidden transition-all duration-500 ease-out " +
                     (isOpen
@@ -155,7 +159,7 @@ export default function Testimonials() {
                   }
                 >
                   <div className="min-h-0">
-                    <ExpandedTestimonial t={t} />
+                    <ExpandedTestimonial item={item} meta={trans.meta} />
                   </div>
                 </div>
               </Reveal>
@@ -167,13 +171,19 @@ export default function Testimonials() {
   );
 }
 
-function ExpandedTestimonial({ t }: { t: Testimonial }) {
+function ExpandedTestimonial({
+  item,
+  meta,
+}: {
+  item: Testimonial;
+  meta: { founder: string; brand: string; location: string; year: string };
+}) {
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
         <div className="relative h-[260px] overflow-hidden rounded-xl sm:h-[330px] lg:h-[377px]">
           <Image
-            src={t.bgImage}
+            src={item.bgImage}
             alt=""
             fill
             sizes="(min-width: 1024px) 580px, 100vw"
@@ -186,30 +196,30 @@ function ExpandedTestimonial({ t }: { t: Testimonial }) {
             &ldquo;
           </span>
           <p className="mt-12 text-[15px] leading-relaxed tracking-tight text-daftime-gray-text sm:mt-14 sm:text-[17px] lg:absolute lg:bottom-6 lg:left-6 lg:right-6 lg:mt-0 lg:text-[18px]">
-            &ldquo;{t.quote}
+            &ldquo;{item.quote}
             <br />
             <br />
-            <span className="text-black">{t.closing}&rdquo;</span>
+            <span className="text-black">{item.closing}&rdquo;</span>
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-y-4 text-[16px] tracking-tight sm:flex sm:flex-wrap sm:items-center sm:justify-between sm:gap-6 sm:text-[20px] md:text-[24px]">
         <div className="flex items-center gap-3 sm:gap-6">
-          <span className="text-[#919191]">Founder</span>
-          <span className="text-black">{t.founder}</span>
+          <span className="text-[#919191]">{meta.founder}</span>
+          <span className="text-black">{item.founder}</span>
         </div>
         <div className="flex items-center gap-3 sm:gap-6">
-          <span className="text-[#919191]">Brand</span>
-          <span className="text-black">{t.brand}</span>
+          <span className="text-[#919191]">{meta.brand}</span>
+          <span className="text-black">{item.brand}</span>
         </div>
         <div className="flex items-center gap-3 sm:gap-6">
-          <span className="text-[#919191]">Location</span>
-          <span className="text-black">{t.location}</span>
+          <span className="text-[#919191]">{meta.location}</span>
+          <span className="text-black">{item.location}</span>
         </div>
         <div className="flex items-center gap-3 sm:gap-6">
-          <span className="text-[#919191]">Year</span>
-          <span className="text-black">{t.year}</span>
+          <span className="text-[#919191]">{meta.year}</span>
+          <span className="text-black">{item.year}</span>
         </div>
       </div>
     </div>
