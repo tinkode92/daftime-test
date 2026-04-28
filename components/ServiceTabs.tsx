@@ -474,7 +474,7 @@ function FolderIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/folder.svg"
+        src="/assets/folder-v2.svg"
         alt=""
         width={218}
         height={210}
@@ -489,7 +489,7 @@ function CardIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/opening-a-business.svg"
+        src="/assets/opening-a-business-v2.svg"
         alt=""
         width={234}
         height={161}
@@ -504,7 +504,7 @@ function PlantIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/creation-structuring.svg"
+        src="/assets/creation-structuring-v2.svg"
         alt=""
         width={234}
         height={187}
@@ -519,7 +519,7 @@ function SealIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/corporate-secretarial.svg"
+        src="/assets/corporate-secretarial-v2.svg"
         alt=""
         width={234}
         height={184}
