@@ -186,6 +186,15 @@ const en = {
       filters: { all: "All", english: "English", french: "Français" },
       readMore: "Read More",
       loadMore: "Load More",
+      date: "Mar 25, 2026",
+      articles: [
+        "Do you need an accountant in Dubai? 2026 Guide",
+        "Accounting Services in Dubai: How to Choose the Right Provider",
+        "Financial Mistakes Startups Make in Dubai 2026",
+        "Choosing an accountant in Dubai: 2026 guide and reviews",
+        "Accounting for Small Businesses in Dubai",
+        "Bookkeeping in Dubai: 2026 pro guide for business growth",
+      ],
     },
     testimonials: {
       eyebrow: "Testimonial",
@@ -427,6 +436,15 @@ const fr: typeof en = {
       filters: { all: "Tous", english: "English", french: "Français" },
       readMore: "Lire plus",
       loadMore: "Charger plus",
+      date: "25 mars 2026",
+      articles: [
+        "A-t-on besoin d'un comptable à Dubaï ? Guide 2026",
+        "Services comptables à Dubaï : comment choisir le bon prestataire",
+        "Les erreurs financières des startups à Dubaï en 2026",
+        "Choisir un comptable à Dubaï : guide 2026 et avis",
+        "Comptabilité pour les TPE à Dubaï",
+        "Tenue de livres à Dubaï : guide pro 2026 pour la croissance",
+      ],
     },
     testimonials: {
       eyebrow: "Témoignage",

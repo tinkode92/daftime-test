@@ -2,47 +2,22 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
 
-const articles = [
-  {
-    image: "/assets/blog-1.png",
-    date: "Mar 25, 2026",
-    title: "A-t-on besoin d'un comptable à Dubaï ? Guide 2026",
-    description: "A-t-on besoin d'un comptable à Dubaï ? Guide 2026",
-  },
-  {
-    image: "/assets/blog-2.png",
-    date: "Mar 25, 2026",
-    title: "Accounting Services in Dubai: How to Choose the Right Provider",
-    description: "Accounting Services in Dubai: How to Choose the Right Provider",
-  },
-  {
-    image: "/assets/blog-3.png",
-    date: "Mar 25, 2026",
-    title: "Financial Mistakes Startups Make in Dubai 2026",
-    description: "Financial Mistakes Startups Make in Dubai 2026",
-  },
-  {
-    image: "/assets/blog-4.png",
-    date: "Mar 25, 2026",
-    title: "Choisir un comptable à Dubaï : guide 2026 et avis",
-    description: "Choisir un comptable à Dubaï : guide 2026 et avis",
-  },
-  {
-    image: "/assets/blog-5.png",
-    date: "Mar 25, 2026",
-    title: "Accounting for Small Businesses in Dubai",
-    description: "Accounting for Small Businesses in Dubai",
-  },
-  {
-    image: "/assets/blog-6.png",
-    date: "Mar 25, 2026",
-    title: "Bookkeeping in Dubai: 2026 pro guide for business growth",
-    description: "Bookkeeping in Dubai: 2026 pro guide for business growth",
-  },
+const blogImages = [
+  "/assets/blog-1.png",
+  "/assets/blog-2.png",
+  "/assets/blog-3.png",
+  "/assets/blog-4.png",
+  "/assets/blog-5.png",
+  "/assets/blog-6.png",
 ];
 
 export default function Blog({ locale = "en" }: { locale?: Locale }) {
   const tr = t(locale).blog;
+  const articles = blogImages.map((image, idx) => ({
+    image,
+    date: tr.date,
+    title: tr.articles[idx] ?? "",
+  }));
   const filters = [
     { label: tr.filters.all, active: true },
     { label: tr.filters.english, active: false },
@@ -126,9 +101,6 @@ export default function Blog({ locale = "en" }: { locale?: Locale }) {
                 <h3 className="mt-2 text-[18px] leading-tight tracking-tight text-black sm:text-[20px]">
                   {a.title}
                 </h3>
-                <p className="mt-2 text-[12px] leading-relaxed tracking-tight text-daftime-gray-text">
-                  {a.description}
-                </p>
                 <button className="mt-4 inline-flex items-center gap-2 rounded-xl border border-black/10 bg-black/[0.04] px-5 py-3 text-[14px] tracking-tight text-black transition-colors hover:bg-black/10">
                   {tr.readMore}
                   <svg

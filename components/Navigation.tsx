@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { openCountryGate } from "./CountryGate";
 import { t, type Locale } from "@/lib/translations";
@@ -131,16 +131,7 @@ export default function Navigation() {
           </li>
         </ul>
         <div className="flex shrink-0 items-center gap-3 pr-1 lg:gap-4">
-          <button
-            type="button"
-            onClick={openCountryGate}
-            aria-label="Change country"
-            className="flex items-center gap-1 rounded-lg px-1.5 py-0.5 text-[15px] text-white transition-colors hover:bg-white/10 lg:text-[16px]"
-          >
-            <GlobeIcon />
-            <span>{currentLocale}</span>
-            <ChevronDown />
-          </button>
+          <LocaleSwitcher locale={locale} />
           <Link
             href={`${home}#contact`}
             className="flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-daftime-yellow px-4 text-[14px] tracking-tight text-black transition-all duration-300 hover:scale-[1.03] hover:opacity-90"
@@ -341,5 +332,137 @@ function CloseIcon() {
         strokeLinecap="round"
       />
     </svg>
+  );
+}
+
+const LOCALE_OPTIONS: {
+  code: Locale;
+  label: string;
+  countryName: string;
+  flag: string;
+  path: string;
+}[] = [
+  {
+    code: "en",
+    label: "EN",
+    countryName: "United Arab Emirates",
+    flag: "🇦🇪",
+    path: "/",
+  },
+  {
+    code: "fr",
+    label: "FR",
+    countryName: "France",
+    flag: "🇫🇷",
+    path: "/fr",
+  },
+  {
+    code: "pt",
+    label: "PT",
+    countryName: "Portugal",
+    flag: "🇵🇹",
+    path: "/pt",
+  },
+];
+
+function LocaleSwitcher({ locale }: { locale: Locale }) {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const choose = (option: (typeof LOCALE_OPTIONS)[number]) => {
+    try {
+      localStorage.setItem("daftime-country", option.code.toUpperCase());
+    } catch {
+      // ignore
+    }
+    setOpen(false);
+    router.push(option.path);
+  };
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        className="flex items-center gap-1 rounded-lg px-1.5 py-0.5 text-[15px] text-white transition-colors hover:bg-white/10 lg:text-[16px]"
+      >
+        <GlobeIcon />
+        <span>{locale.toUpperCase()}</span>
+        <ChevronDown />
+      </button>
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-[calc(100%+8px)] z-50 w-56 overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0d]/95 p-1 shadow-2xl backdrop-blur-md"
+        >
+          {LOCALE_OPTIONS.map((option) => {
+            const isActive = option.code === locale;
+            return (
+              <button
+                role="menuitem"
+                key={option.code}
+                type="button"
+                onClick={() => choose(option)}
+                className={
+                  "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-[14px] transition-colors " +
+                  (isActive
+                    ? "bg-white/10 text-white"
+                    : "text-white/85 hover:bg-white/10 hover:text-white")
+                }
+              >
+                <span aria-hidden className="text-[18px] leading-none">
+                  {option.flag}
+                </span>
+                <span className="flex flex-1 flex-col gap-0">
+                  <span className="text-[14px] font-medium">{option.label}</span>
+                  <span className="text-[11px] text-white/55">
+                    {option.countryName}
+                  </span>
+                </span>
+                {isActive && (
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    aria-hidden
+                    className="text-daftime-yellow"
+                  >
+                    <path
+                      d="M3 7l3 3 5-6"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }
