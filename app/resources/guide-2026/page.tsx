@@ -2,7 +2,7 @@ import GuideHero from "@/components/GuideHero";
 import GuideSections from "@/components/GuideSections";
 import GuideAudience from "@/components/GuideAudience";
 import GuideVision from "@/components/GuideVision";
-import GuideDownload from "@/components/GuideDownload";
+import GuideCTA from "@/components/GuideCTA";
 import PodcastWorldMap from "@/components/PodcastWorldMap";
 import Footer from "@/components/Footer";
 
@@ -19,7 +19,7 @@ export default function Guide2026Page() {
       <GuideSections />
       <GuideAudience />
       <GuideVision />
-      <GuideDownload />
+      <GuideCTA />
       <PodcastWorldMap />
       <Footer />
     </main>
