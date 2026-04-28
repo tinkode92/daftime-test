@@ -30,13 +30,23 @@ export default function Footer() {
 
           <div className="flex flex-col items-start justify-between gap-6 text-[14px] uppercase tracking-wider text-black sm:text-[16px] md:flex-row md:items-end">
             <div className="flex flex-wrap items-center gap-6 sm:gap-12">
-              <a href="#" className="transition-opacity hover:opacity-60">
+              <a
+                href="https://www.instagram.com/daftime.ae/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-60"
+              >
                 Instagram
               </a>
               <a href="#" className="transition-opacity hover:opacity-60">
                 LinkedIn
               </a>
-              <a href="#" className="transition-opacity hover:opacity-60">
+              <a
+                href="https://www.youtube.com/@Daftime"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-60"
+              >
                 Youtube
               </a>
             </div>
@@ -47,7 +57,7 @@ export default function Footer() {
               <a href="#" className="transition-opacity hover:opacity-60">
                 Terms &amp; Conditions
               </a>
-              <span>© 2025 Daftime</span>
+              <span>© 2026 BigBrowser</span>
             </div>
           </div>
         </div>
