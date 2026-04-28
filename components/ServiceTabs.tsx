@@ -477,7 +477,7 @@ function FolderIllustration() {
         src="/assets/folder.svg"
         alt=""
         width={218}
-        height={170}
+        height={210}
         className="absolute left-1/2 top-1/2 h-auto w-[80%] max-w-[218px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
