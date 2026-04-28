@@ -54,10 +54,10 @@ export default function Navigation() {
       <div className="hidden w-full max-w-[560px] items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.14] p-1 backdrop-blur-md md:flex">
         <ul className="flex shrink items-center gap-1 px-2 text-white">
           <li className="rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
-            <a href="#what" className="whitespace-nowrap">What we do</a>
+            <Link href="/#what" className="whitespace-nowrap">What we do</Link>
           </li>
           <li className="rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
-            <a href="#services" className="whitespace-nowrap">Services</a>
+            <Link href="/#services" className="whitespace-nowrap">Services</Link>
           </li>
           <li
             ref={resourcesRef}
@@ -94,14 +94,14 @@ export default function Navigation() {
                 >
                   2026 Daftime Guide
                 </Link>
-                <a
+                <Link
                   role="menuitem"
-                  href="#blog"
+                  href="/#blog"
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
                   Blog
-                </a>
+                </Link>
               </div>
             )}
           </li>
@@ -115,23 +115,23 @@ export default function Navigation() {
             <span>EN</span>
             <ChevronDown />
           </button>
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-daftime-yellow px-4 text-[14px] tracking-tight text-black transition-all duration-300 hover:scale-[1.03] hover:opacity-90"
           >
             Contact Us
-          </a>
+          </Link>
         </div>
       </div>
 
       {/* Mobile burger */}
       <div className="ml-auto flex items-center gap-2 md:hidden">
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="flex h-10 items-center justify-center rounded-lg bg-daftime-yellow px-3 text-[13px] tracking-tight text-black"
         >
           Contact
-        </a>
+        </Link>
         <button
           type="button"
           aria-label="Open menu"
@@ -174,31 +174,31 @@ export default function Navigation() {
             </div>
             <ul className="mt-6 flex flex-col gap-1 text-[18px]">
               <li>
-                <a
+                <Link
                   onClick={() => setOpen(false)}
-                  href="#what"
+                  href="/#what"
                   className="block rounded-lg px-3 py-3 hover:bg-white/10"
                 >
                   What we do
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => setOpen(false)}
-                  href="#services"
+                  href="/#services"
                   className="block rounded-lg px-3 py-3 hover:bg-white/10"
                 >
                   Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => setOpen(false)}
-                  href="#blog"
+                  href="/#blog"
                   className="block rounded-lg px-3 py-3 hover:bg-white/10"
                 >
                   Resources
-                </a>
+                </Link>
               </li>
               <li>
                 <Link
@@ -219,13 +219,13 @@ export default function Navigation() {
                 </Link>
               </li>
             </ul>
-            <a
+            <Link
               onClick={() => setOpen(false)}
-              href="#contact"
+              href="/#contact"
               className="mt-4 flex h-12 items-center justify-center rounded-xl bg-daftime-yellow text-[15px] text-black"
             >
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       )}
