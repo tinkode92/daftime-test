@@ -3,7 +3,7 @@ import Services from "@/components/Services";
 import ServiceTabs from "@/components/ServiceTabs";
 import Blog from "@/components/Blog";
 import Testimonials from "@/components/Testimonials";
-import GuideCTA from "@/components/GuideCTA";
+import GuideDownload from "@/components/GuideDownload";
 import BookConsultationCTA from "@/components/BookConsultationCTA";
 import Footer from "@/components/Footer";
 
@@ -15,7 +15,7 @@ export default function Home() {
       <ServiceTabs />
       <Blog />
       <Testimonials />
-      <GuideCTA />
+      <GuideDownload />
       <BookConsultationCTA />
       <Footer />
     </main>
