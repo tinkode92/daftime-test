@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import Reveal from "./Reveal";
+import GuideDownloadModal from "./GuideDownloadModal";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -11,6 +15,8 @@ const avatars = [
 ];
 
 export default function GuideCTA() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -37,8 +43,9 @@ export default function GuideCTA() {
               </p>
             </div>
 
-            <a
-              href="#guide"
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
               className="btn-pill cta-shimmer self-start bg-daftime-yellow text-black hover:opacity-90"
             >
               Explore the Guide
@@ -51,7 +58,7 @@ export default function GuideCTA() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </a>
+            </button>
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4">
@@ -116,6 +123,8 @@ export default function GuideCTA() {
           </div>
         </Reveal>
       </div>
+
+      <GuideDownloadModal open={open} onClose={() => setOpen(false)} />
     </section>
   );
 }
