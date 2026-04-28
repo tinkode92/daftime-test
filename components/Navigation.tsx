@@ -35,9 +35,9 @@ export default function Navigation() {
   return (
     <nav className="flex w-full items-start gap-2 md:w-auto">
       {/* Logo pill */}
-      <a
-        href="#"
-        aria-label="Daftime"
+      <Link
+        href="/"
+        aria-label="Daftime — back to home"
         className="flex shrink-0 items-center justify-center rounded-[10px] border border-white/10 bg-white/[0.14] p-2.5 backdrop-blur-md transition-transform duration-300 hover:scale-105 md:p-3"
       >
         <Image
@@ -48,7 +48,7 @@ export default function Navigation() {
           className="h-6 w-6 object-contain"
           priority
         />
-      </a>
+      </Link>
 
       {/* Desktop nav */}
       <div className="hidden w-full max-w-[560px] items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.14] p-1 backdrop-blur-md md:flex">
