@@ -47,6 +47,7 @@ type AccountingPlanVariant = "white" | "yellow" | "gray";
 type AccountingPlan = {
   name: string;
   range: string;
+  price?: string;
   features: string[];
   variant: AccountingPlanVariant;
 };
@@ -55,6 +56,7 @@ const accountingPlans: AccountingPlan[] = [
   {
     name: "Basic",
     range: "0 to 50 transactions/month",
+    price: "Starting at AED 999.99/month",
     variant: "white",
     features: [
       "Financial statements (UAE standards)",
@@ -66,6 +68,7 @@ const accountingPlans: AccountingPlan[] = [
   {
     name: "Intermediate",
     range: "51 to 100 transactions/month",
+    price: "Starting at AED 1,999.99/month",
     variant: "yellow",
     features: [
       "UAE financial statements",
@@ -77,7 +80,8 @@ const accountingPlans: AccountingPlan[] = [
   },
   {
     name: "Premium",
-    range: "0 to 50 transactions/month",
+    range: "101 to 250 transactions/month",
+    price: "Starting at AED 2,999.99/month",
     variant: "gray",
     features: [
       "UAE financial statements",
@@ -89,13 +93,13 @@ const accountingPlans: AccountingPlan[] = [
   },
   {
     name: "Large entreprises",
-    range: "0 to 50 transactions/month",
+    range: "Personalized support",
     variant: "white",
     features: [
-      "Financial statements (UAE standards)",
-      "VAT & Corporate Tax Management UAE",
-      "Phone support",
-      "Management tool",
+      "Advanced reporting",
+      "Tax optimization UAE",
+      "Consolidation",
+      "Strategic advice",
     ],
   },
 ];
@@ -372,7 +376,7 @@ function PricingCard({ plan }: { plan: AccountingPlan }) {
 
   return (
     <div
-      className={`card-hover flex min-h-[300px] flex-col gap-6 rounded-2xl p-2 sm:h-[318px] ${palette.bg}`}
+      className={`card-hover flex h-full min-h-[340px] flex-col gap-6 rounded-2xl p-2 ${palette.bg}`}
     >
       <div className="flex flex-col gap-3 px-2 pt-2">
         <div className="flex items-center gap-3">
@@ -383,9 +387,18 @@ function PricingCard({ plan }: { plan: AccountingPlan }) {
           </div>
           <p className={`label-mono ${palette.titleColor}`}>{plan.name}</p>
         </div>
-        <p className={`text-[16px] tracking-tight ${palette.rangeColor}`}>
-          {plan.range}
-        </p>
+        <div className="flex flex-col gap-1">
+          <p className={`text-[16px] tracking-tight ${palette.rangeColor}`}>
+            {plan.range}
+          </p>
+          {plan.price && (
+            <p
+              className={`text-[15px] font-semibold tracking-tight ${palette.titleColor}`}
+            >
+              {plan.price}
+            </p>
+          )}
+        </div>
       </div>
 
       <ul className="flex flex-col gap-4 px-2 pb-2">
