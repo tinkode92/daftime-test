@@ -33,7 +33,6 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
     };
   }, [open, onClose]);
 
-  // Reset transient state on close so the next open is fresh
   useEffect(() => {
     if (!open) {
       const t = setTimeout(() => setSubmitted(false), 300);
@@ -46,7 +45,6 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
-    // Trigger the PDF download
     const link = document.createElement("a");
     link.href = PDF_URL;
     link.download = "Daftime-Guide-2026.pdf";
@@ -69,14 +67,17 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-[560px] overflow-hidden rounded-[28px] bg-daftime-yellow-light shadow-2xl"
+        className="relative w-full max-w-[520px] overflow-hidden rounded-3xl bg-daftime-yellow-light shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"
       >
+        {/* Decorative leaf in the background */}
+        <div className="pointer-events-none absolute -right-10 -top-10 size-44 rounded-full bg-daftime-yellow/30 blur-3xl" />
+
         {/* Close */}
         <button
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full text-[#161535] transition-colors hover:bg-black/[0.06]"
+          className="absolute right-4 top-4 z-10 flex size-9 items-center justify-center rounded-full text-black/70 transition-colors hover:bg-black/[0.06]"
         >
           <svg
             width="14"
@@ -95,24 +96,28 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
         </button>
 
         {/* Header */}
-        <div className="px-6 pt-8 sm:px-10 sm:pt-10">
+        <div className="relative px-6 pt-8 sm:px-10 sm:pt-10">
+          <div className="flex items-center gap-2">
+            <span className="size-1 rounded-full bg-black" />
+            <p className="label-mono text-black">Download</p>
+          </div>
           <h2
             id="guide-download-title"
-            className="text-[26px] font-bold leading-[1.05] tracking-tight text-[#161535] sm:text-[34px]"
+            className="h-display mt-4 text-black"
           >
-            Access the
+            Access the 2026
             <br />
-            2026 Daftime Guide
+            Daftime Guide
           </h2>
-          <p className="mt-3 text-[14px] leading-relaxed text-[#161535]/60 sm:text-[15px]">
+          <p className="mt-3 max-w-[420px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text">
             Enter your details to receive the full edition in PDF format.
           </p>
         </div>
 
-        {/* Form card */}
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="mx-6 mb-6 mt-6 rounded-[20px] bg-[#0e1432] p-5 sm:mx-10 sm:mb-10 sm:mt-8 sm:p-6"
+          className="relative mt-6 flex flex-col gap-4 px-6 pb-8 sm:mt-8 sm:px-10 sm:pb-10"
         >
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field
@@ -132,24 +137,26 @@ export default function GuideDownloadModal({ open, onClose }: Props) {
               required
             />
           </div>
-          <div className="mt-4">
-            <Field
-              id="email"
-              label="Email"
-              type="email"
-              placeholder="jane@email.com"
-              value={email}
-              onChange={setter(setEmail)}
-              required
-            />
-          </div>
+          <Field
+            id="email"
+            label="Email"
+            type="email"
+            placeholder="jane@email.com"
+            value={email}
+            onChange={setter(setEmail)}
+            required
+          />
 
-          <div className="mt-6">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+            <p className="text-[12px] text-daftime-gray-mute">
+              We never share your email.
+            </p>
             <button
               type="submit"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-[#6b5d20] px-6 text-[14px] font-medium text-white transition-all duration-300 hover:scale-[1.02] hover:bg-[#7c6c25]"
+              className="btn-pill cta-shimmer bg-daftime-yellow text-black hover:opacity-90"
             >
-              {submitted ? "Downloaded ✓" : "Get access"}
+              {submitted ? "Downloaded" : "Get access"}
+              {submitted ? <CheckIcon /> : <ArrowRight />}
             </button>
           </div>
         </form>
@@ -178,8 +185,11 @@ function Field({
   required,
 }: FieldProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-[14px] text-white">
+    <div className="flex flex-col gap-1.5">
+      <label
+        htmlFor={id}
+        className="text-[13px] tracking-tight text-daftime-gray-text"
+      >
         {label}
       </label>
       <input
@@ -190,8 +200,36 @@ function Field({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="h-11 rounded-md bg-white px-3 text-[14px] text-[#161535] outline-none placeholder:text-[#9e9e9e] focus:ring-2 focus:ring-daftime-yellow/60"
+        className="h-11 rounded-xl border border-black/10 bg-white px-3 text-[14px] text-black outline-none transition-shadow placeholder:text-[#9e9e9e] focus:border-daftime-yellow focus:shadow-[0_0_0_3px_rgba(214,179,3,0.2)]"
       />
     </div>
+  );
+}
+
+function ArrowRight() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+      <path
+        d="M3 7h8m0 0L7.5 3.5M11 7L7.5 10.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+      <path
+        d="M3 7l3 3 5-6"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
