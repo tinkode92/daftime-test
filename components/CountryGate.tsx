@@ -7,6 +7,7 @@ import { t, type Locale } from "@/lib/translations";
 const COUNTRY_KEY = "daftime-country";
 const LANGUAGE_KEY = "daftime-language";
 export const OPEN_GATE_EVENT = "daftime-open-country-gate";
+export const LOCALE_CHANGED_EVENT = "daftime-locale-changed";
 
 export function openCountryGate() {
   if (typeof window === "undefined") return;
@@ -53,18 +54,24 @@ function localeFromPath(path: string): Locale {
   return "en";
 }
 
-/** Read the selected country from localStorage (defaults to AE on the server). */
+/** Read the selected country from localStorage (defaults to AE on the server).
+ *  Re-reads when the gate broadcasts a locale change. */
 export function useStoredCountry(): Country {
   const [country, setCountry] = useState<Country>("AE");
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(COUNTRY_KEY) as Country | null;
-      if (stored === "AE" || stored === "FR" || stored === "PT") {
-        setCountry(stored);
+    const read = () => {
+      try {
+        const stored = localStorage.getItem(COUNTRY_KEY) as Country | null;
+        if (stored === "AE" || stored === "FR" || stored === "PT") {
+          setCountry(stored);
+        }
+      } catch {
+        // ignore
       }
-    } catch {
-      // ignore
-    }
+    };
+    read();
+    window.addEventListener(LOCALE_CHANGED_EVENT, read);
+    return () => window.removeEventListener(LOCALE_CHANGED_EVENT, read);
   }, []);
   return country;
 }
@@ -143,9 +150,16 @@ export default function CountryGate() {
     } catch {
       // ignore
     }
+    // Tell every component subscribed to LOCALE_CHANGED_EVENT (Navigation
+    // pill, ServiceTabs price visibility, …) to re-read storage.
+    window.dispatchEvent(new CustomEvent(LOCALE_CHANGED_EVENT));
     setOpen(false);
     const targetPath = pathForLanguage(language);
-    if (targetPath !== pathname) {
+    if (targetPath === pathname) {
+      // Same URL but country may have changed — re-fetch to refresh
+      // server-rendered locale-dependent content.
+      router.refresh();
+    } else {
       router.push(targetPath);
     }
   };

@@ -78,8 +78,8 @@ export default function Navigation() {
       </Link>
 
       {/* Desktop nav */}
-      <div className="hidden w-full max-w-[560px] items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.14] p-1 backdrop-blur-md md:flex">
-        <ul className="flex shrink items-center gap-1 px-2 text-white">
+      <div className="hidden w-full max-w-[720px] items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.14] p-1 pl-2 backdrop-blur-md md:flex">
+        <ul className="flex shrink items-center gap-1 px-1 text-white">
           <li className="rounded-lg px-2 py-1 text-[15px] tracking-tight transition-colors hover:bg-white/10 lg:text-[16px]">
             <Link href={`${home}#what`} className="whitespace-nowrap">
               {tr.whatWeDo}
