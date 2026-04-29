@@ -28,6 +28,12 @@ const languages: { code: Language; locale: Locale; label: string }[] = [
   { code: "PT", locale: "pt", label: "Português" },
 ];
 
+function isLanguageAvailable(country: Country, lang: Language): boolean {
+  // Portuguese is only offered with the Portugal office.
+  if (lang === "PT") return country === "PT";
+  return true;
+}
+
 function pathForLanguage(lang: Language): string {
   if (lang === "FR") return "/fr";
   if (lang === "PT") return "/pt";
@@ -209,7 +215,12 @@ export default function CountryGate() {
                 <button
                   key={c.code}
                   type="button"
-                  onClick={() => setCountry(c.code)}
+                  onClick={() => {
+                    setCountry(c.code);
+                    if (!isLanguageAvailable(c.code, language)) {
+                      setLanguage("EN");
+                    }
+                  }}
                   aria-pressed={active}
                   className={
                     "flex flex-col items-start gap-2 rounded-2xl border p-3 text-left transition-all duration-200 " +
@@ -243,17 +254,27 @@ export default function CountryGate() {
           <div className="mt-3 grid grid-cols-3 gap-2">
             {languages.map((l) => {
               const active = language === l.code;
+              const available = isLanguageAvailable(country, l.code);
               return (
                 <button
                   key={l.code}
                   type="button"
-                  onClick={() => setLanguage(l.code)}
+                  onClick={() => available && setLanguage(l.code)}
+                  disabled={!available}
                   aria-pressed={active}
+                  aria-disabled={!available}
+                  title={
+                    available
+                      ? undefined
+                      : "Available only with the Portugal office"
+                  }
                   className={
                     "rounded-2xl border px-3 py-3 text-left transition-all duration-200 " +
                     (active
                       ? "border-daftime-yellow bg-white shadow-[0_8px_20px_-10px_rgba(0,0,0,0.18)]"
-                      : "border-black/10 bg-white/70 hover:-translate-y-0.5 hover:border-daftime-yellow/60")
+                      : available
+                        ? "border-black/10 bg-white/70 hover:-translate-y-0.5 hover:border-daftime-yellow/60"
+                        : "cursor-not-allowed border-black/5 bg-white/40 opacity-50")
                   }
                 >
                   <span className="block text-[15px] font-semibold tracking-tight text-black">
