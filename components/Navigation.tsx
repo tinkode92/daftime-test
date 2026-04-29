@@ -4,8 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { openCountryGate } from "./CountryGate";
+import { openCountryGate, useStoredCountry } from "./CountryGate";
 import { t, type Locale } from "@/lib/translations";
+
+const COUNTRY_FLAGS = {
+  AE: "🇦🇪",
+  FR: "🇫🇷",
+  PT: "🇵🇹",
+} as const;
 
 function localeFromPath(path: string): Locale {
   if (path === "/fr" || path.startsWith("/fr/")) return "fr";
@@ -28,6 +34,7 @@ export default function Navigation() {
   const home = homeForLocale(locale);
   const tr = t(locale).nav;
   const currentLocale = locale.toUpperCase();
+  const country = useStoredCountry();
 
   useEffect(() => {
     if (!open) return;
@@ -135,9 +142,11 @@ export default function Navigation() {
             type="button"
             onClick={openCountryGate}
             aria-label="Change country / language"
-            className="flex items-center gap-1 rounded-lg px-1.5 py-0.5 text-[15px] text-white transition-colors hover:bg-white/10 lg:text-[16px]"
+            className="flex items-center gap-1.5 rounded-lg px-2 py-0.5 text-[15px] text-white transition-colors hover:bg-white/10 lg:text-[16px]"
           >
-            <GlobeIcon />
+            <span aria-hidden className="text-[14px] leading-none">
+              {COUNTRY_FLAGS[country]}
+            </span>
             <span>{currentLocale}</span>
             <ChevronDown />
           </button>
@@ -253,8 +262,12 @@ export default function Navigation() {
               }}
               className="mt-4 flex h-11 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] text-[14px] text-white transition-colors hover:bg-white/[0.12]"
             >
-              <GlobeIcon />
-              <span>Country: {currentLocale}</span>
+              <span aria-hidden className="text-[16px] leading-none">
+                {COUNTRY_FLAGS[country]}
+              </span>
+              <span>
+                {country} · {currentLocale}
+              </span>
             </button>
             <Link
               onClick={() => setOpen(false)}
@@ -291,25 +304,6 @@ function ChevronDown() {
   );
 }
 
-function GlobeIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-    </svg>
-  );
-}
 
 function BurgerIcon({ open }: { open: boolean }) {
   return (

@@ -242,9 +242,12 @@ const en = {
     },
     countryGate: {
       eyebrow: "Welcome",
-      heading: "Choose your country",
+      heading: "Choose your country & language",
       subtitle:
-        "Pick your region to browse Daftime in the version closest to your market.",
+        "Pick the Daftime office you want to work with and the language you'd like to browse in.",
+      countryLabel: "Country",
+      languageLabel: "Language",
+      confirm: "Continue",
     },
 };
 
@@ -496,9 +499,12 @@ const fr: typeof en = {
     },
     countryGate: {
       eyebrow: "Bienvenue",
-      heading: "Choisissez votre pays",
+      heading: "Choisissez votre pays et votre langue",
       subtitle:
-        "Sélectionnez votre région pour parcourir Daftime dans la version la plus proche de votre marché.",
+        "Sélectionnez le bureau Daftime avec lequel vous souhaitez travailler et la langue d'affichage du site.",
+      countryLabel: "Pays",
+      languageLabel: "Langue",
+      confirm: "Continuer",
     },
 };
 

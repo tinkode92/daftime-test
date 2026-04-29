@@ -1,17 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
-
-function isAEPath(path: string | null): boolean {
-  if (!path) return true;
-  if (path === "/fr" || path.startsWith("/fr/")) return false;
-  if (path === "/pt" || path.startsWith("/pt/")) return false;
-  return true;
-}
+import { useStoredCountry } from "./CountryGate";
 
 type TabKey = "legal" | "accounting" | "cfo";
 const TAB_KEYS: TabKey[] = ["legal", "accounting", "cfo"];
@@ -182,8 +175,8 @@ function LegalContent({ locale }: { locale: Locale }) {
 }
 
 function AccountingContent({ locale }: { locale: Locale }) {
-  const pathname = usePathname();
-  const showPrice = isAEPath(pathname);
+  const country = useStoredCountry();
+  const showPrice = country === "AE";
   const tr = t(locale).serviceTabs.accounting;
   return (
     <>
