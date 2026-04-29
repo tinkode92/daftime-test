@@ -508,8 +508,259 @@ const fr: typeof en = {
     },
 };
 
-// Portuguese translation isn't available yet — fall back to English copy.
-const pt: typeof en = en;
+// Portuguese (European Portuguese, the Lisbon office's language).
+const pt: typeof en = {
+  nav: {
+    whatWeDo: "O que fazemos",
+    services: "Serviços",
+    resources: "Recursos",
+    podcast: "Podcast",
+    guide2026: "Guia Daftime 2026",
+    blog: "Blog",
+    contactUs: "Contacte-nos",
+    contact: "Contacto",
+  },
+  hero: {
+    counter: "+12 mil colaborações com clientes",
+    title: "O seu parceiro internacional para estruturar a sua atividade",
+    subtitle:
+      "Onde o direito encontra a contabilidade, e a estratégia impulsiona o crescimento.",
+    learnMore: "Saber mais",
+    letsTalk: "Vamos falar",
+  },
+  services: {
+    eyebrow: "O que fazemos",
+    heading: "Tudo o que precisa para crescer com confiança",
+    subtitle:
+      "Apoio contabilístico, jurídico e de consultoria pensado para ajudar empreendedores a crescer — localmente e além-fronteiras.",
+    cards: {
+      legal: {
+        title: "Jurídico",
+        description:
+          "Da constituição ao crescimento: soluções jurídicas que protegem os seus ativos e simplificam as suas operações internacionais, com acompanhamento de advogados.",
+      },
+      advisory: {
+        title: "Consultoria",
+        description:
+          "A estratégia encontra a execução. Ajudamo-lo a tomar decisões acertadas, otimizar o desempenho e crescer de forma sustentável.",
+      },
+      accounting: {
+        title: "Contabilidade",
+        description:
+          "Uma contabilidade e fiscalidade fiáveis, conformes e orientadas para o futuro, conduzidas por verdadeiros contabilistas certificados — para que se concentre no crescimento enquanto tratamos dos números.",
+      },
+    },
+  },
+  serviceTabs: {
+    eyebrow: "Serviços",
+    heading: ["Apoiar empreendedores", "onde quer que operem"],
+    intro:
+      "Cada missão é uma colaboração, cada conquista, um esforço partilhado. Os seus comentários positivos lembram-nos por que fazemos o que fazemos: criar confiança, clareza e valor a longo prazo.",
+    tabs: {
+      legal: "Serviços jurídicos",
+      accounting: "Contabilidade e fiscalidade",
+      cfo: "CFO & Consultoria",
+    },
+    legal: {
+      heading:
+        "Crie e estruture a sua empresa nos Emirados de forma segura e em conformidade",
+      body:
+        "Na Daftime, acompanhamos os empreendedores em todas as fases da constituição de uma empresa no Dubai: análise do projeto, escolha da melhor estrutura (Mainland/Free Zone), otimização jurídica e fiscal, e total conformidade.",
+      listLabel: "Os nossos serviços de constituição incluem:",
+      cards: {
+        businessSetup: {
+          title: "Constituição de empresa",
+          subtitle: "(Mainland & Free Zone)",
+          description:
+            "Estruturação da empresa, obtenção de licenças, alterações estatutárias — apoio jurídico assegurado por advogados.",
+        },
+        openBank: {
+          title: "Abertura de conta",
+          subtitle: "bancária empresarial",
+          description:
+            "Escolha do banco, preparação do dossier KYC e gestão completa do processo de abertura de conta.",
+        },
+        spv: {
+          title:
+            "Criação e estruturação de veículos de investimento (SPV, holdings, trusts)",
+          subtitle: "",
+          description:
+            "Estruturas concebidas para proteger os seus investimentos, otimizar a governance e apoiar a sua estratégia de longo prazo.",
+        },
+        corporate: {
+          title: "Secretariado corporativo",
+          subtitle: "nos Emirados",
+          description:
+            "Emirates ID, vistos de residência, Golden Visa, patrocínio familiar.",
+        },
+      },
+      tailored: "Acompanhamento à medida",
+      tailoredText:
+        "Todos os nossos serviços são apresentados sob orçamento, garantindo uma implantação segura, conforme e perfeitamente adaptada para alcançar os seus objetivos no Dubai.",
+    },
+    accounting: {
+      heading:
+        "Gestão contabilística e fiscal conforme e otimizada, alinhada com os padrões dos Emirados",
+      body:
+        "Na Daftime, oferecemos uma gestão contabilística e fiscal completa, em conformidade com as exigências dos Emirados: demonstrações financeiras conforme as normas locais, IVA (UAE VAT), Corporate Tax, reporte e acompanhamento operacional. Os nossos serviços adaptam-se ao volume de transações e ao nível de apoio pretendido.",
+      listLabel: "Os nossos pacotes de contabilidade",
+      plans: {
+        basic: {
+          name: "Basic",
+          range: "0 a 50 transações / mês",
+          price: "A partir de 999,99 AED / mês",
+          features: [
+            "Demonstrações financeiras (normas UAE)",
+            "Gestão de IVA & Corporate Tax UAE",
+            "Suporte telefónico",
+            "Ferramenta de gestão",
+          ],
+        },
+        intermediate: {
+          name: "Intermediate",
+          range: "51 a 100 transações / mês",
+          price: "A partir de 1 999,99 AED / mês",
+          features: [
+            "Demonstrações financeiras UAE",
+            "IVA & Corporate Tax",
+            "Suporte telefónico",
+            "Customer Success dedicado",
+            "Ferramenta de gestão multi-divisas",
+          ],
+        },
+        premium: {
+          name: "Premium",
+          range: "101 a 250 transações / mês",
+          price: "A partir de 2 999,99 AED / mês",
+          features: [
+            "Demonstrações financeiras UAE",
+            "IVA & Corporate Tax",
+            "Customer Success dedicado",
+            "Ferramenta multi-divisas",
+            "Reuniões regulares de pilotagem estratégica",
+          ],
+        },
+        large: {
+          name: "Grandes empresas",
+          range: "Acompanhamento personalizado",
+          features: [
+            "Reporting avançado",
+            "Otimização fiscal UAE",
+            "Consolidação",
+            "Aconselhamento estratégico",
+          ],
+        },
+      },
+    },
+    cfo: {
+      heading: "Consultoria estratégica & gestão financeira flexível",
+      body:
+        "Os nossos serviços de consultoria e CFO a tempo parcial (CFO fracionado) trazem-lhe a experiência necessária para sustentar o crescimento, otimizar o desempenho e melhorar a visibilidade financeira nos Emirados Árabes Unidos.",
+      listLabel: "Os nossos pacotes de consultoria",
+      plans: {
+        reporting: {
+          name: "Reporting financeiro\ne pilotagem (UAE)",
+          features: [
+            "Painéis de bordo (KPI)",
+            "Análise de custos & margens",
+            "Ponto morto / break-even",
+            "Comités de pilotagem",
+          ],
+        },
+        office: {
+          name: "Office Management Dubai",
+          features: [
+            "Assistente administrativo dedicado",
+            "Gestão administrativa, compras, vendas & banca",
+            "Apoio ao recrutamento",
+            "Gestão de agenda da direção",
+          ],
+        },
+        fractional: {
+          name: "CFO a tempo parcial UAE",
+          features: [
+            "Reporting financeiro, análise de custos",
+            "Digitalização da função financeira",
+            "Acompanhamento estratégico",
+            "Due diligence",
+          ],
+        },
+      },
+    },
+  },
+  blog: {
+    eyebrow: "Blog",
+    heading: "Concebido para empreender sem fronteiras",
+    subtitle:
+      "A nossa abordagem assenta na colaboração e no sucesso partilhado, guiada por um propósito claro: criar confiança, clareza e valor duradouro.",
+    filters: { all: "Todos", english: "English", french: "Français" },
+    readMore: "Ler mais",
+    loadMore: "Ver mais",
+    date: "25 de março de 2026",
+    articles: [
+      "Precisa de um contabilista no Dubai? Guia 2026",
+      "Serviços de contabilidade no Dubai: como escolher o prestador certo",
+      "Erros financeiros das startups no Dubai em 2026",
+      "Escolher um contabilista no Dubai: guia 2026 e avaliações",
+      "Contabilidade para PME no Dubai",
+      "Bookkeeping no Dubai: guia profissional 2026 para o crescimento",
+    ],
+  },
+  testimonials: {
+    eyebrow: "Testemunho",
+    heading: ["A confiança de empreendedores", "em todo o mundo"],
+    subtitle:
+      "Cada missão é uma colaboração, cada conquista, um esforço partilhado. Os seus comentários positivos lembram-nos por que fazemos o que fazemos: criar confiança, clareza e valor duradouro.",
+    meta: {
+      founder: "Fundador",
+      brand: "Marca",
+      location: "Localização",
+      year: "Ano",
+    },
+  },
+  guide: {
+    eyebrow: "Guia",
+    heading: "Conheça o Guia Daftime 2026",
+    description:
+      "Concebido para empreendedores, dirigentes e investidores, o Guia Daftime oferece uma leitura clara e metódica dos quadros regulamentares e fiscais que estruturam a atividade nos Emirados.",
+    cta: "Descobrir o Guia",
+    counter: "+12 mil colaborações com clientes",
+    bookEdition: "Edição 2026",
+    bookTitle: "O Guia Daftime 2026",
+  },
+  download: {
+    title: ["Aceda ao Guia", "Daftime 2026"],
+    subtitle:
+      "Indique os seus dados para receber a edição completa em formato PDF.",
+    eyebrow: "Download",
+    firstName: "Nome próprio",
+    lastName: "Apelido",
+    email: "E-mail",
+    submit: "Obter acesso",
+    submitted: "Transferido",
+    privacy: "Nunca partilhamos o seu endereço de e-mail.",
+  },
+  book: {
+    eyebrow: "Pronto para o próximo passo?",
+    heading: "Vamos falar —\nmarque uma consulta gratuita",
+    cta: "Marcar uma reunião",
+  },
+  footer: {
+    rights: "© 2026 Daftime — Todos os direitos reservados",
+    privacy: "Política de privacidade",
+    terms: "Termos e condições",
+    copyright: "© 2026 BigBrowser",
+  },
+  countryGate: {
+    eyebrow: "Bem-vindo",
+    heading: "Escolha o seu país e idioma",
+    subtitle:
+      "Selecione o escritório Daftime com o qual deseja trabalhar e o idioma para navegar no site.",
+    countryLabel: "País",
+    languageLabel: "Idioma",
+    confirm: "Continuar",
+  },
+};
 
 export type Translation = typeof en;
 
