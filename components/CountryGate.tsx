@@ -29,9 +29,10 @@ const languages: { code: Language; locale: Locale; label: string }[] = [
 ];
 
 function isLanguageAvailable(country: Country, lang: Language): boolean {
-  // Portuguese is only offered with the Portugal office.
-  if (lang === "PT") return country === "PT";
-  return true;
+  // Portugal office: English + Portuguese only.
+  // AE and France offices: English + French only.
+  if (country === "PT") return lang === "EN" || lang === "PT";
+  return lang === "EN" || lang === "FR";
 }
 
 function pathForLanguage(lang: Language): string {
@@ -251,42 +252,44 @@ export default function CountryGate() {
           <p className="text-[12px] font-medium uppercase tracking-[0.12em] text-black/60">
             {tr.languageLabel}
           </p>
-          <div className="mt-3 grid grid-cols-3 gap-2">
-            {languages.map((l) => {
-              const active = language === l.code;
-              const available = isLanguageAvailable(country, l.code);
-              return (
-                <button
-                  key={l.code}
-                  type="button"
-                  onClick={() => available && setLanguage(l.code)}
-                  disabled={!available}
-                  aria-pressed={active}
-                  aria-disabled={!available}
-                  title={
-                    available
-                      ? undefined
-                      : "Available only with the Portugal office"
-                  }
-                  className={
-                    "rounded-2xl border px-3 py-3 text-left transition-all duration-200 " +
-                    (active
-                      ? "border-daftime-yellow bg-white shadow-[0_8px_20px_-10px_rgba(0,0,0,0.18)]"
-                      : available
-                        ? "border-black/10 bg-white/70 hover:-translate-y-0.5 hover:border-daftime-yellow/60"
-                        : "cursor-not-allowed border-black/5 bg-white/40 opacity-50")
-                  }
-                >
-                  <span className="block text-[15px] font-semibold tracking-tight text-black">
-                    {l.code}
-                  </span>
-                  <span className="block text-[11px] leading-tight tracking-tight text-daftime-gray-text">
-                    {l.label}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          {(() => {
+            const available = languages.filter((l) =>
+              isLanguageAvailable(country, l.code),
+            );
+            return (
+              <div
+                className={
+                  "mt-3 grid gap-2 " +
+                  (available.length === 2 ? "grid-cols-2" : "grid-cols-3")
+                }
+              >
+                {available.map((l) => {
+                  const active = language === l.code;
+                  return (
+                    <button
+                      key={l.code}
+                      type="button"
+                      onClick={() => setLanguage(l.code)}
+                      aria-pressed={active}
+                      className={
+                        "rounded-2xl border px-3 py-3 text-left transition-all duration-200 " +
+                        (active
+                          ? "border-daftime-yellow bg-white shadow-[0_8px_20px_-10px_rgba(0,0,0,0.18)]"
+                          : "border-black/10 bg-white/70 hover:-translate-y-0.5 hover:border-daftime-yellow/60")
+                      }
+                    >
+                      <span className="block text-[15px] font-semibold tracking-tight text-black">
+                        {l.code}
+                      </span>
+                      <span className="block text-[11px] leading-tight tracking-tight text-daftime-gray-text">
+                        {l.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
 
         {/* Confirm */}
