@@ -36,16 +36,16 @@ function isLanguageAvailable(country: Country, lang: Language): boolean {
   return lang === "EN" || lang === "FR";
 }
 
-function pathForLanguage(lang: Language): string {
-  if (lang === "FR") return "/fr";
-  if (lang === "PT") return "/pt";
+function pathForCountry(country: Country): string {
+  if (country === "FR") return "/fr";
+  if (country === "PT") return "/pt";
   return "/";
 }
 
-function languageFromPath(path: string): Language {
+function countryFromPath(path: string): Country {
   if (path === "/fr" || path.startsWith("/fr/")) return "FR";
   if (path === "/pt" || path.startsWith("/pt/")) return "PT";
-  return "EN";
+  return "AE";
 }
 
 function localeFromPath(path: string): Locale {
@@ -80,10 +80,10 @@ export default function CountryGate() {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [country, setCountry] = useState<Country>("AE");
-  const [language, setLanguage] = useState<Language>(
-    languageFromPath(pathname || "/"),
+  const [country, setCountry] = useState<Country>(
+    countryFromPath(pathname || "/"),
   );
+  const [language, setLanguage] = useState<Language>("EN");
   const tr = t(localeFromPath(pathname || "/")).countryGate;
 
   // First-visit: open if no choice yet
@@ -97,10 +97,10 @@ export default function CountryGate() {
       } else {
         setCountry(storedCountry);
         setLanguage(storedLanguage);
-        // If the URL doesn't match the stored language, send the user there
-        const targetPath = pathForLanguage(storedLanguage);
-        const currentLang = languageFromPath(pathname || "/");
-        if (currentLang !== storedLanguage && targetPath !== pathname) {
+        // If the URL doesn't match the stored country, send the user there
+        const targetPath = pathForCountry(storedCountry);
+        const currentCountry = countryFromPath(pathname || "/");
+        if (currentCountry !== storedCountry && targetPath !== pathname) {
           router.replace(targetPath);
         }
       }
@@ -118,8 +118,8 @@ export default function CountryGate() {
         const storedCountry = localStorage.getItem(COUNTRY_KEY) as Country | null;
         const storedLanguage = localStorage.getItem(LANGUAGE_KEY) as Language | null;
         if (storedCountry) setCountry(storedCountry);
+        else setCountry(countryFromPath(pathname || "/"));
         if (storedLanguage) setLanguage(storedLanguage);
-        else setLanguage(languageFromPath(pathname || "/"));
       } catch {
         // ignore
       }
@@ -154,10 +154,11 @@ export default function CountryGate() {
     // pill, ServiceTabs price visibility, …) to re-read storage.
     window.dispatchEvent(new CustomEvent(LOCALE_CHANGED_EVENT));
     setOpen(false);
-    const targetPath = pathForLanguage(language);
+    // The URL follows the COUNTRY: AE → /, FR → /fr, PT → /pt.
+    // Each route is its own page (today they are copies, later they
+    // can diverge per office).
+    const targetPath = pathForCountry(country);
     if (targetPath === pathname) {
-      // Same URL but country may have changed — re-fetch to refresh
-      // server-rendered locale-dependent content.
       router.refresh();
     } else {
       router.push(targetPath);
