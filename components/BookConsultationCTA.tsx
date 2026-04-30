@@ -1,13 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 export default function BookConsultationCTA({
   locale = "en",
 }: {
   locale?: Locale;
 }) {
-  const tr = t(locale).book;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const tr = t(effectiveLocale).book;
   return (
     <section id="contact" className="bg-white px-2 pt-3 sm:px-4 sm:pt-4">
       <Reveal

@@ -7,6 +7,7 @@ import {
   type ChangeEvent,
 } from "react";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 type Props = {
   open: boolean;
@@ -21,7 +22,8 @@ export default function GuideDownloadModal({
   onClose,
   locale = "en",
 }: Props) {
-  const tr = t(locale).download;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const tr = t(effectiveLocale).download;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 import { useStoredCountry } from "./CountryGate";
 
 type TabKey = "legal" | "accounting" | "cfo";
@@ -50,7 +51,8 @@ export default function ServiceTabs({
   locale?: Locale;
 }) {
   const [active, setActive] = useState<TabKey>("legal");
-  const tr = t(locale).serviceTabs;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const tr = t(effectiveLocale).serviceTabs;
 
   return (
     <section
@@ -122,11 +124,11 @@ export default function ServiceTabs({
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col gap-1"
             >
-              {active === "legal" && <LegalContent locale={locale} />}
+              {active === "legal" && <LegalContent locale={effectiveLocale} />}
               {active === "accounting" && (
-                <AccountingContent locale={locale} />
+                <AccountingContent locale={effectiveLocale} />
               )}
-              {active === "cfo" && <CFOContent locale={locale} />}
+              {active === "cfo" && <CFOContent locale={effectiveLocale} />}
             </motion.div>
           </AnimatePresence>
         </div>

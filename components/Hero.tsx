@@ -17,6 +17,7 @@ import WordReveal from "./motion/WordReveal";
 import AnimatedCounter from "./motion/AnimatedCounter";
 import MagneticButton from "./motion/MagneticButton";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -35,7 +36,8 @@ const counterFormatter: Record<Locale, (n: number) => string> = {
 
 export default function Hero({ locale = "en" }: { locale?: Locale }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const tr = t(locale).hero;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const tr = t(effectiveLocale).hero;
 
   // Parallax: as the user scrolls past the hero, the globe drifts up
   // slower and fades, while the headline column lifts a touch — gives
@@ -149,13 +151,13 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
                 <AnimatedCounter
                   to={12000}
                   duration={1.6}
-                  format={counterFormatter[locale]}
+                  format={counterFormatter[effectiveLocale]}
                   className="font-semibold"
                 />
                 <span className="text-white/85">
-                  {locale === "fr"
+                  {effectiveLocale === "fr"
                     ? "collaborations clients"
-                    : locale === "pt"
+                    : effectiveLocale === "pt"
                       ? "colaborações com clientes"
                       : "Client Collaboration"}
                 </span>

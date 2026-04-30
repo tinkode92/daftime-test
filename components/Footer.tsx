@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 export default function Footer({ locale = "en" }: { locale?: Locale }) {
-  const tr = t(locale).footer;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const tr = t(effectiveLocale).footer;
   return (
     <footer className="bg-white p-2 sm:p-4">
       <div className="relative overflow-hidden rounded-2xl bg-daftime-yellow px-5 py-8 sm:px-6 sm:py-10 md:h-[254px]">

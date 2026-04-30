@@ -5,6 +5,7 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 import GuideDownloadModal from "./GuideDownloadModal";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -17,7 +18,8 @@ const avatars = [
 
 export default function GuideCTA({ locale = "en" }: { locale?: Locale }) {
   const [open, setOpen] = useState(false);
-  const tr = t(locale).guide;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const tr = t(effectiveLocale).guide;
 
   return (
     <section className="bg-white">
@@ -124,7 +126,7 @@ export default function GuideCTA({ locale = "en" }: { locale?: Locale }) {
       <GuideDownloadModal
         open={open}
         onClose={() => setOpen(false)}
-        locale={locale}
+        locale={effectiveLocale}
       />
     </section>
   );

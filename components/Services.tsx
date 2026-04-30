@@ -5,6 +5,7 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 import TiltCard from "./motion/TiltCard";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 type ServiceKey = "legal" | "advisory" | "accounting";
 
@@ -25,7 +26,8 @@ const compassRotation: Record<ServiceKey, number> = {
 
 export default function Services({ locale = "en" }: { locale?: Locale }) {
   const [active, setActive] = useState<ServiceKey>("legal");
-  const tr = t(locale).services;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const tr = t(effectiveLocale).services;
   const orderedServices: ServiceKey[] = ["legal", "advisory", "accounting"];
   const marqueeWords = [
     tr.cards.legal.title,

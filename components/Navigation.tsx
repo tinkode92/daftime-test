@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { openCountryGate, useStoredCountry } from "./CountryGate";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 const COUNTRY_FLAGS = {
   AE: "🇦🇪",
@@ -19,22 +20,19 @@ function localeFromPath(path: string): Locale {
   return "en";
 }
 
-function homeForLocale(locale: Locale): string {
-  if (locale === "fr") return "/fr";
-  if (locale === "pt") return "/pt";
-  return "/";
-}
-
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const resourcesRef = useRef<HTMLLIElement>(null);
   const pathname = usePathname();
-  const locale = localeFromPath(pathname || "/");
-  const home = homeForLocale(locale);
+  // The home (URL) we link back to follows the chosen COUNTRY (URL routing).
+  // The displayed text follows the chosen LANGUAGE (preference).
+  const country = useStoredCountry();
+  const home =
+    country === "FR" ? "/fr" : country === "PT" ? "/pt" : "/";
+  const locale = useEffectiveLocale(localeFromPath(pathname || "/"));
   const tr = t(locale).nav;
   const currentLocale = locale.toUpperCase();
-  const country = useStoredCountry();
 
   useEffect(() => {
     if (!open) return;

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "./Reveal";
 import { t as tr, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 type Testimonial = {
   id: string;
@@ -84,7 +85,8 @@ export default function Testimonials({
   locale?: Locale;
 }) {
   const [openId, setOpenId] = useState<string | null>("imrane");
-  const trans = tr(locale).testimonials;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const trans = tr(effectiveLocale).testimonials;
 
   return (
     <section className="bg-white px-4 py-12 sm:px-8 sm:py-14 md:px-12 md:py-16">

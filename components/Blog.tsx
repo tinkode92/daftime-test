@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 const blogImages = [
   "/assets/blog-1.png",
@@ -12,7 +15,8 @@ const blogImages = [
 ];
 
 export default function Blog({ locale = "en" }: { locale?: Locale }) {
-  const tr = t(locale).blog;
+  const effectiveLocale = useEffectiveLocale(locale);
+  const tr = t(effectiveLocale).blog;
   const articles = blogImages.map((image, idx) => ({
     image,
     date: tr.date,
