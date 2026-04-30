@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import CountryGate from "@/components/CountryGate";
+import ScrollProgress from "@/components/motion/ScrollProgress";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${mono.variable} antialiased`}>
+        <ScrollProgress />
         {children}
         <CountryGate />
       </body>

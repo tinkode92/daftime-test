@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "./Reveal";
 import { t as tr, type Locale } from "@/lib/translations";
@@ -149,19 +150,42 @@ export default function Testimonials({
                   </button>
                 </div>
 
-                <div
-                  id={`testimonial-${item.id}`}
-                  className={
-                    "grid overflow-hidden transition-all duration-500 ease-out " +
-                    (isOpen
-                      ? "mt-6 grid-rows-[1fr] opacity-100"
-                      : "grid-rows-[0fr] opacity-0")
-                  }
-                >
-                  <div className="min-h-0">
-                    <ExpandedTestimonial item={item} meta={trans.meta} />
-                  </div>
-                </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      id={`testimonial-${item.id}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{
+                        height: "auto",
+                        opacity: 1,
+                        transition: {
+                          height: {
+                            duration: 0.55,
+                            ease: [0.22, 1, 0.36, 1],
+                          },
+                          opacity: { duration: 0.45, delay: 0.08 },
+                        },
+                      }}
+                      exit={{
+                        height: 0,
+                        opacity: 0,
+                        transition: {
+                          height: {
+                            duration: 0.45,
+                            ease: [0.4, 0, 0.6, 1],
+                          },
+                          opacity: { duration: 0.2 },
+                        },
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-6">
+                        <ExpandedTestimonial item={item} meta={trans.meta} />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </Reveal>
             );
           })}

@@ -1,8 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import Navigation from "./Navigation";
 import BrandMarquee from "./BrandMarquee";
 import LearnMoreModal from "./LearnMoreModal";
@@ -31,15 +37,62 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
   const [modalOpen, setModalOpen] = useState(false);
   const tr = t(locale).hero;
 
+  // Parallax: as the user scrolls past the hero, the globe drifts up
+  // slower and fades, while the headline column lifts a touch — gives
+  // depth without being distracting.
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const globeY = useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
+  const globeScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const globeOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.4]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+
+  // Cursor spotlight that follows the mouse over the hero. Spring-smoothed
+  // and clamped to the section so it never leaks elsewhere.
+  const mx = useMotionValue(50);
+  const my = useMotionValue(20);
+  const sx = useSpring(mx, { stiffness: 80, damping: 16, mass: 0.6 });
+  const sy = useSpring(my, { stiffness: 80, damping: 16, mass: 0.6 });
+  const spotlight = useTransform(
+    [sx, sy] as never,
+    ([x, y]: number[]) =>
+      `radial-gradient(560px circle at ${x}% ${y}%, rgba(214,179,3,0.18), transparent 65%)`,
+  );
+
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
-      <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
+      <div
+        ref={heroRef}
+        onPointerMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          mx.set(((e.clientX - r.left) / r.width) * 100);
+          my.set(((e.clientY - r.top) / r.height) * 100);
+        }}
+        onPointerLeave={() => {
+          mx.set(50);
+          my.set(20);
+        }}
+        className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl"
+      >
+        {/* Cursor spotlight */}
+        <motion.div
+          aria-hidden
+          style={{ background: spotlight }}
+          className="pointer-events-none absolute inset-0 z-[1]"
+        />
+
         {/* Interactive globe (drag to rotate, auto-spins when idle) */}
-        <div className="absolute inset-x-0 top-[12%] flex justify-center sm:top-[14%]">
+        <motion.div
+          style={{ y: globeY, scale: globeScale, opacity: globeOpacity }}
+          className="absolute inset-x-0 top-[12%] flex justify-center sm:top-[14%]"
+        >
           <div className="aspect-square w-[110%] max-w-[820px] sm:w-[95%] md:w-[80%] lg:w-[70%]">
             <Globe className="size-full" />
           </div>
-        </div>
+        </motion.div>
 
         {/* Vertical lines decoration (hidden on small screens) */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-[1100px] -translate-x-1/2 justify-between md:flex">
@@ -51,7 +104,10 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
         {/* Bottom blur fade */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[200px] rounded-b-2xl bg-gradient-to-b from-transparent to-black/50 backdrop-blur-[2px] sm:h-[305px] sm:rounded-b-3xl" />
 
-        <div className="relative flex min-h-[640px] flex-col px-4 pt-5 pb-0 sm:px-6 sm:pt-7 md:min-h-[720px] md:px-10 md:pt-9 lg:min-h-[800px]">
+        <motion.div
+          style={{ y: contentY }}
+          className="relative z-[2] flex min-h-[640px] flex-col px-4 pt-5 pb-0 sm:px-6 sm:pt-7 md:min-h-[720px] md:px-10 md:pt-9 lg:min-h-[800px]"
+        >
           <div className="flex justify-center">
             <Navigation />
           </div>
@@ -158,7 +214,7 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
           <div className="relative">
             <BrandMarquee />
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <LearnMoreModal open={modalOpen} onClose={() => setModalOpen(false)} />

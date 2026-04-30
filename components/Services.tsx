@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import Reveal from "./Reveal";
+import TiltCard from "./motion/TiltCard";
 import { t, type Locale } from "@/lib/translations";
 
 type ServiceKey = "legal" | "advisory" | "accounting";
@@ -110,32 +111,41 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
       </div>
 
       {/* Three cards below */}
-      <div className="grid grid-cols-1 gap-10 px-2 py-12 sm:px-4 md:grid-cols-3 md:gap-12 md:px-12 md:py-16">
+      <div
+        className="grid grid-cols-1 gap-10 px-2 py-12 sm:px-4 md:grid-cols-3 md:gap-12 md:px-12 md:py-16"
+        style={{ perspective: 1000 }}
+      >
         {orderedServices.map((key, idx) => (
           <Reveal
             key={key}
             delay={idx * 120}
             className="flex flex-col gap-5 sm:gap-6"
           >
-            <div
-              role="button"
-              tabIndex={0}
-              onMouseEnter={() => setActive(key)}
-              onFocus={() => setActive(key)}
-              onClick={() => setActive(key)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setActive(key);
-                }
-              }}
-              className={
-                "flex cursor-pointer flex-col gap-5 transition-all duration-300 sm:gap-6 " +
-                (active === key
-                  ? "opacity-100"
-                  : "opacity-80 hover:opacity-100")
-              }
+            <TiltCard
+              intensity={6}
+              glare={false}
+              className="rounded-2xl"
+              style={{ transformStyle: "preserve-3d" } as never}
             >
+              <div
+                role="button"
+                tabIndex={0}
+                onMouseEnter={() => setActive(key)}
+                onFocus={() => setActive(key)}
+                onClick={() => setActive(key)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActive(key);
+                  }
+                }}
+                className={
+                  "flex cursor-pointer flex-col gap-5 transition-all duration-300 sm:gap-6 " +
+                  (active === key
+                    ? "opacity-100"
+                    : "opacity-80 hover:opacity-100")
+                }
+              >
               <div className="flex items-center gap-4 sm:gap-6">
                 <div
                   className={
@@ -160,7 +170,8 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
               <p className="text-[15px] leading-relaxed tracking-tight text-black sm:text-[16px]">
                 {tr.cards[key].description}
               </p>
-            </div>
+              </div>
+            </TiltCard>
           </Reveal>
         ))}
       </div>
