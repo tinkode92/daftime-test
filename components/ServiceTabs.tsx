@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
@@ -79,26 +80,55 @@ export default function ServiceTabs({
 
         {/* Tabs */}
         <div className="mt-8 flex flex-col gap-1 sm:mt-12">
-          <Reveal className="flex flex-wrap items-center gap-2 rounded-2xl bg-white px-4 py-4 sm:gap-5 sm:px-8 sm:py-6">
-            {TAB_KEYS.map((key) => (
-              <button
-                key={key}
-                onClick={() => setActive(key)}
-                className={
-                  "transition-all duration-300 " +
-                  (active === key
-                    ? "flex items-center justify-center rounded-xl bg-black px-4 py-2 text-[15px] tracking-tight text-white sm:px-5 sm:py-2.5 sm:text-[18px]"
-                    : "flex items-center justify-center rounded-md px-2.5 py-2 text-[15px] tracking-tight text-daftime-dark hover:bg-black/5 sm:py-2.5 sm:text-[18px]")
-                }
-              >
-                {tr.tabs[key]}
-              </button>
-            ))}
+          <Reveal className="relative flex flex-wrap items-center gap-2 rounded-2xl bg-white px-4 py-4 sm:gap-5 sm:px-8 sm:py-6">
+            {TAB_KEYS.map((key) => {
+              const isActive = active === key;
+              return (
+                <button
+                  key={key}
+                  onClick={() => setActive(key)}
+                  className="relative flex items-center justify-center rounded-xl px-4 py-2 text-[15px] tracking-tight transition-colors sm:px-5 sm:py-2.5 sm:text-[18px]"
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="active-tab-bg"
+                      className="absolute inset-0 rounded-xl bg-black"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 32,
+                      }}
+                    />
+                  )}
+                  <span
+                    className={
+                      "relative z-10 " +
+                      (isActive ? "text-white" : "text-daftime-dark")
+                    }
+                  >
+                    {tr.tabs[key]}
+                  </span>
+                </button>
+              );
+            })}
           </Reveal>
 
-          {active === "legal" && <LegalContent locale={locale} />}
-          {active === "accounting" && <AccountingContent locale={locale} />}
-          {active === "cfo" && <CFOContent locale={locale} />}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col gap-1"
+            >
+              {active === "legal" && <LegalContent locale={locale} />}
+              {active === "accounting" && (
+                <AccountingContent locale={locale} />
+              )}
+              {active === "cfo" && <CFOContent locale={locale} />}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

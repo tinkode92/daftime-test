@@ -2,10 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import Navigation from "./Navigation";
 import BrandMarquee from "./BrandMarquee";
 import LearnMoreModal from "./LearnMoreModal";
 import Globe from "./Globe";
+import WordReveal from "./motion/WordReveal";
+import AnimatedCounter from "./motion/AnimatedCounter";
+import MagneticButton from "./motion/MagneticButton";
 import { t, type Locale } from "@/lib/translations";
 
 const avatars = [
@@ -16,6 +20,12 @@ const avatars = [
   { src: "/assets/avatar-5.png", bg: "#cac0ff" },
   { src: "/assets/avatar-6.png", bg: "#ffc0c5" },
 ];
+
+const counterFormatter: Record<Locale, (n: number) => string> = {
+  en: (n) => `${Math.round(n / 1000)}k+`,
+  fr: (n) => `+${Math.round(n / 1000)}k`,
+  pt: (n) => `+${Math.round(n / 1000)} mil`,
+};
 
 export default function Hero({ locale = "en" }: { locale?: Locale }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -48,11 +58,24 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
 
           <div className="flex flex-1 flex-col items-center justify-center pt-12 pb-12 text-center sm:pt-16 md:pt-24 md:pb-16">
             {/* Avatars + counter */}
-            <div className="fade-up mb-6 flex items-center gap-3 sm:mb-8 sm:gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-6 flex items-center gap-3 sm:mb-8 sm:gap-4"
+            >
               <div className="flex">
                 {avatars.map((a, i) => (
-                  <div
+                  <motion.div
                     key={i}
+                    initial={{ opacity: 0, scale: 0.4, x: -8 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{
+                      delay: 0.1 + i * 0.06,
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 22,
+                    }}
                     className="-mr-1 size-[24px] overflow-hidden rounded-full border-[3px] border-white/10"
                     style={{ background: a.bg }}
                   >
@@ -63,48 +86,72 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
                       height={24}
                       className="h-full w-full rounded-full object-cover"
                     />
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-              <p className="text-[15px] tracking-tight text-white sm:text-[18px] md:text-[20px]">
-                {tr.counter}
+              <p className="flex items-baseline gap-1.5 text-[15px] tracking-tight text-white sm:text-[18px] md:text-[20px]">
+                <AnimatedCounter
+                  to={12000}
+                  duration={1.6}
+                  format={counterFormatter[locale]}
+                  className="font-semibold"
+                />
+                <span className="text-white/85">
+                  {locale === "fr"
+                    ? "collaborations clients"
+                    : locale === "pt"
+                      ? "colaborações com clientes"
+                      : "Client Collaboration"}
+                </span>
               </p>
-            </div>
+            </motion.div>
 
             {/* Headline */}
-            <h1
-              className="h-hero fade-up max-w-[760px] text-balance text-white"
-              style={{ animationDelay: "120ms" }}
-            >
-              {tr.title}
-            </h1>
-            <p
-              className="fade-up mt-4 max-w-[600px] text-[16px] tracking-tight text-white/90 sm:mt-6 sm:text-[18px] md:text-[20px]"
-              style={{ animationDelay: "240ms" }}
+            <WordReveal
+              as="h1"
+              text={tr.title}
+              className="h-hero max-w-[760px] text-balance text-white"
+            />
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.6,
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="mt-4 max-w-[600px] text-[16px] tracking-tight text-white/90 sm:mt-6 sm:text-[18px] md:text-[20px]"
             >
               {tr.subtitle}
-            </p>
+            </motion.p>
 
             {/* Buttons */}
-            <div
-              className="fade-up mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4"
-              style={{ animationDelay: "360ms" }}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.9,
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4"
             >
-              <button
-                type="button"
+              <MagneticButton
                 onClick={() => setModalOpen(true)}
                 className="btn-pill cta-shimmer bg-daftime-yellow text-black hover:opacity-90"
               >
                 {tr.learnMore}
                 <ArrowRight />
-              </button>
-              <a
+              </MagneticButton>
+              <MagneticButton
+                as="a"
                 href="#contact"
+                strength={10}
                 className="btn-pill border border-white/10 bg-black/10 text-white backdrop-blur hover:bg-white/10"
               >
                 {tr.letsTalk}
-              </a>
-            </div>
+              </MagneticButton>
+            </motion.div>
           </div>
 
           {/* Brand marquee */}
