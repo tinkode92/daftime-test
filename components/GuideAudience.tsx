@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const dotPattern = {
   backgroundImage:
@@ -7,47 +11,112 @@ const dotPattern = {
 };
 
 export default function GuideAudience() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const dotShift = useTransform(scrollYProgress, [0, 1], ["0px", "-60px"]);
+
   return (
-    <section className="bg-daftime-gray-bg px-4 py-16 sm:px-8 sm:py-20 md:px-16 md:py-24">
+    <section
+      ref={sectionRef}
+      className="bg-daftime-gray-bg px-4 py-16 sm:px-8 sm:py-20 md:px-16 md:py-24"
+    >
       <div className="mx-auto flex max-w-[1152px] flex-col gap-10">
         {/* Header */}
-        <div className="flex max-w-[494px] flex-col gap-4">
-          <span className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-daftime-dark">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-15% 0px" }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12 } },
+          }}
+          className="flex max-w-[494px] flex-col gap-4"
+        >
+          <motion.span
+            variants={{
+              hidden: { opacity: 0, y: 10 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
+            className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-daftime-dark"
+          >
             <span className="size-1 bg-daftime-dark" />
             Who It for
-          </span>
-          <h2 className="h-display text-balance text-daftime-dark">
+          </motion.span>
+          <motion.h2
+            variants={{
+              hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
+              visible: {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
+            className="h-display text-balance text-daftime-dark"
+          >
             Who this guide is for
-          </h2>
-          <p className="text-[16px] leading-[1.5] tracking-tight text-daftime-gray-text">
+          </motion.h2>
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 14 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
+            className="text-[16px] leading-[1.5] tracking-tight text-daftime-gray-text"
+          >
             A publication designed for decision-makers structuring, operating,
             or expanding businesses in the United Arab Emirates.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* 2x2 grid */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10% 0px" }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+            },
+          }}
+          className="grid grid-cols-1 gap-4 md:grid-cols-2"
+        >
           <Card
             title="Entrepreneurs"
             description="Structuring or restructuring their presence in the UAE and seeking clarity on Free Zone, Mainland, compliance, and long-term flexibility."
             illustration={<EntrepreneursViz />}
+            dotShift={dotShift}
           />
           <Card
             title="Executives"
             description="Leading expansion into the Emirates and requiring alignment between legal architecture, fiscal obligations, and governance frameworks."
             illustration={<ExecutivesViz />}
+            dotShift={dotShift}
           />
           <Card
             title="Investors"
             description="Assessing regulatory exposure, economic substance, and structural coherence before committing capital."
             illustration={<InvestorsViz />}
+            dotShift={dotShift}
           />
           <Card
             title="Founders & Business Owners"
             description="Navigating Corporate Tax developments and ensuring their structure remains aligned with long-term growth objectives."
             illustration={<FoundersViz />}
+            dotShift={dotShift}
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -57,28 +126,71 @@ function Card({
   title,
   description,
   illustration,
+  dotShift,
 }: {
   title: string;
   description: string;
   illustration: React.ReactNode;
+  dotShift: ReturnType<typeof useTransform<number, string>>;
 }) {
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl bg-white">
-      <div
-        className="relative aspect-[568/405] overflow-hidden bg-white"
-        style={dotPattern}
-      >
-        {illustration}
+    <motion.article
+      variants={{
+        hidden: { opacity: 0, y: 32, scale: 0.97 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          transition: { type: "spring", stiffness: 260, damping: 26 },
+        },
+      }}
+      whileHover={{
+        y: -6,
+        transition: { type: "spring", stiffness: 280, damping: 24 },
+      }}
+      className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_4px_18px_-12px_rgba(0,0,0,0.12)] transition-shadow duration-300 hover:shadow-[0_24px_40px_-16px_rgba(0,0,0,0.18)]"
+    >
+      <div className="relative aspect-[568/405] overflow-hidden bg-white">
+        {/* Slow-drifting dot pattern (parallax-ish on scroll) */}
+        <motion.div
+          aria-hidden
+          style={{
+            ...dotPattern,
+            backgroundPositionY: dotShift,
+          }}
+          className="absolute inset-0"
+        />
+        {/* Illustration: zoom-in subtly on hover */}
+        <motion.div
+          className="absolute inset-0"
+          whileHover={{ scale: 1.04 }}
+          transition={{ type: "spring", stiffness: 220, damping: 22 }}
+        >
+          {illustration}
+        </motion.div>
+        {/* Yellow halo glow on hover */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{
+            background:
+              "radial-gradient(60% 60% at 50% 60%, rgba(214,179,3,0.18), transparent 70%)",
+          }}
+        />
       </div>
       <div className="flex flex-col gap-2 bg-white p-6 drop-shadow-[0_-2px_5px_rgba(240,240,240,0.24)]">
-        <h3 className="text-[28px] leading-[1.1] tracking-[-0.04em] text-black">
+        <motion.h3
+          className="text-[28px] leading-[1.1] tracking-[-0.04em] text-black"
+          whileHover={{ x: 2 }}
+          transition={{ type: "spring", stiffness: 320, damping: 24 }}
+        >
           {title}
-        </h3>
+        </motion.h3>
         <p className="text-[14px] leading-[1.5] tracking-tight text-daftime-gray-text">
           {description}
         </p>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
