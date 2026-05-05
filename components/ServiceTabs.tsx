@@ -435,16 +435,16 @@ function Illustration({ kind }: { kind: IllustrationKind }) {
   return <SealIllustration />;
 }
 
-/* ============= 6194:518 — Folder with paper ============= */
+/* ============= 6194:518 — Business setup (folder) ============= */
 function FolderIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/folder-v2.svg"
+        src="/assets/business-setup-v3.svg"
         alt=""
-        width={218}
-        height={210}
-        className="absolute left-1/2 top-1/2 h-auto w-[80%] max-w-[218px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        width={275}
+        height={170}
+        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
   );
