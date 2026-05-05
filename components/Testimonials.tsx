@@ -13,7 +13,6 @@ type Testimonial = {
   avatar: string;
   bgImage: string;
   quote: string;
-  closing: string;
   founder: string;
   brand: string;
   location: string;
@@ -27,9 +26,7 @@ const testimonials: Testimonial[] = [
     avatar: "/assets/testi-1-avatar.png",
     bgImage: "/assets/testi-1-bg.png",
     quote:
-      "We work with the Daftime firm for all of our companies based in Dubai, and we would like to highlight the exceptional quality of their support. A very professional and proactive team, Accessible, precise, and competent follow-up, Clear, tailored, and business-oriented advice. Special mention to Sami, a dedicated person who always stays up to date with regulatory developments and supports us with seriousness and responsiveness.",
-    closing:
-      "We highly recommend Daftime without hesitation and truly appreciate their human and expert approach.",
+      "We work with the Daftime firm for all of our companies based in Dubai, and we would like to highlight the exceptional quality of their support. A very professional and proactive team, accessible, precise, and competent follow-up, clear, tailored, and business-oriented advice. Special mention to Sami, a dedicated person who always stays up to date with regulatory developments and supports us with seriousness and responsiveness. We highly recommend Daftime without hesitation and truly appreciate their human and expert approach.",
     founder: "Imrane Haniff",
     brand: "Café Crème",
     location: "Dubai",
@@ -41,9 +38,7 @@ const testimonials: Testimonial[] = [
     avatar: "/assets/testi-2-avatar.png",
     bgImage: "/assets/testi-anass-moudrik.svg",
     quote:
-      "Was struggling to find a good accounting company since I arrived in the UAE but I finally found the right guys! Efficiency, practice, language, pricepoint —",
-    closing:
-      "this is your go-to option if you want a reliable partner.",
+      "Was struggling to find a good accounting company since I arrived in the UAE but I finally found the right guys! Efficiency, practice, language, pricepoint this is your go to option if you want a reliable partner.",
     founder: "Anass Moudrik",
     brand: "Bocuse",
     location: "Dubai",
@@ -54,8 +49,8 @@ const testimonials: Testimonial[] = [
     title: "The only true accounting firm in Dubai!",
     avatar: "/assets/testi-3-avatar.png",
     bgImage: "/assets/testi-marion-lefebvre.svg",
-    quote: "Thanks to Daftime for their support,",
-    closing: "the only true accounting firm in Dubai!",
+    quote:
+      "Thanks to Daftime for their support, the only true accounting firm in Dubai!",
     founder: "Marion Lefebvre",
     brand: "Cheffe d'oeuvre",
     location: "Dubai",
@@ -67,9 +62,7 @@ const testimonials: Testimonial[] = [
     avatar: "/assets/testi-4-avatar.png",
     bgImage: "/assets/testi-georges-leguerne.svg",
     quote:
-      "Hello, I recommend this firm, with which we have been working since the beginning of 2024.",
-    closing:
-      "They have a strong understanding of the context and matters in Dubai.",
+      "Hello, I recommend this firm, with which we have been working since the beginning of 2024. They have a strong understanding of the context and matters in Dubai.",
     founder: "Georges Leguerne",
     brand: "Berexia Advisory",
     location: "Dubai",
@@ -204,8 +197,9 @@ function ExpandedTestimonial({
 }) {
   return (
     <div className="flex flex-col gap-6">
-      <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
-        <div className="relative h-[260px] overflow-hidden rounded-xl sm:h-[330px] lg:h-[377px]">
+      <div className="grid grid-cols-1 items-stretch gap-2 lg:grid-cols-2">
+        {/* Portrait — keeps a consistent aspect across all rows */}
+        <div className="relative aspect-[16/11] overflow-hidden rounded-xl">
           <Image
             src={item.bgImage}
             alt=""
@@ -215,15 +209,17 @@ function ExpandedTestimonial({
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
         </div>
-        <div className="relative min-h-[300px] overflow-hidden rounded-xl bg-[#f4f4f4] p-5 sm:p-6 lg:h-[377px]">
-          <span className="absolute left-5 top-1 text-[56px] leading-none text-black sm:left-6 sm:text-[64px]">
+        {/* Quote panel — height adapts to content, text aligned from the top */}
+        <div className="relative flex flex-col overflow-hidden rounded-xl bg-[#f4f4f4] p-6 sm:p-8">
+          <span
+            aria-hidden
+            className="block text-[44px] leading-none text-black sm:text-[56px]"
+          >
             &ldquo;
           </span>
-          <p className="mt-12 text-[15px] leading-relaxed tracking-tight text-daftime-gray-text sm:mt-14 sm:text-[17px] lg:absolute lg:bottom-6 lg:left-6 lg:right-6 lg:mt-0 lg:text-[18px]">
-            &ldquo;{item.quote}
-            <br />
-            <br />
-            <span className="text-black">{item.closing}&rdquo;</span>
+          <p className="mt-3 text-[15px] leading-relaxed tracking-tight text-black sm:text-[17px] lg:text-[18px]">
+            {item.quote}
+            <span className="text-daftime-gray-text">&rdquo;</span>
           </p>
         </div>
       </div>
