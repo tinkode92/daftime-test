@@ -96,14 +96,12 @@ export default function GuideAudience() {
             title="Entrepreneurs"
             description="Structuring or restructuring their presence in the UAE and seeking clarity on Free Zone, Mainland, compliance, and long-term flexibility."
             illustration={<EntrepreneursViz />}
-            aspectClass="aspect-[568/276]"
             dotShift={dotShift}
           />
           <Card
             title="Executives"
             description="Leading expansion into the Emirates and requiring alignment between legal architecture, fiscal obligations, and governance frameworks."
             illustration={<ExecutivesViz />}
-            aspectClass="aspect-[568/276]"
             dotShift={dotShift}
           />
           <Card
@@ -129,17 +127,18 @@ function Card({
   description,
   illustration,
   dotShift,
-  aspectClass = "aspect-[568/405]",
+  aspectClass = "aspect-[568/276]",
 }: {
   title: string;
   description: string;
   illustration: React.ReactNode;
   dotShift: ReturnType<typeof useTransform<number, string>>;
   /**
-   * Aspect ratio for the illustration slot. Defaults to the original
-   * 568:405 (used by Investors + Founders). Pass aspect-[568/276] for
-   * the shorter Entrepreneurs / Executives SVGs so the dotted pattern
-   * isn't padded with empty space above the illustration.
+   * Aspect ratio for the illustration slot. Defaults to 568:276 — the
+   * native size of the user-uploaded SVGs. The 568x405 Founders SVG
+   * has empty space at the bottom of its viewBox so it crops cleanly
+   * with object-top. Pass a different value if a future card needs
+   * its own ratio.
    */
   aspectClass?: string;
 }) {
@@ -275,7 +274,7 @@ function InvestorsViz() {
       </div>
 
       {/* Main card */}
-      <div className="absolute inset-x-[14%] top-[20%] rounded-2xl border-[1.5px] border-daftime-gray-border bg-daftime-gray-light p-3 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
+      <div className="absolute inset-x-[14%] bottom-3 top-[28%] rounded-2xl border-[1.5px] border-daftime-gray-border bg-daftime-gray-light p-3 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
         {/* Search bar */}
         <div className="flex h-9 items-center gap-2 rounded-full border border-white/80 bg-white px-2 shadow-inner">
           <span className="flex size-6 items-center justify-center rounded-full bg-gradient-to-b from-daftime-gray-light to-daftime-gray-border">
@@ -320,16 +319,14 @@ function InvestorsViz() {
 /* ============= 4. Founders & Business Owners ============= */
 function FoundersViz() {
   return (
-    <div className="absolute inset-0">
-      <Image
-        src="/assets/guide-founders.svg"
-        alt=""
-        fill
-        sizes="(min-width: 768px) 568px, 100vw"
-        className="object-cover"
-        priority={false}
-      />
-    </div>
+    <Image
+      src="/assets/guide-founders.svg"
+      alt=""
+      fill
+      sizes="(min-width: 768px) 568px, 100vw"
+      className="select-none object-cover object-top"
+      priority={false}
+    />
   );
 }
 
