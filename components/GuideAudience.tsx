@@ -96,12 +96,14 @@ export default function GuideAudience() {
             title="Entrepreneurs"
             description="Structuring or restructuring their presence in the UAE and seeking clarity on Free Zone, Mainland, compliance, and long-term flexibility."
             illustration={<EntrepreneursViz />}
+            aspectClass="aspect-[568/276]"
             dotShift={dotShift}
           />
           <Card
             title="Executives"
             description="Leading expansion into the Emirates and requiring alignment between legal architecture, fiscal obligations, and governance frameworks."
             illustration={<ExecutivesViz />}
+            aspectClass="aspect-[568/276]"
             dotShift={dotShift}
           />
           <Card
@@ -127,11 +129,19 @@ function Card({
   description,
   illustration,
   dotShift,
+  aspectClass = "aspect-[568/405]",
 }: {
   title: string;
   description: string;
   illustration: React.ReactNode;
   dotShift: ReturnType<typeof useTransform<number, string>>;
+  /**
+   * Aspect ratio for the illustration slot. Defaults to the original
+   * 568:405 (used by Investors + Founders). Pass aspect-[568/276] for
+   * the shorter Entrepreneurs / Executives SVGs so the dotted pattern
+   * isn't padded with empty space above the illustration.
+   */
+  aspectClass?: string;
 }) {
   return (
     <motion.article
@@ -150,7 +160,7 @@ function Card({
       }}
       className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_4px_18px_-12px_rgba(0,0,0,0.12)] transition-shadow duration-300 hover:shadow-[0_24px_40px_-16px_rgba(0,0,0,0.18)]"
     >
-      <div className="relative aspect-[568/405] overflow-hidden bg-white">
+      <div className={`relative overflow-hidden bg-white ${aspectClass}`}>
         {/* Slow-drifting dot pattern (parallax-ish on scroll) */}
         <motion.div
           aria-hidden
@@ -223,32 +233,28 @@ function UAEFlagCircle({ size = 28 }: { size?: number }) {
 /* ============= 1. Entrepreneurs ============= */
 function EntrepreneursViz() {
   return (
-    <div className="absolute inset-0 flex items-end">
-      <Image
-        src="/assets/guide-entrepreneurs.svg"
-        alt=""
-        width={568}
-        height={276}
-        className="h-auto w-full select-none"
-        priority={false}
-      />
-    </div>
+    <Image
+      src="/assets/guide-entrepreneurs.svg"
+      alt=""
+      fill
+      sizes="(min-width: 768px) 568px, 100vw"
+      className="select-none object-cover"
+      priority={false}
+    />
   );
 }
 
 /* ============= 2. Executives ============= */
 function ExecutivesViz() {
   return (
-    <div className="absolute inset-0 flex items-end">
-      <Image
-        src="/assets/guide-executives.svg"
-        alt=""
-        width={568}
-        height={276}
-        className="h-auto w-full select-none"
-        priority={false}
-      />
-    </div>
+    <Image
+      src="/assets/guide-executives.svg"
+      alt=""
+      fill
+      sizes="(min-width: 768px) 568px, 100vw"
+      className="select-none object-cover"
+      priority={false}
+    />
   );
 }
 
