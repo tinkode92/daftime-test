@@ -34,7 +34,7 @@ export default function GuideVision() {
           {/* Photo */}
           <div className="relative aspect-[580/377] overflow-hidden rounded-xl bg-daftime-gray-card lg:aspect-auto lg:h-[377px]">
             <Image
-              src="/assets/testi-1-bg.png"
+              src="/assets/guide-vision-sami.svg"
               alt="Sami Sehrine"
               fill
               className="object-cover"
@@ -54,7 +54,14 @@ export default function GuideVision() {
 
             {/* Daftime wordmark */}
             <div className="mt-12 flex items-center">
-              <DaftimeWordmark />
+              <Image
+                src="/assets/daftime-wordmark-blue.svg"
+                alt="Daftime — International Law & Accounting"
+                width={132}
+                height={36}
+                className="h-9 w-auto select-none"
+                priority={false}
+              />
             </div>
 
             {/* Quote body */}
@@ -91,20 +98,5 @@ export default function GuideVision() {
         </div>
       </div>
     </section>
-  );
-}
-
-function DaftimeWordmark() {
-  return (
-    <div className="flex items-end gap-2">
-      <span className="text-[36px] leading-none tracking-[-0.03em] text-[#161535]">
-        Daftime
-      </span>
-      <span className="mb-1 hidden text-[8px] uppercase tracking-[0.18em] text-[#161535]/70 sm:block">
-        International
-        <br />
-        Law &amp; Accounting
-      </span>
-    </div>
   );
 }
