@@ -450,16 +450,16 @@ function FolderIllustration() {
   );
 }
 
-/* ============= 6194:545 — Credit card with chip ============= */
+/* ============= 6194:545 — Opening a business bank account ============= */
 function CardIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/opening-a-business-v2.svg"
+        src="/assets/opening-a-business-v3.svg"
         alt=""
-        width={234}
-        height={161}
-        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[260px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        width={275}
+        height={170}
+        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
   );
@@ -470,11 +470,11 @@ function PlantIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/creation-structuring-v2.svg"
+        src="/assets/creation-structuring-v3.svg"
         alt=""
-        width={234}
-        height={187}
-        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[260px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        width={275}
+        height={170}
+        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
   );
@@ -485,11 +485,11 @@ function SealIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/corporate-secretarial-v2.svg"
+        src="/assets/corporate-secretarial-v3.svg"
         alt=""
-        width={234}
-        height={184}
-        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[260px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        width={275}
+        height={170}
+        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
       />
     </div>
   );
