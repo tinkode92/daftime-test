@@ -88,7 +88,7 @@ export default function ToolShell({ tool }: { tool: Tool }) {
                 {button || t.primary}
               </a>
               <a
-                href="/blog"
+                href="/#blog"
                 className="btn-pill border border-white/20 bg-transparent text-white hover:bg-white/10"
               >
                 {t.secondary}

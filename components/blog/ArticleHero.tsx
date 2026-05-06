@@ -8,7 +8,7 @@ const labels = {
 
 export default function ArticleHero({ article }: { article: Article }) {
   const l = labels[article.locale];
-  const backHref = article.urlPrefix === "/fr" ? "/fr#blog" : "/#blog";
+  const backHref = "/#blog";
   return (
     <header className="bg-white px-4 pt-8 pb-12 sm:px-8 sm:pt-12 sm:pb-16 md:px-16">
       <div className="mx-auto flex max-w-[920px] flex-col gap-8">
