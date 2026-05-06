@@ -110,3 +110,13 @@ export function getToolByPath(path: string): Tool | null {
 export function getAllPodcasts(): Podcast[] {
   return podcasts;
 }
+
+/**
+ * Extracts the YouTube video ID from a podcast's `content` HTML
+ * (which is the original Framer `<iframe src="https://www.youtube.com/embed/...">`).
+ * Returns null if no embed found.
+ */
+export function getYouTubeId(content: string): string | null {
+  const m = content.match(/youtube\.com\/embed\/([A-Za-z0-9_-]+)/);
+  return m ? m[1] : null;
+}

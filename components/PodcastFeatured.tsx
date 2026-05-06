@@ -2,132 +2,132 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import YouTubeModal from "./YouTubeModal";
+import { getYouTubeId, type Podcast } from "@/lib/blog";
 
-const meta = [
-  { label: "Founder", value: "Imrane Hanif" },
-  { label: "Client", value: "Café-Crème" },
-  { label: "Localisation", value: "Dubaï" },
-  { label: "Year", value: "2069" },
-];
-
-const more = [
-  "Was struggling to find a good accounting company",
-  "The only true accounting firm in Dubai",
-  "Was struggling to find a good accounting company",
-];
-
-export default function PodcastFeatured() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+export default function PodcastFeatured({
+  episode,
+}: {
+  episode: Podcast;
+}) {
+  const [open, setOpen] = useState(false);
+  const videoId = getYouTubeId(episode.content);
 
   return (
-    <section className="bg-daftime-gray-light px-4 py-16 sm:px-8 sm:py-20 md:px-16 md:py-24">
+    <section className="bg-daftime-gray-bg px-4 py-16 sm:px-8 sm:py-20 md:px-16 md:py-24">
       <div className="mx-auto max-w-[1152px]">
         {/* Header */}
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-12">
           <div className="flex flex-col gap-3">
-            <span className="flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-daftime-yellow">
+            <span className="flex items-center gap-2">
               <span className="size-1 rounded-full bg-daftime-yellow" />
-              Testimonial
+              <span className="label-mono text-daftime-yellow">
+                Latest episode
+              </span>
             </span>
-            <h2 className="h-display max-w-[560px] text-balance text-daftime-dark">
-              Trusted by entrepreneurs around the world
+            <h2 className="h-display max-w-[560px] text-balance text-black">
+              {episode.title}
             </h2>
           </div>
-          <p className="max-w-[420px] text-[15px] leading-relaxed text-daftime-gray-text">
-            From cross-border founders to seasoned investors, hear how teams use
-            Daftime to grow without friction.
-          </p>
-        </div>
-
-        {/* Featured card */}
-        <div className="mt-12 grid grid-cols-1 overflow-hidden rounded-3xl border border-daftime-gray-border bg-white lg:grid-cols-[420px_1fr]">
-          <div className="relative aspect-[4/3] lg:aspect-auto">
-            <Image
-              src="/assets/testi-1-bg.png"
-              alt="Imrane Hanif"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 420px, 100vw"
-            />
-          </div>
-          <div className="flex flex-col gap-6 p-6 sm:p-8 md:p-10">
-            <svg
-              width="32"
-              height="24"
-              viewBox="0 0 32 24"
-              fill="none"
-              aria-hidden
-              className="text-daftime-yellow"
-            >
-              <path
-                d="M0 24V14C0 6.27 5.6 0.67 13.33 0v4.27C8.27 4.93 5.07 8.4 4.8 13.33H10.67V24H0zm21.33 0V14c0-7.73 5.6-13.33 13.34-14v4.27c-5.07.66-8.27 4.13-8.54 9.06H32V24H21.33z"
-                fill="currentColor"
-              />
-            </svg>
-            <p className="text-[18px] leading-relaxed text-daftime-dark sm:text-[20px]">
-              We work with the Daftime team for all of our companies based in
-              Dubai. Their professional approach and constant support is exactly
-              what international founders need.
+          {episode.description && (
+            <p className="max-w-[420px] text-[15px] leading-relaxed tracking-tight text-daftime-gray-text">
+              {episode.description}
             </p>
-            <div className="grid grid-cols-2 gap-4 border-t border-daftime-gray-border pt-6 sm:grid-cols-4">
-              {meta.map((m) => (
-                <div key={m.label} className="flex flex-col gap-1">
-                  <span className="text-[11px] uppercase tracking-[0.18em] text-daftime-gray-mute">
-                    {m.label}
-                  </span>
-                  <span className="text-[15px] text-daftime-dark">
-                    {m.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          )}
         </div>
 
-        {/* Expandable rows */}
-        <div className="mt-6 flex flex-col gap-3">
-          {more.map((label, i) => {
-            const open = openIndex === i;
-            return (
-              <div
-                key={`${label}-${i}`}
-                className="overflow-hidden rounded-2xl border border-daftime-gray-border bg-white"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenIndex(open ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-daftime-gray-light"
-                >
-                  <span className="text-[15px] tracking-tight text-daftime-dark">
-                    {label}
-                  </span>
-                  <span
-                    className={`flex size-8 items-center justify-center rounded-full bg-daftime-yellow transition-transform ${
-                      open ? "rotate-45" : ""
-                    }`}
-                    aria-hidden
-                  >
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path
-                        d="M6 1v10M1 6h10"
-                        stroke="black"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
-                {open && (
-                  <div className="border-t border-daftime-gray-border px-6 py-5 text-[14px] leading-relaxed text-daftime-gray-text">
-                    A short interview excerpt from this guest, sharing how
-                    Daftime supported their growth across borders.
-                  </div>
-                )}
+        {/* Featured player card */}
+        <motion.button
+          type="button"
+          onClick={() => videoId && setOpen(true)}
+          disabled={!videoId}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-12 grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-daftime-gray-border bg-white text-left lg:grid-cols-[640px_1fr]"
+        >
+          <div className="group relative aspect-video lg:aspect-auto lg:min-h-[360px]">
+            {episode.image ? (
+              <Image
+                src={episode.image}
+                alt={episode.imageAlt || episode.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                sizes="(min-width: 1024px) 640px, 100vw"
+              />
+            ) : (
+              <div className="size-full bg-daftime-dark" />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            {videoId && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="grid size-16 place-items-center rounded-full bg-daftime-yellow text-black shadow-2xl transition-transform duration-300 group-hover:scale-110 sm:size-20">
+                  <svg width="22" height="24" viewBox="0 0 22 24" fill="currentColor">
+                    <path d="M2 1.5v21l18-10.5L2 1.5z" />
+                  </svg>
+                </span>
               </div>
-            );
-          })}
-        </div>
+            )}
+          </div>
+          <div className="flex flex-col justify-between gap-6 p-6 sm:p-8 md:p-10">
+            <div className="flex flex-col gap-4">
+              {episode.guestName && (
+                <div className="flex items-center gap-3">
+                  {episode.host && (
+                    <span className="relative size-12 overflow-hidden rounded-full bg-daftime-gray-card">
+                      <Image
+                        src={episode.host}
+                        alt={episode.hostAlt || episode.guestName}
+                        fill
+                        className="object-cover"
+                        sizes="48px"
+                      />
+                    </span>
+                  )}
+                  <div className="flex flex-col">
+                    <span className="text-[14px] tracking-tight text-black">
+                      {episode.guestName}
+                    </span>
+                    {episode.guestPosition && (
+                      <span className="text-[12px] tracking-tight text-daftime-gray-mute">
+                        {episode.guestPosition}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+              <h3 className="text-[20px] leading-tight tracking-tight text-black sm:text-[24px]">
+                {episode.title}
+              </h3>
+              {episode.description && (
+                <p className="line-clamp-3 text-[14px] leading-relaxed text-daftime-gray-text sm:text-[15px]">
+                  {episode.description}
+                </p>
+              )}
+            </div>
+            <span className="inline-flex items-center gap-2 text-[13px] font-medium tracking-tight text-black">
+              Watch episode
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
+                <path
+                  d="M1 5h12M9 1l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </div>
+        </motion.button>
       </div>
+
+      <YouTubeModal
+        videoId={open ? videoId : null}
+        title={episode.title}
+        onClose={() => setOpen(false)}
+      />
     </section>
   );
 }

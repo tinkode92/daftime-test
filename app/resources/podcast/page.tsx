@@ -4,6 +4,7 @@ import PodcastFeatured from "@/components/PodcastFeatured";
 import PodcastCTA from "@/components/PodcastCTA";
 import PodcastWorldMap from "@/components/PodcastWorldMap";
 import Footer from "@/components/Footer";
+import { getAllPodcasts } from "@/lib/blog";
 
 export const metadata = {
   title: "Podcast — Daftime",
@@ -12,11 +13,14 @@ export const metadata = {
 };
 
 export default function PodcastPage() {
+  const all = getAllPodcasts();
+  const [featured, ...rest] = all;
+
   return (
     <main className="min-h-screen w-full bg-white">
       <PodcastHero />
-      <PodcastGrid />
-      <PodcastFeatured />
+      {featured && <PodcastFeatured episode={featured} />}
+      <PodcastGrid episodes={rest} />
       <PodcastCTA />
       <PodcastWorldMap />
       <Footer />
