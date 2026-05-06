@@ -219,6 +219,122 @@ body {
   transform: translateX(120%);
 }
 
+/* ------- Article body (HTML from CSV) ------- */
+.prose-daftime {
+  color: #2a2a2a;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+}
+@media (min-width: 640px) {
+  .prose-daftime {
+    font-size: 17px;
+  }
+}
+.prose-daftime p {
+  margin: 0 0 1.1em;
+}
+.prose-daftime p:last-child {
+  margin-bottom: 0;
+}
+.prose-daftime h2,
+.prose-daftime h3 {
+  color: #0d0d0d;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 1.6em 0 0.6em;
+}
+.prose-daftime h2 {
+  font-size: 24px;
+}
+.prose-daftime h3 {
+  font-size: 20px;
+}
+.prose-daftime h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #0d0d0d;
+  margin: 1.4em 0 0.5em;
+}
+.prose-daftime a {
+  color: #070a33;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+.prose-daftime a:hover {
+  color: #d6b303;
+}
+.prose-daftime strong,
+.prose-daftime b {
+  color: #0d0d0d;
+  font-weight: 600;
+}
+.prose-daftime ul,
+.prose-daftime ol {
+  margin: 0 0 1.2em;
+  padding-left: 1.4em;
+}
+.prose-daftime li {
+  margin: 0.35em 0;
+}
+.prose-daftime ul li::marker {
+  color: #d6b303;
+}
+.prose-daftime blockquote {
+  border-left: 3px solid #d6b303;
+  background: #fffced;
+  margin: 1.4em 0;
+  padding: 0.9em 1.2em;
+  border-radius: 0 8px 8px 0;
+  color: #404040;
+  font-style: italic;
+}
+.prose-daftime blockquote p {
+  margin: 0;
+}
+.prose-daftime table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.4em 0;
+  font-size: 15px;
+  display: block;
+  overflow-x: auto;
+}
+.prose-daftime thead {
+  background: #f4f4f4;
+}
+.prose-daftime th,
+.prose-daftime td {
+  border: 1px solid #e5e5e5;
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-daftime th {
+  color: #0d0d0d;
+  font-weight: 600;
+}
+.prose-daftime hr {
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  margin: 2em 0;
+}
+.prose-daftime img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.4em 0;
+}
+.prose-daftime code {
+  background: #f4f4f4;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.92em;
+}
+
 /* ------- Accessibility: respect reduced motion ------- */
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,

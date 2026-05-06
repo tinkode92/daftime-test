@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import ServiceTabs from "@/components/ServiceTabs";
-import Blog from "@/components/Blog";
 import Testimonials from "@/components/Testimonials";
 import GuideCTA from "@/components/GuideCTA";
 import BookConsultationCTA from "@/components/BookConsultationCTA";
@@ -19,7 +18,6 @@ export default function HomePT() {
       <Hero locale="pt" />
       <Services locale="pt" />
       <ServiceTabs locale="pt" />
-      <Blog locale="pt" />
       <Testimonials locale="pt" />
       <GuideCTA locale="pt" />
       <BookConsultationCTA locale="pt" />

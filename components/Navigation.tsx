@@ -117,20 +117,22 @@ export default function Navigation() {
                 </Link>
                 <Link
                   role="menuitem"
-                  href="/resources/guide-2026"
+                  href="/guide"
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
                   {tr.guide2026}
                 </Link>
-                <Link
-                  role="menuitem"
-                  href={`${home}#blog`}
-                  onClick={() => setResourcesOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
-                >
-                  {tr.blog}
-                </Link>
+                {country === "AE" && (
+                  <Link
+                    role="menuitem"
+                    href="/blog"
+                    onClick={() => setResourcesOpen(false)}
+                    className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
+                  >
+                    {tr.blog}
+                  </Link>
+                )}
               </div>
             )}
           </li>
@@ -225,13 +227,9 @@ export default function Navigation() {
                 </Link>
               </li>
               <li>
-                <Link
-                  onClick={() => setOpen(false)}
-                  href={`${home}#blog`}
-                  className="block rounded-lg px-3 py-3 hover:bg-white/10"
-                >
+                <span className="block px-3 py-3 text-white/60">
                   {tr.resources}
-                </Link>
+                </span>
               </li>
               <li>
                 <Link
@@ -245,12 +243,23 @@ export default function Navigation() {
               <li>
                 <Link
                   onClick={() => setOpen(false)}
-                  href="/resources/guide-2026"
+                  href="/guide"
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
                   → {tr.guide2026}
                 </Link>
               </li>
+              {country === "AE" && (
+                <li>
+                  <Link
+                    onClick={() => setOpen(false)}
+                    href="/blog"
+                    className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
+                  >
+                    → {tr.blog}
+                  </Link>
+                </li>
+              )}
             </ul>
             <button
               type="button"

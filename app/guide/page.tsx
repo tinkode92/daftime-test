@@ -7,12 +7,12 @@ import PodcastWorldMap from "@/components/PodcastWorldMap";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "2026 Daftime Guide — Resources",
+  title: "2026 Daftime Guide",
   description:
     "Editorial overview of the legal, accounting and advisory foundations to structure a business in the UAE in 2026.",
 };
 
-export default function Guide2026Page() {
+export default function GuidePage() {
   return (
     <main className="min-h-screen w-full bg-white">
       <GuideHero />
