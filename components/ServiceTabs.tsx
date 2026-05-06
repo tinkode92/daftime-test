@@ -440,11 +440,11 @@ function FolderIllustration() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#F1F1F1]">
       <Image
-        src="/assets/business-setup-v3.svg"
+        src="/assets/business-setup-v4.svg"
         alt=""
-        width={275}
-        height={170}
-        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        fill
+        sizes="(min-width: 1024px) 290px, 50vw"
+        className="object-cover"
       />
     </div>
   );
@@ -457,9 +457,9 @@ function CardIllustration() {
       <Image
         src="/assets/opening-a-business-v3.svg"
         alt=""
-        width={275}
-        height={170}
-        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        fill
+        sizes="(min-width: 1024px) 290px, 50vw"
+        className="object-cover"
       />
     </div>
   );
@@ -472,9 +472,9 @@ function PlantIllustration() {
       <Image
         src="/assets/creation-structuring-v3.svg"
         alt=""
-        width={275}
-        height={170}
-        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        fill
+        sizes="(min-width: 1024px) 290px, 50vw"
+        className="object-cover"
       />
     </div>
   );
@@ -487,9 +487,9 @@ function SealIllustration() {
       <Image
         src="/assets/corporate-secretarial-v3.svg"
         alt=""
-        width={275}
-        height={170}
-        className="absolute left-1/2 top-1/2 h-auto w-[90%] max-w-[275px] -translate-x-1/2 -translate-y-1/2 object-contain"
+        fill
+        sizes="(min-width: 1024px) 290px, 50vw"
+        className="object-cover"
       />
     </div>
   );
