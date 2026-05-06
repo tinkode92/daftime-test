@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dubaï Real Estate ROI — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+.dft-roi-dxb {
+  --dft-bg:#080A32;
+  --dft-card:#0F1240;
+  --dft-primary:#1a1d56;
+  --dft-primary-light:#2a2d6a;
+  --dft-accent:#d4af37;
+  --dft-accent-light:#e8c547;
+  --dft-white:#fff;
+  --dft-text-sec:rgba(255,255,255,.7);
+  --dft-text-mut:rgba(255,255,255,.5);
+  --dft-border:rgba(255,255,255,.1);
+  --dft-success:#10b981;
+  --dft-danger:#ef4444;
+  --dft-radius:16px;
+  --dft-radius-sm:8px;
+  font-family:'Poppins',sans-serif;
+  background:var(--dft-bg);
+  color:var(--dft-white);
+  line-height:1.6;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.dft-roi-dxb *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+
+.dft-roi-dxb .dft-topbar{display:flex;justify-content:flex-end;padding:16px 24px;border-bottom:1px solid var(--dft-border)}
+.dft-roi-dxb .dft-lang-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:100px;padding:3px}
+.dft-roi-dxb .dft-lang-btn{padding:6px 12px;font-size:11px;font-weight:600;color:var(--dft-text-mut);cursor:pointer;border-radius:100px;border:none;background:transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.dft-roi-dxb .dft-lang-btn.active{background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-roi-dxb .dft-hero{padding:50px 24px 30px;text-align:center;position:relative;background:linear-gradient(180deg,var(--dft-bg) 0%,#0B0E3A 100%)}
+.dft-roi-dxb .dft-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(212,175,55,.08) 0%,transparent 70%);pointer-events:none}
+.dft-roi-dxb .dft-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--dft-accent);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:20px;position:relative}
+.dft-roi-dxb .dft-hero h1{font-size:38px;font-weight:300;margin-bottom:14px;line-height:1.2;position:relative;color:var(--dft-white)}
+.dft-roi-dxb .dft-hero h1 span{background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:500}
+.dft-roi-dxb .dft-hero p{color:var(--dft-text-sec);font-size:15px;max-width:720px;margin:0 auto;position:relative}
+
+
+.dft-roi-dxb .dft-main{max-width:1200px;margin:0 auto;padding:30px 24px 50px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.dft-roi-dxb .dft-section{background:var(--dft-card);border:1px solid var(--dft-border);border-radius:var(--dft-radius)}
+.dft-roi-dxb .dft-section + .dft-section{margin-top:20px}
+.dft-roi-dxb .dft-section-header{padding:18px 24px;border-bottom:1px solid var(--dft-border);display:flex;align-items:center;gap:12px}
+.dft-roi-dxb .dft-section-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.dft-roi-dxb .dft-section-title{font-size:14px;font-weight:600;color:var(--dft-white)}
+.dft-roi-dxb .dft-section-body{padding:24px}
+
+
+.dft-roi-dxb .dft-form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.dft-roi-dxb .dft-form-group:last-child{margin-bottom:0}
+.dft-roi-dxb .dft-form-label{font-size:11px;font-weight:500;color:var(--dft-text-sec);text-transform:uppercase;letter-spacing:.5px}
+.dft-roi-dxb .dft-form-input,.dft-roi-dxb .dft-form-select{background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);padding:12px 14px;font-size:14px;color:var(--dft-white);transition:all .2s;width:100%;font-family:'Poppins',sans-serif}
+.dft-roi-dxb .dft-form-input:focus,.dft-roi-dxb .dft-form-select:focus{outline:none;border-color:var(--dft-accent);background:rgba(255,255,255,.08)}
+.dft-roi-dxb .dft-form-select option{background:var(--dft-card);color:var(--dft-white)}
+.dft-roi-dxb .dft-form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+
+.dft-roi-dxb .dft-result-header{padding:32px 24px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius) var(--dft-radius) 0 0;text-align:center;border:1px solid rgba(212,175,55,.3);border-bottom:none}
+.dft-roi-dxb .dft-result-label{color:rgba(255,255,255,.7);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.dft-roi-dxb .dft-result-main{font-size:48px;font-weight:600;color:var(--dft-accent);font-family:'Monaco',monospace}
+.dft-roi-dxb .dft-result-sub{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+.dft-roi-dxb .dft-result-body{padding:24px;background:var(--dft-card);border:1px solid var(--dft-border);border-top:none;border-radius:0 0 var(--dft-radius) var(--dft-radius)}
+.dft-roi-dxb .dft-result-body h4{font-size:11px;color:var(--dft-accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:600}
+.dft-roi-dxb .dft-result-body h4.dft-h-spaced{margin:20px 0 12px}
+.dft-roi-dxb .dft-result-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--dft-border);font-size:13px;color:var(--dft-white)}
+.dft-roi-dxb .dft-result-row:last-child{border-bottom:none}
+.dft-roi-dxb .dft-result-row .dft-val{font-family:'Monaco',monospace;font-weight:500;color:var(--dft-white)}
+.dft-roi-dxb .dft-result-row.dft-highlight{background:rgba(212,175,55,.08);margin:0 -24px;padding:14px 24px}
+.dft-roi-dxb .dft-result-row.dft-highlight .dft-val{color:var(--dft-accent);font-size:16px;font-weight:600}
+
+
+.dft-roi-dxb .dft-alert{background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);border-radius:var(--dft-radius-sm);padding:14px;margin-top:16px;font-size:12px;color:var(--dft-text-sec);display:flex;gap:10px}
+.dft-roi-dxb .dft-alert-icon{color:var(--dft-accent);flex-shrink:0;font-weight:600}
+.dft-roi-dxb .dft-alert.success{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3)}
+.dft-roi-dxb .dft-alert.success .dft-alert-icon{color:var(--dft-success)}
+
+
+.dft-roi-dxb .dft-seo{max-width:1100px;margin:40px auto;padding:40px 24px;background:var(--dft-card);border-radius:var(--dft-radius);border:1px solid var(--dft-border)}
+.dft-roi-dxb .dft-seo h2{font-size:24px;font-weight:500;margin-bottom:16px;color:var(--dft-white)}
+.dft-roi-dxb .dft-seo h2 span{color:var(--dft-accent)}
+.dft-roi-dxb .dft-seo h3{font-size:16px;font-weight:500;margin:24px 0 10px;color:var(--dft-accent)}
+.dft-roi-dxb .dft-seo p,.dft-roi-dxb .dft-seo li{color:var(--dft-text-sec);font-size:14px;margin-bottom:10px}
+.dft-roi-dxb .dft-seo ul{padding-left:20px;margin-bottom:16px}
+.dft-roi-dxb .dft-seo strong{color:var(--dft-white)}
+.dft-roi-dxb .dft-faq-item{border-bottom:1px solid var(--dft-border);padding:16px 0;cursor:pointer}
+.dft-roi-dxb .dft-faq-q{font-weight:500;color:var(--dft-white);display:flex;justify-content:space-between;font-size:14px;gap:12px}
+.dft-roi-dxb .dft-faq-a{color:var(--dft-text-sec);font-size:13px;margin-top:8px;padding-left:10px;border-left:2px solid var(--dft-accent);display:none}
+.dft-roi-dxb .dft-faq-item.open .dft-faq-a{display:block}
+
+
+.dft-roi-dxb .dft-cta{max-width:1100px;margin:40px auto;padding:40px 24px;text-align:center;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius);border:1px solid rgba(212,175,55,.3)}
+.dft-roi-dxb .dft-cta h3{font-size:24px;font-weight:400;margin-bottom:10px;color:var(--dft-white)}
+.dft-roi-dxb .dft-cta h3 span{color:var(--dft-accent);font-weight:600}
+.dft-roi-dxb .dft-cta p{color:rgba(255,255,255,.8);margin-bottom:20px;font-size:14px}
+.dft-roi-dxb .dft-btn{padding:12px 24px;border:none;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;cursor:pointer;background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-roi-dxb .dft-lang-fr{display:none}
+.dft-roi-dxb[data-lang="fr"] .dft-lang-fr{display:block}
+.dft-roi-dxb[data-lang="fr"] .dft-lang-en{display:none}
+
+
+@media(max-width:1024px){
+  .dft-roi-dxb .dft-main{grid-template-columns:1fr;gap:20px;padding:24px 20px 40px;max-width:780px}
+  .dft-roi-dxb .dft-hero{padding:40px 20px 24px}
+  .dft-roi-dxb .dft-hero h1{font-size:34px}
+  .dft-roi-dxb .dft-hero p{font-size:14px}
+  .dft-roi-dxb .dft-seo,.dft-roi-dxb .dft-cta{margin:24px 20px;padding:32px 24px;max-width:calc(100% - 40px)}
+  .dft-roi-dxb .dft-seo h2{font-size:22px}
+  .dft-roi-dxb .dft-cta h3{font-size:22px}
+  .dft-roi-dxb .dft-result-main{font-size:42px}
+}
+@media(max-width:768px){
+  .dft-roi-dxb .dft-topbar{padding:14px 18px}
+  .dft-roi-dxb .dft-hero{padding:32px 18px 20px}
+  .dft-roi-dxb .dft-hero-badge{font-size:11px;padding:5px 14px;margin-bottom:16px}
+  .dft-roi-dxb .dft-hero h1{font-size:28px;line-height:1.25}
+  .dft-roi-dxb .dft-hero p{font-size:13px;line-height:1.5}
+  .dft-roi-dxb .dft-main{padding:20px 16px 36px;gap:16px}
+  .dft-roi-dxb .dft-section + .dft-section{margin-top:16px}
+  .dft-roi-dxb .dft-section-header{padding:16px 18px}
+  .dft-roi-dxb .dft-section-body{padding:20px}
+  .dft-roi-dxb .dft-section-icon{width:32px;height:32px;font-size:14px}
+  .dft-roi-dxb .dft-form-group{margin-bottom:14px}
+  .dft-roi-dxb .dft-form-input,.dft-roi-dxb .dft-form-select{padding:11px 12px;font-size:16px}
+  .dft-roi-dxb .dft-result-header{padding:24px 18px}
+  .dft-roi-dxb .dft-result-main{font-size:36px}
+  .dft-roi-dxb .dft-result-body{padding:20px}
+  .dft-roi-dxb .dft-result-row.dft-highlight{margin:0 -20px;padding:12px 20px}
+  .dft-roi-dxb .dft-seo,.dft-roi-dxb .dft-cta{margin:20px 16px;padding:28px 20px;max-width:calc(100% - 32px)}
+  .dft-roi-dxb .dft-seo h2{font-size:20px}
+  .dft-roi-dxb .dft-seo h3{font-size:15px;margin:20px 0 8px}
+  .dft-roi-dxb .dft-seo p,.dft-roi-dxb .dft-seo li{font-size:13px}
+  .dft-roi-dxb .dft-cta h3{font-size:20px}
+  .dft-roi-dxb .dft-cta p{font-size:13px}
+}
+@media(max-width:480px){
+  .dft-roi-dxb .dft-topbar{padding:12px 14px;justify-content:center}
+  .dft-roi-dxb .dft-hero{padding:28px 14px 18px}
+  .dft-roi-dxb .dft-hero h1{font-size:24px}
+  .dft-roi-dxb .dft-hero p{font-size:12.5px}
+  .dft-roi-dxb .dft-main{padding:16px 12px 32px;gap:14px}
+  .dft-roi-dxb .dft-section-header{padding:14px 16px;gap:10px}
+  .dft-roi-dxb .dft-section-body{padding:16px}
+  .dft-roi-dxb .dft-form-grid-2{grid-template-columns:1fr;gap:0}
+  .dft-roi-dxb .dft-form-label{font-size:10.5px}
+  .dft-roi-dxb .dft-form-input,.dft-roi-dxb .dft-form-select{padding:10px 12px;font-size:16px}
+  .dft-roi-dxb .dft-result-header{padding:22px 16px}
+  .dft-roi-dxb .dft-result-label{font-size:11px}
+  .dft-roi-dxb .dft-result-main{font-size:30px}
+  .dft-roi-dxb .dft-result-sub{font-size:12px}
+  .dft-roi-dxb .dft-result-body{padding:16px}
+  .dft-roi-dxb .dft-result-row{font-size:12.5px;padding:10px 0}
+  .dft-roi-dxb .dft-result-row.dft-highlight{margin:0 -16px;padding:12px 16px}
+  .dft-roi-dxb .dft-result-row.dft-highlight .dft-val{font-size:14px}
+  .dft-roi-dxb .dft-alert{padding:12px;font-size:11.5px}
+  .dft-roi-dxb .dft-seo,.dft-roi-dxb .dft-cta{margin:16px 12px;padding:22px 16px;max-width:calc(100% - 24px)}
+  .dft-roi-dxb .dft-seo h2{font-size:18px}
+  .dft-roi-dxb .dft-seo h3{font-size:14px;margin:16px 0 6px}
+  .dft-roi-dxb .dft-seo p,.dft-roi-dxb .dft-seo li{font-size:12.5px;line-height:1.55}
+  .dft-roi-dxb .dft-faq-q{font-size:13px}
+  .dft-roi-dxb .dft-faq-a{font-size:12.5px}
+  .dft-roi-dxb .dft-cta h3{font-size:18px}
+  .dft-roi-dxb .dft-cta p{font-size:12.5px}
+  .dft-roi-dxb .dft-btn{padding:11px 22px;font-size:12.5px}
+}
+</style>
+
+
+<div class="dft-roi-dxb" data-lang="en" id="dftRoiDxb">
+  <div class="dft-topbar">
+    <div class="dft-lang-toggle">
+      <button class="dft-lang-btn" data-lang="fr">FR</button>
+      <button class="dft-lang-btn active" data-lang="en">EN</button>
+    </div>
+  </div>
+
+
+  <section class="dft-hero">
+    <div class="dft-hero-badge" data-fr="✓ Halal-compliant · Yields Dubai 2026" data-en="✓ Halal-compliant · Dubai yields 2026">✓ Halal-compliant · Dubai yields 2026</div>
+    <h1 data-fr='ROI Immobilier <span>Dubai</span>' data-en='<span>Dubai</span> Real Estate ROI'><span>Dubai</span> Real Estate ROI</h1>
+    <p data-fr="Rendement net, payback, DLD, NOC, service charges : analyse complète d'un investissement Dubai." data-en="Net yield, payback, DLD, NOC, service charges: full analysis of a Dubai investment.">Net yield, payback, DLD, NOC, service charges: full analysis of a Dubai investment.</p>
+  </section>
+
+
+  <main class="dft-main">
+    <div>
+      <div class="dft-section">
+        <div class="dft-section-header"><div class="dft-section-icon">🏢</div><div class="dft-section-title" data-fr="Bien & acquisition" data-en="Property & acquisition">Property & acquisition</div></div>
+        <div class="dft-section-body">
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Prix d'achat (AED)" data-en="Purchase price (AED)">Purchase price (AED)</label><input type="number" class="dft-form-input" id="dftPrice" value="1200000" /></div>
+          <div class="dft-form-grid-2">
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Surface (sqft)" data-en="Area (sqft)">Area (sqft)</label><input type="number" class="dft-form-input" id="dftSqft" value="700" /></div>
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Zone" data-en="Area">Area</label>
+              <select class="dft-form-select" id="dftZone">
+                <option value="jvc" selected>JVC · 7.2%</option>
+                <option value="marina">Dubai Marina · 6.0%</option>
+                <option value="downtown">Downtown · 5.5%</option>
+                <option value="business">Business Bay · 6.5%</option>
+                <option value="jlt">JLT · 6.8%</option>
+                <option value="palm">Palm · 5.0%</option>
+                <option value="other" data-fr="Autre (personnalisé)" data-en="Other (custom)">Other (custom)</option>
+              </select>
+            </div>
+          </div>
+          <div class="dft-form-grid-2">
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Type de bien" data-en="Property type">Property type</label>
+              <select class="dft-form-select" id="dftPtype">
+                <option value="ready" selected>Ready / Secondary</option>
+                <option value="offplan" data-fr="Off-plan / Développeur" data-en="Off-plan / Developer">Off-plan / Developer</option>
+              </select>
+            </div>
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Rendement brut attendu" data-en="Expected gross yield">Expected gross yield</label><input type="number" class="dft-form-input" id="dftGrossYield" value="7.2" step="0.1" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="dft-section">
+        <div class="dft-section-header"><div class="dft-section-icon">📋</div><div class="dft-section-title" data-fr="Charges annuelles" data-en="Annual charges">Annual charges</div></div>
+        <div class="dft-section-body">
+          <div class="dft-form-grid-2">
+            <div class="dft-form-group"><label class="dft-form-label">Service charge / sqft</label><input type="number" class="dft-form-input" id="dftSvcCharge" value="15" step="1" /></div>
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Vacance (%)" data-en="Vacancy (%)">Vacancy (%)</label><input type="number" class="dft-form-input" id="dftVacancy" value="8" step="1" /></div>
+          </div>
+          <div class="dft-form-grid-2">
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Gestion locative (%)" data-en="Property mgmt (%)">Property mgmt (%)</label><input type="number" class="dft-form-input" id="dftMgmt" value="5" step="1" /></div>
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Maintenance (%)" data-en="Maintenance (%)">Maintenance (%)</label><input type="number" class="dft-form-input" id="dftMaint" value="2" step="1" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="dft-result-header">
+        <div class="dft-result-label" data-fr="Rendement net annuel" data-en="Net annual yield">Net annual yield</div>
+        <div class="dft-result-main" id="dftResYield">0%</div>
+        <div class="dft-result-sub" id="dftResSub"></div>
+      </div>
+      <div class="dft-result-body" id="dftBreakdown"></div>
+    </div>
+  </main>
+
+
+  <section class="dft-seo">
+    <div class="dft-lang-fr">
+      <h2>Investir dans l'<span>immobilier Dubai</span> en 2026</h2>
+      <p>Dubai offre l'un des rendements locatifs les plus attractifs au monde : 5 à 8% brut. Les frais d'acquisition restent modérés (~6-8%) et la fiscalité est nulle (pas d'IR, pas de taxe foncière, pas de plus-value).</p>
+      <h3>Frais d'acquisition (one-off)</h3>
+      <ul><li><strong>DLD (Dubai Land Department)</strong> : 4% du prix + AED 540 admin</li><li><strong>Agent immobilier</strong> : 2% + VAT</li><li><strong>Trustee office</strong> : AED 4 000 à 6 500</li><li><strong>NOC développeur</strong> (secondary uniquement) : AED 500 à 5 000</li><li><strong>Mortgage fees</strong> si financement : ~0,25% + registration</li></ul>
+      <h3>Charges récurrentes</h3>
+      <ul><li>Service charges : AED 10-25 / sqft / an selon tour</li><li>DEWA et chiller : variable (souvent payé par le locataire)</li><li>Insurance : AED 500-1 500 / an</li><li>Management fee : 5-8% du loyer annuel</li></ul>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">L'investissement Dubai est-il halal ?<span>+</span></div><div class="dft-faq-a">Un achat en cash est conforme à la Sharia. Pour un financement, privilégier une banque islamique (Dubai Islamic Bank, ADIB, Emirates Islamic) avec un contrat Ijara ou Murabaha plutôt qu'un prêt classique à intérêt.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Quel visa l'immobilier permet-il d'obtenir ?<span>+</span></div><div class="dft-faq-a">Investment visa 2 ans dès AED 750 000, Golden Visa 10 ans dès AED 2M. Le bien doit être ready (pas off-plan) et financé à plus de 50% en fonds propres.</div></div>
+    </div>
+    <div class="dft-lang-en">
+      <h2>Investing in <span>Dubai real estate</span> in 2026</h2>
+      <p>Dubai offers one of the world's most attractive rental yields: 5 to 8% gross. Acquisition costs remain moderate (~6-8%) and taxation is nil (no income tax, no property tax, no capital gains tax).</p>
+      <h3>One-off acquisition costs</h3>
+      <ul><li><strong>DLD (Dubai Land Department)</strong>: 4% of price + AED 540 admin</li><li><strong>Real estate agent</strong>: 2% + VAT</li><li><strong>Trustee office</strong>: AED 4,000 to 6,500</li><li><strong>Developer NOC</strong> (secondary only): AED 500 to 5,000</li><li><strong>Mortgage fees</strong> if financed: ~0.25% + registration</li></ul>
+      <h3>Recurring charges</h3>
+      <ul><li>Service charges: AED 10-25 / sqft / year depending on tower</li><li>DEWA and chiller: variable (often paid by tenant)</li><li>Insurance: AED 500-1,500 / year</li><li>Management fee: 5-8% of annual rent</li></ul>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Is Dubai property halal-compliant?<span>+</span></div><div class="dft-faq-a">Cash purchases are Sharia-compliant. For financing, prefer an Islamic bank (Dubai Islamic Bank, ADIB, Emirates Islamic) with an Ijara or Murabaha contract rather than a conventional interest-bearing loan.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">What visa can real estate provide?<span>+</span></div><div class="dft-faq-a">Investment visa 2 years from AED 750,000; Golden Visa 10 years from AED 2M. Property must be ready (not off-plan) and over 50% equity-financed.</div></div>
+    </div>
+  </section>
+
+
+  <div class="dft-cta">
+    <h3 data-fr='Investissement <span>halal</span> à Dubai' data-en='<span>Halal</span> investing in Dubai'><span>Halal</span> investing in Dubai</h3>
+    <p data-fr="Sourcing, due diligence, acquisition, gestion locative : structurons ensemble votre patrimoine UAE." data-en="Sourcing, due diligence, acquisition, rental management: let's structure your UAE portfolio.">Sourcing, due diligence, acquisition, rental management: let's structure your UAE portfolio.</p>
+    <a href="https://daftime.ae/contact" target="_blank" rel="noopener" class="dft-btn" data-fr="Prendre rendez-vous" data-en="Book a meeting">Book a meeting</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var root = document.getElementById('dftRoiDxb');
+  if(!root) return;
+
+
+  // Force English by default, ignore any saved preference
+  var currentLang = 'en';
+
+
+  function $(id){ return document.getElementById(id); }
+  function n(id){ return parseFloat($(id).value) || 0; }
+  function fmt(v){ return Math.round(v).toLocaleString(currentLang === 'en' ? 'en-US' : 'fr-FR'); }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+
+  var yields = {jvc:7.2, marina:6.0, downtown:5.5, business:6.5, jlt:6.8, palm:5.0, other:null};
+
+
+  function setLang(l){
+    currentLang = l;
+    root.setAttribute('data-lang', l);
+    root.querySelectorAll('[data-fr]').forEach(function(el){
+      var v = el.getAttribute('data-'+l);
+      if(v !== null) el.innerHTML = v;
+    });
+    root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+    compute();
+  }
+
+
+  function compute(){
+    var price = n('dftPrice');
+    var sqft = n('dftSqft');
+    var ptype = $('dftPtype').value;
+    var gross = n('dftGrossYield') / 100;
+    var svc = n('dftSvcCharge') * sqft;
+    var vac = n('dftVacancy') / 100;
+    var mgmt = n('dftMgmt') / 100;
+    var maint = n('dftMaint') / 100;
+    var l = currentLang;
+
+
+    // Acquisition costs
+    var dld = price * 0.04 + 540;
+    var agent = price * 0.02 * 1.05;
+    var trustee = 6500;
+    var noc = ptype === 'ready' ? 2500 : 0;
+    var totalAcq = price + dld + agent + trustee + noc;
+
+
+    // Rental
+    var grossRent = price * gross;
+    var effectiveRent = grossRent * (1 - vac);
+    var mgmtFee = effectiveRent * mgmt;
+    var maintFee = price * maint;
+    var netRent = effectiveRent - svc - mgmtFee - maintFee;
+    var netYield = totalAcq > 0 ? netRent / totalAcq * 100 : 0;
+    var payback = netRent > 0 ? totalAcq / netRent : 0;
+
+
+    $('dftResYield').textContent = netYield.toFixed(2) + '%';
+    $('dftResSub').textContent = (l === 'fr' ? 'Payback net : ' : 'Net payback: ') +
+      (payback > 0 ? payback.toFixed(1) + (l === 'fr' ? ' ans' : ' years') : 'N/A');
+
+
+    var labels = l === 'fr' ? {
+      acq:'ACQUISITION', price:"Prix d'achat", dld:'DLD (4% + 540)', agent:'Agent (2% + VAT)', trustee:'Trustee office', noc:'NOC', totalAcq:'Total investissement',
+      rent:'EXPLOITATION ANNUELLE', grossRent:'Loyer brut théorique', vac:'Vacance', effRent:'Loyer effectif', svc:'Service charges', mgmt:'Gestion', maint:'Maintenance', netRent:'Revenu net annuel',
+      halal:'Rappel : achat cash = halal. Pour financement, privilégier Dubai Islamic Bank, ADIB ou Emirates Islamic (Ijara/Murabaha)'
+    } : {
+      acq:'ACQUISITION', price:'Purchase price', dld:'DLD (4% + 540)', agent:'Agent (2% + VAT)', trustee:'Trustee office', noc:'NOC', totalAcq:'Total investment',
+      rent:'ANNUAL OPERATION', grossRent:'Gross theoretical rent', vac:'Vacancy', effRent:'Effective rent', svc:'Service charges', mgmt:'Management', maint:'Maintenance', netRent:'Net annual income',
+      halal:'Reminder: cash purchase = halal. For financing, prefer Dubai Islamic Bank, ADIB or Emirates Islamic (Ijara/Murabaha)'
+    };
+
+
+    var html = '<h4>' + labels.acq + '</h4>' +
+      '<div class="dft-result-row"><span>' + labels.price + '</span><span class="dft-val">' + fmt(price) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labels.dld + '</span><span class="dft-val">' + fmt(dld) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labels.agent + '</span><span class="dft-val">' + fmt(agent) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labels.trustee + '</span><span class="dft-val">' + fmt(trustee) + '</span></div>' +
+      (noc > 0 ? '<div class="dft-result-row"><span>' + labels.noc + '</span><span class="dft-val">' + fmt(noc) + '</span></div>' : '') +
+      '<div class="dft-result-row dft-highlight"><span>' + labels.totalAcq + '</span><span class="dft-val">' + fmt(totalAcq) + '</span></div>' +
+      '<h4 class="dft-h-spaced">' + labels.rent + '</h4>' +
+      '<div class="dft-result-row"><span>' + labels.grossRent + '</span><span class="dft-val">+' + fmt(grossRent) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labels.vac + ' (-' + n('dftVacancy') + '%)</span><span class="dft-val">-' + fmt(grossRent * vac) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labels.svc + '</span><span class="dft-val">-' + fmt(svc) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labels.mgmt + '</span><span class="dft-val">-' + fmt(mgmtFee) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labels.maint + '</span><span class="dft-val">-' + fmt(maintFee) + '</span></div>' +
+      '<div class="dft-result-row dft-highlight"><span>' + labels.netRent + '</span><span class="dft-val">AED ' + fmt(netRent) + '</span></div>' +
+      '<div class="dft-alert success"><span class="dft-alert-icon">✓</span><div>' + labels.halal + '</div></div>';
+
+
+    $('dftBreakdown').innerHTML = html;
+  }
+
+
+  // Zone change → auto-fill gross yield
+  $('dftZone').addEventListener('change', function(){
+    var y = yields[this.value];
+    if(y !== null && y !== undefined) $('dftGrossYield').value = y;
+    compute();
+  });
+
+
+  // Lang buttons
+  root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+
+
+  // FAQ
+  root.querySelectorAll('.dft-faq-item').forEach(function(item){
+    item.addEventListener('click', function(){ item.classList.toggle('open'); });
+  });
+
+
+  // Live compute on all inputs
+  ['dftPrice','dftSqft','dftPtype','dftGrossYield','dftSvcCharge','dftVacancy','dftMgmt','dftMaint'].forEach(function(id){
+    var el = $(id);
+    el.addEventListener('input', compute);
+    el.addEventListener('change', compute);
+  });
+
+
+  setLang(currentLang);
+})();
+</script>
+________________
+</body>
+</html>

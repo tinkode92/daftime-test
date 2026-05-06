@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAT Calculator UAE — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+.dft-vat-calc {
+  --dft-bg:#080A32;
+  --dft-card:#0F1240;
+  --dft-primary:#1a1d56;
+  --dft-primary-light:#2a2d6a;
+  --dft-accent:#d4af37;
+  --dft-accent-light:#e8c547;
+  --dft-white:#fff;
+  --dft-text-sec:rgba(255,255,255,.7);
+  --dft-text-mut:rgba(255,255,255,.5);
+  --dft-border:rgba(255,255,255,.1);
+  --dft-success:#10b981;
+  --dft-danger:#ef4444;
+  --dft-radius:16px;
+  --dft-radius-sm:8px;
+  font-family:'Poppins',sans-serif;
+  background:var(--dft-bg);
+  color:var(--dft-white);
+  line-height:1.6;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.dft-vat-calc *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+
+.dft-vat-calc .dft-topbar{display:flex;justify-content:flex-end;padding:16px 24px;border-bottom:1px solid var(--dft-border)}
+.dft-vat-calc .dft-lang-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:100px;padding:3px}
+.dft-vat-calc .dft-lang-btn{padding:6px 12px;font-size:11px;font-weight:600;color:var(--dft-text-mut);cursor:pointer;border-radius:100px;border:none;background:transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.dft-vat-calc .dft-lang-btn.active{background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-vat-calc .dft-hero{padding:50px 24px 30px;text-align:center;position:relative;background:linear-gradient(180deg,var(--dft-bg) 0%,#0B0E3A 100%)}
+.dft-vat-calc .dft-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(212,175,55,.08) 0%,transparent 70%);pointer-events:none}
+.dft-vat-calc .dft-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--dft-accent);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:20px;position:relative}
+.dft-vat-calc .dft-hero h1{font-size:38px;font-weight:300;margin-bottom:14px;line-height:1.2;position:relative;color:var(--dft-white)}
+.dft-vat-calc .dft-hero h1 span{background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:500}
+.dft-vat-calc .dft-hero p{color:var(--dft-text-sec);font-size:15px;max-width:720px;margin:0 auto;position:relative}
+
+
+.dft-vat-calc .dft-main{max-width:1000px;margin:0 auto;padding:30px 24px 50px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.dft-vat-calc .dft-section{background:var(--dft-card);border:1px solid var(--dft-border);border-radius:var(--dft-radius)}
+.dft-vat-calc .dft-tabs{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--dft-border);border-radius:var(--dft-radius) var(--dft-radius) 0 0}
+.dft-vat-calc .dft-tab{flex:1;padding:14px 8px;text-align:center;font-size:13px;font-weight:500;color:var(--dft-text-sec);cursor:pointer;border-radius:var(--dft-radius-sm);transition:all .2s;border:none;background:transparent;font-family:'Poppins',sans-serif}
+.dft-vat-calc .dft-tab.active{background:var(--dft-accent);color:var(--dft-bg)}
+.dft-vat-calc .dft-section-body{padding:24px}
+
+
+.dft-vat-calc .dft-form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.dft-vat-calc .dft-form-group:last-child{margin-bottom:0}
+.dft-vat-calc .dft-form-label{font-size:11px;font-weight:500;color:var(--dft-text-sec);text-transform:uppercase;letter-spacing:.5px}
+.dft-vat-calc .dft-form-input,.dft-vat-calc .dft-form-select{background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);padding:12px 14px;font-size:14px;color:var(--dft-white);transition:all .2s;width:100%;font-family:'Poppins',sans-serif}
+.dft-vat-calc .dft-form-input:focus,.dft-vat-calc .dft-form-select:focus{outline:none;border-color:var(--dft-accent);background:rgba(255,255,255,.08)}
+.dft-vat-calc .dft-form-select option{background:var(--dft-card);color:var(--dft-white)}
+
+
+.dft-vat-calc .dft-result-header{padding:32px 24px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius) var(--dft-radius) 0 0;text-align:center;border:1px solid rgba(212,175,55,.3);border-bottom:none}
+.dft-vat-calc .dft-result-label{color:rgba(255,255,255,.7);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.dft-vat-calc .dft-result-main{font-size:44px;font-weight:600;color:var(--dft-accent);font-family:'Monaco',monospace}
+.dft-vat-calc .dft-result-sub{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+.dft-vat-calc .dft-result-body{padding:24px;background:var(--dft-card);border:1px solid var(--dft-border);border-top:none;border-radius:0 0 var(--dft-radius) var(--dft-radius)}
+.dft-vat-calc .dft-result-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--dft-border);font-size:13px;color:var(--dft-white)}
+.dft-vat-calc .dft-result-row:last-child{border-bottom:none}
+.dft-vat-calc .dft-result-row .dft-val{font-family:'Monaco',monospace;font-weight:500;color:var(--dft-white)}
+.dft-vat-calc .dft-result-row.dft-highlight{background:rgba(212,175,55,.08);margin:0 -24px;padding:14px 24px}
+.dft-vat-calc .dft-result-row.dft-highlight .dft-val{color:var(--dft-accent);font-size:16px;font-weight:600}
+
+
+.dft-vat-calc .dft-seo{max-width:1100px;margin:40px auto;padding:40px 24px;background:var(--dft-card);border-radius:var(--dft-radius);border:1px solid var(--dft-border)}
+.dft-vat-calc .dft-seo h2{font-size:24px;font-weight:500;margin-bottom:16px;color:var(--dft-white)}
+.dft-vat-calc .dft-seo h2 span{color:var(--dft-accent)}
+.dft-vat-calc .dft-seo h3{font-size:16px;font-weight:500;margin:24px 0 10px;color:var(--dft-accent)}
+.dft-vat-calc .dft-seo p,.dft-vat-calc .dft-seo li{color:var(--dft-text-sec);font-size:14px;margin-bottom:10px}
+.dft-vat-calc .dft-seo ul{padding-left:20px;margin-bottom:16px}
+.dft-vat-calc .dft-seo strong{color:var(--dft-white)}
+.dft-vat-calc .dft-faq-item{border-bottom:1px solid var(--dft-border);padding:16px 0;cursor:pointer}
+.dft-vat-calc .dft-faq-q{font-weight:500;color:var(--dft-white);display:flex;justify-content:space-between;font-size:14px;gap:12px}
+.dft-vat-calc .dft-faq-a{color:var(--dft-text-sec);font-size:13px;margin-top:8px;padding-left:10px;border-left:2px solid var(--dft-accent);display:none}
+.dft-vat-calc .dft-faq-item.open .dft-faq-a{display:block}
+
+
+.dft-vat-calc .dft-cta{max-width:1100px;margin:40px auto;padding:40px 24px;text-align:center;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius);border:1px solid rgba(212,175,55,.3)}
+.dft-vat-calc .dft-cta h3{font-size:24px;font-weight:400;margin-bottom:10px;color:var(--dft-white)}
+.dft-vat-calc .dft-cta h3 span{color:var(--dft-accent);font-weight:600}
+.dft-vat-calc .dft-cta p{color:rgba(255,255,255,.8);margin-bottom:20px;font-size:14px}
+.dft-vat-calc .dft-btn{padding:12px 24px;border:none;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;cursor:pointer;background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-vat-calc .dft-lang-en{display:none}
+.dft-vat-calc[data-lang="en"] .dft-lang-fr{display:none}
+.dft-vat-calc[data-lang="en"] .dft-lang-en{display:block}
+
+
+@media(max-width:1024px){
+  .dft-vat-calc .dft-main{grid-template-columns:1fr;gap:20px;padding:24px 20px 40px;max-width:680px}
+  .dft-vat-calc .dft-hero{padding:40px 20px 24px}
+  .dft-vat-calc .dft-hero h1{font-size:34px}
+  .dft-vat-calc .dft-hero p{font-size:14px}
+  .dft-vat-calc .dft-seo,.dft-vat-calc .dft-cta{margin:24px 20px;padding:32px 24px;max-width:calc(100% - 40px)}
+  .dft-vat-calc .dft-seo h2{font-size:22px}
+  .dft-vat-calc .dft-cta h3{font-size:22px}
+  .dft-vat-calc .dft-result-main{font-size:40px}
+}
+@media(max-width:768px){
+  .dft-vat-calc .dft-topbar{padding:14px 18px}
+  .dft-vat-calc .dft-hero{padding:32px 18px 20px}
+  .dft-vat-calc .dft-hero-badge{font-size:11px;padding:5px 14px;margin-bottom:16px}
+  .dft-vat-calc .dft-hero h1{font-size:28px;line-height:1.25}
+  .dft-vat-calc .dft-hero p{font-size:13px;line-height:1.5}
+  .dft-vat-calc .dft-main{padding:20px 16px 36px;gap:16px}
+  .dft-vat-calc .dft-section-body{padding:20px}
+  .dft-vat-calc .dft-tab{padding:12px 6px;font-size:12px}
+  .dft-vat-calc .dft-form-group{margin-bottom:14px}
+  .dft-vat-calc .dft-form-input,.dft-vat-calc .dft-form-select{padding:11px 12px;font-size:16px}
+  .dft-vat-calc .dft-result-header{padding:24px 18px}
+  .dft-vat-calc .dft-result-main{font-size:34px}
+  .dft-vat-calc .dft-result-body{padding:20px}
+  .dft-vat-calc .dft-result-row.dft-highlight{margin:0 -20px;padding:12px 20px}
+  .dft-vat-calc .dft-seo,.dft-vat-calc .dft-cta{margin:20px 16px;padding:28px 20px;max-width:calc(100% - 32px)}
+  .dft-vat-calc .dft-seo h2{font-size:20px}
+  .dft-vat-calc .dft-seo h3{font-size:15px;margin:20px 0 8px}
+  .dft-vat-calc .dft-seo p,.dft-vat-calc .dft-seo li{font-size:13px}
+  .dft-vat-calc .dft-cta h3{font-size:20px}
+  .dft-vat-calc .dft-cta p{font-size:13px}
+}
+@media(max-width:480px){
+  .dft-vat-calc .dft-topbar{padding:12px 14px;justify-content:center}
+  .dft-vat-calc .dft-hero{padding:28px 14px 18px}
+  .dft-vat-calc .dft-hero h1{font-size:24px}
+  .dft-vat-calc .dft-hero p{font-size:12.5px}
+  .dft-vat-calc .dft-main{padding:16px 12px 32px;gap:14px}
+  .dft-vat-calc .dft-tabs{flex-wrap:wrap;gap:3px}
+  .dft-vat-calc .dft-tab{padding:10px 4px;font-size:11.5px;flex:1 1 auto;min-width:0}
+  .dft-vat-calc .dft-section-body{padding:16px}
+  .dft-vat-calc .dft-form-label{font-size:10.5px}
+  .dft-vat-calc .dft-form-input,.dft-vat-calc .dft-form-select{padding:10px 12px;font-size:16px}
+  .dft-vat-calc .dft-result-header{padding:22px 16px}
+  .dft-vat-calc .dft-result-label{font-size:11px}
+  .dft-vat-calc .dft-result-main{font-size:28px}
+  .dft-vat-calc .dft-result-sub{font-size:12px}
+  .dft-vat-calc .dft-result-body{padding:16px}
+  .dft-vat-calc .dft-result-row{font-size:12.5px;padding:10px 0}
+  .dft-vat-calc .dft-result-row.dft-highlight{margin:0 -16px;padding:12px 16px}
+  .dft-vat-calc .dft-result-row.dft-highlight .dft-val{font-size:15px}
+  .dft-vat-calc .dft-seo,.dft-vat-calc .dft-cta{margin:16px 12px;padding:22px 16px;max-width:calc(100% - 24px)}
+  .dft-vat-calc .dft-seo h2{font-size:18px}
+  .dft-vat-calc .dft-seo h3{font-size:14px;margin:16px 0 6px}
+  .dft-vat-calc .dft-seo p,.dft-vat-calc .dft-seo li{font-size:12.5px;line-height:1.55}
+  .dft-vat-calc .dft-faq-q{font-size:13px}
+  .dft-vat-calc .dft-faq-a{font-size:12.5px}
+  .dft-vat-calc .dft-cta h3{font-size:18px}
+  .dft-vat-calc .dft-cta p{font-size:12.5px}
+  .dft-vat-calc .dft-btn{padding:11px 22px;font-size:12.5px}
+}
+</style>
+
+
+<div class="dft-vat-calc" data-lang="fr" id="dftVatCalc">
+  <div class="dft-topbar">
+    <div class="dft-lang-toggle">
+      <button class="dft-lang-btn active" data-lang="fr">FR</button>
+      <button class="dft-lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+
+
+  <section class="dft-hero">
+    <div class="dft-hero-badge" data-fr="✓ Federal Tax Authority · Taux 5%" data-en="✓ Federal Tax Authority · Rate 5%">✓ Federal Tax Authority · Taux 5%</div>
+    <h1 data-fr='Calculateur <span>VAT UAE 5%</span>' data-en='UAE <span>VAT 5%</span> Calculator'>Calculateur <span>VAT UAE 5%</span></h1>
+    <p data-fr="Calcul VAT aux Émirats : HT vers TTC, TTC vers HT, Reverse Charge mechanism. Conforme Federal Tax Authority." data-en="UAE VAT computation: net to gross, gross to net, Reverse Charge mechanism. Federal Tax Authority compliant.">Calcul VAT aux Émirats : HT vers TTC, TTC vers HT, Reverse Charge mechanism. Conforme Federal Tax Authority.</p>
+  </section>
+
+
+  <main class="dft-main">
+    <div class="dft-section">
+      <div class="dft-tabs">
+        <button type="button" class="dft-tab active" data-mode="ht" data-fr="HT → TTC" data-en="Net → Gross">HT → TTC</button>
+        <button type="button" class="dft-tab" data-mode="ttc" data-fr="TTC → HT" data-en="Gross → Net">TTC → HT</button>
+        <button type="button" class="dft-tab" data-mode="rcm" data-fr="Reverse Charge" data-en="Reverse Charge">Reverse Charge</button>
+      </div>
+      <div class="dft-section-body">
+        <div class="dft-form-group">
+          <label class="dft-form-label" id="dftLblAmount" data-fr="Montant HT (AED)" data-en="Net amount (AED)">Montant HT (AED)</label>
+          <input type="number" class="dft-form-input" id="dftAmount" value="10000" />
+        </div>
+        <div class="dft-form-group">
+          <label class="dft-form-label" data-fr="Taux VAT" data-en="VAT rate">Taux VAT</label>
+          <select class="dft-form-select" id="dftRate">
+            <option value="5" selected>Standard · 5%</option>
+            <option value="0">Zero-rated · 0%</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="dft-result-header">
+        <div class="dft-result-label" id="dftResLabel" data-fr="Montant TTC" data-en="Gross amount">Montant TTC</div>
+        <div class="dft-result-main" id="dftResMain">AED 10 500</div>
+        <div class="dft-result-sub" id="dftResSub">VAT incluse : 500 AED</div>
+      </div>
+      <div class="dft-result-body">
+        <div class="dft-result-row"><span data-fr="Base HT" data-en="Net base">Base HT</span><span class="dft-val" id="dftRHt">10 000</span></div>
+        <div class="dft-result-row"><span data-fr="VAT (5%)" data-en="VAT (5%)">VAT (5%)</span><span class="dft-val" id="dftRVat">500</span></div>
+        <div class="dft-result-row dft-highlight"><span data-fr="TOTAL TTC" data-en="TOTAL GROSS">TOTAL TTC</span><span class="dft-val" id="dftRTtc">10 500</span></div>
+      </div>
+    </div>
+  </main>
+
+
+  <section class="dft-seo">
+    <div class="dft-lang-fr">
+      <h2>La <span>TVA (VAT)</span> aux Émirats Arabes Unis</h2>
+      <p>La VAT (Value Added Tax) a été introduite aux UAE le 1er janvier 2018 au taux standard de 5%, l'un des plus bas au monde. Elle est administrée par la Federal Tax Authority (FTA) selon le Federal Decree-Law No. 8 of 2017.</p>
+      <h3>Les 3 taux possibles</h3>
+      <ul><li><strong>5% standard</strong> : biens et services généraux</li><li><strong>0% zero-rated</strong> : exports hors GCC, transport international, médicaments, premier transfert immobilier résidentiel neuf, éducation et santé sous conditions</li><li><strong>Exempt</strong> : services financiers non rémunérés explicitement, location résidentielle long terme, transport local de passagers</li></ul>
+      <h3>Le Reverse Charge Mechanism (RCM)</h3>
+      <p>Le Reverse Charge s'applique notamment aux importations de services depuis l'étranger : le client UAE doit s'auto-liquider la VAT (sortie) et la déduire (entrée) sur la même déclaration. Neutre en trésorerie si pro-rata 100%.</p>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">À partir de quel chiffre d'affaires s'enregistrer ?<span>+</span></div><div class="dft-faq-a">Obligation dès AED 375 000 de chiffre d'affaires taxable sur 12 mois. Enregistrement volontaire possible dès AED 187 500.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Fréquence des déclarations VAT ?<span>+</span></div><div class="dft-faq-a">Trimestrielle par défaut (Form 201), mensuelle pour les CA &gt; AED 150M. Deadline : 28 jours après la fin de la période.</div></div>
+    </div>
+    <div class="dft-lang-en">
+      <h2><span>VAT</span> in the United Arab Emirates</h2>
+      <p>VAT was introduced in the UAE on 1 January 2018 at a standard rate of 5%, one of the lowest worldwide. It is administered by the Federal Tax Authority (FTA) under Federal Decree-Law No. 8 of 2017.</p>
+      <h3>The 3 possible rates</h3>
+      <ul><li><strong>5% standard</strong>: most goods and services</li><li><strong>0% zero-rated</strong>: exports outside the GCC, international transport, medicines, first supply of new residential real estate, education and healthcare under conditions</li><li><strong>Exempt</strong>: unremunerated financial services, long-term residential rentals, local passenger transport</li></ul>
+      <h3>Reverse Charge Mechanism (RCM)</h3>
+      <p>Reverse Charge notably applies to services imported from abroad: the UAE client self-assesses output VAT and reclaims input VAT on the same return. Cash-neutral if pro-rata is 100%.</p>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">At what turnover must I register?<span>+</span></div><div class="dft-faq-a">Mandatory above AED 375,000 taxable turnover over 12 months. Voluntary registration from AED 187,500.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">How often must I file?<span>+</span></div><div class="dft-faq-a">Quarterly by default (Form 201), monthly above AED 150M turnover. Deadline: 28 days after period end.</div></div>
+    </div>
+  </section>
+
+
+  <div class="dft-cta">
+    <h3 data-fr='Gestion <span>VAT complète</span>' data-en='Full <span>VAT management</span>'>Gestion <span>VAT complète</span></h3>
+    <p data-fr="Enregistrement FTA, déclarations trimestrielles, audits et contentieux : Daftime vous accompagne." data-en="FTA registration, quarterly filings, audits and disputes: Daftime handles it all.">Enregistrement FTA, déclarations trimestrielles, audits et contentieux : Daftime vous accompagne.</p>
+    <a href="https://daftime.ae/contact" target="_blank" rel="noopener" class="dft-btn" data-fr="Prendre rendez-vous" data-en="Book a meeting">Prendre rendez-vous</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var root = document.getElementById('dftVatCalc');
+  if(!root) return;
+
+
+  var currentLang = 'fr';
+  var mode = 'ht';
+
+
+  try {
+    var saved = localStorage.getItem('daftime_lang');
+    if(saved) currentLang = saved;
+    else if(navigator.language && navigator.language.indexOf('en')===0) currentLang = 'en';
+  } catch(e){}
+
+
+  function $(id){ return document.getElementById(id); }
+  function fmt(v){ return Math.round(v).toLocaleString(currentLang === 'en' ? 'en-US' : 'fr-FR'); }
+
+
+  function setLang(l){
+    currentLang = l;
+    root.setAttribute('data-lang', l);
+    try { localStorage.setItem('daftime_lang', l); } catch(e){}
+    root.querySelectorAll('[data-fr]').forEach(function(el){
+      var v = el.getAttribute('data-'+l);
+      if(v !== null) el.innerHTML = v;
+    });
+    root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+    compute();
+  }
+
+
+  function compute(){
+    var amt = parseFloat($('dftAmount').value) || 0;
+    var rate = parseFloat($('dftRate').value) || 0;
+    var l = currentLang;
+    var ht = 0, vat = 0, ttc = 0, label = '', sub = '';
+
+
+    if(mode === 'ht'){
+      ht = amt; vat = amt * rate / 100; ttc = amt + vat;
+      $('dftLblAmount').textContent = l === 'fr' ? 'Montant HT (AED)' : 'Net amount (AED)';
+      label = l === 'fr' ? 'Montant TTC' : 'Gross amount';
+      sub = (l === 'fr' ? 'VAT incluse : ' : 'VAT included: ') + fmt(vat) + ' AED';
+    } else if(mode === 'ttc'){
+      ttc = amt; ht = amt / (1 + rate / 100); vat = amt - ht;
+      $('dftLblAmount').textContent = l === 'fr' ? 'Montant TTC (AED)' : 'Gross amount (AED)';
+      label = l === 'fr' ? 'Montant HT' : 'Net amount';
+      sub = (l === 'fr' ? 'VAT à déduire : ' : 'Extractable VAT: ') + fmt(vat) + ' AED';
+    } else {
+      ht = amt; vat = amt * rate / 100; ttc = ht;
+      $('dftLblAmount').textContent = l === 'fr' ? 'Valeur service importé (AED)' : 'Imported service value (AED)';
+      label = l === 'fr' ? 'Reverse Charge neutre' : 'Reverse Charge neutral';
+      sub = (l === 'fr' ? 'Output VAT auto-liquidée : ' : 'Self-assessed output VAT: ') + fmt(vat) + ' AED';
+    }
+
+
+    $('dftResLabel').textContent = label;
+    $('dftResMain').textContent = 'AED ' + fmt(mode === 'ttc' ? ht : ttc);
+    $('dftResSub').textContent = sub;
+    $('dftRHt').textContent = fmt(ht);
+    $('dftRVat').textContent = fmt(vat);
+    $('dftRTtc').textContent = fmt(ttc);
+  }
+
+
+  // Tab buttons
+  root.querySelectorAll('.dft-tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      root.querySelectorAll('.dft-tab').forEach(function(x){ x.classList.remove('active'); });
+      t.classList.add('active');
+      mode = t.getAttribute('data-mode');
+      compute();
+    });
+  });
+
+
+  // Lang buttons
+  root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+
+
+  // FAQ
+  root.querySelectorAll('.dft-faq-item').forEach(function(item){
+    item.addEventListener('click', function(){ item.classList.toggle('open'); });
+  });
+
+
+  // Live compute
+  $('dftAmount').addEventListener('input', compute);
+  $('dftRate').addEventListener('change', compute);
+
+
+  setLang(currentLang);
+})();
+</script>
+</body>
+</html>

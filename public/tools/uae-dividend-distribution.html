@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAE Dividend Distribution — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+.dft-div-dist {
+  --dft-bg:#080A32;
+  --dft-card:#0F1240;
+  --dft-primary:#1a1d56;
+  --dft-primary-light:#2a2d6a;
+  --dft-accent:#d4af37;
+  --dft-accent-light:#e8c547;
+  --dft-white:#fff;
+  --dft-text-sec:rgba(255,255,255,.7);
+  --dft-text-mut:rgba(255,255,255,.5);
+  --dft-border:rgba(255,255,255,.1);
+  --dft-success:#10b981;
+  --dft-danger:#ef4444;
+  --dft-radius:16px;
+  --dft-radius-sm:8px;
+  font-family:'Poppins',sans-serif;
+  background:var(--dft-bg);
+  color:var(--dft-white);
+  line-height:1.6;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.dft-div-dist *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+
+.dft-div-dist .dft-topbar{display:flex;justify-content:flex-end;padding:16px 24px;border-bottom:1px solid var(--dft-border)}
+.dft-div-dist .dft-lang-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:100px;padding:3px}
+.dft-div-dist .dft-lang-btn{padding:6px 12px;font-size:11px;font-weight:600;color:var(--dft-text-mut);cursor:pointer;border-radius:100px;border:none;background:transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.dft-div-dist .dft-lang-btn.active{background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-div-dist .dft-hero{padding:50px 24px 30px;text-align:center;position:relative;background:linear-gradient(180deg,var(--dft-bg) 0%,#0B0E3A 100%)}
+.dft-div-dist .dft-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(212,175,55,.08) 0%,transparent 70%);pointer-events:none}
+.dft-div-dist .dft-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--dft-accent);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:20px;position:relative}
+.dft-div-dist .dft-hero h1{font-size:38px;font-weight:300;margin-bottom:14px;line-height:1.2;position:relative;color:var(--dft-white)}
+.dft-div-dist .dft-hero h1 span{background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:500}
+.dft-div-dist .dft-hero p{color:var(--dft-text-sec);font-size:15px;max-width:720px;margin:0 auto;position:relative}
+
+
+.dft-div-dist .dft-main{max-width:1200px;margin:0 auto;padding:30px 24px 50px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.dft-div-dist .dft-section{background:var(--dft-card);border:1px solid var(--dft-border);border-radius:var(--dft-radius)}
+.dft-div-dist .dft-section + .dft-section{margin-top:20px}
+.dft-div-dist .dft-section-header{padding:18px 24px;border-bottom:1px solid var(--dft-border);display:flex;align-items:center;gap:12px}
+.dft-div-dist .dft-section-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.dft-div-dist .dft-section-title{font-size:14px;font-weight:600;color:var(--dft-white)}
+.dft-div-dist .dft-section-body{padding:24px}
+
+
+.dft-div-dist .dft-form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.dft-div-dist .dft-form-group:last-child{margin-bottom:0}
+.dft-div-dist .dft-form-label{font-size:11px;font-weight:500;color:var(--dft-text-sec);text-transform:uppercase;letter-spacing:.5px}
+.dft-div-dist .dft-form-input,.dft-div-dist .dft-form-select{background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);padding:12px 14px;font-size:14px;color:var(--dft-white);transition:all .2s;width:100%;font-family:'Poppins',sans-serif}
+.dft-div-dist .dft-form-input:focus,.dft-div-dist .dft-form-select:focus{outline:none;border-color:var(--dft-accent);background:rgba(255,255,255,.08)}
+.dft-div-dist .dft-form-select option{background:var(--dft-card);color:var(--dft-white)}
+.dft-div-dist .dft-form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+
+.dft-div-dist .dft-result-header{padding:32px 24px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius) var(--dft-radius) 0 0;text-align:center;border:1px solid rgba(212,175,55,.3);border-bottom:none}
+.dft-div-dist .dft-result-label{color:rgba(255,255,255,.7);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.dft-div-dist .dft-result-main{font-size:44px;font-weight:600;color:var(--dft-accent);font-family:'Monaco',monospace}
+.dft-div-dist .dft-result-sub{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+.dft-div-dist .dft-result-body{padding:24px;background:var(--dft-card);border:1px solid var(--dft-border);border-top:none;border-radius:0 0 var(--dft-radius) var(--dft-radius)}
+.dft-div-dist .dft-result-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--dft-border);font-size:13px;color:var(--dft-white);gap:12px}
+.dft-div-dist .dft-result-row:last-child{border-bottom:none}
+.dft-div-dist .dft-result-row .dft-val{font-family:'Monaco',monospace;font-weight:500;color:var(--dft-white);text-align:right;white-space:nowrap}
+.dft-div-dist .dft-result-row.dft-highlight{background:rgba(212,175,55,.08);margin:0 -24px;padding:14px 24px;border-bottom:none}
+.dft-div-dist .dft-result-row.dft-highlight .dft-val{color:var(--dft-accent);font-size:16px;font-weight:600}
+
+
+.dft-div-dist .dft-flow-viz{margin:0 0 20px}
+.dft-div-dist .dft-flow-step{display:flex;align-items:center;gap:12px;padding:10px 16px;border-left:2px solid var(--dft-border);position:relative}
+.dft-div-dist .dft-flow-step::before{content:'';position:absolute;left:-5px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--dft-border)}
+.dft-div-dist .dft-flow-step.active::before{background:var(--dft-accent)}
+.dft-div-dist .dft-flow-step.out{border-left-color:var(--dft-danger)}
+.dft-div-dist .dft-flow-step.out::before{background:var(--dft-danger)}
+.dft-div-dist .dft-flow-label{font-size:11px;color:var(--dft-text-mut);text-transform:uppercase;letter-spacing:.5px;flex:1;line-height:1.4}
+.dft-div-dist .dft-flow-value{font-family:'Monaco',monospace;font-size:13px;color:var(--dft-white);font-weight:500;white-space:nowrap;flex-shrink:0}
+.dft-div-dist .dft-flow-value.out{color:var(--dft-danger)}
+.dft-div-dist .dft-flow-value.in{color:var(--dft-success);font-size:14px;font-weight:600}
+
+
+.dft-div-dist .dft-seo{max-width:1100px;margin:40px auto;padding:40px 24px;background:var(--dft-card);border-radius:var(--dft-radius);border:1px solid var(--dft-border)}
+.dft-div-dist .dft-seo h2{font-size:24px;font-weight:500;margin-bottom:16px;color:var(--dft-white)}
+.dft-div-dist .dft-seo h2 span{color:var(--dft-accent)}
+.dft-div-dist .dft-seo h3{font-size:16px;font-weight:500;margin:24px 0 10px;color:var(--dft-accent)}
+.dft-div-dist .dft-seo p,.dft-div-dist .dft-seo li{color:var(--dft-text-sec);font-size:14px;margin-bottom:10px}
+.dft-div-dist .dft-seo ul{padding-left:20px;margin-bottom:16px}
+.dft-div-dist .dft-seo strong{color:var(--dft-white)}
+.dft-div-dist .dft-faq-item{border-bottom:1px solid var(--dft-border);padding:16px 0;cursor:pointer}
+.dft-div-dist .dft-faq-q{font-weight:500;color:var(--dft-white);display:flex;justify-content:space-between;font-size:14px;gap:12px}
+.dft-div-dist .dft-faq-a{color:var(--dft-text-sec);font-size:13px;margin-top:8px;padding-left:10px;border-left:2px solid var(--dft-accent);display:none}
+.dft-div-dist .dft-faq-item.open .dft-faq-a{display:block}
+
+
+.dft-div-dist .dft-cta{max-width:1100px;margin:40px auto;padding:40px 24px;text-align:center;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius);border:1px solid rgba(212,175,55,.3)}
+.dft-div-dist .dft-cta h3{font-size:24px;font-weight:400;margin-bottom:10px;color:var(--dft-white)}
+.dft-div-dist .dft-cta h3 span{color:var(--dft-accent);font-weight:600}
+.dft-div-dist .dft-cta p{color:rgba(255,255,255,.8);margin-bottom:20px;font-size:14px}
+.dft-div-dist .dft-btn{padding:12px 24px;border:none;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;cursor:pointer;background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-div-dist .dft-lang-fr{display:none}
+.dft-div-dist[data-lang="fr"] .dft-lang-fr{display:block}
+.dft-div-dist[data-lang="fr"] .dft-lang-en{display:none}
+
+
+@media(max-width:1024px){
+  .dft-div-dist .dft-main{grid-template-columns:1fr;gap:20px;padding:24px 20px 40px;max-width:780px}
+  .dft-div-dist .dft-hero{padding:40px 20px 24px}
+  .dft-div-dist .dft-hero h1{font-size:34px}
+  .dft-div-dist .dft-hero p{font-size:14px}
+  .dft-div-dist .dft-seo,.dft-div-dist .dft-cta{margin:24px 20px;padding:32px 24px;max-width:calc(100% - 40px)}
+  .dft-div-dist .dft-seo h2{font-size:22px}
+  .dft-div-dist .dft-cta h3{font-size:22px}
+  .dft-div-dist .dft-result-main{font-size:40px}
+}
+@media(max-width:768px){
+  .dft-div-dist .dft-topbar{padding:14px 18px}
+  .dft-div-dist .dft-hero{padding:32px 18px 20px}
+  .dft-div-dist .dft-hero-badge{font-size:11px;padding:5px 14px;margin-bottom:16px}
+  .dft-div-dist .dft-hero h1{font-size:28px;line-height:1.25}
+  .dft-div-dist .dft-hero p{font-size:13px;line-height:1.5}
+  .dft-div-dist .dft-main{padding:20px 16px 36px;gap:16px}
+  .dft-div-dist .dft-section + .dft-section{margin-top:16px}
+  .dft-div-dist .dft-section-header{padding:16px 18px}
+  .dft-div-dist .dft-section-body{padding:20px}
+  .dft-div-dist .dft-section-icon{width:32px;height:32px;font-size:14px}
+  .dft-div-dist .dft-form-group{margin-bottom:14px}
+  .dft-div-dist .dft-form-input,.dft-div-dist .dft-form-select{padding:11px 12px;font-size:16px}
+  .dft-div-dist .dft-result-header{padding:24px 18px}
+  .dft-div-dist .dft-result-main{font-size:34px}
+  .dft-div-dist .dft-result-body{padding:20px}
+  .dft-div-dist .dft-result-row.dft-highlight{margin:0 -20px;padding:12px 20px}
+  .dft-div-dist .dft-flow-step{padding:9px 14px;gap:10px}
+  .dft-div-dist .dft-seo,.dft-div-dist .dft-cta{margin:20px 16px;padding:28px 20px;max-width:calc(100% - 32px)}
+  .dft-div-dist .dft-seo h2{font-size:20px}
+  .dft-div-dist .dft-seo h3{font-size:15px;margin:20px 0 8px}
+  .dft-div-dist .dft-seo p,.dft-div-dist .dft-seo li{font-size:13px}
+  .dft-div-dist .dft-cta h3{font-size:20px}
+  .dft-div-dist .dft-cta p{font-size:13px}
+}
+@media(max-width:480px){
+  .dft-div-dist .dft-topbar{padding:12px 14px;justify-content:center}
+  .dft-div-dist .dft-hero{padding:28px 14px 18px}
+  .dft-div-dist .dft-hero h1{font-size:24px}
+  .dft-div-dist .dft-hero p{font-size:12.5px}
+  .dft-div-dist .dft-main{padding:16px 12px 32px;gap:14px}
+  .dft-div-dist .dft-section-header{padding:14px 16px;gap:10px}
+  .dft-div-dist .dft-section-body{padding:16px}
+  .dft-div-dist .dft-form-grid-2{grid-template-columns:1fr;gap:0}
+  .dft-div-dist .dft-form-label{font-size:10.5px}
+  .dft-div-dist .dft-form-input,.dft-div-dist .dft-form-select{padding:10px 12px;font-size:16px}
+  .dft-div-dist .dft-result-header{padding:22px 16px}
+  .dft-div-dist .dft-result-label{font-size:11px}
+  .dft-div-dist .dft-result-main{font-size:26px}
+  .dft-div-dist .dft-result-sub{font-size:12px}
+  .dft-div-dist .dft-result-body{padding:16px}
+  .dft-div-dist .dft-result-row{font-size:12.5px;padding:10px 0;gap:10px}
+  .dft-div-dist .dft-result-row.dft-highlight{margin:0 -16px;padding:12px 16px}
+  .dft-div-dist .dft-result-row.dft-highlight .dft-val{font-size:14px}
+  .dft-div-dist .dft-flow-step{padding:8px 12px;gap:8px}
+  .dft-div-dist .dft-flow-label{font-size:10px}
+  .dft-div-dist .dft-flow-value{font-size:12px}
+  .dft-div-dist .dft-flow-value.in{font-size:13px}
+  .dft-div-dist .dft-seo,.dft-div-dist .dft-cta{margin:16px 12px;padding:22px 16px;max-width:calc(100% - 24px)}
+  .dft-div-dist .dft-seo h2{font-size:18px}
+  .dft-div-dist .dft-seo h3{font-size:14px;margin:16px 0 6px}
+  .dft-div-dist .dft-seo p,.dft-div-dist .dft-seo li{font-size:12.5px;line-height:1.55}
+  .dft-div-dist .dft-faq-q{font-size:13px}
+  .dft-div-dist .dft-faq-a{font-size:12.5px}
+  .dft-div-dist .dft-cta h3{font-size:18px}
+  .dft-div-dist .dft-cta p{font-size:12.5px}
+  .dft-div-dist .dft-btn{padding:11px 22px;font-size:12.5px}
+}
+</style>
+
+
+<div class="dft-div-dist" data-lang="en" id="dftDivDist">
+  <div class="dft-topbar">
+    <div class="dft-lang-toggle">
+      <button class="dft-lang-btn" data-lang="fr">FR</button>
+      <button class="dft-lang-btn active" data-lang="en">EN</button>
+    </div>
+  </div>
+
+
+  <section class="dft-hero">
+    <div class="dft-hero-badge">✓ Post-CT · WHT 0% · DTT</div>
+    <h1 data-fr='Distribution <span>Dividendes UAE</span>' data-en='UAE <span>Dividend</span> Distribution'>UAE <span>Dividend</span> Distribution</h1>
+    <p data-fr="Flux post Corporate Tax : CT → réserve → dividende brut → WHT → impôt résidence → net en poche." data-en="Post-Corporate Tax flow: CT → reserve → gross dividend → WHT → residence tax → net in pocket.">Post-Corporate Tax flow: CT → reserve → gross dividend → WHT → residence tax → net in pocket.</p>
+  </section>
+
+
+  <main class="dft-main">
+    <div>
+      <div class="dft-section">
+        <div class="dft-section-header"><div class="dft-section-icon">💰</div><div class="dft-section-title" data-fr="Source" data-en="Source">Source</div></div>
+        <div class="dft-section-body">
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Bénéfice avant impôt (AED)" data-en="Profit before tax (AED)">Profit before tax (AED)</label><input type="number" class="dft-form-input" id="dftEbt" value="1000000" /></div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Régime fiscal" data-en="Tax regime">Tax regime</label>
+            <select class="dft-form-select" id="dftRegime">
+              <option value="standard" selected data-fr="Standard (9% au-delà de 375K)" data-en="Standard (9% above 375K)">Standard (9% above 375K)</option>
+              <option value="sbr">Small Business Relief (0%)</option>
+              <option value="qfzp">QFZP (0%)</option>
+            </select>
+          </div>
+          <div class="dft-form-grid-2">
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Réserve légale (%)" data-en="Legal reserve (%)">Legal reserve (%)</label><input type="number" class="dft-form-input" id="dftReserve" value="10" /></div>
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Taux de distribution (%)" data-en="Payout ratio (%)">Payout ratio (%)</label><input type="number" class="dft-form-input" id="dftPayout" value="100" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="dft-section">
+        <div class="dft-section-header"><div class="dft-section-icon">🌍</div><div class="dft-section-title" data-fr="Actionnaire" data-en="Shareholder">Shareholder</div></div>
+        <div class="dft-section-body">
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Type" data-en="Type">Type</label>
+            <select class="dft-form-select" id="dftShType">
+              <option value="individual" selected data-fr="Personne physique" data-en="Individual">Individual</option>
+              <option value="corporate" data-fr="Personne morale" data-en="Corporate">Corporate</option>
+            </select>
+          </div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Pays de résidence fiscale" data-en="Country of tax residence">Country of tax residence</label>
+            <select class="dft-form-select" id="dftCountry">
+              <option value="ae" selected data-fr="Émirats Arabes Unis" data-en="United Arab Emirates">United Arab Emirates</option>
+              <option value="fr">France</option>
+              <option value="be" data-fr="Belgique" data-en="Belgium">Belgium</option>
+              <option value="lu">Luxembourg</option>
+              <option value="ca">Canada</option>
+              <option value="other" data-fr="Autre" data-en="Other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="dft-result-header">
+        <div class="dft-result-label" data-fr="Net en poche actionnaire" data-en="Net in shareholder's pocket">Net in shareholder's pocket</div>
+        <div class="dft-result-main" id="dftResMain">AED 0</div>
+        <div class="dft-result-sub" id="dftResSub"></div>
+      </div>
+      <div class="dft-result-body">
+        <div class="dft-flow-viz" id="dftFlowViz"></div>
+        <div id="dftBreakdown"></div>
+      </div>
+    </div>
+  </main>
+
+
+  <section class="dft-seo">
+    <div class="dft-lang-fr">
+      <h2>Distribuer des <span>dividendes</span> depuis les UAE</h2>
+      <p>Les UAE n'appliquent aucune retenue à la source (WHT) sur les dividendes sortants : 0%. L'imposition totale dépend donc de la résidence fiscale de l'actionnaire et des conventions fiscales (DTT).</p>
+      <h3>Côté UAE</h3>
+      <ul><li>Corporate Tax (0% ou 9%) au niveau de la société</li><li>Réserve légale : 10% du bénéfice net jusqu'à 50% du capital social</li><li>WHT sur dividendes sortants : 0%</li><li>Pas de taxe sur les plus-values</li></ul>
+      <h3>Côté actionnaire (résidents fiscaux)</h3>
+      <p>Particulier France : PFU 30% (12,8% IR + 17,2% prélèvements sociaux) ou barème progressif + CSG/CRDS. Particulier Belgique : précompte mobilier 30%. Luxembourg : exonération partielle 50% pour dividendes éligibles, puis tranche IR. Canada : imposition comme dividendes étrangers, crédit DTT.</p>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Participation exemption pour holdings ?<span>+</span></div><div class="dft-faq-a">Oui. Si la société UAE détient ≥ 5% du capital d'une filiale pendant ≥ 12 mois et que la filiale est imposée à ≥ 9% (condition de substance équivalente), les dividendes reçus sont exonérés (Art. 22 du Federal Decree-Law No. 47 of 2022).</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Les UAE ont-ils une convention fiscale avec la France ?<span>+</span></div><div class="dft-faq-a">Oui, convention du 19/07/1989. Les dividendes de source UAE sont imposables en France mais bénéficient d'un crédit d'impôt forfaitaire. Pour les résidents fiscaux UAE certifiés (TRC), exonération en France.</div></div>
+    </div>
+    <div class="dft-lang-en">
+      <h2>Distributing <span>dividends</span> from the UAE</h2>
+      <p>The UAE applies no withholding tax (WHT) on outbound dividends: 0%. Total taxation therefore depends on the shareholder's tax residence and applicable tax treaties (DTT).</p>
+      <h3>UAE side</h3>
+      <ul><li>Corporate Tax (0% or 9%) at company level</li><li>Legal reserve: 10% of net profit up to 50% of share capital</li><li>WHT on outbound dividends: 0%</li><li>No capital gains tax</li></ul>
+      <h3>Shareholder side (tax residents)</h3>
+      <p>French individual: PFU flat rate 30% (12.8% IT + 17.2% social contributions) or progressive scale + CSG/CRDS. Belgian individual: withholding 30%. Luxembourg: 50% partial exemption for qualifying dividends, then IT bracket. Canadian: foreign dividend taxation with DTT credit.</p>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Participation exemption for holdings?<span>+</span></div><div class="dft-faq-a">Yes. If the UAE company holds ≥ 5% of a subsidiary for ≥ 12 months and the subsidiary is taxed at ≥ 9% (or equivalent substance), received dividends are exempt (Art. 22 of Federal Decree-Law No. 47 of 2022).</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Does the UAE have a tax treaty with France?<span>+</span></div><div class="dft-faq-a">Yes, treaty of 19/07/1989. UAE-source dividends are taxable in France but benefit from a deemed foreign tax credit. For certified UAE tax residents (TRC), French exemption applies.</div></div>
+    </div>
+  </section>
+
+
+  <div class="dft-cta">
+    <h3 data-fr='Structurez vos <span>dividendes</span>' data-en='Structure your <span>dividends</span>'>Structure your <span>dividends</span></h3>
+    <p data-fr="Holdings, DTT, retrait efficient : nos fiscalistes optimisent votre chaîne de distribution." data-en="Holdings, DTT, efficient extraction: our tax experts optimise your distribution chain.">Holdings, DTT, efficient extraction: our tax experts optimise your distribution chain.</p>
+    <a href="https://daftime.ae/contact" target="_blank" rel="noopener" class="dft-btn" data-fr="Prendre rendez-vous" data-en="Book a meeting">Book a meeting</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var root = document.getElementById('dftDivDist');
+  if(!root) return;
+
+
+  // Force English by default, ignore any saved preference
+  var currentLang = 'en';
+
+
+  function $(id){ return document.getElementById(id); }
+  function n(id){ return parseFloat($(id).value) || 0; }
+  function fmt(v){ return Math.round(v).toLocaleString(currentLang === 'en' ? 'en-US' : 'fr-FR'); }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+
+  var countryTax = {
+    ae: {individual:0, corporate:0, name_fr:'UAE', name_en:'UAE', desc_fr:'TRC requis', desc_en:'TRC required'},
+    fr: {individual:0.30, corporate:0.25, name_fr:'France', name_en:'France', desc_fr:'PFU 30% particulier / IS 25% société', desc_en:'PFU 30% individual / CIT 25% company'},
+    be: {individual:0.30, corporate:0.25, name_fr:'Belgique', name_en:'Belgium', desc_fr:'Précompte mobilier 30%', desc_en:'Withholding 30%'},
+    lu: {individual:0.25, corporate:0.0, name_fr:'Luxembourg', name_en:'Luxembourg', desc_fr:'Régime parent-filiale société', desc_en:'Parent-subsidiary for companies'},
+    ca: {individual:0.33, corporate:0.15, name_fr:'Canada', name_en:'Canada', desc_fr:'Imposition marginale + DTT', desc_en:'Marginal + DTT'},
+    other: {individual:0.25, corporate:0.15, name_fr:'Autre', name_en:'Other', desc_fr:'Estimation 25% / 15%', desc_en:'Estimate 25% / 15%'}
+  };
+
+
+  function setLang(l){
+    currentLang = l;
+    root.setAttribute('data-lang', l);
+    root.querySelectorAll('[data-fr]').forEach(function(el){
+      var v = el.getAttribute('data-'+l);
+      if(v !== null) el.innerHTML = v;
+    });
+    root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+    compute();
+  }
+
+
+  function compute(){
+    var ebt = n('dftEbt');
+    var regime = $('dftRegime').value;
+    var reservePct = n('dftReserve') / 100;
+    var payoutPct = n('dftPayout') / 100;
+    var shType = $('dftShType').value;
+    var country = $('dftCountry').value;
+    var l = currentLang;
+
+
+    var ct = 0;
+    if(regime === 'standard') ct = Math.max(ebt - 375000, 0) * 0.09;
+
+
+    var netProfit = ebt - ct;
+    var reserve = netProfit * reservePct;
+    var distributable = netProfit - reserve;
+    var dividendGross = distributable * payoutPct;
+    var wht = 0;
+    var ctry = countryTax[country];
+    var foreignRate = shType === 'corporate' ? ctry.corporate : ctry.individual;
+    var foreignTax = dividendGross * foreignRate;
+    var netPocket = dividendGross - wht - foreignTax;
+    var effectiveRate = ebt > 0 ? ((ebt - netPocket) / ebt * 100) : 0;
+    var retained = reserve + distributable * (1 - payoutPct);
+
+
+    $('dftResMain').textContent = 'AED ' + fmt(netPocket);
+    $('dftResSub').textContent = (l === 'fr' ? 'Taux effectif global : ' : 'Global effective rate: ') + effectiveRate.toFixed(1) + '%';
+
+
+    var labels = l === 'fr' ? {
+      ebt:'Bénéfice avant impôt', ct:'- Corporate Tax UAE',
+      reg: regime === 'standard' ? 'Standard 9%' : (regime === 'sbr' ? 'SBR 0%' : 'QFZP 0%'),
+      np:'Bénéfice net', res:'- Réserve légale', dist:'Résultat distribuable',
+      pay:'Dividende brut distribué', wht:'- WHT UAE (0%)',
+      ft:'- Impôt résidence', ft2:'Net en poche', ret:'Retenu en société'
+    } : {
+      ebt:'Profit before tax', ct:'- UAE Corporate Tax',
+      reg: regime === 'standard' ? 'Standard 9%' : (regime === 'sbr' ? 'SBR 0%' : 'QFZP 0%'),
+      np:'Net profit', res:'- Legal reserve', dist:'Distributable result',
+      pay:'Gross dividend declared', wht:'- UAE WHT (0%)',
+      ft:'- Residence tax', ft2:'Net in pocket', ret:'Retained in company'
+    };
+    var ctryName = l === 'en' ? ctry.name_en : ctry.name_fr;
+    var ctryDesc = l === 'en' ? ctry.desc_en : ctry.desc_fr;
+
+
+    $('dftFlowViz').innerHTML =
+      '<div class="dft-flow-step active"><div class="dft-flow-label">' + labels.ebt + '</div><div class="dft-flow-value">' + fmt(ebt) + '</div></div>' +
+      '<div class="dft-flow-step out"><div class="dft-flow-label">' + labels.ct + ' (' + labels.reg + ')</div><div class="dft-flow-value out">-' + fmt(ct) + '</div></div>' +
+      '<div class="dft-flow-step active"><div class="dft-flow-label">' + labels.np + '</div><div class="dft-flow-value">' + fmt(netProfit) + '</div></div>' +
+      '<div class="dft-flow-step out"><div class="dft-flow-label">' + labels.res + ' (' + n('dftReserve') + '%)</div><div class="dft-flow-value out">-' + fmt(reserve) + '</div></div>' +
+      '<div class="dft-flow-step active"><div class="dft-flow-label">' + labels.dist + '</div><div class="dft-flow-value">' + fmt(distributable) + '</div></div>' +
+      '<div class="dft-flow-step active"><div class="dft-flow-label">' + labels.pay + ' (' + n('dftPayout') + '%)</div><div class="dft-flow-value">' + fmt(dividendGross) + '</div></div>' +
+      '<div class="dft-flow-step"><div class="dft-flow-label">' + labels.wht + '</div><div class="dft-flow-value">0</div></div>' +
+      '<div class="dft-flow-step out"><div class="dft-flow-label">' + labels.ft + ' (' + escapeHtml(ctryName) + ' · ' + (foreignRate * 100).toFixed(0) + '%)</div><div class="dft-flow-value out">-' + fmt(foreignTax) + '</div></div>' +
+      '<div class="dft-flow-step active"><div class="dft-flow-label">' + labels.ft2 + '</div><div class="dft-flow-value in">AED ' + fmt(netPocket) + '</div></div>';
+
+
+    $('dftBreakdown').innerHTML =
+      '<div class="dft-result-row"><span>' + (l === 'fr' ? 'Pays résidence' : 'Country of residence') + '</span><span class="dft-val">' + escapeHtml(ctryName) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + (l === 'fr' ? 'Taux IR applicable' : 'Applicable income tax') + '</span><span class="dft-val">' + (foreignRate * 100).toFixed(0) + '% · ' + escapeHtml(ctryDesc) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labels.ret + '</span><span class="dft-val">' + fmt(retained) + '</span></div>' +
+      '<div class="dft-result-row dft-highlight"><span>' + labels.ft2 + '</span><span class="dft-val">AED ' + fmt(netPocket) + '</span></div>';
+  }
+
+
+  // Lang buttons
+  root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+
+
+  // FAQ
+  root.querySelectorAll('.dft-faq-item').forEach(function(item){
+    item.addEventListener('click', function(){ item.classList.toggle('open'); });
+  });
+
+
+  // Live compute
+  ['dftEbt','dftRegime','dftReserve','dftPayout','dftShType','dftCountry'].forEach(function(id){
+    var el = $(id);
+    el.addEventListener('input', compute);
+    el.addEventListener('change', compute);
+  });
+
+
+  setLang(currentLang);
+})();
+</script>
+________________
+</body>
+</html>

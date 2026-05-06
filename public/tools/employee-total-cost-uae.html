@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Employee Total Cost UAE — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+.dft-emp-cost {
+  --dft-bg:#080A32;
+  --dft-card:#0F1240;
+  --dft-primary:#1a1d56;
+  --dft-primary-light:#2a2d6a;
+  --dft-accent:#d4af37;
+  --dft-accent-light:#e8c547;
+  --dft-white:#fff;
+  --dft-text-sec:rgba(255,255,255,.7);
+  --dft-text-mut:rgba(255,255,255,.5);
+  --dft-border:rgba(255,255,255,.1);
+  --dft-success:#10b981;
+  --dft-danger:#ef4444;
+  --dft-radius:16px;
+  --dft-radius-sm:8px;
+  font-family:'Poppins',sans-serif;
+  background:var(--dft-bg);
+  color:var(--dft-white);
+  line-height:1.6;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.dft-emp-cost *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+
+.dft-emp-cost .dft-topbar{display:flex;justify-content:flex-end;padding:16px 24px;border-bottom:1px solid var(--dft-border)}
+.dft-emp-cost .dft-lang-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:100px;padding:3px}
+.dft-emp-cost .dft-lang-btn{padding:6px 12px;font-size:11px;font-weight:600;color:var(--dft-text-mut);cursor:pointer;border-radius:100px;border:none;background:transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.dft-emp-cost .dft-lang-btn.active{background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-emp-cost .dft-hero{padding:50px 24px 30px;text-align:center;position:relative;background:linear-gradient(180deg,var(--dft-bg) 0%,#0B0E3A 100%)}
+.dft-emp-cost .dft-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(212,175,55,.08) 0%,transparent 70%);pointer-events:none}
+.dft-emp-cost .dft-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--dft-accent);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:20px;position:relative}
+.dft-emp-cost .dft-hero h1{font-size:38px;font-weight:300;margin-bottom:14px;line-height:1.2;position:relative;color:var(--dft-white)}
+.dft-emp-cost .dft-hero h1 span{background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:500}
+.dft-emp-cost .dft-hero p{color:var(--dft-text-sec);font-size:15px;max-width:720px;margin:0 auto;position:relative}
+
+
+.dft-emp-cost .dft-main{max-width:1200px;margin:0 auto;padding:30px 24px 50px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.dft-emp-cost .dft-section{background:var(--dft-card);border:1px solid var(--dft-border);border-radius:var(--dft-radius)}
+.dft-emp-cost .dft-section-header{padding:18px 24px;border-bottom:1px solid var(--dft-border);display:flex;align-items:center;gap:12px}
+.dft-emp-cost .dft-section-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.dft-emp-cost .dft-section-title{font-size:14px;font-weight:600;color:var(--dft-white)}
+.dft-emp-cost .dft-section-body{padding:24px}
+
+
+.dft-emp-cost .dft-form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.dft-emp-cost .dft-form-group:last-child{margin-bottom:0}
+.dft-emp-cost .dft-form-label{font-size:11px;font-weight:500;color:var(--dft-text-sec);text-transform:uppercase;letter-spacing:.5px}
+.dft-emp-cost .dft-form-input{background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);padding:12px 14px;font-size:14px;color:var(--dft-white);transition:all .2s;width:100%;font-family:'Poppins',sans-serif}
+.dft-emp-cost .dft-form-input:focus{outline:none;border-color:var(--dft-accent);background:rgba(255,255,255,.08)}
+.dft-emp-cost .dft-form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+
+.dft-emp-cost .dft-checkbox-label{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--dft-text-sec);cursor:pointer;padding:6px 0;text-transform:none;letter-spacing:0;font-weight:400}
+.dft-emp-cost .dft-checkbox-label input[type="checkbox"]{width:16px;height:16px;accent-color:var(--dft-accent);cursor:pointer;flex-shrink:0}
+
+
+.dft-emp-cost .dft-result-header{padding:32px 24px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius) var(--dft-radius) 0 0;text-align:center;border:1px solid rgba(212,175,55,.3);border-bottom:none}
+.dft-emp-cost .dft-result-label{color:rgba(255,255,255,.7);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.dft-emp-cost .dft-result-main{font-size:40px;font-weight:600;color:var(--dft-accent);font-family:'Monaco',monospace}
+.dft-emp-cost .dft-result-sub{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+.dft-emp-cost .dft-result-body{padding:24px;background:var(--dft-card);border:1px solid var(--dft-border);border-top:none;border-radius:0 0 var(--dft-radius) var(--dft-radius)}
+.dft-emp-cost .dft-result-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--dft-border);font-size:13px;color:var(--dft-white)}
+.dft-emp-cost .dft-result-row:last-child{border-bottom:none}
+.dft-emp-cost .dft-result-row .dft-val{font-family:'Monaco',monospace;font-weight:500;color:var(--dft-white)}
+.dft-emp-cost .dft-result-row.dft-highlight{background:rgba(212,175,55,.08);margin:0 -24px;padding:14px 24px}
+.dft-emp-cost .dft-result-row.dft-highlight .dft-val{color:var(--dft-accent);font-size:16px;font-weight:600}
+
+
+.dft-emp-cost .dft-bar-viz{display:flex;height:40px;border-radius:6px;overflow:hidden;margin:0 0 16px}
+.dft-emp-cost .dft-bar-seg{display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:600;transition:all .3s;min-width:0;overflow:hidden}
+.dft-emp-cost .dft-bar-seg.basic{background:#1a1d56}
+.dft-emp-cost .dft-bar-seg.allowances{background:#2a3e8f}
+.dft-emp-cost .dft-bar-seg.insurance{background:#d4af37;color:#080A32}
+.dft-emp-cost .dft-bar-seg.visa{background:#a08028}
+.dft-emp-cost .dft-bar-seg.gratuity{background:#6b5820}
+.dft-emp-cost .dft-legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;font-size:11px;color:var(--dft-text-sec)}
+.dft-emp-cost .dft-legend-item{display:flex;align-items:center;gap:6px}
+.dft-emp-cost .dft-legend-color{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+
+.dft-emp-cost .dft-seo{max-width:1100px;margin:40px auto;padding:40px 24px;background:var(--dft-card);border-radius:var(--dft-radius);border:1px solid var(--dft-border)}
+.dft-emp-cost .dft-seo h2{font-size:24px;font-weight:500;margin-bottom:16px;color:var(--dft-white)}
+.dft-emp-cost .dft-seo h2 span{color:var(--dft-accent)}
+.dft-emp-cost .dft-seo h3{font-size:16px;font-weight:500;margin:24px 0 10px;color:var(--dft-accent)}
+.dft-emp-cost .dft-seo p,.dft-emp-cost .dft-seo li{color:var(--dft-text-sec);font-size:14px;margin-bottom:10px}
+.dft-emp-cost .dft-seo ul{padding-left:20px;margin-bottom:16px}
+.dft-emp-cost .dft-seo strong{color:var(--dft-white)}
+.dft-emp-cost .dft-faq-item{border-bottom:1px solid var(--dft-border);padding:16px 0;cursor:pointer}
+.dft-emp-cost .dft-faq-q{font-weight:500;color:var(--dft-white);display:flex;justify-content:space-between;font-size:14px;gap:12px}
+.dft-emp-cost .dft-faq-a{color:var(--dft-text-sec);font-size:13px;margin-top:8px;padding-left:10px;border-left:2px solid var(--dft-accent);display:none}
+.dft-emp-cost .dft-faq-item.open .dft-faq-a{display:block}
+
+
+.dft-emp-cost .dft-cta{max-width:1100px;margin:40px auto;padding:40px 24px;text-align:center;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius);border:1px solid rgba(212,175,55,.3)}
+.dft-emp-cost .dft-cta h3{font-size:24px;font-weight:400;margin-bottom:10px;color:var(--dft-white)}
+.dft-emp-cost .dft-cta h3 span{color:var(--dft-accent);font-weight:600}
+.dft-emp-cost .dft-cta p{color:rgba(255,255,255,.8);margin-bottom:20px;font-size:14px}
+.dft-emp-cost .dft-btn{padding:12px 24px;border:none;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;cursor:pointer;background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-emp-cost .dft-lang-fr{display:none}
+.dft-emp-cost[data-lang="fr"] .dft-lang-fr{display:block}
+.dft-emp-cost[data-lang="fr"] .dft-lang-en{display:none}
+
+
+@media(max-width:1024px){
+  .dft-emp-cost .dft-main{grid-template-columns:1fr 1fr;gap:20px;padding:24px 20px 40px;max-width:900px}
+  .dft-emp-cost .dft-main > div:last-child{grid-column:1/-1}
+  .dft-emp-cost .dft-hero{padding:40px 20px 24px}
+  .dft-emp-cost .dft-hero h1{font-size:34px}
+  .dft-emp-cost .dft-hero p{font-size:14px}
+  .dft-emp-cost .dft-seo,.dft-emp-cost .dft-cta{margin:24px 20px;padding:32px 24px;max-width:calc(100% - 40px)}
+  .dft-emp-cost .dft-seo h2{font-size:22px}
+  .dft-emp-cost .dft-cta h3{font-size:22px}
+}
+@media(max-width:768px){
+  .dft-emp-cost .dft-topbar{padding:14px 18px}
+  .dft-emp-cost .dft-hero{padding:32px 18px 20px}
+  .dft-emp-cost .dft-hero-badge{font-size:11px;padding:5px 14px;margin-bottom:16px}
+  .dft-emp-cost .dft-hero h1{font-size:28px;line-height:1.25}
+  .dft-emp-cost .dft-hero p{font-size:13px;line-height:1.5}
+  .dft-emp-cost .dft-main{grid-template-columns:1fr;padding:20px 16px 36px;gap:16px}
+  .dft-emp-cost .dft-main > div:last-child{grid-column:auto}
+  .dft-emp-cost .dft-section-header{padding:16px 18px}
+  .dft-emp-cost .dft-section-body{padding:20px}
+  .dft-emp-cost .dft-section-icon{width:32px;height:32px;font-size:14px}
+  .dft-emp-cost .dft-form-group{margin-bottom:14px}
+  .dft-emp-cost .dft-form-input{padding:11px 12px;font-size:16px}
+  .dft-emp-cost .dft-result-header{padding:24px 18px}
+  .dft-emp-cost .dft-result-main{font-size:32px}
+  .dft-emp-cost .dft-result-body{padding:20px}
+  .dft-emp-cost .dft-result-row.dft-highlight{margin:0 -20px;padding:12px 20px}
+  .dft-emp-cost .dft-seo,.dft-emp-cost .dft-cta{margin:20px 16px;padding:28px 20px;max-width:calc(100% - 32px)}
+  .dft-emp-cost .dft-seo h2{font-size:20px}
+  .dft-emp-cost .dft-seo h3{font-size:15px;margin:20px 0 8px}
+  .dft-emp-cost .dft-seo p,.dft-emp-cost .dft-seo li{font-size:13px}
+  .dft-emp-cost .dft-cta h3{font-size:20px}
+  .dft-emp-cost .dft-cta p{font-size:13px}
+}
+@media(max-width:480px){
+  .dft-emp-cost .dft-topbar{padding:12px 14px;justify-content:center}
+  .dft-emp-cost .dft-hero{padding:28px 14px 18px}
+  .dft-emp-cost .dft-hero h1{font-size:24px}
+  .dft-emp-cost .dft-hero p{font-size:12.5px}
+  .dft-emp-cost .dft-main{padding:16px 12px 32px;gap:14px}
+  .dft-emp-cost .dft-section-header{padding:14px 16px;gap:10px}
+  .dft-emp-cost .dft-section-body{padding:16px}
+  .dft-emp-cost .dft-form-grid-2{grid-template-columns:1fr;gap:0}
+  .dft-emp-cost .dft-form-label{font-size:10.5px}
+  .dft-emp-cost .dft-form-input{padding:10px 12px;font-size:16px}
+  .dft-emp-cost .dft-checkbox-label{font-size:12.5px}
+  .dft-emp-cost .dft-result-header{padding:22px 16px}
+  .dft-emp-cost .dft-result-label{font-size:11px}
+  .dft-emp-cost .dft-result-main{font-size:26px}
+  .dft-emp-cost .dft-result-sub{font-size:12px}
+  .dft-emp-cost .dft-result-body{padding:16px}
+  .dft-emp-cost .dft-result-row{font-size:12.5px;padding:10px 0}
+  .dft-emp-cost .dft-result-row.dft-highlight{margin:0 -16px;padding:12px 16px}
+  .dft-emp-cost .dft-result-row.dft-highlight .dft-val{font-size:14px}
+  .dft-emp-cost .dft-bar-viz{height:32px}
+  .dft-emp-cost .dft-bar-seg{font-size:9px}
+  .dft-emp-cost .dft-legend{gap:8px;font-size:10.5px}
+  .dft-emp-cost .dft-seo,.dft-emp-cost .dft-cta{margin:16px 12px;padding:22px 16px;max-width:calc(100% - 24px)}
+  .dft-emp-cost .dft-seo h2{font-size:18px}
+  .dft-emp-cost .dft-seo h3{font-size:14px;margin:16px 0 6px}
+  .dft-emp-cost .dft-seo p,.dft-emp-cost .dft-seo li{font-size:12.5px;line-height:1.55}
+  .dft-emp-cost .dft-faq-q{font-size:13px}
+  .dft-emp-cost .dft-faq-a{font-size:12.5px}
+  .dft-emp-cost .dft-cta h3{font-size:18px}
+  .dft-emp-cost .dft-cta p{font-size:12.5px}
+  .dft-emp-cost .dft-btn{padding:11px 22px;font-size:12.5px}
+}
+</style>
+
+
+<div class="dft-emp-cost" data-lang="en" id="dftEmpCost">
+  <div class="dft-topbar">
+    <div class="dft-lang-toggle">
+      <button class="dft-lang-btn" data-lang="fr">FR</button>
+      <button class="dft-lang-btn active" data-lang="en">EN</button>
+    </div>
+  </div>
+
+
+  <section class="dft-hero">
+    <div class="dft-hero-badge">✓ UAE employer total cost</div>
+    <h1 data-fr='Coût Total <span>Employé UAE</span>' data-en='<span>Employee</span> Total Cost UAE'><span>Employee</span> Total Cost UAE</h1>
+    <p data-fr="Salaire, allowances, visa, assurance, gratuity accrual : coût réel d'une embauche aux Émirats." data-en="Salary, allowances, visa, insurance, gratuity accrual: true cost of hiring in the UAE.">Salary, allowances, visa, insurance, gratuity accrual: true cost of hiring in the UAE.</p>
+  </section>
+
+
+  <main class="dft-main">
+    <div class="dft-section">
+      <div class="dft-section-header"><div class="dft-section-icon">💼</div><div class="dft-section-title" data-fr="Rémunération" data-en="Compensation">Compensation</div></div>
+      <div class="dft-section-body">
+        <div class="dft-form-grid-2">
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Salaire de base / mois" data-en="Basic salary / month">Basic salary / month</label><input type="number" class="dft-form-input" id="dftBasic" value="12000" /></div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Logement / mois" data-en="Housing / month">Housing / month</label><input type="number" class="dft-form-input" id="dftHousing" value="5000" /></div>
+        </div>
+        <div class="dft-form-grid-2">
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Transport / mois" data-en="Transport / month">Transport / month</label><input type="number" class="dft-form-input" id="dftTransport" value="1000" /></div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Bonus annuel" data-en="Annual bonus">Annual bonus</label><input type="number" class="dft-form-input" id="dftBonus" value="0" /></div>
+        </div>
+      </div>
+    </div>
+    <div class="dft-section">
+      <div class="dft-section-header"><div class="dft-section-icon">🎫</div><div class="dft-section-title" data-fr="Avantages & charges" data-en="Benefits & charges">Benefits & charges</div></div>
+      <div class="dft-section-body">
+        <div class="dft-form-grid-2">
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Assurance santé / an" data-en="Medical insurance / yr">Medical insurance / yr</label><input type="number" class="dft-form-input" id="dftMedical" value="3500" /></div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Visa (amorti 2 ans)" data-en="Visa (amort. 2 yrs)">Visa (amort. 2 yrs)</label><input type="number" class="dft-form-input" id="dftVisa" value="6000" /></div>
+        </div>
+        <label class="dft-checkbox-label"><input type="checkbox" id="dftTicket" checked><span data-fr="Billet retour pays d'origine (annuel)" data-en="Annual return flight (home country)">Annual return flight (home country)</span></label>
+        <label class="dft-checkbox-label"><input type="checkbox" id="dftRecruit"><span data-fr="Frais de recrutement (1 mois de salaire)" data-en="Recruitment fee (1 month's salary)">Recruitment fee (1 month's salary)</span></label>
+      </div>
+    </div>
+    <div>
+      <div class="dft-result-header">
+        <div class="dft-result-label" data-fr="Coût total employeur / an" data-en="Total employer cost / year">Total employer cost / year</div>
+        <div class="dft-result-main" id="dftResMain">AED 0</div>
+        <div class="dft-result-sub" id="dftResSub"></div>
+      </div>
+      <div class="dft-result-body">
+        <div class="dft-bar-viz" id="dftBarViz"></div>
+        <div id="dftBreakdown"></div>
+      </div>
+    </div>
+  </main>
+
+
+  <section class="dft-seo">
+    <div class="dft-lang-fr">
+      <h2>Coût réel d'un <span>employé</span> aux Émirats</h2>
+      <p>Aux UAE, pas de cotisations sociales employeur (sauf DEWS à Dubai pour certains types de contrats ou pension des nationaux). Le coût total comprend : salaire brut + allowances + visa amorti + assurance santé obligatoire + billet annuel + provision gratuity.</p>
+      <h3>Composition d'un salary package UAE</h3>
+      <ul><li><strong>Basic salary</strong> : 50-60% du package (base de calcul gratuity)</li><li><strong>Housing allowance</strong> : 20-25% du package</li><li><strong>Transport allowance</strong> : 5-10% du package</li><li><strong>Other allowances</strong> : éducation, téléphone, etc.</li></ul>
+      <h3>Charges récurrentes employeur</h3>
+      <ul><li>Visa de travail : ~AED 5 000-8 000 pour 2 ans</li><li>Emirates ID : AED 370 pour 2 ans</li><li>Assurance santé : AED 2 000 à 8 000 / an selon niveau</li><li>Medical fitness test : AED 350</li><li>Gratuity : provision ~8,3% du basic pour les 5 premières années</li></ul>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Y a-t-il des cotisations sociales ?<span>+</span></div><div class="dft-faq-a">Pour les expatriés : non. Pour les nationaux UAE/GCC : GPSSA (pension publique) ~20% (12,5% employeur / 5% employé / 2,5% État). À Dubai, certaines sociétés opt-in au DEWS qui remplace la gratuity par des versements mensuels ~5,83%.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Quelle provision gratuity comptabiliser ?<span>+</span></div><div class="dft-faq-a">21 jours de basic par année d'ancienneté les 5 premières années → ~5,83% mensuel. Puis 30 jours par année → ~8,33% mensuel. Comptabiliser en charges à payer au bilan.</div></div>
+    </div>
+    <div class="dft-lang-en">
+      <h2>True <span>employee</span> cost in the UAE</h2>
+      <p>In the UAE, there are no employer social charges (except DEWS in Dubai for some contracts or pensions for nationals). Total cost includes: gross salary + allowances + amortised visa + mandatory medical insurance + annual flight + gratuity accrual.</p>
+      <h3>Typical UAE salary package composition</h3>
+      <ul><li><strong>Basic salary</strong>: 50-60% of package (gratuity base)</li><li><strong>Housing allowance</strong>: 20-25% of package</li><li><strong>Transport allowance</strong>: 5-10% of package</li><li><strong>Other allowances</strong>: education, phone, etc.</li></ul>
+      <h3>Recurring employer costs</h3>
+      <ul><li>Work visa: ~AED 5,000-8,000 for 2 years</li><li>Emirates ID: AED 370 for 2 years</li><li>Medical insurance: AED 2,000 to 8,000 / year depending on level</li><li>Medical fitness test: AED 350</li><li>Gratuity: ~8.3% accrual on basic for the first 5 years</li></ul>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Are there social charges?<span>+</span></div><div class="dft-faq-a">For expatriates: no. For UAE/GCC nationals: GPSSA (public pension) ~20% (12.5% employer / 5% employee / 2.5% State). In Dubai, some companies opt in to DEWS which replaces gratuity with monthly contributions ~5.83%.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">What gratuity provision should I book?<span>+</span></div><div class="dft-faq-a">21 days of basic per year of service for the first 5 years → ~5.83% monthly. Then 30 days per year → ~8.33% monthly. Record as accrued charges on the balance sheet.</div></div>
+    </div>
+  </section>
+
+
+  <div class="dft-cta">
+    <h3 data-fr='Gestion <span>paie UAE</span> clé en main' data-en='Turnkey <span>UAE payroll</span>'>Turnkey <span>UAE payroll</span></h3>
+    <p data-fr="Payroll, WPS, contrats, provisions EOSB : Daftime gère votre masse salariale de A à Z." data-en="Payroll, WPS, contracts, EOSB provisions: Daftime handles your payroll end-to-end.">Payroll, WPS, contracts, EOSB provisions: Daftime handles your payroll end-to-end.</p>
+    <a href="https://daftime.ae/contact" target="_blank" rel="noopener" class="dft-btn" data-fr="Prendre rendez-vous" data-en="Book a meeting">Book a meeting</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var root = document.getElementById('dftEmpCost');
+  if(!root) return;
+
+
+  // Force English by default on this tool, ignore any saved preference
+  var currentLang = 'en';
+
+
+  function $(id){ return document.getElementById(id); }
+  function n(id){ return parseFloat($(id).value) || 0; }
+  function fmt(v){ return Math.round(v).toLocaleString(currentLang === 'en' ? 'en-US' : 'fr-FR'); }
+
+
+  function setLang(l){
+    currentLang = l;
+    root.setAttribute('data-lang', l);
+    root.querySelectorAll('[data-fr]').forEach(function(el){
+      var v = el.getAttribute('data-'+l);
+      if(v !== null) el.innerHTML = v;
+    });
+    root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+    compute();
+  }
+
+
+  function compute(){
+    var basic = n('dftBasic') * 12;
+    var housing = n('dftHousing') * 12;
+    var transport = n('dftTransport') * 12;
+    var bonus = n('dftBonus');
+    var medical = n('dftMedical');
+    var visa = n('dftVisa') / 2;
+    var ticket = $('dftTicket').checked ? 3000 : 0;
+    var recruit = $('dftRecruit').checked ? n('dftBasic') : 0;
+    var gratuity = basic * 0.0583;
+    var total = basic + housing + transport + bonus + medical + visa + ticket + recruit + gratuity;
+    var l = currentLang;
+
+
+    $('dftResMain').textContent = 'AED ' + fmt(total);
+    $('dftResSub').textContent = (l === 'fr' ? 'Soit ' : 'About ') + fmt(total / 12) + (l === 'fr' ? ' AED / mois tout compris' : ' AED / month all-in');
+
+
+    function pct(v){ return total > 0 ? (v / total * 100).toFixed(1) : 0; }
+
+
+    $('dftBarViz').innerHTML =
+      '<div class="dft-bar-seg basic" style="width:' + pct(basic) + '%">' + (pct(basic) >= 8 ? pct(basic) + '%' : '') + '</div>' +
+      '<div class="dft-bar-seg allowances" style="width:' + pct(housing+transport+bonus) + '%">' + (pct(housing+transport+bonus) >= 8 ? pct(housing+transport+bonus) + '%' : '') + '</div>' +
+      '<div class="dft-bar-seg insurance" style="width:' + pct(medical+ticket) + '%">' + (pct(medical+ticket) >= 8 ? pct(medical+ticket) + '%' : '') + '</div>' +
+      '<div class="dft-bar-seg visa" style="width:' + pct(visa+recruit) + '%">' + (pct(visa+recruit) >= 8 ? pct(visa+recruit) + '%' : '') + '</div>' +
+      '<div class="dft-bar-seg gratuity" style="width:' + pct(gratuity) + '%">' + (pct(gratuity) >= 8 ? pct(gratuity) + '%' : '') + '</div>';
+
+
+    var labBasic = 'Basic';
+    var labAllow = l === 'fr' ? 'Allowances' : 'Allowances';
+    var labBenef = l === 'fr' ? 'Avantages' : 'Benefits';
+    var labVisa = l === 'fr' ? 'Visa / Recrutement' : 'Visa / Recruitment';
+    var labGrat = l === 'fr' ? 'Provision EOSB' : 'EOSB accrual';
+
+
+    $('dftBreakdown').innerHTML =
+      '<div class="dft-legend">' +
+        '<div class="dft-legend-item"><div class="dft-legend-color" style="background:#1a1d56"></div>' + labBasic + '</div>' +
+        '<div class="dft-legend-item"><div class="dft-legend-color" style="background:#2a3e8f"></div>' + labAllow + '</div>' +
+        '<div class="dft-legend-item"><div class="dft-legend-color" style="background:#d4af37"></div>' + labBenef + '</div>' +
+        '<div class="dft-legend-item"><div class="dft-legend-color" style="background:#a08028"></div>' + labVisa + '</div>' +
+        '<div class="dft-legend-item"><div class="dft-legend-color" style="background:#6b5820"></div>' + labGrat + '</div>' +
+      '</div>' +
+      '<div class="dft-result-row"><span>' + labBasic + '</span><span class="dft-val">' + fmt(basic) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + (l === 'fr' ? 'Logement + transport + bonus' : 'Housing + transport + bonus') + '</span><span class="dft-val">' + fmt(housing + transport + bonus) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + (l === 'fr' ? 'Assurance + billet' : 'Insurance + flight') + '</span><span class="dft-val">' + fmt(medical + ticket) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labVisa + '</span><span class="dft-val">' + fmt(visa + recruit) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + labGrat + '</span><span class="dft-val">' + fmt(gratuity) + '</span></div>' +
+      '<div class="dft-result-row dft-highlight"><span>' + (l === 'fr' ? 'TOTAL / AN' : 'TOTAL / YEAR') + '</span><span class="dft-val">AED ' + fmt(total) + '</span></div>';
+  }
+
+
+  // Lang buttons
+  root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+
+
+  // FAQ
+  root.querySelectorAll('.dft-faq-item').forEach(function(item){
+    item.addEventListener('click', function(){ item.classList.toggle('open'); });
+  });
+
+
+  // Live compute
+  ['dftBasic','dftHousing','dftTransport','dftBonus','dftMedical','dftVisa','dftTicket','dftRecruit'].forEach(function(id){
+    var el = $(id);
+    el.addEventListener('input', compute);
+    el.addEventListener('change', compute);
+  });
+
+
+  setLang(currentLang);
+})();
+</script>
+________________
+</body>
+</html>

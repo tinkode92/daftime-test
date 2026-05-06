@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QFZP Eligibility Test — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+.dft-qfzp-test {
+  --dft-bg:#080A32;
+  --dft-card:#0F1240;
+  --dft-primary:#1a1d56;
+  --dft-primary-light:#2a2d6a;
+  --dft-accent:#d4af37;
+  --dft-accent-light:#e8c547;
+  --dft-white:#fff;
+  --dft-text-sec:rgba(255,255,255,.7);
+  --dft-text-mut:rgba(255,255,255,.5);
+  --dft-border:rgba(255,255,255,.1);
+  --dft-success:#10b981;
+  --dft-danger:#ef4444;
+  --dft-warning:#f59e0b;
+  --dft-radius:16px;
+  --dft-radius-sm:8px;
+  font-family:'Poppins',sans-serif;
+  background:var(--dft-bg);
+  color:var(--dft-white);
+  line-height:1.6;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.dft-qfzp-test *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+
+.dft-qfzp-test .dft-topbar{display:flex;justify-content:flex-end;padding:16px 24px;border-bottom:1px solid var(--dft-border)}
+.dft-qfzp-test .dft-lang-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:100px;padding:3px}
+.dft-qfzp-test .dft-lang-btn{padding:6px 12px;font-size:11px;font-weight:600;color:var(--dft-text-mut);cursor:pointer;border-radius:100px;border:none;background:transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.dft-qfzp-test .dft-lang-btn.active{background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-qfzp-test .dft-hero{padding:50px 24px 30px;text-align:center;position:relative;background:linear-gradient(180deg,var(--dft-bg) 0%,#0B0E3A 100%)}
+.dft-qfzp-test .dft-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(212,175,55,.08) 0%,transparent 70%);pointer-events:none}
+.dft-qfzp-test .dft-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--dft-accent);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:20px;position:relative}
+.dft-qfzp-test .dft-hero h1{font-size:38px;font-weight:300;margin-bottom:14px;line-height:1.2;position:relative;color:var(--dft-white)}
+.dft-qfzp-test .dft-hero h1 span{background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:500}
+.dft-qfzp-test .dft-hero p{color:var(--dft-text-sec);font-size:15px;max-width:720px;margin:0 auto;position:relative}
+
+
+.dft-qfzp-test .dft-main{max-width:800px;margin:0 auto;padding:30px 24px 50px}
+.dft-qfzp-test .dft-section{background:var(--dft-card);border:1px solid var(--dft-border);border-radius:var(--dft-radius);overflow:hidden}
+.dft-qfzp-test .dft-section-body{padding:32px}
+
+
+.dft-qfzp-test .dft-progress-bar{height:4px;background:rgba(255,255,255,.05);overflow:hidden}
+.dft-qfzp-test .dft-progress-fill{height:100%;background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));transition:width .3s;width:0%}
+
+
+.dft-qfzp-test .dft-question-count{font-size:11px;color:var(--dft-accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;font-weight:600}
+.dft-qfzp-test .dft-question{font-size:20px;font-weight:500;color:var(--dft-white);margin-bottom:8px;line-height:1.4}
+.dft-qfzp-test .dft-question-hint{font-size:13px;color:var(--dft-text-mut);margin-bottom:24px}
+
+
+.dft-qfzp-test .dft-options{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.dft-qfzp-test .dft-option{padding:16px 20px;background:rgba(255,255,255,.03);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);cursor:pointer;font-size:14px;color:var(--dft-white);transition:all .2s;text-align:left;width:100%;font-family:'Poppins',sans-serif}
+.dft-qfzp-test .dft-option:hover{border-color:var(--dft-accent);background:rgba(212,175,55,.05)}
+.dft-qfzp-test .dft-option.selected{border-color:var(--dft-accent);background:rgba(212,175,55,.1)}
+
+
+.dft-qfzp-test .dft-btn-nav{background:transparent;border:1px solid var(--dft-border);color:var(--dft-text-sec);padding:10px 20px;border-radius:100px;font-size:13px;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s}
+.dft-qfzp-test .dft-btn-nav:hover:not(:disabled){border-color:var(--dft-accent);color:var(--dft-accent)}
+.dft-qfzp-test .dft-btn-nav:disabled{opacity:.3;cursor:not-allowed}
+
+
+.dft-qfzp-test .dft-result-header{padding:32px 24px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);text-align:center;border-bottom:1px solid var(--dft-border)}
+.dft-qfzp-test .dft-result-header.success{background:linear-gradient(135deg,#065f46 0%,#10b981 100%)}
+.dft-qfzp-test .dft-result-header.danger{background:linear-gradient(135deg,#7f1d1d 0%,#dc2626 100%)}
+.dft-qfzp-test .dft-result-header.warning{background:linear-gradient(135deg,#78350f 0%,#f59e0b 100%)}
+.dft-qfzp-test .dft-result-label{color:rgba(255,255,255,.8);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.dft-qfzp-test .dft-result-main{font-size:36px;font-weight:600;color:var(--dft-white)}
+.dft-qfzp-test .dft-result-sub{color:rgba(255,255,255,.85);font-size:13px;margin-top:8px}
+.dft-qfzp-test .dft-result-body{padding:24px 32px 32px}
+
+
+.dft-qfzp-test .dft-criteria-row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--dft-border);font-size:13px;color:var(--dft-white)}
+.dft-qfzp-test .dft-criteria-row:last-child{border-bottom:none}
+.dft-qfzp-test .dft-criteria-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;font-weight:600}
+.dft-qfzp-test .dft-criteria-icon.ok{background:rgba(16,185,129,.15);color:var(--dft-success)}
+.dft-qfzp-test .dft-criteria-icon.ko{background:rgba(239,68,68,.15);color:var(--dft-danger)}
+
+
+.dft-qfzp-test .dft-btn{padding:12px 24px;border:none;border-radius:100px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;cursor:pointer;background:var(--dft-accent);color:var(--dft-bg);transition:all .2s}
+.dft-qfzp-test .dft-btn-restart{margin-top:24px;width:100%;padding:14px}
+
+
+.dft-qfzp-test .dft-seo{max-width:1100px;margin:40px auto;padding:40px 24px;background:var(--dft-card);border-radius:var(--dft-radius);border:1px solid var(--dft-border)}
+.dft-qfzp-test .dft-seo h2{font-size:24px;font-weight:500;margin-bottom:16px;color:var(--dft-white)}
+.dft-qfzp-test .dft-seo h2 span{color:var(--dft-accent)}
+.dft-qfzp-test .dft-seo h3{font-size:16px;font-weight:500;margin:24px 0 10px;color:var(--dft-accent)}
+.dft-qfzp-test .dft-seo p,.dft-qfzp-test .dft-seo li{color:var(--dft-text-sec);font-size:14px;margin-bottom:10px}
+.dft-qfzp-test .dft-seo ul,.dft-qfzp-test .dft-seo ol{padding-left:22px;margin-bottom:16px}
+
+
+.dft-qfzp-test .dft-cta{max-width:1100px;margin:40px auto;padding:40px 24px;text-align:center;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius);border:1px solid rgba(212,175,55,.3)}
+.dft-qfzp-test .dft-cta h3{font-size:24px;font-weight:400;margin-bottom:10px;color:var(--dft-white)}
+.dft-qfzp-test .dft-cta h3 span{color:var(--dft-accent);font-weight:600}
+.dft-qfzp-test .dft-cta p{color:rgba(255,255,255,.8);margin-bottom:20px;font-size:14px}
+
+
+.dft-qfzp-test .dft-lang-en{display:none}
+.dft-qfzp-test[data-lang="en"] .dft-lang-fr{display:none}
+.dft-qfzp-test[data-lang="en"] .dft-lang-en{display:block}
+
+
+@media(max-width:1024px){
+  .dft-qfzp-test .dft-hero{padding:40px 20px 24px}
+  .dft-qfzp-test .dft-hero h1{font-size:34px}
+  .dft-qfzp-test .dft-hero p{font-size:14px}
+  .dft-qfzp-test .dft-main{padding:24px 20px 40px}
+  .dft-qfzp-test .dft-section-body{padding:28px}
+  .dft-qfzp-test .dft-seo,.dft-qfzp-test .dft-cta{margin:24px 20px;padding:32px 24px;max-width:calc(100% - 40px)}
+  .dft-qfzp-test .dft-seo h2{font-size:22px}
+  .dft-qfzp-test .dft-cta h3{font-size:22px}
+}
+@media(max-width:768px){
+  .dft-qfzp-test .dft-topbar{padding:14px 18px}
+  .dft-qfzp-test .dft-hero{padding:32px 18px 20px}
+  .dft-qfzp-test .dft-hero-badge{font-size:11px;padding:5px 14px;margin-bottom:16px}
+  .dft-qfzp-test .dft-hero h1{font-size:28px;line-height:1.25}
+  .dft-qfzp-test .dft-hero p{font-size:13px;line-height:1.5}
+  .dft-qfzp-test .dft-main{padding:20px 16px 36px}
+  .dft-qfzp-test .dft-section-body{padding:24px 20px}
+  .dft-qfzp-test .dft-question{font-size:18px}
+  .dft-qfzp-test .dft-question-hint{font-size:12.5px;margin-bottom:20px}
+  .dft-qfzp-test .dft-option{padding:14px 16px;font-size:13.5px}
+  .dft-qfzp-test .dft-result-header{padding:28px 20px}
+  .dft-qfzp-test .dft-result-main{font-size:30px}
+  .dft-qfzp-test .dft-result-body{padding:20px}
+  .dft-qfzp-test .dft-criteria-row{font-size:12.5px;padding:12px 0;gap:10px}
+  .dft-qfzp-test .dft-seo,.dft-qfzp-test .dft-cta{margin:20px 16px;padding:28px 20px;max-width:calc(100% - 32px)}
+  .dft-qfzp-test .dft-seo h2{font-size:20px}
+  .dft-qfzp-test .dft-seo h3{font-size:15px;margin:20px 0 8px}
+  .dft-qfzp-test .dft-seo p,.dft-qfzp-test .dft-seo li{font-size:13px}
+  .dft-qfzp-test .dft-cta h3{font-size:20px}
+  .dft-qfzp-test .dft-cta p{font-size:13px}
+}
+@media(max-width:480px){
+  .dft-qfzp-test .dft-topbar{padding:12px 14px;justify-content:center}
+  .dft-qfzp-test .dft-hero{padding:28px 14px 18px}
+  .dft-qfzp-test .dft-hero h1{font-size:24px}
+  .dft-qfzp-test .dft-hero p{font-size:12.5px}
+  .dft-qfzp-test .dft-main{padding:16px 12px 32px}
+  .dft-qfzp-test .dft-section-body{padding:20px 16px}
+  .dft-qfzp-test .dft-question-count{font-size:10.5px;margin-bottom:12px}
+  .dft-qfzp-test .dft-question{font-size:16px;line-height:1.35;margin-bottom:6px}
+  .dft-qfzp-test .dft-question-hint{font-size:12px;margin-bottom:18px}
+  .dft-qfzp-test .dft-options{gap:8px;margin-bottom:20px}
+  .dft-qfzp-test .dft-option{padding:13px 14px;font-size:13px}
+  .dft-qfzp-test .dft-btn-nav{padding:9px 18px;font-size:12.5px}
+  .dft-qfzp-test .dft-result-header{padding:24px 16px}
+  .dft-qfzp-test .dft-result-label{font-size:11px}
+  .dft-qfzp-test .dft-result-main{font-size:24px}
+  .dft-qfzp-test .dft-result-sub{font-size:12px}
+  .dft-qfzp-test .dft-result-body{padding:16px}
+  .dft-qfzp-test .dft-criteria-row{font-size:12px;padding:10px 0;gap:10px}
+  .dft-qfzp-test .dft-criteria-icon{width:22px;height:22px;font-size:11px}
+  .dft-qfzp-test .dft-btn-restart{padding:12px;font-size:12.5px}
+  .dft-qfzp-test .dft-seo,.dft-qfzp-test .dft-cta{margin:16px 12px;padding:22px 16px;max-width:calc(100% - 24px)}
+  .dft-qfzp-test .dft-seo h2{font-size:18px}
+  .dft-qfzp-test .dft-seo h3{font-size:14px;margin:16px 0 6px}
+  .dft-qfzp-test .dft-seo p,.dft-qfzp-test .dft-seo li{font-size:12.5px;line-height:1.55}
+  .dft-qfzp-test .dft-cta h3{font-size:18px}
+  .dft-qfzp-test .dft-cta p{font-size:12.5px}
+  .dft-qfzp-test .dft-btn{padding:11px 22px;font-size:12.5px}
+}
+</style>
+
+
+<div class="dft-qfzp-test" data-lang="fr" id="dftQfzpTest">
+  <div class="dft-topbar">
+    <div class="dft-lang-toggle">
+      <button class="dft-lang-btn active" data-lang="fr">FR</button>
+      <button class="dft-lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+
+
+  <section class="dft-hero">
+    <div class="dft-hero-badge">✓ Ministerial Decision 265 of 2023</div>
+    <h1 data-fr='Test Éligibilité <span>QFZP UAE</span>' data-en='<span>QFZP</span> Eligibility Test'>Test Éligibilité <span>QFZP UAE</span></h1>
+    <p data-fr="Votre société Free Zone est-elle éligible au régime 0% Corporate Tax ? Diagnostic en 9 questions." data-en="Is your Free Zone entity eligible for the 0% Corporate Tax regime? 9-question diagnostic.">Votre société Free Zone est-elle éligible au régime 0% Corporate Tax ? Diagnostic en 9 questions.</p>
+  </section>
+
+
+  <main class="dft-main">
+    <div id="dftQuizContainer" class="dft-section">
+      <div class="dft-progress-bar"><div class="dft-progress-fill" id="dftProgress"></div></div>
+      <div class="dft-section-body">
+        <div class="dft-question-count" id="dftQCount"></div>
+        <div class="dft-question" id="dftQText"></div>
+        <div class="dft-question-hint" id="dftQHint"></div>
+        <div class="dft-options" id="dftOptions"></div>
+        <button type="button" class="dft-btn-nav" id="dftPrevBtn" data-fr="← Précédent" data-en="← Previous">← Précédent</button>
+      </div>
+    </div>
+    <div id="dftResultContainer" class="dft-section" style="display:none">
+      <div class="dft-result-header" id="dftResHead">
+        <div class="dft-result-label" data-fr="Résultat du diagnostic" data-en="Diagnostic result">Résultat du diagnostic</div>
+        <div class="dft-result-main" id="dftResStatus">-</div>
+        <div class="dft-result-sub" id="dftResScore">-</div>
+      </div>
+      <div class="dft-result-body">
+        <div id="dftCriteriaList"></div>
+        <button type="button" class="dft-btn dft-btn-restart" id="dftRestartBtn" data-fr="Refaire le test" data-en="Restart test">Refaire le test</button>
+      </div>
+    </div>
+  </main>
+
+
+  <section class="dft-seo">
+    <div class="dft-lang-fr">
+      <h2>Le régime <span>QFZP</span> aux Émirats Arabes Unis</h2>
+      <p>Le QFZP (Qualifying Free Zone Person) permet aux sociétés Free Zone de bénéficier d'un taux Corporate Tax de 0% sur le revenu qualifiant. Encadré par le Ministerial Decision No. 265 of 2023 et No. 139 of 2023.</p>
+      <h3>Les 6 critères cumulatifs</h3>
+      <ol><li>Être une personne morale constituée en Free Zone UAE</li><li>Avoir une substance adéquate (employés qualifiés, actifs, dépenses opérationnelles)</li><li>Percevoir un revenu qualifiant (activités listées)</li><li>Ne pas avoir opté pour le taux 9%</li><li>Respecter les règles de transfer pricing (Arms Length Principle + documentation)</li><li>Respecter le seuil de minimis (revenu non-qualifiant &le; 5% du total ou AED 5M)</li></ol>
+      <h3>Activités qualifiantes</h3>
+      <p>Fabrication, holding, shipping, trading de matières premières, services à des clients hors UAE, services à d'autres Free Zone Persons, treasury et financing pour le groupe, gestion de fonds, aviation, logistique.</p>
+      <h3>Activités exclues</h3>
+      <p>Transactions avec personnes physiques (sauf exceptions), banking et assurance (hors Free Zones régulées), activités immobilières (sauf immobilier commercial en Free Zone loué à une Free Zone Person).</p>
+    </div>
+    <div class="dft-lang-en">
+      <h2>The <span>QFZP</span> regime in the UAE</h2>
+      <p>QFZP (Qualifying Free Zone Person) enables Free Zone entities to enjoy a 0% Corporate Tax rate on qualifying income. Governed by Ministerial Decisions No. 265 of 2023 and No. 139 of 2023.</p>
+      <h3>The 6 cumulative criteria</h3>
+      <ol><li>Be a legal person incorporated in a UAE Free Zone</li><li>Maintain adequate substance (qualified staff, assets, operating expenditure)</li><li>Derive qualifying income (listed activities)</li><li>Not have elected to be subject to 9% CT</li><li>Comply with transfer pricing rules (Arm's Length Principle + documentation)</li><li>Meet the de minimis threshold (non-qualifying income &le; 5% of total or AED 5M)</li></ol>
+      <h3>Qualifying activities</h3>
+      <p>Manufacturing, holding, shipping, trading of qualifying commodities, services to non-UAE customers, services to other Free Zone Persons, treasury and financing for the group, fund management, aviation, logistics.</p>
+      <h3>Excluded activities</h3>
+      <p>Transactions with natural persons (except exceptions), banking and insurance (outside regulated Free Zones), real estate (except commercial real estate in Free Zone leased to a Free Zone Person).</p>
+    </div>
+  </section>
+
+
+  <div class="dft-cta">
+    <h3 data-fr='Validation <span>QFZP</span> par nos experts' data-en='<span>QFZP</span> validation by our experts'>Validation <span>QFZP</span> par nos experts</h3>
+    <p data-fr="Diagnostic, mise en conformité, documentation transfer pricing : Daftime sécurise votre éligibilité." data-en="Diagnostic, compliance setup, transfer pricing documentation: Daftime secures your eligibility.">Diagnostic, mise en conformité, documentation transfer pricing : Daftime sécurise votre éligibilité.</p>
+    <a href="https://daftime.ae/contact" target="_blank" rel="noopener" class="dft-btn" data-fr="Prendre rendez-vous" data-en="Book a meeting">Prendre rendez-vous</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var root = document.getElementById('dftQfzpTest');
+  if(!root) return;
+
+
+  var currentLang = 'fr';
+  var cur = 0;
+  var answers = [];
+
+
+  try {
+    var saved = localStorage.getItem('daftime_lang');
+    if(saved) currentLang = saved;
+    else if(navigator.language && navigator.language.indexOf('en')===0) currentLang = 'en';
+  } catch(e){}
+
+
+  function $(id){ return document.getElementById(id); }
+
+
+  var questions = {
+    fr: [
+      {q:"Votre société est-elle constituée dans une Free Zone UAE ?", h:"IFZA, DMCC, RAKEZ, JAFZA, DIFC, ADGM, etc.", opts:["Oui","Non"], elim:[false,true], w:[3,0]},
+      {q:"Avez-vous des employés qualifiés basés aux UAE ?", h:"Substance économique requise", opts:["Oui, avec bureau physique","Oui, flexi-desk uniquement","Non"], w:[3,1,0], elim:[false,false,true]},
+      {q:"Votre activité principale est-elle une activité qualifiante ?", h:"Manufacturing, holding, trading commodities, services à non-résidents UAE, fund management, etc.", opts:["Oui clairement","Incertain","Non"], w:[3,1,0], elim:[false,false,true]},
+      {q:"Avez-vous opté pour le taux 9% Corporate Tax ?", h:"Option irrévocable pour la période fiscale", opts:["Non","Oui"], w:[3,0], elim:[false,true]},
+      {q:"Avez-vous des clients personnes physiques aux UAE ?", h:"Hors exceptions : aviation, logistique, fonds d'investissement", opts:["Non","Quelques-uns","Oui, nombreux"], w:[3,1,0], elim:[false,false,false]},
+      {q:"Quel pourcentage de votre CA provient de clients hors UAE ?", h:"Services à l'étranger typiquement qualifiants", opts:["> 80%","50-80%","< 50%","Non applicable"], w:[3,2,1,2], elim:[false,false,false,false]},
+      {q:"Avez-vous une documentation transfer pricing ?", h:"Master file, Local file, CbCR si applicable", opts:["Oui complète","Partielle","Non"], w:[3,1,0], elim:[false,false,false]},
+      {q:"Votre revenu non-qualifiant dépasse-t-il le seuil de minimis ?", h:"5% du total OU AED 5M (le plus bas)", opts:["Non","Oui"], w:[3,0], elim:[false,true]},
+      {q:"Avez-vous audité vos comptes annuels ?", h:"Audit obligatoire pour les QFZP", opts:["Oui","En cours","Non"], w:[3,1,0], elim:[false,false,true]}
+    ],
+    en: [
+      {q:"Is your company incorporated in a UAE Free Zone?", h:"IFZA, DMCC, RAKEZ, JAFZA, DIFC, ADGM, etc.", opts:["Yes","No"], elim:[false,true], w:[3,0]},
+      {q:"Do you have qualified employees based in the UAE?", h:"Economic substance required", opts:["Yes, with physical office","Yes, flexi-desk only","No"], w:[3,1,0], elim:[false,false,true]},
+      {q:"Is your main activity a qualifying activity?", h:"Manufacturing, holding, commodity trading, services to non-UAE residents, fund management, etc.", opts:["Yes clearly","Uncertain","No"], w:[3,1,0], elim:[false,false,true]},
+      {q:"Have you elected to be subject to 9% Corporate Tax?", h:"Election is irrevocable for the tax period", opts:["No","Yes"], w:[3,0], elim:[false,true]},
+      {q:"Do you have UAE natural-person customers?", h:"Excluding exceptions: aviation, logistics, investment funds", opts:["No","A few","Yes, many"], w:[3,1,0], elim:[false,false,false]},
+      {q:"What percentage of revenue comes from non-UAE customers?", h:"Services abroad typically qualifying", opts:["> 80%","50-80%","< 50%","Not applicable"], w:[3,2,1,2], elim:[false,false,false,false]},
+      {q:"Do you have transfer pricing documentation?", h:"Master file, Local file, CbCR where applicable", opts:["Yes, complete","Partial","No"], w:[3,1,0], elim:[false,false,false]},
+      {q:"Does your non-qualifying income exceed the de minimis threshold?", h:"5% of total OR AED 5M (whichever is lower)", opts:["No","Yes"], w:[3,0], elim:[false,true]},
+      {q:"Have your annual accounts been audited?", h:"Audit mandatory for QFZPs", opts:["Yes","In progress","No"], w:[3,1,0], elim:[false,false,true]}
+    ]
+  };
+
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+
+  function setLang(l){
+    currentLang = l;
+    root.setAttribute('data-lang', l);
+    try { localStorage.setItem('daftime_lang', l); } catch(e){}
+    root.querySelectorAll('[data-fr]').forEach(function(el){
+      var v = el.getAttribute('data-'+l);
+      if(v !== null) el.innerHTML = v;
+    });
+    root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+    if($('dftResultContainer').style.display === 'block'){
+      showResult();
+    } else {
+      renderQ();
+    }
+  }
+
+
+  function renderQ(){
+    var qs = questions[currentLang] || questions.fr;
+    var q = qs[cur];
+    $('dftProgress').style.width = (cur / qs.length * 100) + '%';
+    $('dftQCount').textContent = (currentLang === 'fr' ? 'Question ' : 'Question ') + (cur + 1) + ' / ' + qs.length;
+    $('dftQText').textContent = q.q;
+    $('dftQHint').textContent = q.h;
+    var html = q.opts.map(function(o, i){
+      var sel = answers[cur] === i ? ' selected' : '';
+      return '<button type="button" class="dft-option' + sel + '" data-opt="' + i + '">' + escapeHtml(o) + '</button>';
+    }).join('');
+    $('dftOptions').innerHTML = html;
+    $('dftOptions').querySelectorAll('[data-opt]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-opt'), 10);
+        select(i);
+      });
+    });
+    $('dftPrevBtn').disabled = cur === 0;
+  }
+
+
+  function select(i){
+    var qs = questions[currentLang] || questions.fr;
+    answers[cur] = i;
+    renderQ();
+    setTimeout(function(){
+      if(cur < qs.length - 1){
+        cur++;
+        renderQ();
+      } else {
+        showResult();
+      }
+    }, 300);
+  }
+
+
+  function prev(){
+    if(cur > 0){
+      cur--;
+      renderQ();
+    }
+  }
+
+
+  function showResult(){
+    var qs = questions[currentLang] || questions.fr;
+    var total = 0, max = 0, elim = false;
+    qs.forEach(function(q, i){
+      var a = answers[i];
+      if(a === undefined) return;
+      total += q.w[a];
+      max += Math.max.apply(null, q.w);
+      if(q.elim[a]) elim = true;
+    });
+    var pct = max > 0 ? (total / max * 100) : 0;
+    $('dftQuizContainer').style.display = 'none';
+    $('dftResultContainer').style.display = 'block';
+    var head = $('dftResHead');
+    var status, sub;
+    if(elim || pct < 50){
+      head.className = 'dft-result-header danger';
+      status = currentLang === 'fr' ? 'Non éligible' : 'Not eligible';
+      sub = currentLang === 'fr' ? 'Critères rédhibitoires non remplis' : 'Deal-breaker criteria not met';
+    } else if(pct >= 85){
+      head.className = 'dft-result-header success';
+      status = currentLang === 'fr' ? 'Éligible QFZP' : 'QFZP eligible';
+      sub = currentLang === 'fr' ? 'Vous semblez remplir les conditions' : 'You appear to meet the conditions';
+    } else {
+      head.className = 'dft-result-header warning';
+      status = currentLang === 'fr' ? 'À sécuriser' : 'Needs review';
+      sub = currentLang === 'fr' ? 'Certains critères nécessitent des ajustements' : 'Some criteria need adjustments';
+    }
+    $('dftResStatus').textContent = status;
+    $('dftResScore').textContent = sub + ' · ' + (currentLang === 'fr' ? 'Score : ' : 'Score: ') + Math.round(pct) + '%';
+    $('dftCriteriaList').innerHTML = qs.map(function(q, i){
+      var a = answers[i];
+      var ok = a !== undefined && !q.elim[a] && q.w[a] >= 2;
+      return '<div class="dft-criteria-row"><div class="dft-criteria-icon ' + (ok ? 'ok' : 'ko') + '">' + (ok ? '✓' : '✕') + '</div><div>' + escapeHtml(q.q) + '</div></div>';
+    }).join('');
+  }
+
+
+  function restart(){
+    cur = 0;
+    answers = [];
+    $('dftQuizContainer').style.display = 'block';
+    $('dftResultContainer').style.display = 'none';
+    renderQ();
+  }
+
+
+  // Lang buttons
+  root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+
+
+  // Prev / Restart
+  $('dftPrevBtn').addEventListener('click', prev);
+  $('dftRestartBtn').addEventListener('click', restart);
+
+
+  // Init
+  setLang(currentLang);
+})();
+</script>
+________________
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Invoice Generator — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+<style>
+.dft-inv-gen {
+  --dft-bg:#080A32;
+  --dft-card:#0F1240;
+  --dft-primary:#1a1d56;
+  --dft-primary-light:#2a2d6a;
+  --dft-accent:#d4af37;
+  --dft-accent-light:#e8c547;
+  --dft-white:#fff;
+  --dft-text-sec:rgba(255,255,255,.7);
+  --dft-text-mut:rgba(255,255,255,.5);
+  --dft-border:rgba(255,255,255,.1);
+  --dft-success:#10b981;
+  --dft-danger:#ef4444;
+  --dft-radius:16px;
+  --dft-radius-sm:8px;
+  font-family:'Poppins',sans-serif;
+  background:var(--dft-bg);
+  color:var(--dft-white);
+  line-height:1.6;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.dft-inv-gen *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+
+.dft-inv-gen .dft-topbar{display:flex;justify-content:flex-end;padding:16px 24px;border-bottom:1px solid var(--dft-border)}
+.dft-inv-gen .dft-lang-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:100px;padding:3px}
+.dft-inv-gen .dft-lang-btn{padding:6px 12px;font-size:11px;font-weight:600;color:var(--dft-text-mut);cursor:pointer;border-radius:100px;border:none;background:transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.dft-inv-gen .dft-lang-btn.active{background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-inv-gen .dft-hero{padding:50px 24px 30px;text-align:center;position:relative;background:linear-gradient(180deg,var(--dft-bg) 0%,#0B0E3A 100%)}
+.dft-inv-gen .dft-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(212,175,55,.08) 0%,transparent 70%);pointer-events:none}
+.dft-inv-gen .dft-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--dft-accent);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:20px;position:relative}
+.dft-inv-gen .dft-hero h1{font-size:38px;font-weight:300;margin-bottom:14px;line-height:1.2;position:relative;color:var(--dft-white)}
+.dft-inv-gen .dft-hero h1 span{background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:500}
+.dft-inv-gen .dft-hero p{color:var(--dft-text-sec);font-size:15px;max-width:720px;margin:0 auto;position:relative}
+
+
+.dft-inv-gen .dft-main{max-width:1400px;margin:0 auto;padding:30px 24px 50px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.dft-inv-gen .dft-section{background:var(--dft-card);border:1px solid var(--dft-border);border-radius:var(--dft-radius)}
+.dft-inv-gen .dft-section + .dft-section{margin-top:20px}
+.dft-inv-gen .dft-section-header{padding:18px 24px;border-bottom:1px solid var(--dft-border);display:flex;align-items:center;gap:12px}
+.dft-inv-gen .dft-section-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.dft-inv-gen .dft-section-title{font-size:14px;font-weight:600;color:var(--dft-white)}
+.dft-inv-gen .dft-section-body{padding:24px}
+
+
+.dft-inv-gen .dft-form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.dft-inv-gen .dft-form-label{font-size:11px;font-weight:500;color:var(--dft-text-sec);text-transform:uppercase;letter-spacing:.5px}
+.dft-inv-gen .dft-form-input,.dft-inv-gen .dft-form-select,.dft-inv-gen textarea{background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);padding:12px 14px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--dft-white);transition:all .2s;width:100%}
+.dft-inv-gen textarea{resize:vertical;min-height:60px}
+.dft-inv-gen .dft-form-input:focus,.dft-inv-gen .dft-form-select:focus,.dft-inv-gen textarea:focus{outline:none;border-color:var(--dft-accent);background:rgba(255,255,255,.08)}
+.dft-inv-gen .dft-form-select option{background:var(--dft-card);color:var(--dft-white)}
+.dft-inv-gen .dft-form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+
+.dft-inv-gen .dft-logo-upload{display:flex;align-items:center;gap:10px;padding:10px;background:rgba(255,255,255,.05);border:1px dashed var(--dft-border);border-radius:var(--dft-radius-sm);cursor:pointer;margin-bottom:14px;font-size:13px;color:var(--dft-text-sec)}
+.dft-inv-gen .dft-logo-preview-small{max-height:30px}
+
+
+.dft-inv-gen .dft-items-wrap{margin-top:8px}
+.dft-inv-gen .dft-item-row{display:grid;grid-template-columns:3fr 1fr 1fr 1fr 32px;gap:8px;margin-bottom:8px;align-items:center}
+.dft-inv-gen .dft-item-row input{padding:9px 10px;font-size:13px}
+.dft-inv-gen .dft-btn-remove{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;border-radius:6px;width:32px;height:32px;cursor:pointer;font-size:16px;flex-shrink:0}
+.dft-inv-gen .dft-btn-add{background:rgba(212,175,55,.1);border:1px dashed rgba(212,175,55,.4);color:var(--dft-accent);padding:10px;width:100%;border-radius:var(--dft-radius-sm);cursor:pointer;font-size:13px;font-weight:500;margin-top:8px;font-family:'Poppins',sans-serif}
+
+
+.dft-inv-gen .dft-btn{padding:12px 24px;border:none;border-radius:100px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;cursor:pointer;background:var(--dft-accent);color:var(--dft-bg)}
+.dft-inv-gen .dft-btn-full{width:100%;font-size:14px;margin-top:16px;padding:14px 24px}
+
+
+.dft-inv-gen .dft-preview-wrap{position:sticky;top:20px}
+.dft-inv-gen .dft-preview{background:white;color:#1a1d56;border-radius:var(--dft-radius);padding:40px;min-height:600px}
+.dft-inv-gen .dft-preview-header{display:flex;justify-content:space-between;border-bottom:2px solid #1a1d56;padding-bottom:20px;margin-bottom:24px;gap:20px;flex-wrap:wrap}
+.dft-inv-gen .dft-preview-logo{max-height:60px}
+.dft-inv-gen .dft-preview-brand{font-size:24px;font-weight:700;color:#1a1d56}
+.dft-inv-gen .dft-preview-title-box{text-align:right}
+.dft-inv-gen .dft-preview-title{font-size:28px;font-weight:700;color:#1a1d56;letter-spacing:1px}
+.dft-inv-gen .dft-preview-num{font-size:12px;color:#666;margin-top:4px}
+.dft-inv-gen .dft-preview-section{margin-bottom:20px}
+.dft-inv-gen .dft-preview-section h4{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.dft-inv-gen .dft-preview-section p{font-size:13px;color:#1a1d56}
+.dft-inv-gen .dft-preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.dft-inv-gen .dft-preview-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:12px}
+.dft-inv-gen .dft-preview-table th{background:#1a1d56;color:white;padding:10px;text-align:left}
+.dft-inv-gen .dft-preview-table td{padding:10px;border-bottom:1px solid #eee;color:#333}
+.dft-inv-gen .dft-preview-totals{margin-left:auto;width:280px;max-width:100%}
+.dft-inv-gen .dft-preview-total-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;color:#333}
+.dft-inv-gen .dft-preview-total-row.dft-final{border-top:2px solid #1a1d56;padding-top:10px;margin-top:8px;font-size:16px;font-weight:700;color:#1a1d56}
+
+
+.dft-inv-gen .dft-seo{max-width:1100px;margin:40px auto;padding:40px 24px;background:var(--dft-card);border-radius:var(--dft-radius);border:1px solid var(--dft-border)}
+.dft-inv-gen .dft-seo h2{font-size:24px;font-weight:500;margin-bottom:16px;color:var(--dft-white)}
+.dft-inv-gen .dft-seo h2 span{color:var(--dft-accent)}
+.dft-inv-gen .dft-seo h3{font-size:16px;font-weight:500;margin:24px 0 10px;color:var(--dft-accent)}
+.dft-inv-gen .dft-seo p,.dft-inv-gen .dft-seo li{color:var(--dft-text-sec);font-size:14px;margin-bottom:10px}
+.dft-inv-gen .dft-seo ul{padding-left:20px;margin-bottom:16px}
+.dft-inv-gen .dft-faq-item{border-bottom:1px solid var(--dft-border);padding:16px 0;cursor:pointer}
+.dft-inv-gen .dft-faq-q{font-weight:500;color:var(--dft-white);display:flex;justify-content:space-between;font-size:14px;gap:12px}
+.dft-inv-gen .dft-faq-a{color:var(--dft-text-sec);font-size:13px;margin-top:8px;padding-left:10px;border-left:2px solid var(--dft-accent);display:none}
+.dft-inv-gen .dft-faq-item.open .dft-faq-a{display:block}
+
+
+.dft-inv-gen .dft-cta{max-width:1100px;margin:40px auto;padding:40px 24px;text-align:center;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius);border:1px solid rgba(212,175,55,.3)}
+.dft-inv-gen .dft-cta h3{font-size:24px;font-weight:400;margin-bottom:10px;color:var(--dft-white)}
+.dft-inv-gen .dft-cta h3 span{color:var(--dft-accent);font-weight:600}
+.dft-inv-gen .dft-cta p{color:rgba(255,255,255,.8);margin-bottom:20px;font-size:14px}
+
+
+.dft-inv-gen .dft-lang-en{display:none}
+.dft-inv-gen[data-lang="en"] .dft-lang-fr{display:none}
+.dft-inv-gen[data-lang="en"] .dft-lang-en{display:block}
+
+
+@media(max-width:1024px){
+  .dft-inv-gen .dft-main{grid-template-columns:1fr;gap:20px;padding:24px 20px 40px;max-width:780px}
+  .dft-inv-gen .dft-preview-wrap{position:static}
+  .dft-inv-gen .dft-hero{padding:40px 20px 24px}
+  .dft-inv-gen .dft-hero h1{font-size:34px}
+  .dft-inv-gen .dft-hero p{font-size:14px}
+  .dft-inv-gen .dft-seo,.dft-inv-gen .dft-cta{margin:24px 20px;padding:32px 24px;max-width:calc(100% - 40px)}
+  .dft-inv-gen .dft-seo h2{font-size:22px}
+  .dft-inv-gen .dft-cta h3{font-size:22px}
+  .dft-inv-gen .dft-preview{padding:32px}
+}
+@media(max-width:768px){
+  .dft-inv-gen .dft-topbar{padding:14px 18px}
+  .dft-inv-gen .dft-hero{padding:32px 18px 20px}
+  .dft-inv-gen .dft-hero-badge{font-size:11px;padding:5px 14px;margin-bottom:16px}
+  .dft-inv-gen .dft-hero h1{font-size:28px;line-height:1.25}
+  .dft-inv-gen .dft-hero p{font-size:13px;line-height:1.5}
+  .dft-inv-gen .dft-main{padding:20px 16px 36px;gap:16px}
+  .dft-inv-gen .dft-section + .dft-section{margin-top:16px}
+  .dft-inv-gen .dft-section-header{padding:16px 18px}
+  .dft-inv-gen .dft-section-body{padding:20px}
+  .dft-inv-gen .dft-section-icon{width:32px;height:32px;font-size:14px}
+  .dft-inv-gen .dft-form-group{margin-bottom:14px}
+  .dft-inv-gen .dft-form-input,.dft-inv-gen .dft-form-select,.dft-inv-gen textarea{padding:11px 12px;font-size:16px}
+  .dft-inv-gen .dft-preview{padding:24px}
+  .dft-inv-gen .dft-preview-title{font-size:24px}
+  .dft-inv-gen .dft-preview-brand{font-size:20px}
+  .dft-inv-gen .dft-seo,.dft-inv-gen .dft-cta{margin:20px 16px;padding:28px 20px;max-width:calc(100% - 32px)}
+  .dft-inv-gen .dft-seo h2{font-size:20px}
+  .dft-inv-gen .dft-seo h3{font-size:15px;margin:20px 0 8px}
+  .dft-inv-gen .dft-seo p,.dft-inv-gen .dft-seo li{font-size:13px}
+  .dft-inv-gen .dft-cta h3{font-size:20px}
+  .dft-inv-gen .dft-cta p{font-size:13px}
+}
+@media(max-width:480px){
+  .dft-inv-gen .dft-topbar{padding:12px 14px;justify-content:center}
+  .dft-inv-gen .dft-hero{padding:28px 14px 18px}
+  .dft-inv-gen .dft-hero h1{font-size:24px}
+  .dft-inv-gen .dft-hero p{font-size:12.5px}
+  .dft-inv-gen .dft-main{padding:16px 12px 32px;gap:14px}
+  .dft-inv-gen .dft-section-header{padding:14px 16px;gap:10px}
+  .dft-inv-gen .dft-section-body{padding:16px}
+  .dft-inv-gen .dft-form-grid-2{grid-template-columns:1fr;gap:0}
+  .dft-inv-gen .dft-form-label{font-size:10.5px}
+  .dft-inv-gen .dft-form-input,.dft-inv-gen .dft-form-select,.dft-inv-gen textarea{padding:10px 12px;font-size:16px}
+  .dft-inv-gen .dft-item-row{grid-template-columns:1fr 1fr 32px;grid-template-areas:"desc desc desc" "qty price remove";gap:8px;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);margin-bottom:10px}
+  .dft-inv-gen .dft-item-row input:nth-child(1){grid-area:desc}
+  .dft-inv-gen .dft-item-row input:nth-child(2){grid-area:qty}
+  .dft-inv-gen .dft-item-row input:nth-child(3){grid-area:price}
+  .dft-inv-gen .dft-item-row input:nth-child(4){display:none}
+  .dft-inv-gen .dft-item-row .dft-btn-remove{grid-area:remove}
+  .dft-inv-gen .dft-item-row input{padding:10px;font-size:14px}
+  .dft-inv-gen .dft-btn-full{padding:12px;font-size:13px}
+  .dft-inv-gen .dft-preview{padding:18px}
+  .dft-inv-gen .dft-preview-header{flex-direction:column;align-items:flex-start;gap:12px;padding-bottom:16px;margin-bottom:18px}
+  .dft-inv-gen .dft-preview-title-box{text-align:left}
+  .dft-inv-gen .dft-preview-title{font-size:20px;letter-spacing:.5px}
+  .dft-inv-gen .dft-preview-brand{font-size:18px}
+  .dft-inv-gen .dft-preview-grid{grid-template-columns:1fr;gap:14px}
+  .dft-inv-gen .dft-preview-table{font-size:11px;display:block;overflow-x:auto;white-space:nowrap}
+  .dft-inv-gen .dft-preview-table th,.dft-inv-gen .dft-preview-table td{padding:8px}
+  .dft-inv-gen .dft-preview-totals{width:100%}
+  .dft-inv-gen .dft-preview-total-row{font-size:12.5px}
+  .dft-inv-gen .dft-preview-total-row.dft-final{font-size:14px}
+  .dft-inv-gen .dft-seo,.dft-inv-gen .dft-cta{margin:16px 12px;padding:22px 16px;max-width:calc(100% - 24px)}
+  .dft-inv-gen .dft-seo h2{font-size:18px}
+  .dft-inv-gen .dft-seo h3{font-size:14px;margin:16px 0 6px}
+  .dft-inv-gen .dft-seo p,.dft-inv-gen .dft-seo li{font-size:12.5px;line-height:1.55}
+  .dft-inv-gen .dft-faq-q{font-size:13px}
+  .dft-inv-gen .dft-faq-a{font-size:12.5px}
+  .dft-inv-gen .dft-cta h3{font-size:18px}
+  .dft-inv-gen .dft-cta p{font-size:12.5px}
+  .dft-inv-gen .dft-btn{padding:11px 22px;font-size:12.5px}
+}
+</style>
+
+
+<div class="dft-inv-gen" data-lang="fr" id="dftInvGen">
+  <div class="dft-topbar">
+    <div class="dft-lang-toggle">
+      <button class="dft-lang-btn active" data-lang="fr">FR</button>
+      <button class="dft-lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+
+
+  <section class="dft-hero">
+    <div class="dft-hero-badge">✓ Federal Tax Authority compliant</div>
+    <h1 data-fr='Générateur de <span>Facture UAE</span>' data-en='UAE <span>Tax Invoice</span> Generator'>Générateur de <span>Facture UAE</span></h1>
+    <p data-fr="Factures aux normes Federal Tax Authority : TRN, mention Tax Invoice, détail VAT 5%. Export PDF instantané." data-en="Invoices compliant with the Federal Tax Authority: TRN, Tax Invoice header, VAT 5% breakdown. Instant PDF export.">Factures aux normes Federal Tax Authority : TRN, mention Tax Invoice, détail VAT 5%. Export PDF instantané.</p>
+  </section>
+
+
+  <main class="dft-main">
+    <div>
+      <div class="dft-section">
+        <div class="dft-section-header"><div class="dft-section-icon">🏢</div><div class="dft-section-title" data-fr="Votre société" data-en="Your company">Votre société</div></div>
+        <div class="dft-section-body">
+          <label class="dft-logo-upload" for="dftLogoInput">
+            <input type="file" id="dftLogoInput" accept="image/*" style="display:none" />
+            <img id="dftLogoPreview" class="dft-logo-preview-small" style="display:none" alt="" />
+            <span id="dftLogoText" data-fr="📷 Ajouter votre logo (optionnel)" data-en="📷 Add your logo (optional)">📷 Ajouter votre logo (optionnel)</span>
+          </label>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Nom de la société" data-en="Company name">Nom de la société</label><input type="text" class="dft-form-input" id="dftCompanyName" placeholder="Daftime Accounting LLC" /></div>
+          <div class="dft-form-group"><label class="dft-form-label">TRN (Tax Registration Number)</label><input type="text" class="dft-form-input" id="dftCompanyTrn" placeholder="100123456700003" /></div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Adresse complète" data-en="Full address">Adresse complète</label><textarea class="dft-form-input" id="dftCompanyAddress">Office 1204, Business Bay, Dubai, UAE</textarea></div>
+          <div class="dft-form-grid-2">
+            <div class="dft-form-group"><label class="dft-form-label">Email</label><input type="email" class="dft-form-input" id="dftCompanyEmail" placeholder="contact@daftime.ae" /></div>
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Téléphone" data-en="Phone">Téléphone</label><input type="tel" class="dft-form-input" id="dftCompanyPhone" placeholder="+971 4 123 4567" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="dft-section">
+        <div class="dft-section-header"><div class="dft-section-icon">👤</div><div class="dft-section-title" data-fr="Client" data-en="Customer">Client</div></div>
+        <div class="dft-section-body">
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Nom du client" data-en="Customer name">Nom du client</label><input type="text" class="dft-form-input" id="dftClientName" /></div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="TRN client (si applicable)" data-en="Customer TRN (if applicable)">TRN client (si applicable)</label><input type="text" class="dft-form-input" id="dftClientTrn" /></div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Adresse" data-en="Address">Adresse</label><textarea class="dft-form-input" id="dftClientAddress"></textarea></div>
+        </div>
+      </div>
+      <div class="dft-section">
+        <div class="dft-section-header"><div class="dft-section-icon">📋</div><div class="dft-section-title" data-fr="Détails de la facture" data-en="Invoice details">Détails de la facture</div></div>
+        <div class="dft-section-body">
+          <div class="dft-form-grid-2">
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="N° de facture" data-en="Invoice number">N° de facture</label><input type="text" class="dft-form-input" id="dftInvoiceNum" value="INV-2026-001" /></div>
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Date d'émission" data-en="Issue date">Date d'émission</label><input type="date" class="dft-form-input" id="dftInvoiceDate" /></div>
+          </div>
+          <div class="dft-form-grid-2">
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Date d'échéance" data-en="Due date">Date d'échéance</label><input type="date" class="dft-form-input" id="dftDueDate" /></div>
+            <div class="dft-form-group"><label class="dft-form-label" data-fr="Devise" data-en="Currency">Devise</label><select class="dft-form-select" id="dftCurrency"><option>AED</option><option>USD</option><option>EUR</option></select></div>
+          </div>
+          <div class="dft-items-wrap" id="dftItems"></div>
+          <button type="button" class="dft-btn-add" id="dftBtnAdd" data-fr="+ Ajouter une ligne" data-en="+ Add a line">+ Ajouter une ligne</button>
+        </div>
+      </div>
+      <button type="button" class="dft-btn dft-btn-full" id="dftBtnExport" data-fr="📄 Télécharger la facture PDF" data-en="📄 Download invoice PDF">📄 Télécharger la facture PDF</button>
+    </div>
+    <div>
+      <div class="dft-preview-wrap">
+        <div id="dftPreview" class="dft-preview">
+          <div class="dft-preview-header">
+            <div><img id="dftPreviewLogo" style="display:none" class="dft-preview-logo" alt="" /><div id="dftPreviewBrand" class="dft-preview-brand" style="display:none"></div></div>
+            <div class="dft-preview-title-box"><div class="dft-preview-title">TAX INVOICE</div><div class="dft-preview-num" id="dftPreviewNum">INV-2026-001</div></div>
+          </div>
+          <div class="dft-preview-grid">
+            <div class="dft-preview-section"><h4 data-fr="ÉMETTEUR" data-en="FROM">ÉMETTEUR</h4><p id="dftPreviewFrom"></p></div>
+            <div class="dft-preview-section"><h4 data-fr="CLIENT" data-en="BILL TO">CLIENT</h4><p id="dftPreviewTo"></p></div>
+          </div>
+          <div class="dft-preview-grid">
+            <div class="dft-preview-section"><h4 data-fr="DATE D'ÉMISSION" data-en="ISSUE DATE">DATE D'ÉMISSION</h4><p id="dftPreviewDate"></p></div>
+            <div class="dft-preview-section"><h4 data-fr="ÉCHÉANCE" data-en="DUE DATE">ÉCHÉANCE</h4><p id="dftPreviewDue"></p></div>
+          </div>
+          <table class="dft-preview-table">
+            <thead><tr><th data-fr="Description" data-en="Description">Description</th><th data-fr="Qté" data-en="Qty">Qté</th><th data-fr="Prix U." data-en="Unit price">Prix U.</th><th>Total</th></tr></thead>
+            <tbody id="dftPreviewItems"></tbody>
+          </table>
+          <div class="dft-preview-totals">
+            <div class="dft-preview-total-row"><span data-fr="Sous-total HT" data-en="Subtotal (excl. VAT)">Sous-total HT</span><span id="dftPreviewSub">0.00</span></div>
+            <div class="dft-preview-total-row"><span>VAT 5%</span><span id="dftPreviewVat">0.00</span></div>
+            <div class="dft-preview-total-row dft-final"><span data-fr="Total TTC" data-en="Total (incl. VAT)">Total TTC</span><span id="dftPreviewTotal">0.00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <section class="dft-seo">
+    <div class="dft-lang-fr">
+      <h2>Facturation conforme aux <span>Émirats Arabes Unis</span></h2>
+      <p>Aux UAE, toute société enregistrée à la VAT doit émettre une Tax Invoice conforme à l'article 59 du règlement exécutif du Federal Decree-Law No. 8 of 2017. Les mentions obligatoires : "Tax Invoice", TRN émetteur et client, date d'émission, numéro séquentiel, description, montant HT, VAT 5%, total TTC.</p>
+      <h3>Mentions obligatoires</h3>
+      <ul><li>Mention claire "Tax Invoice"</li><li>Nom, adresse et TRN du fournisseur</li><li>Nom, adresse du client, TRN si enregistré VAT</li><li>Numéro séquentiel unique</li><li>Date d'émission et date de fourniture</li><li>Description, quantité, prix unitaire</li><li>Montant HT, taux et montant VAT, total TTC</li></ul>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Tax Invoice vs Simplified Tax Invoice ?<span>+</span></div><div class="dft-faq-a">La Simplified est autorisée pour B2C &lt; AED 10 000. Moins de mentions (pas de TRN client). Au-delà ou en B2B, la Tax Invoice complète est obligatoire.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Durée de conservation des factures ?<span>+</span></div><div class="dft-faq-a">5 ans minimum (15 ans pour l'immobilier). Format électronique accepté.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Tous les biens et services sont-ils à 5% ?<span>+</span></div><div class="dft-faq-a">Non. Zero-rated : exports hors GCC, médicaments, transport international. Exemptés : services financiers, location résidentielle long terme.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Facturation en USD ou EUR possible ?<span>+</span></div><div class="dft-faq-a">Oui, mais la VAT doit être exprimée en AED au taux officiel UAE Central Bank à la date d'émission.</div></div>
+    </div>
+    <div class="dft-lang-en">
+      <h2>UAE <span>Tax Invoice</span> compliance</h2>
+      <p>In the UAE, every VAT-registered company must issue a Tax Invoice compliant with Article 59 of the Executive Regulation of Federal Decree-Law No. 8 of 2017. Mandatory mentions: "Tax Invoice", issuer and customer TRN, issue date, sequential number, description, net amount, VAT 5%, total.</p>
+      <h3>Mandatory information</h3>
+      <ul><li>Clear "Tax Invoice" header</li><li>Supplier name, address and TRN</li><li>Customer name, address, TRN if VAT-registered</li><li>Unique sequential invoice number</li><li>Issue date and supply date</li><li>Description, quantity, unit price</li><li>Net amount, VAT rate and amount, total</li></ul>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Tax Invoice vs Simplified Tax Invoice?<span>+</span></div><div class="dft-faq-a">The Simplified is allowed for B2C below AED 10,000. Fewer fields (no customer TRN). Above that threshold or for B2B, the full Tax Invoice is mandatory.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Invoice retention period?<span>+</span></div><div class="dft-faq-a">Minimum 5 years (15 years for real estate). Electronic format accepted.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Are all goods and services taxed at 5%?<span>+</span></div><div class="dft-faq-a">No. Zero-rated: exports outside GCC, medicines, international transport. Exempt: financial services, long-term residential rentals.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Can I invoice in USD or EUR?<span>+</span></div><div class="dft-faq-a">Yes, but VAT must be shown in AED using the official UAE Central Bank rate on issue date.</div></div>
+    </div>
+  </section>
+
+
+  <div class="dft-cta">
+    <h3 data-fr='Besoin d<span>&#39;accompagnement</span> VAT ?' data-en='Need <span>VAT advisory</span>?'>Besoin d<span>&#39;accompagnement</span> VAT ?</h3>
+    <p data-fr="Daftime gère votre enregistrement FTA, vos déclarations trimestrielles et vos audits VAT." data-en="Daftime manages your FTA registration, quarterly VAT returns and audits.">Daftime gère votre enregistrement FTA, vos déclarations trimestrielles et vos audits VAT.</p>
+    <a href="https://daftime.ae/contact" target="_blank" rel="noopener" class="dft-btn" data-fr="Prendre rendez-vous" data-en="Book a meeting">Prendre rendez-vous</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var root = document.getElementById('dftInvGen');
+  if(!root) return;
+
+
+  var currentLang = 'fr';
+  try {
+    var saved = localStorage.getItem('daftime_lang');
+    if(saved) currentLang = saved;
+    else if(navigator.language && navigator.language.indexOf('en')===0) currentLang = 'en';
+  } catch(e){}
+
+
+  var items = [{desc:'',qty:1,price:0}];
+
+
+  function $(id){ return document.getElementById(id); }
+
+
+  function setLang(l){
+    currentLang = l;
+    root.setAttribute('data-lang', l);
+    try { localStorage.setItem('daftime_lang', l); } catch(e){}
+    root.querySelectorAll('[data-fr]').forEach(function(el){
+      var v = el.getAttribute('data-'+l);
+      if(v !== null) el.innerHTML = v;
+    });
+    root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+    renderItems();
+    render();
+  }
+
+
+  function renderItems(){
+    var phDesc = currentLang === 'fr' ? 'Description' : 'Description';
+    var phQty = currentLang === 'fr' ? 'Qté' : 'Qty';
+    var phPrice = currentLang === 'fr' ? 'Prix U.' : 'Unit price';
+    var html = items.map(function(it, i){
+      var total = (it.qty * it.price).toFixed(2);
+      return '<div class="dft-item-row">' +
+        '<input type="text" class="dft-form-input" placeholder="' + phDesc + '" value="' + escapeHtml(it.desc) + '" data-idx="' + i + '" data-field="desc">' +
+        '<input type="number" class="dft-form-input" placeholder="' + phQty + '" value="' + it.qty + '" data-idx="' + i + '" data-field="qty">' +
+        '<input type="number" class="dft-form-input" placeholder="' + phPrice + '" value="' + it.price + '" data-idx="' + i + '" data-field="price">' +
+        '<input type="text" class="dft-form-input" value="' + total + '" readonly>' +
+        '<button type="button" class="dft-btn-remove" data-remove="' + i + '">×</button>' +
+      '</div>';
+    }).join('');
+    $('dftItems').innerHTML = html;
+    $('dftItems').querySelectorAll('input[data-idx]').forEach(function(inp){
+      inp.addEventListener('input', function(){
+        var idx = parseInt(inp.getAttribute('data-idx'), 10);
+        var field = inp.getAttribute('data-field');
+        items[idx][field] = field === 'desc' ? inp.value : (parseFloat(inp.value) || 0);
+        render();
+        if(field !== 'desc') {
+          var row = inp.parentElement;
+          var totalInput = row.querySelectorAll('input')[3];
+          totalInput.value = (items[idx].qty * items[idx].price).toFixed(2);
+        }
+      });
+    });
+    $('dftItems').querySelectorAll('[data-remove]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = parseInt(btn.getAttribute('data-remove'), 10);
+        items.splice(idx, 1);
+        if(items.length === 0) items.push({desc:'',qty:1,price:0});
+        renderItems();
+        render();
+      });
+    });
+  }
+
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+
+  function render(){
+    var cn = $('dftCompanyName').value;
+    if(cn && $('dftPreviewLogo').style.display === 'none'){
+      $('dftPreviewBrand').textContent = cn;
+      $('dftPreviewBrand').style.display = 'block';
+    } else if(!cn){
+      $('dftPreviewBrand').style.display = 'none';
+    }
+    var trn = $('dftCompanyTrn').value;
+    var addr = $('dftCompanyAddress').value;
+    var email = $('dftCompanyEmail').value;
+    var phone = $('dftCompanyPhone').value;
+    $('dftPreviewFrom').innerHTML = '<strong>' + escapeHtml(cn||'') + '</strong><br>' + escapeHtml(addr||'') + '<br>' + (trn ? 'TRN: ' + escapeHtml(trn) : '') + '<br>' + escapeHtml(email||'') + ' ' + (phone ? ' · ' + escapeHtml(phone) : '');
+    var clName = $('dftClientName').value;
+    var clTrn = $('dftClientTrn').value;
+    var clAddr = $('dftClientAddress').value;
+    $('dftPreviewTo').innerHTML = '<strong>' + escapeHtml(clName||'') + '</strong><br>' + escapeHtml(clAddr||'') + '<br>' + (clTrn ? 'TRN: ' + escapeHtml(clTrn) : '');
+    $('dftPreviewNum').textContent = $('dftInvoiceNum').value;
+    var fmt = function(d){ return d ? new Date(d).toLocaleDateString(currentLang === 'en' ? 'en-GB' : 'fr-FR') : ''; };
+    $('dftPreviewDate').textContent = fmt($('dftInvoiceDate').value);
+    $('dftPreviewDue').textContent = fmt($('dftDueDate').value);
+    var cur = $('dftCurrency').value;
+    var sub = 0;
+    $('dftPreviewItems').innerHTML = items.map(function(it){
+      var t = it.qty * it.price; sub += t;
+      return '<tr><td>' + escapeHtml(it.desc||'') + '</td><td>' + it.qty + '</td><td>' + it.price.toFixed(2) + ' ' + cur + '</td><td>' + t.toFixed(2) + ' ' + cur + '</td></tr>';
+    }).join('');
+    var vat = sub * 0.05;
+    $('dftPreviewSub').textContent = sub.toFixed(2) + ' ' + cur;
+    $('dftPreviewVat').textContent = vat.toFixed(2) + ' ' + cur;
+    $('dftPreviewTotal').textContent = (sub + vat).toFixed(2) + ' ' + cur;
+  }
+
+
+  // Init dates
+  $('dftInvoiceDate').valueAsDate = new Date();
+  var due = new Date(); due.setDate(due.getDate() + 30);
+  $('dftDueDate').valueAsDate = due;
+
+
+  // Logo upload
+  $('dftLogoInput').addEventListener('change', function(e){
+    var f = e.target.files[0]; if(!f) return;
+    var r = new FileReader();
+    r.onload = function(ev){
+      $('dftLogoPreview').src = ev.target.result;
+      $('dftLogoPreview').style.display = 'block';
+      $('dftLogoText').style.display = 'none';
+      $('dftPreviewLogo').src = ev.target.result;
+      $('dftPreviewLogo').style.display = 'block';
+      $('dftPreviewBrand').style.display = 'none';
+    };
+    r.readAsDataURL(f);
+  });
+
+
+  // Add item
+  $('dftBtnAdd').addEventListener('click', function(){
+    items.push({desc:'',qty:1,price:0});
+    renderItems();
+    render();
+  });
+
+
+  // Lang buttons
+  root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+
+
+  // FAQ
+  root.querySelectorAll('.dft-faq-item').forEach(function(item){
+    item.addEventListener('click', function(){ item.classList.toggle('open'); });
+  });
+
+
+  // Live render on input
+  ['dftCompanyName','dftCompanyTrn','dftCompanyAddress','dftCompanyEmail','dftCompanyPhone','dftClientName','dftClientTrn','dftClientAddress','dftInvoiceNum','dftInvoiceDate','dftDueDate','dftCurrency'].forEach(function(id){
+    var el = $(id);
+    el.addEventListener('input', render);
+    el.addEventListener('change', render);
+  });
+
+
+  // PDF export
+  $('dftBtnExport').addEventListener('click', async function(){
+    if(typeof window.jspdf === 'undefined' || typeof window.html2canvas === 'undefined'){
+      alert(currentLang === 'fr' ? 'Librairie PDF non chargée. Réessayez dans un instant.' : 'PDF library not loaded. Try again in a moment.');
+      return;
+    }
+    try {
+      var jsPDF = window.jspdf.jsPDF;
+      var canvas = await window.html2canvas($('dftPreview'), {scale:2, backgroundColor:'#ffffff'});
+      var pdf = new jsPDF({unit:'mm', format:'a4'});
+      var w = pdf.internal.pageSize.getWidth();
+      var h = (canvas.height * w) / canvas.width;
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, w, h);
+      pdf.save($('dftInvoiceNum').value + '.pdf');
+    } catch(err){
+      console.error(err);
+      alert(currentLang === 'fr' ? 'Erreur lors de la génération du PDF.' : 'Error generating PDF.');
+    }
+  });
+
+
+  // Init
+  setLang(currentLang);
+})();
+</script>
+________________
+</body>
+</html>

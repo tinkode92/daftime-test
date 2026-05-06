@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WPS SIF Generator — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<div id="wps-generator">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        #wps-generator {
+            --primary-color: #7b8cde;
+            --accent-color: #9ba8e8;
+            --bg: #ffffff;
+            --card-bg: #1b1e3d;
+            --text-color: #c8cee0;
+            --border-color: rgba(123, 140, 222, 0.15);
+            --muted-color: #7a82a6;
+            --label-color: #9098ba;
+            --input-bg: #151533;
+            --emp-card-bg: #171938;
+            --summary-bg: #151533;
+            --pre-bg: #0e0e24;
+            --secondary-btn-bg: rgba(123, 140, 222, 0.12);
+            --shadow: 0 4px 24px rgba(0,0,0,0.25);
+            --hover-bg: rgba(123, 140, 222, 0.1);
+            --card-gradient: linear-gradient(135deg, rgba(91, 108, 190, 0.08), rgba(123, 140, 222, 0.04));
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-color);
+            padding: 24px;
+            box-sizing: border-box;
+            line-height: 1.6;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+
+        #wps-generator *, #wps-generator *::before, #wps-generator *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+        /* ── Cards ── */
+        #wps-generator .wps-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        #wps-generator .wps-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(160deg, rgba(123, 140, 222, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+
+        #wps-generator .wps-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #d4daf0;
+            letter-spacing: -0.5px;
+        }
+
+
+        #wps-generator .wps-subtitle {
+            font-size: 14px;
+            color: var(--muted-color);
+            margin: 0 0 24px 0;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+
+        /* ── Form elements ── */
+        #wps-generator label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--label-color);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+
+        #wps-generator input,
+        #wps-generator select {
+            width: 100%;
+            min-width: 0;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 16px;
+            outline: none;
+            transition: all 0.25s ease;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-weight: 400;
+            -webkit-appearance: none;
+        }
+
+
+        #wps-generator select { cursor: pointer; }
+
+
+        #wps-generator input:focus,
+        #wps-generator select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(123, 140, 222, 0.12);
+        }
+
+
+        #wps-generator input::placeholder {
+            color: rgba(122, 130, 166, 0.5);
+        }
+
+
+        /* ── Grid layouts ── */
+        #wps-generator .wps-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-width: 0; }
+        #wps-generator .wps-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; min-width: 0; }
+        #wps-generator .wps-mb-12 { margin-bottom: 12px; }
+        #wps-generator .wps-mb-16 { margin-bottom: 16px; }
+        #wps-generator .wps-mb-20 { margin-bottom: 20px; }
+
+
+        /* ── Buttons ── */
+        #wps-generator .wps-btn {
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            letter-spacing: 0.2px;
+        }
+
+
+        #wps-generator .wps-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        #wps-generator .wps-btn:active { transform: translateY(0); }
+
+
+        #wps-generator .wps-btn-primary {
+            background: linear-gradient(135deg, #4a5699, #6b7bc5);
+            color: #e8ecf8;
+            border: 1px solid rgba(123, 140, 222, 0.2);
+        }
+
+
+        #wps-generator .wps-btn-secondary {
+            background: var(--secondary-btn-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+
+        /* ── Employee cards ── */
+        #wps-generator .wps-emp-card {
+            background: var(--emp-card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        #wps-generator .wps-emp-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(123, 140, 222, 0.05), transparent 70%);
+            pointer-events: none;
+        }
+
+
+        #wps-generator .wps-emp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+
+        #wps-generator .wps-emp-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            letter-spacing: -0.2px;
+        }
+
+
+        #wps-generator .wps-emp-header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+
+        #wps-generator .wps-total-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(123, 140, 222, 0.1);
+            border: 1px solid rgba(123, 140, 222, 0.15);
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+
+        #wps-generator .wps-btn-remove {
+            background: rgba(220, 60, 60, 0.15);
+            color: #e8737d;
+            border: 1px solid rgba(220, 60, 60, 0.2);
+            border-radius: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+
+        #wps-generator .wps-btn-remove:hover { background: rgba(220, 60, 60, 0.25); }
+
+
+        #wps-generator .wps-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+
+        #wps-generator .wps-section-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            color: #d4daf0;
+            letter-spacing: -0.3px;
+        }
+
+
+        /* ── Download Section ── */
+        #wps-generator .wps-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+
+        #wps-generator .wps-download-group {
+            position: relative;
+            display: inline-flex;
+        }
+
+
+        #wps-generator .wps-btn-dl-main {
+            padding: 12px 20px;
+            border-radius: 12px 0 0 12px;
+            border: none;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            background: linear-gradient(135deg, #4a5699, #6b7bc5);
+            color: #e8ecf8;
+            transition: all 0.25s;
+        }
+
+
+        #wps-generator .wps-btn-dl-main:hover { opacity: 0.9; }
+
+
+        #wps-generator .wps-btn-dl-toggle {
+            padding: 12px 14px;
+            border-radius: 0 12px 12px 0;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            background: linear-gradient(135deg, #4a5699, #6b7bc5);
+            color: #e8ecf8;
+            transition: all 0.25s;
+            min-width: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        #wps-generator .wps-btn-dl-toggle:hover { opacity: 0.9; }
+
+
+        /* Dropdown menu */
+        #wps-generator .wps-dropdown {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            margin-bottom: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            min-width: 320px;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.35);
+            z-index: 200;
+            overflow: hidden;
+        }
+
+
+        #wps-generator .wps-dropdown.active { display: block; }
+
+
+        #wps-generator .wps-dropdown-header {
+            padding: 12px 16px;
+            background: var(--emp-card-bg);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 11px;
+            color: var(--muted-color);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+        }
+
+
+        #wps-generator .wps-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+            color: var(--text-color);
+        }
+
+
+        #wps-generator .wps-dropdown-item:hover {
+            background: var(--hover-bg);
+        }
+
+
+        #wps-generator .wps-dropdown-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+
+        #wps-generator .wps-dropdown-icon.sif { background: linear-gradient(135deg, #4a5699, #6b7bc5); }
+        #wps-generator .wps-dropdown-icon.csv { background: linear-gradient(135deg, #2d6a5a, #3d9d82); }
+        #wps-generator .wps-dropdown-icon.wio { background: linear-gradient(135deg, #5a3a8e, #8055c0); }
+        #wps-generator .wps-dropdown-icon.enbd { background: linear-gradient(135deg, #8e3a3a, #c05555); }
+        #wps-generator .wps-dropdown-icon.fab { background: linear-gradient(135deg, #2a5a8e, #4088c0); }
+
+
+        #wps-generator .wps-dropdown-content { flex: 1; }
+        #wps-generator .wps-dropdown-title { font-size: 14px; font-weight: 500; color: #d4daf0; }
+        #wps-generator .wps-dropdown-desc { font-size: 11px; color: var(--muted-color); margin-top: 2px; }
+
+
+        #wps-generator .wps-dropdown-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 0;
+        }
+
+
+        /* ── Summary bar ── */
+        #wps-generator .wps-summary-bar {
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: var(--summary-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+
+        #wps-generator .wps-summary-bar p {
+            font-size: 13px;
+            color: var(--muted-color);
+            margin: 0;
+            word-break: break-word;
+        }
+
+
+        #wps-generator .wps-summary-bar strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+
+        #wps-generator .wps-summary-item { white-space: nowrap; }
+        #wps-generator .wps-summary-sep { }
+
+
+        /* ── Modal ── */
+        #wps-generator .wps-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(6, 6, 20, 0.75);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+
+        #wps-generator .wps-modal-overlay.active { display: flex; }
+
+
+        #wps-generator .wps-modal-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 80vh;
+            overflow: auto;
+            border: 1px solid var(--border-color);
+        }
+
+
+        #wps-generator .wps-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+
+        #wps-generator .wps-modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #d4daf0;
+        }
+
+
+        #wps-generator .wps-pre-block {
+            background: var(--pre-bg);
+            padding: 16px;
+            border-radius: 12px;
+            overflow: auto;
+            font-size: 12px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.7;
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+        }
+
+
+        /* ── Heading for download ── */
+        #wps-generator .wps-card h2 {
+            color: #d4daf0;
+        }
+
+
+        /* ── Tablet: 768 ── */
+        @media (max-width: 768px) {
+            #wps-generator {
+                padding: 16px;
+                max-width: 100%;
+            }
+
+
+            #wps-generator .wps-card {
+                padding: 20px;
+                border-radius: 16px;
+                margin-bottom: 16px;
+            }
+
+
+            #wps-generator .wps-card::before { display: none; }
+
+
+            #wps-generator .wps-title { font-size: 24px; }
+            #wps-generator .wps-subtitle { font-size: 13px; margin-bottom: 20px; }
+
+
+            #wps-generator .wps-grid-2 { grid-template-columns: 1fr; }
+            #wps-generator .wps-grid-3 { grid-template-columns: 1fr 1fr; }
+
+
+            #wps-generator input,
+            #wps-generator select {
+                font-size: 16px;
+                padding: 14px;
+                border-radius: 10px;
+            }
+
+
+            #wps-generator label {
+                font-size: 11px;
+                margin-bottom: 5px;
+            }
+
+
+            /* Employee cards — net amount becomes hero element */
+            #wps-generator .wps-emp-card {
+                padding: 16px;
+                border-radius: 14px;
+            }
+
+
+            #wps-generator .wps-emp-card::after { display: none; }
+
+
+            #wps-generator .wps-emp-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                margin-bottom: 18px;
+            }
+
+
+            #wps-generator .wps-emp-title {
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+
+            #wps-generator .wps-emp-header-right {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+
+            #wps-generator .wps-total-badge {
+                font-size: 16px;
+                padding: 8px 14px;
+                border-radius: 10px;
+                flex: 1;
+                text-align: center;
+            }
+
+
+            #wps-generator .wps-btn-remove {
+                padding: 10px 14px;
+                font-size: 13px;
+                border-radius: 10px;
+                margin-left: 10px;
+            }
+
+
+            /* Section header */
+            #wps-generator .wps-section-header {
+                flex-direction: row;
+                align-items: center;
+            }
+
+
+            #wps-generator .wps-section-header h2 { font-size: 17px; }
+
+
+            /* Download — full width stacked */
+            #wps-generator .wps-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+
+            #wps-generator .wps-download-group { width: 100%; }
+            #wps-generator .wps-btn-dl-main {
+                flex: 1;
+                justify-content: center;
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+            #wps-generator .wps-btn-dl-toggle {
+                padding: 14px 16px;
+            }
+            #wps-generator .wps-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+
+
+            /* Dropdown → bottom sheet */
+            #wps-generator .wps-dropdown {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                top: auto;
+                margin-bottom: 0;
+                border-radius: 20px 20px 0 0;
+                min-width: unset;
+                max-height: 75vh;
+                overflow-y: auto;
+                box-shadow: 0 -20px 60px rgba(0,0,0,0.4);
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+            }
+
+
+            #wps-generator .wps-dropdown-item {
+                padding: 16px;
+                min-height: 56px;
+            }
+
+
+            /* Summary — becomes visually distinct bar */
+            #wps-generator .wps-summary-bar {
+                padding: 14px 16px;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+
+            #wps-generator .wps-summary-bar p {
+                font-size: 13px;
+                line-height: 1.8;
+            }
+
+
+            /* Modal → mobile sheet from bottom */
+            #wps-generator .wps-modal-overlay {
+                align-items: flex-end;
+                padding: 0;
+            }
+
+
+            #wps-generator .wps-modal-content {
+                border-radius: 20px 20px 0 0;
+                padding: 20px;
+                max-height: 85vh;
+                padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+            }
+
+
+            #wps-generator .wps-pre-block {
+                font-size: 11px;
+                padding: 14px;
+            }
+        }
+
+
+        /* ── Phone: 480 ── */
+        @media (max-width: 480px) {
+            #wps-generator {
+                padding: 0;
+            }
+
+
+            /* Cards go edge-to-edge, no border-radius */
+            #wps-generator .wps-card {
+                border-radius: 0;
+                padding: 18px 16px;
+                margin-bottom: 8px;
+                box-shadow: none;
+                border-left: none;
+                border-right: none;
+            }
+
+
+            #wps-generator .wps-title { font-size: 21px; }
+            #wps-generator .wps-subtitle { font-size: 12px; margin-bottom: 16px; }
+
+
+            #wps-generator .wps-grid-2 { grid-template-columns: 1fr; gap: 12px; }
+
+
+            /* Salary fields: Basic+Housing pair, Transport+Other pair, Deductions+Leave pair */
+            #wps-generator .wps-grid-3 {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+
+            #wps-generator input,
+            #wps-generator select {
+                padding: 13px 12px;
+                border-radius: 10px;
+            }
+
+
+            /* Employee card — compact mobile layout */
+            #wps-generator .wps-emp-card {
+                padding: 14px;
+                border-radius: 12px;
+                margin-bottom: 12px;
+            }
+
+
+            #wps-generator .wps-emp-header {
+                gap: 8px;
+                margin-bottom: 14px;
+                padding-bottom: 12px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+
+            #wps-generator .wps-emp-title { font-size: 13px; }
+
+
+            #wps-generator .wps-total-badge {
+                font-size: 15px;
+                padding: 6px 12px;
+                border-radius: 8px;
+            }
+
+
+            /* Section header — stack on narrow */
+            #wps-generator .wps-section-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            #wps-generator .wps-section-header h2 { font-size: 16px; }
+            #wps-generator .wps-section-header .wps-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+
+            /* Download buttons — large touch targets */
+            #wps-generator .wps-btn {
+                padding: 14px;
+                font-size: 14px;
+                border-radius: 10px;
+                min-height: 48px;
+            }
+            #wps-generator .wps-btn-dl-main {
+                padding: 14px;
+                font-size: 14px;
+                min-height: 48px;
+            }
+            #wps-generator .wps-btn-dl-toggle {
+                padding: 14px;
+                min-height: 48px;
+                min-width: 48px;
+            }
+
+
+            /* Bottom sheet items — bigger tap targets */
+            #wps-generator .wps-dropdown-item {
+                padding: 16px;
+                min-height: 60px;
+            }
+            #wps-generator .wps-dropdown-icon { width: 38px; height: 38px; }
+            #wps-generator .wps-dropdown-title { font-size: 15px; }
+            #wps-generator .wps-dropdown-desc { font-size: 12px; }
+
+
+            /* Summary — stacked metrics */
+            #wps-generator .wps-summary-bar {
+                padding: 14px;
+                border-radius: 10px;
+            }
+
+
+            #wps-generator .wps-summary-bar p {
+                font-size: 13px;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+
+            #wps-generator .wps-summary-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 4px 0;
+                border-bottom: 1px solid rgba(123, 140, 222, 0.08);
+            }
+
+
+            #wps-generator .wps-summary-item:last-child { border-bottom: none; }
+
+
+            #wps-generator .wps-summary-sep { display: none; }
+
+
+            /* Modal sheet */
+            #wps-generator .wps-modal-content {
+                padding: 16px;
+                padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+                max-height: 90vh;
+            }
+            #wps-generator .wps-modal-header h3 { font-size: 16px; }
+            #wps-generator .wps-pre-block {
+                font-size: 10px;
+                padding: 12px;
+                max-height: 50vh;
+            }
+
+
+            #wps-generator .wps-btn-remove {
+                padding: 10px 14px;
+                font-size: 12px;
+                min-height: 40px;
+            }
+
+
+            #wps-generator label {
+                font-size: 10px;
+                letter-spacing: 0.8px;
+            }
+
+
+            /* Salary month full width on phone */
+            #wps-generator input[type="month"] {
+                max-width: 100% !important;
+            }
+        }
+
+
+        /* ── Tiny phones: 360 ── */
+        @media (max-width: 360px) {
+            #wps-generator .wps-grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+
+            #wps-generator .wps-title { font-size: 19px; }
+
+
+            #wps-generator .wps-emp-header-right {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+
+            #wps-generator .wps-total-badge { width: 100%; }
+            #wps-generator .wps-btn-remove {
+                width: 100%;
+                text-align: center;
+                margin-left: 0;
+                justify-content: center;
+                display: flex;
+            }
+        }
+
+
+        /* ── Bottom sheet backdrop for mobile ── */
+        #wps-generator .wps-sheet-backdrop {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(6, 6, 20, 0.5);
+            z-index: 199;
+        }
+
+
+        #wps-generator .wps-sheet-backdrop.active { display: block; }
+
+
+        /* Scrollbar styling */
+        #wps-generator ::-webkit-scrollbar { width: 6px; }
+        #wps-generator ::-webkit-scrollbar-track { background: transparent; }
+        #wps-generator ::-webkit-scrollbar-thumb { background: rgba(123, 140, 222, 0.2); border-radius: 3px; }
+    </style>
+
+
+    <!-- Employer Card -->
+    <div class="wps-card">
+        <h1 class="wps-title">🇦🇪 WPS SIF Generator</h1>
+        <p class="wps-subtitle">UAE Wages Protection System — Compliant file generation</p>
+
+
+        <div class="wps-grid-2 wps-mb-16">
+            <div>
+                <label>Employer ID (MoL)</label>
+                <input type="text" id="wpsEmployerId" placeholder="Enter MoL ID">
+            </div>
+            <div>
+                <label>Employer Bank</label>
+                <select id="wpsEmployerBank">
+                    <option value="">Select bank...</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div>
+            <label>Salary Month</label>
+            <input type="month" id="wpsSalaryMonth" style="max-width:200px">
+        </div>
+    </div>
+
+
+    <!-- Employees Card -->
+    <div class="wps-card">
+        <div class="wps-section-header wps-mb-20">
+            <h2>👥 Employees (<span id="wpsEmpCount">1</span>)</h2>
+            <button class="wps-btn wps-btn-primary" onclick="WPS.addEmployee()">+ Add Employee</button>
+        </div>
+        <div id="wpsEmployeesContainer"></div>
+    </div>
+
+
+    <!-- Download & Summary Card -->
+    <div class="wps-card">
+        <h2 style="font-size:18px; font-weight:600; margin:0 0 20px 0">📥 Download Options</h2>
+
+
+        <div class="wps-actions">
+            <button class="wps-btn wps-btn-secondary" onclick="WPS.showPreview()">👁️ Preview SIF</button>
+
+
+            <div class="wps-download-group">
+                <button class="wps-btn-dl-main" onclick="WPS.downloadSIF()">⬇️ Download SIF</button>
+                <button class="wps-btn-dl-toggle" onclick="WPS.toggleMenu()">▼</button>
+
+
+                <div class="wps-dropdown" id="wpsDownloadMenu">
+                    <div class="wps-dropdown-header">📁 Standard WPS Formats</div>
+                    <button class="wps-dropdown-item" onclick="WPS.downloadSIF(); WPS.closeMenu();">
+                        <div class="wps-dropdown-icon sif">📄</div>
+                        <div class="wps-dropdown-content">
+                            <div class="wps-dropdown-title">SIF File</div>
+                            <div class="wps-dropdown-desc">Official CBUAE format — Compatible with all banks</div>
+                        </div>
+                    </button>
+                    <button class="wps-dropdown-item" onclick="WPS.generateCSV('standard'); WPS.closeMenu();">
+                        <div class="wps-dropdown-icon csv">📊</div>
+                        <div class="wps-dropdown-content">
+                            <div class="wps-dropdown-title">CSV Standard</div>
+                            <div class="wps-dropdown-desc">CSV with headers — Excel / Google Sheets</div>
+                        </div>
+                    </button>
+
+
+                    <div class="wps-dropdown-divider"></div>
+                    <div class="wps-dropdown-header">🏦 Bank-Specific Formats</div>
+
+
+                    <button class="wps-dropdown-item" onclick="WPS.generateCSV('wio'); WPS.closeMenu();">
+                        <div class="wps-dropdown-icon wio">🟣</div>
+                        <div class="wps-dropdown-content">
+                            <div class="wps-dropdown-title">WIO Bank</div>
+                            <div class="wps-dropdown-desc">CSV for WIO Business portal upload</div>
+                        </div>
+                    </button>
+                    <button class="wps-dropdown-item" onclick="WPS.generateCSV('enbd'); WPS.closeMenu();">
+                        <div class="wps-dropdown-icon enbd">🔴</div>
+                        <div class="wps-dropdown-content">
+                            <div class="wps-dropdown-title">Emirates NBD</div>
+                            <div class="wps-dropdown-desc">ENBD businessONLINE format</div>
+                        </div>
+                    </button>
+                    <button class="wps-dropdown-item" onclick="WPS.generateCSV('fab'); WPS.closeMenu();">
+                        <div class="wps-dropdown-icon fab">🔵</div>
+                        <div class="wps-dropdown-content">
+                            <div class="wps-dropdown-title">First Abu Dhabi Bank (FAB)</div>
+                            <div class="wps-dropdown-desc">FAB Business CSV format</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="wps-summary-bar">
+            <p>
+                <span class="wps-summary-item"><strong>Total Payroll:</strong> AED <span id="wpsTotalPayroll">0.00</span></span>
+                <span class="wps-summary-sep">&nbsp;|&nbsp;</span>
+                <span class="wps-summary-item"><strong>Employees:</strong> <span id="wpsTotalEmpCount">1</span></span>
+                <span class="wps-summary-sep">&nbsp;|&nbsp;</span>
+                <span class="wps-summary-item"><strong>Period:</strong> <span id="wpsPeriodDisplay">Not set</span></span>
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Mobile bottom-sheet backdrop -->
+    <div class="wps-sheet-backdrop" id="wpsSheetBackdrop" onclick="WPS.closeMenu()"></div>
+
+
+    <!-- Preview Modal -->
+    <div class="wps-modal-overlay" id="wpsPreviewModal">
+        <div class="wps-modal-content">
+            <div class="wps-modal-header">
+                <h3>📄 SIF Preview</h3>
+                <button class="wps-btn wps-btn-secondary" onclick="WPS.closePreview()">✕ Close</button>
+            </div>
+            <pre class="wps-pre-block" id="wpsPreviewCode"></pre>
+            <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="wps-btn wps-btn-primary" onclick="WPS.downloadSIF()">⬇️ Download SIF</button>
+                <button class="wps-btn wps-btn-secondary" onclick="WPS.generateCSV('standard'); WPS.closePreview();">📊 Download CSV</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function() {
+    var banks = [
+        { n: "Abu Dhabi Commercial Bank (ADCB)", c: "600310101" },
+        { n: "Abu Dhabi Islamic Bank (ADIB)", c: "405010101" },
+        { n: "Ajman Bank", c: "805740101" },
+        { n: "Commercial Bank of Dubai (CBD)", c: "102320150" },
+        { n: "Dubai Islamic Bank (DIB)", c: "802420101" },
+        { n: "Emirates Islamic Bank", c: "703420114" },
+        { n: "Emirates NBD Bank", c: "202620103" },
+        { n: "First Abu Dhabi Bank (FAB)", c: "803510106" },
+        { n: "HSBC Bank Middle East", c: "302020120" },
+        { n: "Mashreqbank", c: "203320101" },
+        { n: "National Bank of Fujairah", c: "703820101" },
+        { n: "RAKBANK", c: "104060106" },
+        { n: "Sharjah Islamic Bank", c: "404130101" },
+        { n: "Standard Chartered Bank", c: "504420120" },
+        { n: "WIO Bank", c: "808610001" },
+        { n: "Al Ansari Exchange", c: "720610101", t: 1 },
+        { n: "UAE Exchange", c: "929110101", t: 1 },
+    ].sort(function(a, b) { return a.n.localeCompare(b.n); });
+
+
+    var employees = [createEmployee()];
+    var nextId = Date.now() + 1;
+
+
+    function createEmployee() {
+        return {
+            id: Date.now(),
+            visaId: "",
+            visaIdManual: false,
+            empBank: "",
+            iban: "",
+            startDate: "",
+            endDate: "",
+            basic: "",
+            housing: "",
+            transport: "",
+            other: "",
+            deductions: "",
+            leaveDays: "0",
+        };
+    }
+
+
+    function addEmployee() {
+        var last = employees[employees.length - 1];
+        var newEmp = createEmployee();
+        newEmp.id = nextId++;
+        if (last) {
+            newEmp.startDate = last.startDate;
+            newEmp.endDate = last.endDate;
+        }
+        employees.push(newEmp);
+        renderEmployees();
+    }
+
+
+    function removeEmployee(id) {
+        if (employees.length > 1) {
+            employees = employees.filter(function(e) { return e.id !== id; });
+            renderEmployees();
+        }
+    }
+
+
+    function updateEmployee(id, field, value) {
+        employees = employees.map(function(e) {
+            if (e.id === id) {
+                var updated = Object.assign({}, e);
+                updated[field] = value;
+                if (field === "iban" && !e.visaIdManual) {
+                    var clean = value.replace(/\s/g, "").toUpperCase();
+                    if (clean.length >= 21) {
+                        updated.visaId = clean.substring(10, 21);
+                    }
+                    var prefix = clean.substring(4, 7);
+                    var bankMap = {
+                        "033": "203320101",
+                        "030": "600310101",
+                        "035": "803510106",
+                        "024": "802420101",
+                        "026": "202620103",
+                        "027": "803510106",
+                        "038": "703820101",
+                        "040": "104060106",
+                        "050": "405010101",
+                        "086": "808610001",
+                    };
+                    if (bankMap[prefix] && !e.empBank) {
+                        updated.empBank = bankMap[prefix];
+                    }
+                }
+                if (field === "visaId") {
+                    updated.visaIdManual = true;
+                }
+                return updated;
+            }
+            return e;
+        });
+
+
+        if (field === "iban") {
+            renderEmployees();
+        } else {
+            updateSummary();
+        }
+    }
+
+
+    function calcDays(start, end) {
+        if (!start || !end) return 0;
+        var s = new Date(start), e = new Date(end);
+        return Math.max(0, Math.ceil((e - s) / 86400000) + 1);
+    }
+
+
+    function calcTotal(emp) {
+        var basic = parseFloat(emp.basic) || 0;
+        var housing = parseFloat(emp.housing) || 0;
+        var transport = parseFloat(emp.transport) || 0;
+        var other = parseFloat(emp.other) || 0;
+        var deductions = parseFloat(emp.deductions) || 0;
+        return basic + housing + transport + other - deductions;
+    }
+
+
+    function escapeAttr(str) {
+        return (str || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+
+    function renderEmployees() {
+        var container = document.getElementById('wpsEmployeesContainer');
+        container.innerHTML = '';
+
+
+        employees.forEach(function(emp, idx) {
+            var card = document.createElement('div');
+            card.className = 'wps-emp-card';
+            card.innerHTML =
+                '<div class="wps-emp-header">' +
+                    '<span class="wps-emp-title">Employee #' + (idx + 1) + '</span>' +
+                    '<div class="wps-emp-header-right">' +
+                        '<span class="wps-total-badge" id="wpsBadge-' + emp.id + '">Net: AED ' + calcTotal(emp).toFixed(2) + '</span>' +
+                        (employees.length > 1 ? '<button class="wps-btn-remove" onclick="WPS.removeEmployee(' + emp.id + ')">✕ Remove</button>' : '') +
+                    '</div>' +
+                '</div>' +
+
+
+                '<div class="wps-grid-2 wps-mb-12">' +
+                    '<div>' +
+                        '<label>IBAN</label>' +
+                        '<input type="text" value="' + escapeAttr(emp.iban) + '" placeholder="AE..." oninput="WPS.updateEmployee(' + emp.id + ', \'iban\', this.value)">' +
+                    '</div>' +
+                    '<div>' +
+                        '<label>Employee Bank</label>' +
+                        '<select onchange="WPS.updateEmployee(' + emp.id + ', \'empBank\', this.value)" id="wpsEmpBank-' + emp.id + '">' +
+                            '<option value="">Select...</option>' +
+                        '</select>' +
+                    '</div>' +
+                '</div>' +
+
+
+                '<div class="wps-grid-3 wps-mb-12">' +
+                    '<div>' +
+                        '<label>Visa/Labour ID</label>' +
+                        '<input type="text" value="' + escapeAttr(emp.visaId) + '" placeholder="Auto from IBAN" oninput="WPS.updateEmployee(' + emp.id + ', \'visaId\', this.value)">' +
+                    '</div>' +
+                    '<div>' +
+                        '<label>Start Date</label>' +
+                        '<input type="date" value="' + emp.startDate + '" onchange="WPS.updateEmployee(' + emp.id + ', \'startDate\', this.value)">' +
+                    '</div>' +
+                    '<div>' +
+                        '<label>End Date</label>' +
+                        '<input type="date" value="' + emp.endDate + '" onchange="WPS.updateEmployee(' + emp.id + ', \'endDate\', this.value)">' +
+                    '</div>' +
+                '</div>' +
+
+
+                '<div class="wps-grid-3">' +
+                    '<div>' +
+                        '<label>Basic Salary</label>' +
+                        '<input type="number" value="' + emp.basic + '" placeholder="0.00" oninput="WPS.updateEmployee(' + emp.id + ', \'basic\', this.value)">' +
+                    '</div>' +
+                    '<div>' +
+                        '<label>Housing</label>' +
+                        '<input type="number" value="' + emp.housing + '" placeholder="0.00" oninput="WPS.updateEmployee(' + emp.id + ', \'housing\', this.value)">' +
+                    '</div>' +
+                    '<div>' +
+                        '<label>Transport</label>' +
+                        '<input type="number" value="' + emp.transport + '" placeholder="0.00" oninput="WPS.updateEmployee(' + emp.id + ', \'transport\', this.value)">' +
+                    '</div>' +
+                    '<div>' +
+                        '<label>Other Allow.</label>' +
+                        '<input type="number" value="' + emp.other + '" placeholder="0.00" oninput="WPS.updateEmployee(' + emp.id + ', \'other\', this.value)">' +
+                    '</div>' +
+                    '<div>' +
+                        '<label>Deductions</label>' +
+                        '<input type="number" value="' + emp.deductions + '" placeholder="0.00" oninput="WPS.updateEmployee(' + emp.id + ', \'deductions\', this.value)">' +
+                    '</div>' +
+                    '<div>' +
+                        '<label>Leave Days</label>' +
+                        '<input type="number" value="' + emp.leaveDays + '" placeholder="0" oninput="WPS.updateEmployee(' + emp.id + ', \'leaveDays\', this.value)">' +
+                    '</div>' +
+                '</div>';
+            container.appendChild(card);
+
+
+            var bankSel = card.querySelector('#wpsEmpBank-' + emp.id);
+            banks.forEach(function(b) {
+                var opt = document.createElement('option');
+                opt.value = b.c;
+                opt.textContent = b.n;
+                if (b.c === emp.empBank) opt.selected = true;
+                bankSel.appendChild(opt);
+            });
+        });
+
+
+        updateSummary();
+    }
+
+
+    function updateSummary() {
+        var total = employees.reduce(function(sum, e) { return sum + calcTotal(e); }, 0);
+        var salaryMonth = document.getElementById('wpsSalaryMonth').value;
+
+
+        document.getElementById('wpsEmpCount').textContent = employees.length;
+        document.getElementById('wpsTotalEmpCount').textContent = employees.length;
+        document.getElementById('wpsTotalPayroll').textContent = total.toFixed(2);
+        document.getElementById('wpsPeriodDisplay').textContent = salaryMonth || 'Not set';
+
+
+        employees.forEach(function(emp) {
+            var badge = document.getElementById('wpsBadge-' + emp.id);
+            if (badge) badge.textContent = 'Net: AED ' + calcTotal(emp).toFixed(2);
+        });
+    }
+
+
+    function generateSIF() {
+        var employerId = document.getElementById('wpsEmployerId').value;
+        var employerBank = document.getElementById('wpsEmployerBank').value;
+        var salaryMonth = document.getElementById('wpsSalaryMonth').value;
+
+
+        var content = "";
+        var fileDate = new Date().toISOString().split("T")[0];
+        var fileTime = new Date().toTimeString().substring(0, 5).replace(":", "");
+        var monthParts = salaryMonth.split("-");
+        var salMonth = monthParts[1] + "-" + monthParts[0];
+
+
+        employees.forEach(function(emp) {
+            var days = calcDays(emp.startDate, emp.endDate);
+            var variable =
+                (parseFloat(emp.housing) || 0) +
+                (parseFloat(emp.transport) || 0) +
+                (parseFloat(emp.other) || 0);
+            content += "EDR," + emp.visaId.padStart(14, "0") + "," + emp.empBank + "," + emp.iban.replace(/\s/g, "").toUpperCase() + "," + emp.startDate + "," + emp.endDate + "," + days + "," + parseFloat(emp.basic || 0).toFixed(2) + "," + variable.toFixed(2) + "," + parseFloat(emp.deductions || 0).toFixed(2) + "\n";
+        });
+
+
+        var totalSalary = employees.reduce(function(sum, e) { return sum + calcTotal(e); }, 0);
+        content += "SCR," + employerId.padStart(13, "0") + "," + employerBank + "," + fileDate + "," + fileTime + "," + salMonth + "," + employees.length + "," + totalSalary.toFixed(2);
+
+
+        return content;
+    }
+
+
+    function downloadFile(content, filename, type) {
+        type = type || "text/plain";
+        var blob = new Blob(["\uFEFF" + content], { type: type + ";charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+
+    function downloadSIF() {
+        var salaryMonth = document.getElementById('wpsSalaryMonth').value;
+        var content = generateSIF();
+        var filename = "WPS_" + salaryMonth + "_" + Date.now() + ".SIF";
+        downloadFile(content, filename);
+    }
+
+
+    function generateCSV(format) {
+        var employerId = document.getElementById('wpsEmployerId').value;
+        var employerBank = document.getElementById('wpsEmployerBank').value;
+        var salaryMonth = document.getElementById('wpsSalaryMonth').value;
+        var fileDate = new Date().toISOString().split("T")[0];
+        var monthParts = salaryMonth.split("-");
+        var csv = "";
+
+
+        if (format === "wio") {
+            csv = "Employee_ID,Bank_Code,IBAN,Start_Date,End_Date,Days_Worked,Leave_Days,Basic_Salary,Variable_Pay,Deductions,Net_Salary\n";
+            employees.forEach(function(emp) {
+                var days = calcDays(emp.startDate, emp.endDate);
+                var variable = (parseFloat(emp.housing) || 0) + (parseFloat(emp.transport) || 0) + (parseFloat(emp.other) || 0);
+                var net = calcTotal(emp);
+                csv += emp.visaId.padStart(14, "0") + "," + emp.empBank + "," + emp.iban.replace(/\s/g, "").toUpperCase() + "," + emp.startDate.replace(/-/g, "") + "," + emp.endDate.replace(/-/g, "") + "," + days + "," + (emp.leaveDays || 0) + "," + parseFloat(emp.basic || 0).toFixed(2) + "," + variable.toFixed(2) + "," + parseFloat(emp.deductions || 0).toFixed(2) + "," + net.toFixed(2) + "\n";
+            });
+        } else if (format === "enbd") {
+            csv = "Record_Type,Employee_ID,Agent_Code,IBAN,Pay_Start,Pay_End,Days,Fixed_Amount,Variable_Amount,Deductions\n";
+            employees.forEach(function(emp) {
+                var days = calcDays(emp.startDate, emp.endDate);
+                var variable = (parseFloat(emp.housing) || 0) + (parseFloat(emp.transport) || 0) + (parseFloat(emp.other) || 0);
+                csv += "EDR," + emp.visaId.padStart(14, "0") + "," + emp.empBank + "," + emp.iban.replace(/\s/g, "").toUpperCase() + "," + emp.startDate + "," + emp.endDate + "," + days + "," + parseFloat(emp.basic || 0).toFixed(2) + "," + variable.toFixed(2) + "," + parseFloat(emp.deductions || 0).toFixed(2) + "\n";
+            });
+            var totalSalary = employees.reduce(function(sum, e) { return sum + calcTotal(e); }, 0);
+            csv += "SCR," + employerId.padStart(13, "0") + "," + employerBank + "," + fileDate + ",," + monthParts[1] + "-" + monthParts[0] + "," + employees.length + "," + totalSalary.toFixed(2) + ",";
+        } else if (format === "fab") {
+            csv = "Employee_ID,Bank_Routing_Code,IBAN,Period_Start,Period_End,Working_Days,Basic_Salary,Allowances,Deductions,Total_Salary\n";
+            employees.forEach(function(emp) {
+                var days = calcDays(emp.startDate, emp.endDate);
+                var allowances = (parseFloat(emp.housing) || 0) + (parseFloat(emp.transport) || 0) + (parseFloat(emp.other) || 0);
+                var total = calcTotal(emp);
+                csv += emp.visaId.padStart(14, "0") + "," + emp.empBank + "," + emp.iban.replace(/\s/g, "").toUpperCase() + "," + emp.startDate + "," + emp.endDate + "," + days + "," + parseFloat(emp.basic || 0).toFixed(2) + "," + allowances.toFixed(2) + "," + parseFloat(emp.deductions || 0).toFixed(2) + "," + total.toFixed(2) + "\n";
+            });
+        } else {
+            csv = "Employee_ID,Bank_Code,IBAN,Start_Date,End_Date,Days,Basic_Salary,Variable_Pay,Deductions,Net_Salary\n";
+            employees.forEach(function(emp) {
+                var days = calcDays(emp.startDate, emp.endDate);
+                var variable = (parseFloat(emp.housing) || 0) + (parseFloat(emp.transport) || 0) + (parseFloat(emp.other) || 0);
+                var net = calcTotal(emp);
+                csv += emp.visaId.padStart(14, "0") + "," + emp.empBank + "," + emp.iban.replace(/\s/g, "").toUpperCase() + "," + emp.startDate + "," + emp.endDate + "," + days + "," + parseFloat(emp.basic || 0).toFixed(2) + "," + variable.toFixed(2) + "," + parseFloat(emp.deductions || 0).toFixed(2) + "," + net.toFixed(2) + "\n";
+            });
+        }
+
+
+        var formatNames = { wio: "WIO", enbd: "ENBD", fab: "FAB", standard: "CSV" };
+        var salMo = document.getElementById('wpsSalaryMonth').value;
+        var filename = "WPS_" + formatNames[format] + "_" + salMo + "_" + Date.now() + ".csv";
+        downloadFile(csv, filename, "text/csv");
+    }
+
+
+    function toggleMenu() {
+        var menu = document.getElementById('wpsDownloadMenu');
+        var backdrop = document.getElementById('wpsSheetBackdrop');
+        var isActive = menu.classList.contains('active');
+        if (isActive) {
+            menu.classList.remove('active');
+            backdrop.classList.remove('active');
+        } else {
+            menu.classList.add('active');
+            backdrop.classList.add('active');
+        }
+    }
+
+
+    function closeMenu() {
+        document.getElementById('wpsDownloadMenu').classList.remove('active');
+        document.getElementById('wpsSheetBackdrop').classList.remove('active');
+    }
+
+
+    document.addEventListener('click', function(e) {
+        var group = document.querySelector('#wps-generator .wps-download-group');
+        if (group && !group.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+
+    function showPreview() {
+        document.getElementById('wpsPreviewCode').textContent = generateSIF();
+        document.getElementById('wpsPreviewModal').classList.add('active');
+    }
+
+
+    function closePreview() {
+        document.getElementById('wpsPreviewModal').classList.remove('active');
+    }
+
+
+    document.getElementById('wpsPreviewModal').addEventListener('click', function(e) {
+        if (e.target === this) closePreview();
+    });
+
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closePreview();
+            closeMenu();
+        }
+    });
+
+
+    var sel = document.getElementById('wpsEmployerBank');
+    banks.filter(function(b) { return !b.t; }).forEach(function(b) {
+        var opt = document.createElement('option');
+        opt.value = b.c;
+        opt.textContent = b.n;
+        sel.appendChild(opt);
+    });
+
+
+    document.getElementById('wpsSalaryMonth').addEventListener('change', updateSummary);
+
+
+    renderEmployees();
+
+
+    window.WPS = {
+        addEmployee: addEmployee,
+        removeEmployee: removeEmployee,
+        updateEmployee: updateEmployee,
+        downloadSIF: downloadSIF,
+        generateCSV: generateCSV,
+        showPreview: showPreview,
+        closePreview: closePreview,
+        toggleMenu: toggleMenu,
+        closeMenu: closeMenu,
+    };
+})();
+</script>
+</body>
+</html>

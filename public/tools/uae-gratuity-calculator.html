@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAE Gratuity Calculator — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+.dft-grat-calc {
+  --dft-bg:#080A32;
+  --dft-card:#0F1240;
+  --dft-primary:#1a1d56;
+  --dft-primary-light:#2a2d6a;
+  --dft-accent:#d4af37;
+  --dft-accent-light:#e8c547;
+  --dft-white:#fff;
+  --dft-text-sec:rgba(255,255,255,.7);
+  --dft-text-mut:rgba(255,255,255,.5);
+  --dft-border:rgba(255,255,255,.1);
+  --dft-success:#10b981;
+  --dft-danger:#ef4444;
+  --dft-radius:16px;
+  --dft-radius-sm:8px;
+  font-family:'Poppins',sans-serif;
+  background:var(--dft-bg);
+  color:var(--dft-white);
+  line-height:1.6;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.dft-grat-calc *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+
+.dft-grat-calc .dft-topbar{display:flex;justify-content:flex-end;padding:16px 24px;border-bottom:1px solid var(--dft-border)}
+.dft-grat-calc .dft-lang-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:100px;padding:3px}
+.dft-grat-calc .dft-lang-btn{padding:6px 12px;font-size:11px;font-weight:600;color:var(--dft-text-mut);cursor:pointer;border-radius:100px;border:none;background:transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.dft-grat-calc .dft-lang-btn.active{background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-grat-calc .dft-hero{padding:50px 24px 30px;text-align:center;position:relative;background:linear-gradient(180deg,var(--dft-bg) 0%,#0B0E3A 100%)}
+.dft-grat-calc .dft-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(212,175,55,.08) 0%,transparent 70%);pointer-events:none}
+.dft-grat-calc .dft-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--dft-accent);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:20px;position:relative;text-align:center}
+.dft-grat-calc .dft-hero h1{font-size:38px;font-weight:300;margin-bottom:14px;line-height:1.2;position:relative;color:var(--dft-white)}
+.dft-grat-calc .dft-hero h1 span{background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:500}
+.dft-grat-calc .dft-hero p{color:var(--dft-text-sec);font-size:15px;max-width:720px;margin:0 auto;position:relative}
+
+
+.dft-grat-calc .dft-main{max-width:1100px;margin:0 auto;padding:30px 24px 50px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.dft-grat-calc .dft-section{background:var(--dft-card);border:1px solid var(--dft-border);border-radius:var(--dft-radius)}
+.dft-grat-calc .dft-section-header{padding:18px 24px;border-bottom:1px solid var(--dft-border);display:flex;align-items:center;gap:12px}
+.dft-grat-calc .dft-section-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.dft-grat-calc .dft-section-title{font-size:14px;font-weight:600;color:var(--dft-white)}
+.dft-grat-calc .dft-section-body{padding:24px}
+
+
+.dft-grat-calc .dft-form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.dft-grat-calc .dft-form-group:last-child{margin-bottom:0}
+.dft-grat-calc .dft-form-label{font-size:11px;font-weight:500;color:var(--dft-text-sec);text-transform:uppercase;letter-spacing:.5px}
+.dft-grat-calc .dft-form-input,.dft-grat-calc .dft-form-select{background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);padding:12px 14px;font-size:14px;color:var(--dft-white);transition:all .2s;width:100%;font-family:'Poppins',sans-serif}
+.dft-grat-calc .dft-form-input:focus,.dft-grat-calc .dft-form-select:focus{outline:none;border-color:var(--dft-accent);background:rgba(255,255,255,.08)}
+.dft-grat-calc .dft-form-select option{background:var(--dft-card);color:var(--dft-white)}
+.dft-grat-calc .dft-form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+
+.dft-grat-calc .dft-result-header{padding:32px 24px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius) var(--dft-radius) 0 0;text-align:center;border:1px solid rgba(212,175,55,.3);border-bottom:none}
+.dft-grat-calc .dft-result-label{color:rgba(255,255,255,.7);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.dft-grat-calc .dft-result-main{font-size:44px;font-weight:600;color:var(--dft-accent);font-family:'Monaco',monospace}
+.dft-grat-calc .dft-result-sub{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+.dft-grat-calc .dft-result-body{padding:24px;background:var(--dft-card);border:1px solid var(--dft-border);border-top:none;border-radius:0 0 var(--dft-radius) var(--dft-radius)}
+.dft-grat-calc .dft-result-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--dft-border);font-size:13px;color:var(--dft-white)}
+.dft-grat-calc .dft-result-row:last-child{border-bottom:none}
+.dft-grat-calc .dft-result-row .dft-val{font-family:'Monaco',monospace;font-weight:500;color:var(--dft-white)}
+.dft-grat-calc .dft-result-row.dft-highlight{background:rgba(212,175,55,.08);margin:0 -24px;padding:14px 24px}
+.dft-grat-calc .dft-result-row.dft-highlight .dft-val{color:var(--dft-accent);font-size:16px;font-weight:600}
+
+
+.dft-grat-calc .dft-tier-visual{margin:0 0 20px}
+.dft-grat-calc .dft-tier{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.02);border-radius:var(--dft-radius-sm);margin-bottom:8px;border:1px solid transparent;transition:all .2s}
+.dft-grat-calc .dft-tier.active{background:rgba(212,175,55,.08);border-color:rgba(212,175,55,.3)}
+.dft-grat-calc .dft-tier-years{font-family:'Monaco',monospace;font-weight:600;color:var(--dft-accent);min-width:80px;font-size:12px}
+.dft-grat-calc .dft-tier-desc{font-size:12px;color:var(--dft-text-sec);flex:1}
+.dft-grat-calc .dft-tier-days{font-size:12px;color:var(--dft-white);font-weight:500;flex-shrink:0}
+
+
+.dft-grat-calc .dft-seo{max-width:1100px;margin:40px auto;padding:40px 24px;background:var(--dft-card);border-radius:var(--dft-radius);border:1px solid var(--dft-border)}
+.dft-grat-calc .dft-seo h2{font-size:24px;font-weight:500;margin-bottom:16px;color:var(--dft-white)}
+.dft-grat-calc .dft-seo h2 span{color:var(--dft-accent)}
+.dft-grat-calc .dft-seo h3{font-size:16px;font-weight:500;margin:24px 0 10px;color:var(--dft-accent)}
+.dft-grat-calc .dft-seo p,.dft-grat-calc .dft-seo li{color:var(--dft-text-sec);font-size:14px;margin-bottom:10px}
+.dft-grat-calc .dft-seo ul{padding-left:20px;margin-bottom:16px}
+.dft-grat-calc .dft-seo strong{color:var(--dft-white)}
+.dft-grat-calc .dft-faq-item{border-bottom:1px solid var(--dft-border);padding:16px 0;cursor:pointer}
+.dft-grat-calc .dft-faq-q{font-weight:500;color:var(--dft-white);display:flex;justify-content:space-between;font-size:14px;gap:12px}
+.dft-grat-calc .dft-faq-a{color:var(--dft-text-sec);font-size:13px;margin-top:8px;padding-left:10px;border-left:2px solid var(--dft-accent);display:none}
+.dft-grat-calc .dft-faq-item.open .dft-faq-a{display:block}
+
+
+.dft-grat-calc .dft-cta{max-width:1100px;margin:40px auto;padding:40px 24px;text-align:center;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius);border:1px solid rgba(212,175,55,.3)}
+.dft-grat-calc .dft-cta h3{font-size:24px;font-weight:400;margin-bottom:10px;color:var(--dft-white)}
+.dft-grat-calc .dft-cta h3 span{color:var(--dft-accent);font-weight:600}
+.dft-grat-calc .dft-cta p{color:rgba(255,255,255,.8);margin-bottom:20px;font-size:14px}
+.dft-grat-calc .dft-btn{padding:12px 24px;border:none;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;cursor:pointer;background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-grat-calc .dft-lang-en{display:none}
+.dft-grat-calc[data-lang="en"] .dft-lang-fr{display:none}
+.dft-grat-calc[data-lang="en"] .dft-lang-en{display:block}
+
+
+@media(max-width:1024px){
+  .dft-grat-calc .dft-main{grid-template-columns:1fr;gap:20px;padding:24px 20px 40px;max-width:720px}
+  .dft-grat-calc .dft-hero{padding:40px 20px 24px}
+  .dft-grat-calc .dft-hero h1{font-size:34px}
+  .dft-grat-calc .dft-hero p{font-size:14px}
+  .dft-grat-calc .dft-seo,.dft-grat-calc .dft-cta{margin:24px 20px;padding:32px 24px;max-width:calc(100% - 40px)}
+  .dft-grat-calc .dft-seo h2{font-size:22px}
+  .dft-grat-calc .dft-cta h3{font-size:22px}
+  .dft-grat-calc .dft-result-main{font-size:40px}
+}
+@media(max-width:768px){
+  .dft-grat-calc .dft-topbar{padding:14px 18px}
+  .dft-grat-calc .dft-hero{padding:32px 18px 20px}
+  .dft-grat-calc .dft-hero-badge{font-size:11px;padding:5px 14px;margin-bottom:16px}
+  .dft-grat-calc .dft-hero h1{font-size:28px;line-height:1.25}
+  .dft-grat-calc .dft-hero p{font-size:13px;line-height:1.5}
+  .dft-grat-calc .dft-main{padding:20px 16px 36px;gap:16px}
+  .dft-grat-calc .dft-section-header{padding:16px 18px}
+  .dft-grat-calc .dft-section-body{padding:20px}
+  .dft-grat-calc .dft-section-icon{width:32px;height:32px;font-size:14px}
+  .dft-grat-calc .dft-form-group{margin-bottom:14px}
+  .dft-grat-calc .dft-form-input,.dft-grat-calc .dft-form-select{padding:11px 12px;font-size:16px}
+  .dft-grat-calc .dft-result-header{padding:24px 18px}
+  .dft-grat-calc .dft-result-main{font-size:34px}
+  .dft-grat-calc .dft-result-body{padding:20px}
+  .dft-grat-calc .dft-result-row.dft-highlight{margin:0 -20px;padding:12px 20px}
+  .dft-grat-calc .dft-tier-years{min-width:70px}
+  .dft-grat-calc .dft-seo,.dft-grat-calc .dft-cta{margin:20px 16px;padding:28px 20px;max-width:calc(100% - 32px)}
+  .dft-grat-calc .dft-seo h2{font-size:20px}
+  .dft-grat-calc .dft-seo h3{font-size:15px;margin:20px 0 8px}
+  .dft-grat-calc .dft-seo p,.dft-grat-calc .dft-seo li{font-size:13px}
+  .dft-grat-calc .dft-cta h3{font-size:20px}
+  .dft-grat-calc .dft-cta p{font-size:13px}
+}
+@media(max-width:480px){
+  .dft-grat-calc .dft-topbar{padding:12px 14px;justify-content:center}
+  .dft-grat-calc .dft-hero{padding:28px 14px 18px}
+  .dft-grat-calc .dft-hero h1{font-size:24px}
+  .dft-grat-calc .dft-hero p{font-size:12.5px}
+  .dft-grat-calc .dft-main{padding:16px 12px 32px;gap:14px}
+  .dft-grat-calc .dft-section-header{padding:14px 16px;gap:10px}
+  .dft-grat-calc .dft-section-body{padding:16px}
+  .dft-grat-calc .dft-form-grid-2{grid-template-columns:1fr;gap:0}
+  .dft-grat-calc .dft-form-label{font-size:10.5px}
+  .dft-grat-calc .dft-form-input,.dft-grat-calc .dft-form-select{padding:10px 12px;font-size:16px}
+  .dft-grat-calc .dft-result-header{padding:22px 16px}
+  .dft-grat-calc .dft-result-label{font-size:11px}
+  .dft-grat-calc .dft-result-main{font-size:28px}
+  .dft-grat-calc .dft-result-sub{font-size:12px}
+  .dft-grat-calc .dft-result-body{padding:16px}
+  .dft-grat-calc .dft-result-row{font-size:12.5px;padding:10px 0}
+  .dft-grat-calc .dft-result-row.dft-highlight{margin:0 -16px;padding:12px 16px}
+  .dft-grat-calc .dft-result-row.dft-highlight .dft-val{font-size:15px}
+  .dft-grat-calc .dft-tier{padding:10px;gap:10px}
+  .dft-grat-calc .dft-tier-years{min-width:60px;font-size:11.5px}
+  .dft-grat-calc .dft-tier-desc{font-size:11.5px}
+  .dft-grat-calc .dft-tier-days{font-size:11.5px}
+  .dft-grat-calc .dft-seo,.dft-grat-calc .dft-cta{margin:16px 12px;padding:22px 16px;max-width:calc(100% - 24px)}
+  .dft-grat-calc .dft-seo h2{font-size:18px}
+  .dft-grat-calc .dft-seo h3{font-size:14px;margin:16px 0 6px}
+  .dft-grat-calc .dft-seo p,.dft-grat-calc .dft-seo li{font-size:12.5px;line-height:1.55}
+  .dft-grat-calc .dft-faq-q{font-size:13px}
+  .dft-grat-calc .dft-faq-a{font-size:12.5px}
+  .dft-grat-calc .dft-cta h3{font-size:18px}
+  .dft-grat-calc .dft-cta p{font-size:12.5px}
+  .dft-grat-calc .dft-btn{padding:11px 22px;font-size:12.5px}
+}
+</style>
+
+
+<div class="dft-grat-calc" data-lang="fr" id="dftGratCalc">
+  <div class="dft-topbar">
+    <div class="dft-lang-toggle">
+      <button class="dft-lang-btn active" data-lang="fr">FR</button>
+      <button class="dft-lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+
+
+  <section class="dft-hero">
+    <div class="dft-hero-badge">✓ Federal Decree-Law No. 33 of 2021 · Art. 51</div>
+    <h1 data-fr='Calculateur <span>Gratuity UAE</span>' data-en='UAE <span>Gratuity Calculator</span>'>Calculateur <span>Gratuity UAE</span></h1>
+    <p data-fr="Indemnité de fin de service aux Émirats : calcul conforme MOHRE selon démission, licenciement, ancienneté." data-en="UAE end-of-service benefit: MOHRE-compliant calculation based on resignation, termination and tenure.">Indemnité de fin de service aux Émirats : calcul conforme MOHRE selon démission, licenciement, ancienneté.</p>
+  </section>
+
+
+  <main class="dft-main">
+    <div class="dft-section">
+      <div class="dft-section-header"><div class="dft-section-icon">👤</div><div class="dft-section-title" data-fr="Données" data-en="Inputs">Données</div></div>
+      <div class="dft-section-body">
+        <div class="dft-form-group"><label class="dft-form-label" data-fr="Salaire de base mensuel (AED)" data-en="Basic monthly salary (AED)">Salaire de base mensuel (AED)</label><input type="number" class="dft-form-input" id="dftBasic" value="10000" /></div>
+        <div class="dft-form-grid-2">
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Date d'embauche" data-en="Start date">Date d'embauche</label><input type="date" class="dft-form-input" id="dftStartDate" /></div>
+          <div class="dft-form-group"><label class="dft-form-label" data-fr="Date de fin" data-en="End date">Date de fin</label><input type="date" class="dft-form-input" id="dftEndDate" /></div>
+        </div>
+        <div class="dft-form-group"><label class="dft-form-label" data-fr="Motif de fin de contrat" data-en="End-of-contract reason">Motif de fin de contrat</label>
+          <select class="dft-form-select" id="dftReason">
+            <option value="end" selected data-fr="Fin de contrat / Licenciement" data-en="End of contract / Termination">Fin de contrat / Licenciement</option>
+            <option value="resign" data-fr="Démission volontaire" data-en="Voluntary resignation">Démission volontaire</option>
+            <option value="cause" data-fr="Licenciement pour faute grave (Art. 44)" data-en="Termination for cause (Art. 44)">Licenciement pour faute grave (Art. 44)</option>
+          </select>
+        </div>
+        <div class="dft-form-group"><label class="dft-form-label" data-fr="Type de contrat" data-en="Contract type">Type de contrat</label>
+          <select class="dft-form-select" id="dftCtype">
+            <option value="full" selected data-fr="Temps plein" data-en="Full-time">Temps plein</option>
+            <option value="part" data-fr="Temps partiel (prorata)" data-en="Part-time (prorata)">Temps partiel (prorata)</option>
+          </select>
+        </div>
+        <div class="dft-form-group" id="dftPartGroup" style="display:none"><label class="dft-form-label" data-fr="Heures travaillées / semaine" data-en="Hours worked / week">Heures travaillées / semaine</label><input type="number" class="dft-form-input" id="dftPartHours" value="24" /></div>
+      </div>
+    </div>
+    <div>
+      <div class="dft-result-header">
+        <div class="dft-result-label" data-fr="Indemnité de fin de service" data-en="End-of-service gratuity">Indemnité de fin de service</div>
+        <div class="dft-result-main" id="dftResMain">AED 0</div>
+        <div class="dft-result-sub" id="dftResSub"></div>
+      </div>
+      <div class="dft-result-body">
+        <div class="dft-tier-visual" id="dftTierVisual"></div>
+        <div id="dftBreakdown"></div>
+      </div>
+    </div>
+  </main>
+
+
+  <section class="dft-seo">
+    <div class="dft-lang-fr">
+      <h2>La <span>Gratuity</span> aux Émirats Arabes Unis</h2>
+      <p>L'indemnité de fin de service (EOSB ou Gratuity) est régie par la loi fédérale sur le travail (Federal Decree-Law No. 33 of 2021, Article 51). Elle se calcule exclusivement sur le salaire de base (hors allowances).</p>
+      <h3>Barème légal</h3>
+      <ul><li><strong>Années 1 à 5</strong> : 21 jours de salaire par année d'ancienneté</li><li><strong>Au-delà de 5 ans</strong> : 30 jours par année supplémentaire</li><li><strong>Plafond</strong> : 2 ans de salaire maximum</li></ul>
+      <h3>Cas particuliers</h3>
+      <ul><li>Moins d'1 an : pas de gratuity</li><li>Entre 1 et 5 ans, démission sous ancien régime (pré-feb 2022) : réduction progressive</li><li>Licenciement pour faute grave Art. 44 : perte totale de la gratuity</li><li>Temps partiel : prorata au ratio heures travaillées / temps plein standard</li></ul>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Quel salaire pris en compte pour la gratuity ?<span>+</span></div><div class="dft-faq-a">Uniquement le salaire de base (basic). Les allowances (housing, transport, etc.) sont exclues sauf si qualifiées contractuellement comme partie intégrante du salaire.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Dans quel délai l'employeur doit-il payer ?<span>+</span></div><div class="dft-faq-a">14 jours après la fin du contrat (Art. 53 de la loi). À défaut, pénalités de retard applicables devant le MOHRE.</div></div>
+    </div>
+    <div class="dft-lang-en">
+      <h2>UAE <span>Gratuity</span> (End of Service Benefit)</h2>
+      <p>End of Service Benefit (EOSB or Gratuity) is governed by the UAE Labour Law (Federal Decree-Law No. 33 of 2021, Article 51). It is calculated exclusively on the basic salary (excluding allowances).</p>
+      <h3>Legal schedule</h3>
+      <ul><li><strong>Years 1 to 5</strong>: 21 days of salary per year of service</li><li><strong>Beyond 5 years</strong>: 30 days per additional year</li><li><strong>Cap</strong>: maximum 2 years of salary</li></ul>
+      <h3>Special cases</h3>
+      <ul><li>Less than 1 year: no gratuity</li><li>Between 1 and 5 years, legacy regime resignation (pre-Feb 2022): progressive reduction</li><li>Termination for cause (Art. 44): total loss of gratuity</li><li>Part-time: prorated based on hours worked / full-time standard</li></ul>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Which salary is used for gratuity?<span>+</span></div><div class="dft-faq-a">Basic salary only. Allowances (housing, transport, etc.) are excluded unless contractually qualified as an integral part of salary.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">What's the payment deadline?<span>+</span></div><div class="dft-faq-a">14 days after contract end (Article 53). Late payment penalties applicable before MOHRE.</div></div>
+    </div>
+  </section>
+
+
+  <div class="dft-cta">
+    <h3 data-fr='Audit <span>EOSB</span> de votre société' data-en='<span>EOSB</span> audit for your company'>Audit <span>EOSB</span> de votre société</h3>
+    <p data-fr="Provision EOSB, règlements en cas de sortie, conformité MOHRE : Daftime sécurise votre masse salariale." data-en="EOSB provision, exit settlements, MOHRE compliance: Daftime secures your payroll.">Provision EOSB, règlements en cas de sortie, conformité MOHRE : Daftime sécurise votre masse salariale.</p>
+    <a href="https://daftime.ae/contact" target="_blank" rel="noopener" class="dft-btn" data-fr="Prendre rendez-vous" data-en="Book a meeting">Prendre rendez-vous</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var root = document.getElementById('dftGratCalc');
+  if(!root) return;
+
+
+  var currentLang = 'fr';
+
+
+  try {
+    var saved = localStorage.getItem('daftime_lang');
+    if(saved) currentLang = saved;
+    else if(navigator.language && navigator.language.indexOf('en')===0) currentLang = 'en';
+  } catch(e){}
+
+
+  function $(id){ return document.getElementById(id); }
+  function n(id){ return parseFloat($(id).value) || 0; }
+  function fmt(v){ return Math.round(v).toLocaleString(currentLang === 'en' ? 'en-US' : 'fr-FR'); }
+
+
+  function setLang(l){
+    currentLang = l;
+    root.setAttribute('data-lang', l);
+    try { localStorage.setItem('daftime_lang', l); } catch(e){}
+    root.querySelectorAll('[data-fr]').forEach(function(el){
+      var v = el.getAttribute('data-'+l);
+      if(v !== null) el.innerHTML = v;
+    });
+    root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+    compute();
+  }
+
+
+  function compute(){
+    var basic = n('dftBasic');
+    var start = $('dftStartDate').value;
+    var end = $('dftEndDate').value;
+    var reason = $('dftReason').value;
+    var ctype = $('dftCtype').value;
+    var partH = n('dftPartHours');
+    var l = currentLang;
+
+
+    if(!start || !end){
+      $('dftResMain').textContent = 'AED 0';
+      $('dftResSub').textContent = '';
+      $('dftBreakdown').innerHTML = '';
+      $('dftTierVisual').innerHTML = '';
+      return;
+    }
+
+
+    var startD = new Date(start);
+    var endD = new Date(end);
+    var years = (endD - startD) / (1000 * 60 * 60 * 24 * 365.25);
+    if(years < 0) years = 0;
+
+
+    var gratuity = 0, days = 0;
+    if(reason === 'cause'){
+      gratuity = 0;
+    } else if(years < 1){
+      gratuity = 0;
+    } else {
+      var dailyBasic = basic / 30;
+      var y1_5 = Math.min(years, 5);
+      var y5plus = Math.max(years - 5, 0);
+      days = y1_5 * 21 + y5plus * 30;
+      gratuity = days * dailyBasic;
+      var cap = basic * 24;
+      if(gratuity > cap) gratuity = cap;
+    }
+    if(ctype === 'part' && partH > 0){
+      gratuity = gratuity * (partH / 48);
+    }
+
+
+    $('dftResMain').textContent = 'AED ' + fmt(gratuity);
+
+
+    var sub = '';
+    if(years < 1) sub = l === 'fr' ? '< 1 an : pas de gratuity' : '< 1 year: no gratuity';
+    else if(reason === 'cause') sub = l === 'fr' ? 'Faute grave Art. 44 : gratuity perdue' : 'Cause termination Art. 44: gratuity forfeited';
+    else sub = years.toFixed(2) + (l === 'fr' ? ' ans d\'ancienneté · ' : ' years of service · ') + Math.round(days) + (l === 'fr' ? ' jours' : ' days');
+    $('dftResSub').textContent = sub;
+
+
+    var tier1Active = years >= 1 && years <= 5;
+    var tier2Active = years > 5;
+    $('dftTierVisual').innerHTML =
+      '<div class="dft-tier' + (tier1Active ? ' active' : '') + '"><div class="dft-tier-years">1-5 ' + (l === 'fr' ? 'ans' : 'yrs') + '</div><div class="dft-tier-desc">' + (l === 'fr' ? '21 jours de salaire / an' : '21 days / year') + '</div><div class="dft-tier-days">21 ' + (l === 'fr' ? 'j' : 'd') + '</div></div>' +
+      '<div class="dft-tier' + (tier2Active ? ' active' : '') + '"><div class="dft-tier-years">5+ ' + (l === 'fr' ? 'ans' : 'yrs') + '</div><div class="dft-tier-desc">' + (l === 'fr' ? '30 jours / an supplémentaire' : '30 days / additional year') + '</div><div class="dft-tier-days">30 ' + (l === 'fr' ? 'j' : 'd') + '</div></div>' +
+      '<div class="dft-tier"><div class="dft-tier-years">Cap</div><div class="dft-tier-desc">' + (l === 'fr' ? 'Plafond : 2 ans de salaire' : 'Cap: 2 years of salary') + '</div><div class="dft-tier-days">24 ' + (l === 'fr' ? 'mois' : 'm') + '</div></div>';
+
+
+    $('dftBreakdown').innerHTML =
+      '<div class="dft-result-row"><span>' + (l === 'fr' ? 'Salaire de base' : 'Basic salary') + '</span><span class="dft-val">AED ' + fmt(basic) + '</span></div>' +
+      '<div class="dft-result-row"><span>' + (l === 'fr' ? 'Ancienneté' : 'Service') + '</span><span class="dft-val">' + years.toFixed(2) + ' ' + (l === 'fr' ? 'ans' : 'yrs') + '</span></div>' +
+      '<div class="dft-result-row"><span>' + (l === 'fr' ? 'Jours de gratuity' : 'Gratuity days') + '</span><span class="dft-val">' + Math.round(days) + '</span></div>' +
+      '<div class="dft-result-row dft-highlight"><span>GRATUITY</span><span class="dft-val">AED ' + fmt(gratuity) + '</span></div>';
+  }
+
+
+  // Show/hide part-time hours field
+  $('dftCtype').addEventListener('change', function(){
+    $('dftPartGroup').style.display = this.value === 'part' ? 'flex' : 'none';
+    compute();
+  });
+
+
+  // Lang buttons
+  root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+
+
+  // FAQ
+  root.querySelectorAll('.dft-faq-item').forEach(function(item){
+    item.addEventListener('click', function(){ item.classList.toggle('open'); });
+  });
+
+
+  // Live compute
+  ['dftBasic','dftStartDate','dftEndDate','dftReason','dftCtype','dftPartHours'].forEach(function(id){
+    var el = $(id);
+    el.addEventListener('input', compute);
+    el.addEventListener('change', compute);
+  });
+
+
+  // Default dates: today and 2 years ago
+  var today = new Date();
+  var twoYrsAgo = new Date(); twoYrsAgo.setFullYear(today.getFullYear() - 2);
+  $('dftStartDate').valueAsDate = twoYrsAgo;
+  $('dftEndDate').valueAsDate = today;
+
+
+  setLang(currentLang);
+})();
+</script>
+________________
+</body>
+</html>

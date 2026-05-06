@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Corporate Tax UAE — Daftime</title>
+<style>
+  html,body { margin:0; padding:0; background:#fff; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+.dft-ct-calc {
+  --dft-bg:#080A32;
+  --dft-card:#0F1240;
+  --dft-primary:#1a1d56;
+  --dft-primary-light:#2a2d6a;
+  --dft-accent:#d4af37;
+  --dft-accent-light:#e8c547;
+  --dft-white:#fff;
+  --dft-text-sec:rgba(255,255,255,.7);
+  --dft-text-mut:rgba(255,255,255,.5);
+  --dft-border:rgba(255,255,255,.1);
+  --dft-success:#10b981;
+  --dft-danger:#ef4444;
+  --dft-radius:16px;
+  --dft-radius-sm:8px;
+  font-family:'Poppins',sans-serif;
+  background:var(--dft-bg);
+  color:var(--dft-white);
+  line-height:1.6;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.dft-ct-calc *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+
+.dft-ct-calc .dft-topbar{display:flex;justify-content:flex-end;padding:16px 24px;border-bottom:1px solid var(--dft-border)}
+.dft-ct-calc .dft-lang-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:100px;padding:3px}
+.dft-ct-calc .dft-lang-btn{padding:6px 12px;font-size:11px;font-weight:600;color:var(--dft-text-mut);cursor:pointer;border-radius:100px;border:none;background:transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.dft-ct-calc .dft-lang-btn.active{background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-ct-calc .dft-hero{padding:50px 24px 30px;text-align:center;position:relative;background:linear-gradient(180deg,var(--dft-bg) 0%,#0B0E3A 100%)}
+.dft-ct-calc .dft-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(212,175,55,.08) 0%,transparent 70%);pointer-events:none}
+.dft-ct-calc .dft-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--dft-accent);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:20px;position:relative}
+.dft-ct-calc .dft-hero h1{font-size:38px;font-weight:300;margin-bottom:14px;line-height:1.2;position:relative;color:var(--dft-white)}
+.dft-ct-calc .dft-hero h1 span{background:linear-gradient(90deg,var(--dft-accent),var(--dft-accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:500}
+.dft-ct-calc .dft-hero p{color:var(--dft-text-sec);font-size:15px;max-width:720px;margin:0 auto;position:relative}
+
+
+.dft-ct-calc .dft-main{max-width:1100px;margin:0 auto;padding:30px 24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.dft-ct-calc .dft-section{background:var(--dft-card);border:1px solid var(--dft-border);border-radius:var(--dft-radius)}
+.dft-ct-calc .dft-section-header{padding:18px 24px;border-bottom:1px solid var(--dft-border);display:flex;align-items:center;gap:12px}
+.dft-ct-calc .dft-section-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.dft-ct-calc .dft-section-title{font-size:14px;font-weight:600;color:var(--dft-white)}
+.dft-ct-calc .dft-section-body{padding:24px}
+
+
+.dft-ct-calc .dft-form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.dft-ct-calc .dft-form-label{font-size:11px;font-weight:500;color:var(--dft-text-sec);text-transform:uppercase;letter-spacing:.5px}
+.dft-ct-calc .dft-form-input,.dft-ct-calc .dft-form-select{background:rgba(255,255,255,.05);border:1px solid var(--dft-border);border-radius:var(--dft-radius-sm);padding:12px 14px;font-size:14px;color:var(--dft-white);transition:all .2s;width:100%}
+.dft-ct-calc .dft-form-input:focus,.dft-ct-calc .dft-form-select:focus{outline:none;border-color:var(--dft-accent);background:rgba(255,255,255,.08)}
+.dft-ct-calc .dft-form-select option{background:var(--dft-card);color:var(--dft-white)}
+.dft-ct-calc .dft-form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+
+.dft-ct-calc .dft-result-header{padding:32px 24px;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius) var(--dft-radius) 0 0;text-align:center;border:1px solid rgba(212,175,55,.3);border-bottom:none}
+.dft-ct-calc .dft-result-label{color:rgba(255,255,255,.7);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.dft-ct-calc .dft-result-main{font-size:44px;font-weight:600;color:var(--dft-accent);font-family:'Monaco',monospace}
+.dft-ct-calc .dft-result-sub{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+.dft-ct-calc .dft-result-body{padding:24px;background:var(--dft-card);border:1px solid var(--dft-border);border-top:none;border-radius:0 0 var(--dft-radius) var(--dft-radius)}
+.dft-ct-calc .dft-result-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--dft-border);font-size:13px;color:var(--dft-white)}
+.dft-ct-calc .dft-result-row:last-child{border-bottom:none}
+.dft-ct-calc .dft-result-row .dft-val{font-family:'Monaco',monospace;font-weight:500;color:var(--dft-white)}
+.dft-ct-calc .dft-result-row.dft-highlight{background:rgba(212,175,55,.08);margin:0 -24px;padding:14px 24px}
+.dft-ct-calc .dft-result-row.dft-highlight .dft-val{color:var(--dft-accent);font-size:16px;font-weight:600}
+
+
+.dft-ct-calc .dft-alert{background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);border-radius:var(--dft-radius-sm);padding:14px;margin-top:16px;font-size:12px;color:var(--dft-text-sec);display:flex;gap:10px}
+.dft-ct-calc .dft-alert-icon{color:var(--dft-accent);flex-shrink:0}
+
+
+.dft-ct-calc .dft-seo{max-width:1100px;margin:40px auto;padding:40px 24px;background:var(--dft-card);border-radius:var(--dft-radius);border:1px solid var(--dft-border)}
+.dft-ct-calc .dft-seo h2{font-size:24px;font-weight:500;margin-bottom:16px;color:var(--dft-white)}
+.dft-ct-calc .dft-seo h2 span{color:var(--dft-accent)}
+.dft-ct-calc .dft-seo h3{font-size:16px;font-weight:500;margin:24px 0 10px;color:var(--dft-accent)}
+.dft-ct-calc .dft-seo p,.dft-ct-calc .dft-seo li{color:var(--dft-text-sec);font-size:14px;margin-bottom:10px}
+.dft-ct-calc .dft-faq-item{border-bottom:1px solid var(--dft-border);padding:16px 0;cursor:pointer}
+.dft-ct-calc .dft-faq-q{font-weight:500;color:var(--dft-white);display:flex;justify-content:space-between;font-size:14px}
+.dft-ct-calc .dft-faq-a{color:var(--dft-text-sec);font-size:13px;margin-top:8px;padding-left:10px;border-left:2px solid var(--dft-accent);display:none}
+.dft-ct-calc .dft-faq-item.open .dft-faq-a{display:block}
+
+
+.dft-ct-calc .dft-cta{max-width:1100px;margin:40px auto;padding:40px 24px;text-align:center;background:linear-gradient(135deg,var(--dft-primary) 0%,var(--dft-primary-light) 100%);border-radius:var(--dft-radius);border:1px solid rgba(212,175,55,.3)}
+.dft-ct-calc .dft-cta h3{font-size:24px;font-weight:400;margin-bottom:10px;color:var(--dft-white)}
+.dft-ct-calc .dft-cta h3 span{color:var(--dft-accent);font-weight:600}
+.dft-ct-calc .dft-cta p{color:rgba(255,255,255,.8);margin-bottom:20px;font-size:14px}
+.dft-ct-calc .dft-btn{padding:12px 24px;border:none;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;cursor:pointer;background:var(--dft-accent);color:var(--dft-bg)}
+
+
+.dft-ct-calc .dft-lang-en{display:none}
+.dft-ct-calc[data-lang="en"] .dft-lang-fr{display:none}
+.dft-ct-calc[data-lang="en"] .dft-lang-en{display:block}
+
+
+@media(max-width:1024px){
+  .dft-ct-calc .dft-main{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .dft-ct-calc .dft-hero{padding:30px 16px 20px}
+  .dft-ct-calc .dft-hero h1{font-size:26px}
+  .dft-ct-calc .dft-main{padding:20px 16px}
+  .dft-ct-calc .dft-form-grid-2{grid-template-columns:1fr}
+  .dft-ct-calc .dft-seo,.dft-ct-calc .dft-cta{padding:24px 16px;margin:20px 16px}
+  .dft-ct-calc .dft-result-main{font-size:36px}
+}
+</style>
+
+
+<div class="dft-ct-calc" data-lang="fr" id="dftCtCalc">
+  <div class="dft-topbar">
+    <div class="dft-lang-toggle">
+      <button class="dft-lang-btn active" data-lang="fr">FR</button>
+      <button class="dft-lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+
+
+  <section class="dft-hero">
+    <div class="dft-hero-badge">✓ Federal Decree-Law No. 47 of 2022</div>
+    <h1 data-fr='Calculateur <span>Corporate Tax UAE</span>' data-en='UAE <span>Corporate Tax</span> Calculator'>Calculateur <span>Corporate Tax UAE</span></h1>
+    <p data-fr="Corporate Tax UAE 9% : calcul avec Small Business Relief, QFZP, reports déficitaires et de minimis." data-en="UAE Corporate Tax 9%: calculation with Small Business Relief, QFZP, loss carryforward and de minimis.">Corporate Tax UAE 9% : calcul avec Small Business Relief, QFZP, reports déficitaires et de minimis.</p>
+  </section>
+
+
+  <main class="dft-main">
+    <div class="dft-section">
+      <div class="dft-section-header">
+        <div class="dft-section-icon">📊</div>
+        <div class="dft-section-title" data-fr="Paramètres" data-en="Inputs">Paramètres</div>
+      </div>
+      <div class="dft-section-body">
+        <div class="dft-form-group">
+          <label class="dft-form-label" data-fr="Chiffre d'affaires (AED)" data-en="Revenue (AED)">Chiffre d'affaires (AED)</label>
+          <input type="number" class="dft-form-input" id="dftRevenue" value="2000000" />
+        </div>
+        <div class="dft-form-group">
+          <label class="dft-form-label" data-fr="Bénéfice imposable (AED)" data-en="Taxable profit (AED)">Bénéfice imposable (AED)</label>
+          <input type="number" class="dft-form-input" id="dftProfit" value="500000" />
+        </div>
+        <div class="dft-form-group">
+          <label class="dft-form-label" data-fr="Régime" data-en="Regime">Régime</label>
+          <select class="dft-form-select" id="dftRegime">
+            <option value="mainland" selected data-fr="Mainland standard" data-en="Mainland standard">Mainland standard</option>
+            <option value="sbr" data-fr="SBR (Small Business Relief)" data-en="SBR (Small Business Relief)">SBR (Small Business Relief)</option>
+            <option value="qfzp" data-fr="QFZP (Qualifying Free Zone Person)" data-en="QFZP (Qualifying Free Zone Person)">QFZP (Qualifying Free Zone Person)</option>
+          </select>
+        </div>
+        <div class="dft-form-grid-2">
+          <div class="dft-form-group">
+            <label class="dft-form-label" data-fr="Revenu qualifiant QFZP" data-en="QFZP qualifying income">Revenu qualifiant QFZP</label>
+            <input type="number" class="dft-form-input" id="dftQfzpInc" value="0" />
+          </div>
+          <div class="dft-form-group">
+            <label class="dft-form-label" data-fr="Revenu non-qualifiant" data-en="Non-qualifying income">Revenu non-qualifiant</label>
+            <input type="number" class="dft-form-input" id="dftQfzpNonInc" value="0" />
+          </div>
+        </div>
+        <div class="dft-form-group">
+          <label class="dft-form-label" data-fr="Déficits antérieurs (AED)" data-en="Prior losses (AED)">Déficits antérieurs (AED)</label>
+          <input type="number" class="dft-form-input" id="dftLosses" value="0" />
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <div class="dft-result-header">
+        <div class="dft-result-label" data-fr="Corporate Tax dû" data-en="Corporate Tax due">Corporate Tax dû</div>
+        <div class="dft-result-main" id="dftResMain">AED 0</div>
+        <div class="dft-result-sub" id="dftResSub"></div>
+      </div>
+      <div class="dft-result-body"><div id="dftBreakdown"></div></div>
+    </div>
+  </main>
+
+
+  <section class="dft-seo">
+    <div class="dft-lang-fr">
+      <h2>La <span>Corporate Tax UAE</span> en 2026</h2>
+      <p>La Corporate Tax UAE est entrée en vigueur le 1er juin 2023 (Federal Decree-Law No. 47 of 2022). Taux standard : 0% jusqu'à AED 375 000 de bénéfice imposable, 9% au-delà. Trois régimes spéciaux existent : Small Business Relief, QFZP (Free Zones), et participation exemption pour holdings.</p>
+      <h3>Small Business Relief (SBR)</h3>
+      <p>Les entreprises avec un chiffre d'affaires &le; AED 3 000 000 peuvent opter pour le SBR : taux effectif 0%, mais obligation de produire une déclaration simplifiée. Valable jusqu'à fin 2026.</p>
+      <h3>QFZP - Qualifying Free Zone Person</h3>
+      <p>Conditions cumulatives : activité qualifiante, substance adéquate aux UAE, transfer pricing documenté, seuil de minimis (revenu non-qualifiant &le; 5% du total ou AED 5M), non-opt pour le 9%. Si toutes les conditions sont remplies : 0% sur le qualifying income, 9% sur le non-qualifying uniquement.</p>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">Quand dois-je déposer ma première déclaration CT ?<span>+</span></div><div class="dft-faq-a">Dans les 9 mois suivant la fin de la première période fiscale de la société. Exemple : exercice 01/01/2024-31/12/2024 → déclaration avant le 30/09/2025.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Puis-je reporter mes déficits ?<span>+</span></div><div class="dft-faq-a">Oui, sans limitation de durée, mais l'utilisation est plafonnée à 75% du bénéfice imposable de l'année où vous les imputez.</div></div>
+    </div>
+    <div class="dft-lang-en">
+      <h2><span>UAE Corporate Tax</span> in 2026</h2>
+      <p>UAE Corporate Tax came into force on 1 June 2023 (Federal Decree-Law No. 47 of 2022). Standard rate: 0% up to AED 375,000 taxable profit, 9% above. Three special regimes exist: Small Business Relief, QFZP (Free Zones), and participation exemption for holdings.</p>
+      <h3>Small Business Relief (SBR)</h3>
+      <p>Companies with revenue &le; AED 3,000,000 may elect SBR: effective rate 0%, with obligation to file a simplified return. Valid until end of 2026.</p>
+      <h3>QFZP - Qualifying Free Zone Person</h3>
+      <p>Cumulative conditions: qualifying activity, adequate substance in UAE, transfer pricing documentation, de minimis threshold (non-qualifying income &le; 5% of total or AED 5M), no opt for 9%. If all met: 0% on qualifying income, 9% on non-qualifying only.</p>
+      <h3>FAQ</h3>
+      <div class="dft-faq-item"><div class="dft-faq-q">When must I file my first CT return?<span>+</span></div><div class="dft-faq-a">Within 9 months after the end of the first tax period. Example: FY 01/01/2024-31/12/2024 → filing by 30/09/2025.</div></div>
+      <div class="dft-faq-item"><div class="dft-faq-q">Can I carry forward losses?<span>+</span></div><div class="dft-faq-a">Yes, indefinitely, but usage is capped at 75% of the taxable profit of the year of offset.</div></div>
+    </div>
+  </section>
+
+
+  <div class="dft-cta">
+    <h3 data-fr='Optimisez votre <span>Corporate Tax</span>' data-en='Optimize your <span>Corporate Tax</span>'>Optimisez votre <span>Corporate Tax</span></h3>
+    <p data-fr="Structuration fiscale, QFZP, transfer pricing : nos experts agréés FTA vous accompagnent." data-en="Tax structuring, QFZP, transfer pricing: our FTA-registered experts support you.">Structuration fiscale, QFZP, transfer pricing : nos experts agréés FTA vous accompagnent.</p>
+    <a href="https://daftime.ae/contact" target="_blank" rel="noopener" class="dft-btn" data-fr="Prendre rendez-vous" data-en="Book a meeting">Prendre rendez-vous</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var root = document.getElementById('dftCtCalc');
+  if(!root) return;
+  var currentLang = 'fr';
+  try {
+    var saved = localStorage.getItem('daftime_lang');
+    if(saved) currentLang = saved;
+    else if(navigator.language && navigator.language.indexOf('en')===0) currentLang = 'en';
+  } catch(e){}
+
+
+  function setLang(l){
+    currentLang = l;
+    root.setAttribute('data-lang', l);
+    try { localStorage.setItem('daftime_lang', l); } catch(e){}
+    root.querySelectorAll('[data-fr]').forEach(function(el){
+      var v = el.getAttribute('data-'+l);
+      if(v !== null) el.innerHTML = v;
+    });
+    root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+    compute();
+  }
+
+
+  function n(id){ return parseFloat(document.getElementById(id).value) || 0; }
+  function fmt(v){ return Math.round(v).toLocaleString(currentLang === 'en' ? 'en-US' : 'fr-FR'); }
+
+
+  function compute(){
+    var rev = n('dftRevenue'), profit = n('dftProfit');
+    var regime = document.getElementById('dftRegime').value;
+    var qi = n('dftQfzpInc'), qni = n('dftQfzpNonInc'), losses = n('dftLosses');
+    var l = currentLang;
+    var ct = 0, rate = '', alertMsg = '', rows = [];
+
+
+    if(regime === 'sbr'){
+      if(rev <= 3000000){
+        ct = 0; rate = 'SBR · 0%';
+        alertMsg = l === 'fr' ? '✓ Éligible SBR (CA ≤ AED 3M)' : '✓ SBR eligible (revenue ≤ AED 3M)';
+      } else {
+        var lossUse = Math.min(losses, profit * 0.75);
+        var taxable = Math.max(profit - lossUse - 375000, 0);
+        ct = taxable * 0.09;
+        rate = '9%';
+        alertMsg = l === 'fr' ? '⚠ CA dépasse AED 3M : SBR non applicable, taux 9% appliqué' : '⚠ Revenue exceeds AED 3M: SBR not applicable, 9% applied';
+      }
+    } else if(regime === 'qfzp'){
+      var deMinPct = qi > 0 ? qni / (qi + qni) * 100 : 0;
+      if(deMinPct > 5 && qni > 5000000){
+        ct = profit * 0.09;
+        alertMsg = l === 'fr' ? '⚠ Seuil de minimis dépassé : QFZP perdu, 9% sur tout le bénéfice' : '⚠ De minimis exceeded: QFZP lost, 9% on full profit';
+        rate = '9%';
+      } else {
+        var taxableNon = Math.max(qni - 375000, 0);
+        ct = taxableNon * 0.09;
+        alertMsg = l === 'fr' ? '✓ QFZP préservé · 0% sur qualifying, 9% sur non-qualifying au-delà de 375K' : '✓ QFZP preserved · 0% on qualifying, 9% on non-qualifying above 375K';
+        rate = '0% / 9%';
+      }
+    } else {
+      var lossUse2 = Math.min(losses, profit * 0.75);
+      var taxable2 = Math.max(profit - lossUse2 - 375000, 0);
+      ct = taxable2 * 0.09;
+      rate = taxable2 > 0 ? '9%' : '0% (< 375K)';
+      rows.push({k: l === 'fr' ? 'Abattement SBR/Seuil' : 'SBR/Threshold relief', v: -375000});
+      if(lossUse2 > 0) rows.push({k: l === 'fr' ? 'Déficit imputé' : 'Loss offset', v: -lossUse2});
+      alertMsg = l === 'fr' ? 'ⓘ Régime mainland standard · seuil 375K + 9% au-delà' : 'ⓘ Mainland standard regime · 375K threshold + 9% above';
+    }
+
+
+    document.getElementById('dftResMain').textContent = 'AED ' + fmt(ct);
+    document.getElementById('dftResSub').textContent = (l === 'fr' ? 'Taux effectif : ' : 'Effective rate: ') + rate;
+
+
+    var html = '<div class="dft-result-row"><span>' + (l === 'fr' ? 'Bénéfice imposable' : 'Taxable profit') + '</span><span class="dft-val">' + fmt(profit) + '</span></div>';
+    rows.forEach(function(r){
+      html += '<div class="dft-result-row"><span>' + r.k + '</span><span class="dft-val">' + fmt(r.v) + '</span></div>';
+    });
+    html += '<div class="dft-result-row dft-highlight"><span>CORPORATE TAX</span><span class="dft-val">AED ' + fmt(ct) + '</span></div>';
+    html += '<div class="dft-alert" style="margin-top:12px"><span class="dft-alert-icon">ⓘ</span><div>' + alertMsg + '</div></div>';
+    document.getElementById('dftBreakdown').innerHTML = html;
+  }
+
+
+  root.querySelectorAll('.dft-lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+
+
+  root.querySelectorAll('.dft-faq-item').forEach(function(item){
+    item.addEventListener('click', function(){ item.classList.toggle('open'); });
+  });
+
+
+  ['dftRevenue','dftProfit','dftRegime','dftQfzpInc','dftQfzpNonInc','dftLosses'].forEach(function(id){
+    var el = document.getElementById(id);
+    el.addEventListener('input', compute);
+    el.addEventListener('change', compute);
+  });
+
+
+  setLang(currentLang);
+})();
+</script>
+________________
+</body>
+</html>
