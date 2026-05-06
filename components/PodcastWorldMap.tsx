@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Office = {
   country: string;
   flag: React.ReactNode;
@@ -36,13 +38,8 @@ const offices: Office[] = [
   },
 ];
 
-// Real lat/lng for the 3 offices, projected onto the world-map.svg viewBox
-// (1000×500, equirectangular: x = (lng+180)/360 * 100, y = (90-lat)/180 * 100)
-const dots = [
-  { left: 50.65, top: 22.86, label: "Paris" }, // France 48.85, 2.35
-  { left: 47.46, top: 28.49, label: "Lisbon" }, // Portugal 38.72, -9.13
-  { left: 65.36, top: 35.96, label: "Dubai" }, // UAE 25.27, 55.30
-];
+// The 3 office dots (Paris / Lisbon / Dubai) live inside world-map.svg
+// itself and pulse via SMIL animations baked into the file.
 
 export default function PodcastWorldMap() {
   return (
@@ -65,36 +62,18 @@ export default function PodcastWorldMap() {
           </div>
         </div>
 
-        {/* World map */}
-        <div className="relative aspect-[2/1] overflow-hidden rounded-2xl bg-black">
-          {/* Vertical decorative lines */}
-          <div className="pointer-events-none absolute inset-0 flex justify-between px-12 opacity-[0.06]">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <span key={i} className="h-full w-px bg-white" />
-            ))}
-          </div>
-
-          {/* Continent silhouette (real world map) */}
-          <div
-            className="absolute inset-0 bg-no-repeat bg-center bg-contain"
-            style={{ backgroundImage: "url(/assets/world-map.svg)" }}
-            aria-hidden
+        {/* World map — SVG carries the dotted continents + 3 pulsing
+            yellow office markers (SMIL animations baked in). */}
+        <div className="relative aspect-[1248/454] overflow-hidden rounded-2xl bg-black">
+          <Image
+            src="/assets/world-map.svg"
+            alt="Daftime offices around the world"
+            fill
+            priority
+            className="object-cover"
+            sizes="(min-width: 1248px) 1248px, 100vw"
+            unoptimized
           />
-
-          {/* Yellow location dots with pulse */}
-          {dots.map((d, i) => (
-            <span
-              key={i}
-              className="absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ left: `${d.left}%`, top: `${d.top}%` }}
-              aria-label={d.label}
-            >
-              <span className="absolute inset-0 -m-3 animate-ping rounded-full bg-daftime-yellow/40" />
-              <span className="relative flex size-6 items-center justify-center rounded-full bg-daftime-yellow/30 ring-1 ring-daftime-yellow/50">
-                <span className="size-2.5 rounded-full bg-daftime-yellow shadow-[0_0_12px_rgba(214,179,3,0.8)]" />
-              </span>
-            </span>
-          ))}
         </div>
 
         {/* Office cards */}
