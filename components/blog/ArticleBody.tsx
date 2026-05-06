@@ -32,7 +32,7 @@ export default function ArticleBody({ article }: { article: Article }) {
               </span>
             </summary>
             <div className="mt-4">
-              <ArticleTOC article={article} />
+              <ArticleTOC article={article} showHeading={false} />
             </div>
           </details>
           <div className="hidden lg:block">

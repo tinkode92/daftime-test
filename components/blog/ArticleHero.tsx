@@ -15,25 +15,37 @@ const labels = {
   },
 };
 
+function formatDate(raw: string, locale: "en" | "fr"): string {
+  if (!raw) return "";
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) return raw;
+  return new Intl.DateTimeFormat(locale === "fr" ? "fr-FR" : "en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(d);
+}
+
 export default function ArticleHero({ article }: { article: Article }) {
   const l = labels[article.locale];
+  const formattedDate = formatDate(article.date, article.locale);
 
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
-        {/* Atmospheric backdrop — subtle so it doesn't fight the content */}
+        {/* Atmospheric backdrop */}
         <div className="pointer-events-none absolute inset-0">
           <Image
             src="/assets/cta-bg.png"
             alt=""
             fill
             priority
-            className="object-cover opacity-[0.35]"
+            className="object-cover opacity-[0.32]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/72 via-black/55 to-black/85" />
         </div>
 
-        {/* Yellow glow + vertical lines, mirroring Hero / GuideHero */}
+        {/* Yellow glow + vertical lines */}
         <div className="pointer-events-none absolute -right-20 -top-20 size-[420px] rounded-full bg-daftime-yellow/12 blur-[120px]" />
         <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-[1100px] -translate-x-1/2 justify-between md:flex">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -46,25 +58,24 @@ export default function ArticleHero({ article }: { article: Article }) {
             <Navigation />
           </div>
 
-          <div className="mx-auto mt-14 flex w-full max-w-[920px] flex-1 flex-col gap-7 sm:mt-20">
-            {/* Eyebrow + back link */}
-            <div className="flex items-center justify-between gap-4">
-              <span className="flex items-center gap-2">
-                <span className="size-1 rounded-full bg-daftime-yellow" />
-                <span className="label-mono text-daftime-yellow">
-                  {l.eyebrow}
-                </span>
-              </span>
-              <a
-                href="/#blog"
-                className="font-mono text-[12px] uppercase tracking-[0.12em] text-white/55 transition-colors hover:text-daftime-yellow"
-              >
-                {l.back}
-              </a>
-            </div>
+          {/* Top utility row — eyebrow left, back link right (full width of inner container) */}
+          <div className="mx-auto mt-12 flex w-full max-w-[1100px] items-center justify-between gap-4 sm:mt-16">
+            <span className="flex items-center gap-2">
+              <span className="size-1 rounded-full bg-daftime-yellow" />
+              <span className="label-mono text-daftime-yellow">{l.eyebrow}</span>
+            </span>
+            <a
+              href="/#blog"
+              className="font-mono text-[12px] uppercase tracking-[0.12em] text-white/55 transition-colors hover:text-daftime-yellow"
+            >
+              {l.back}
+            </a>
+          </div>
 
+          {/* Centered title block */}
+          <div className="mx-auto mt-8 flex w-full max-w-[860px] flex-1 flex-col items-center gap-6 text-center sm:mt-10">
             {article.categories.length > 0 && (
-              <div className="flex flex-wrap gap-2">
+              <div className="fade-up flex flex-wrap justify-center gap-2">
                 {article.categories.slice(0, 3).map((c) => (
                   <span
                     key={c}
@@ -76,15 +87,18 @@ export default function ArticleHero({ article }: { article: Article }) {
               </div>
             )}
 
-            <h1 className="h-hero max-w-[18ch] text-balance fade-up text-white">
+            <h1
+              className="h-hero fade-up text-balance text-white"
+              style={{ animationDelay: "120ms" }}
+            >
               {article.title}
             </h1>
 
             <div
-              className="fade-up flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px] tracking-tight text-white/60"
-              style={{ animationDelay: "120ms" }}
+              className="fade-up flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[14px] tracking-tight text-white/60"
+              style={{ animationDelay: "240ms" }}
             >
-              {article.date && <span>{article.date}</span>}
+              {formattedDate && <span>{formattedDate}</span>}
               {article.readingTime && (
                 <>
                   <span className="size-1 rounded-full bg-white/30" aria-hidden />
@@ -102,7 +116,7 @@ export default function ArticleHero({ article }: { article: Article }) {
         </div>
       </div>
 
-      {/* Cover image — own rounded card, NOT overlapping the dark hero */}
+      {/* Cover image — own rounded card on white below the dark hero */}
       {article.image && (
         <div className="mx-auto mt-3 max-w-[1176px] sm:mt-4">
           <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-daftime-gray-card sm:rounded-3xl">

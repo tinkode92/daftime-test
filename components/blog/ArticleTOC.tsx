@@ -8,7 +8,13 @@ const labels = {
   fr: "Sur cette page",
 };
 
-export default function ArticleTOC({ article }: { article: Article }) {
+export default function ArticleTOC({
+  article,
+  showHeading = true,
+}: {
+  article: Article;
+  showHeading?: boolean;
+}) {
   // Build the TOC entries from sections that have a title
   const items = article.sections
     .map((s, idx) => ({ idx, title: s.title }))
@@ -49,13 +55,15 @@ export default function ArticleTOC({ article }: { article: Article }) {
 
   return (
     <nav aria-label={labels[article.locale]} className="text-[14px]">
-      <span className="flex items-center gap-2">
-        <span className="size-1 rounded-full bg-daftime-yellow" />
-        <span className="label-mono text-[#070a33]">
-          {labels[article.locale]}
+      {showHeading && (
+        <span className="flex items-center gap-2">
+          <span className="size-1 rounded-full bg-daftime-yellow" />
+          <span className="label-mono text-[#070a33]">
+            {labels[article.locale]}
+          </span>
         </span>
-      </span>
-      <ol className="mt-5 flex flex-col gap-1.5">
+      )}
+      <ol className={(showHeading ? "mt-5 " : "") + "flex flex-col gap-1.5"}>
         {items.map((s, i) => {
           const isActive = active === s.idx;
           return (
