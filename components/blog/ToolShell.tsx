@@ -6,30 +6,25 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ToolEmbed from "./ToolEmbed";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
-import { useCalendarUrl } from "@/lib/useCalendarUrl";
 import type { Tool } from "@/lib/blog";
 
 const ui = {
   en: {
     eyebrow: "UAE tool",
-    bookCall: "Talk to an expert",
     backToBlog: "← Back to insights",
   },
   fr: {
     eyebrow: "Outil UAE",
-    bookCall: "Parler à un expert",
     backToBlog: "← Retour aux articles",
   },
 };
 
 export default function ToolShell({ tool }: { tool: Tool }) {
   const locale = useEffectiveLocale("en");
-  const calendarUrl = useCalendarUrl();
   const isFr = locale === "fr";
   const t = ui[isFr ? "fr" : "en"];
   const headline = isFr ? tool.cta.headlineFr : tool.cta.headlineEn;
   const description = isFr ? tool.cta.descriptionFr : tool.cta.descriptionEn;
-  const button = isFr ? tool.cta.buttonFr : tool.cta.buttonEn;
 
   // Static iframe filename derived from the URL path
   const fileSlug = tool.path ? tool.path.replace(/^\//, "") : null;
@@ -88,14 +83,6 @@ export default function ToolShell({ tool }: { tool: Tool }) {
                   {headline}
                 </p>
               )}
-              <a
-                href={calendarUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-pill cta-shimmer mt-2 bg-daftime-yellow text-[#070a33] hover:opacity-95"
-              >
-                {button || t.bookCall}
-              </a>
             </motion.div>
           </div>
         </div>
