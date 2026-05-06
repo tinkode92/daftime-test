@@ -291,17 +291,7 @@ export default function CountryGate() {
                     <button
                       key={l.code}
                       type="button"
-                      onClick={() => {
-                        setLanguage(l.code);
-                        // Auto-sync the country so the URL matches the language:
-                        //   FR language → FR country (URL /fr)
-                        //   PT language → PT country (URL /pt)
-                        //   EN language → AE country (URL /)
-                        // The user can still override the country radio after.
-                        if (l.code === "FR") setCountry("FR");
-                        else if (l.code === "PT") setCountry("PT");
-                        else if (l.code === "EN") setCountry("AE");
-                      }}
+                      onClick={() => setLanguage(l.code)}
                       aria-pressed={active}
                       className={
                         "rounded-2xl border px-3 py-3 text-left transition-all duration-200 " +
