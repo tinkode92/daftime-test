@@ -47,7 +47,7 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
                 href="https://www.instagram.com/daftime.ae/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-underline transition-opacity hover:opacity-80"
+                className="transition-opacity hover:opacity-60"
               >
                 Instagram
               </a>
@@ -55,7 +55,7 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
                 href="https://www.linkedin.com/in/sami-sehrine-9287b860/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-underline transition-opacity hover:opacity-80"
+                className="transition-opacity hover:opacity-60"
               >
                 LinkedIn
               </a>
@@ -63,16 +63,16 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
                 href="https://www.youtube.com/@Daftime"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-underline transition-opacity hover:opacity-80"
+                className="transition-opacity hover:opacity-60"
               >
                 Youtube
               </a>
             </div>
             <div className="flex flex-wrap items-center gap-6 sm:gap-12">
-              <a href="#" className="link-underline transition-opacity hover:opacity-80">
+              <a href="#" className="transition-opacity hover:opacity-60">
                 {tr.privacy}
               </a>
-              <a href="#" className="link-underline transition-opacity hover:opacity-80">
+              <a href="#" className="transition-opacity hover:opacity-60">
                 {tr.terms}
               </a>
               <span>{tr.copyright}</span>

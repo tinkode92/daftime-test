@@ -37,6 +37,12 @@ export type Article = {
   author: ArticleAuthor;
   sections: ArticleSection[];
   faqs: ArticleFAQ[];
+  /**
+   * SEO keywords array — manually curated, eventually editable from
+   * Contentful. Optional. When unset, structured data falls back to
+   * the article's categories.
+   */
+  keywords?: string[];
 };
 
 export type Tool = {

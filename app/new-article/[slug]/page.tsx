@@ -5,6 +5,7 @@ import ArticleHero from "@/components/blog/ArticleHero";
 import ArticleBody from "@/components/blog/ArticleBody";
 import ArticleFAQ from "@/components/blog/ArticleFAQ";
 import ArticleToolCTA from "@/components/blog/ArticleToolCTA";
+import ArticleStructuredData from "@/components/blog/ArticleStructuredData";
 import { getArticle, getArticleSlugs, getToolBySlug } from "@/lib/blog";
 
 export function generateStaticParams() {
@@ -39,6 +40,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   const tool = article.tool ? getToolBySlug(article.tool) : null;
   return (
     <main className="min-h-screen w-full bg-white">
+      <ArticleStructuredData article={article} />
       <ArticleHero article={article} />
       <ArticleBody article={article} />
       {tool && <ArticleToolCTA article={article} tool={tool} />}
