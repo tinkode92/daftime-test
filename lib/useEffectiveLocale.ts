@@ -22,7 +22,13 @@ function readStored(): Locale | null {
 
 function localeFromPath(path: string | null): Locale | null {
   if (!path) return null;
+  // FR-language prefixes: /fr (AE-FR) and /fr-fr (FR country, FR lang)
   if (path === "/fr" || path.startsWith("/fr/")) return "fr";
+  if (path === "/fr-fr" || path.startsWith("/fr-fr/")) return "fr";
+  // EN-language prefixes for non-AE countries
+  if (path === "/fr-en" || path.startsWith("/fr-en/")) return "en";
+  if (path === "/pt-en" || path.startsWith("/pt-en/")) return "en";
+  // PT-language prefixes
   if (path === "/pt" || path.startsWith("/pt/")) return "pt";
   return null;
 }

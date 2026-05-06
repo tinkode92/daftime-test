@@ -3,17 +3,34 @@
 import { usePathname } from "next/navigation";
 
 /**
- * Returns the URL locale prefix matching the current pathname:
- *   "/fr/*" → "/fr"
- *   "/pt/*" → "/pt"
- *   anything else → ""
+ * Returns the URL prefix matching the current pathname. Used to keep
+ * internal links in the user's country/language context.
  *
- * Use to keep internal links inside the user's language context, so
- * /fr/podcast → /fr/podcast/<slug> instead of leaking back to /podcast.
+ * The 6 country/language combinations map to:
+ *   AE+EN → ""        AE+FR → "/fr"
+ *   FR+EN → "/fr-en"  FR+FR → "/fr-fr"
+ *   PT+EN → "/pt-en"  PT+PT → "/pt"
  */
-export function useLangPrefix(): "" | "/fr" | "/pt" {
+export type LangPrefix =
+  | ""
+  | "/fr"
+  | "/fr-fr"
+  | "/fr-en"
+  | "/pt"
+  | "/pt-en";
+
+const PREFIXES: LangPrefix[] = [
+  "/fr-fr",
+  "/fr-en",
+  "/pt-en",
+  "/fr",
+  "/pt",
+];
+
+export function useLangPrefix(): LangPrefix {
   const pathname = usePathname() || "/";
-  if (pathname === "/fr" || pathname.startsWith("/fr/")) return "/fr";
-  if (pathname === "/pt" || pathname.startsWith("/pt/")) return "/pt";
+  for (const p of PREFIXES) {
+    if (pathname === p || pathname.startsWith(p + "/")) return p;
+  }
   return "";
 }

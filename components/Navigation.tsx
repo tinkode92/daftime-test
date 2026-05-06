@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { openCountryGate, useStoredCountry } from "./CountryGate";
 import { t, type Locale } from "@/lib/translations";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
+import { useLangPrefix } from "@/lib/useLangPrefix";
 
 const COUNTRY_FLAGS = {
   AE: "🇦🇪",
@@ -15,8 +16,11 @@ const COUNTRY_FLAGS = {
 } as const;
 
 function localeFromPath(path: string): Locale {
+  if (path === "/fr-fr" || path.startsWith("/fr-fr/")) return "fr";
   if (path === "/fr" || path.startsWith("/fr/")) return "fr";
   if (path === "/pt" || path.startsWith("/pt/")) return "pt";
+  if (path === "/fr-en" || path.startsWith("/fr-en/")) return "en";
+  if (path === "/pt-en" || path.startsWith("/pt-en/")) return "en";
   return "en";
 }
 
@@ -29,11 +33,7 @@ export default function Navigation() {
   // their language context as they navigate. The flag pill below still
   // shows the user's stored COUNTRY for the popup.
   const country = useStoredCountry();
-  const langPrefix = pathname?.startsWith("/fr")
-    ? "/fr"
-    : pathname?.startsWith("/pt")
-      ? "/pt"
-      : "";
+  const langPrefix = useLangPrefix();
   const home = langPrefix || "/";
   const locale = useEffectiveLocale(localeFromPath(pathname || "/"));
   const tr = t(locale).nav;

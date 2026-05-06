@@ -36,15 +36,29 @@ function isLanguageAvailable(country: Country, lang: Language): boolean {
   return lang === "EN" || lang === "FR";
 }
 
-function pathForCountry(country: Country): string {
-  if (country === "FR") return "/fr";
-  if (country === "PT") return "/pt";
-  return "/";
+/**
+ * Country × Language → URL prefix matrix.
+ *   AE+EN → ""        AE+FR → "/fr"
+ *   FR+EN → "/fr-en"  FR+FR → "/fr-fr"
+ *   PT+EN → "/pt-en"  PT+PT → "/pt"
+ */
+function getUrlPrefix(country: Country, language: Language): string {
+  if (country === "AE") return language === "FR" ? "/fr" : "";
+  if (country === "FR") return language === "FR" ? "/fr-fr" : "/fr-en";
+  if (country === "PT") return language === "PT" ? "/pt" : "/pt-en";
+  return "";
 }
 
 function countryFromPath(path: string): Country {
-  if (path === "/fr" || path.startsWith("/fr/")) return "FR";
+  // FR country: dedicated /fr-fr or /fr-en prefixes
+  if (path === "/fr-fr" || path.startsWith("/fr-fr/")) return "FR";
+  if (path === "/fr-en" || path.startsWith("/fr-en/")) return "FR";
+  // PT country: /pt-en or the legacy /pt (PT-PT)
+  if (path === "/pt-en" || path.startsWith("/pt-en/")) return "PT";
   if (path === "/pt" || path.startsWith("/pt/")) return "PT";
+  // AE country in FR language uses /fr (the original SEO URL)
+  // — country still resolves to AE because /fr has historically been
+  // 'the AE site translated to French'.
   return "AE";
 }
 
@@ -97,11 +111,15 @@ export default function CountryGate() {
       } else {
         setCountry(storedCountry);
         setLanguage(storedLanguage);
-        // If the URL doesn't match the stored country, send the user there
-        const targetPath = pathForCountry(storedCountry);
-        const currentCountry = countryFromPath(pathname || "/");
-        if (currentCountry !== storedCountry && targetPath !== pathname) {
-          router.replace(targetPath);
+        // On first hit of a country root, sync the URL with the stored
+        // country/language pair (e.g. user picked FR+FR earlier and now
+        // landed on /, push them to /fr-fr). On inner pages we leave
+        // them alone — they're either at a preserved article URL or
+        // the rewrites already serve the right content.
+        const onCountryRoot = ["/", "/fr", "/pt"].includes(pathname || "/");
+        if (onCountryRoot) {
+          const target = getUrlPrefix(storedCountry, storedLanguage) || "/";
+          if (target !== pathname) router.replace(target);
         }
       }
     } catch {
@@ -154,27 +172,34 @@ export default function CountryGate() {
     // pill, ServiceTabs price visibility, …) to re-read storage.
     window.dispatchEvent(new CustomEvent(LOCALE_CHANGED_EVENT));
     setOpen(false);
-    // The URL prefix follows the LANGUAGE (per the SEO team's setup):
-    //   EN → /        FR → /fr        PT → /pt
-    // Country is independent — it just drives content variations
-    // (offices, AED prices, etc.) and does not change the URL.
+    // Country/language URL matrix:
+    //   AE+EN → ""       AE+FR → "/fr"
+    //   FR+EN → "/fr-en" FR+FR → "/fr-fr"
+    //   PT+EN → "/pt-en" PT+PT → "/pt"
     //
     // Articles (/new-article/<slug> and /fr/new-article/<slug>) keep
-    // their preserved SEO URL — those URLs are fixed, so the language
-    // switch only re-renders text via LOCALE_CHANGED_EVENT and the
-    // user stays put.
+    // their preserved SEO URL across language/country switches — those
+    // URLs are fixed, only the displayed text re-renders via
+    // LOCALE_CHANGED_EVENT.
     //
-    // Every other page (home, podcast, guide, tools) has /fr/* and
-    // /pt/* mirrors, so the language switch swaps the prefix in place.
+    // Every other page (home, podcast, guide, tools) is mirrored under
+    // /fr/*, /fr-fr/*, /fr-en/*, /pt-en/*, /pt/*, so the prefix swap is
+    // safe — Next.js rewrites resolve the FR/PT-country prefixes to
+    // their AE-equivalent content for now.
+    const newPrefix = getUrlPrefix(country, language);
     const currentPath = pathname || "/";
     const isArticle = /^\/(?:fr\/)?new-article\//.test(currentPath);
     let target = currentPath;
     if (!isArticle) {
+      // Strip any existing country/language prefix (longest first so
+      // /fr-fr matches before /fr, etc.).
       const base =
-        currentPath.replace(/^\/(fr|pt)(?=\/|$)/, "") || "/";
-      const langPrefix =
-        language === "FR" ? "/fr" : language === "PT" ? "/pt" : "";
-      target = (langPrefix + (base === "/" ? "" : base)) || "/";
+        currentPath.replace(
+          /^\/(fr-fr|fr-en|pt-en|fr|pt)(?=\/|$)/,
+          "",
+        ) || "/";
+      target =
+        (newPrefix + (base === "/" ? "" : base)) || "/";
     }
     if (target !== currentPath) {
       router.push(target);
