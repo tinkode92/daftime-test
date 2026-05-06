@@ -15,16 +15,16 @@ export default function GuideHero() {
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
-        {/* City / Burj Al Arab background */}
+        {/* Guide-specific background art */}
         <div className="pointer-events-none absolute inset-0">
           <Image
-            src="/assets/cta-bg.png"
+            src="/assets/daftime-guide-background.svg"
             alt=""
             fill
             priority
-            className="object-cover opacity-60"
+            unoptimized
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/80" />
         </div>
 
         {/* Vertical lines */}
