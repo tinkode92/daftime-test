@@ -99,10 +99,10 @@ function PodcastCard({
               alt={episode.imageAlt || episode.title}
               fill
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+              className="object-cover transition-transform duration-700 [filter:saturate(0)_brightness(0.55)] group-hover:scale-[1.05]"
             />
           ) : null}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/55" />
           {hasVideo && (
             <span className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <span className="grid size-14 place-items-center rounded-full bg-daftime-yellow text-black shadow-xl">

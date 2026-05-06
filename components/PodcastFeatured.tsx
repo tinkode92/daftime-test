@@ -51,13 +51,13 @@ export default function PodcastFeatured({
                 src={episode.image}
                 alt={episode.imageAlt || episode.title}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                className="object-cover transition-transform duration-700 [filter:saturate(0)_brightness(0.55)] group-hover:scale-[1.03]"
                 sizes="(min-width: 1024px) 640px, 100vw"
               />
             ) : (
               <div className="size-full bg-daftime-dark" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/30" />
             {hasVideo && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="grid size-16 place-items-center rounded-full bg-daftime-yellow text-black shadow-2xl transition-transform duration-300 group-hover:scale-110 sm:size-20">
