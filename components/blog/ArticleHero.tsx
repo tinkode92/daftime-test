@@ -110,17 +110,13 @@ export default function ArticleHero({ article }: { article: Article }) {
         aria-hidden
       />
 
-      {/* TLDR callout (yellow-light, matches site language) */}
+      {/* Key takeaway callout */}
       {article.tldr && (
         <div className="bg-white px-4 pt-12 sm:px-8 sm:pt-16 md:px-16">
           <div className="mx-auto max-w-[760px]">
             <div className="overflow-hidden rounded-2xl border-l-[3px] border-daftime-yellow bg-daftime-yellow-light px-6 py-5 sm:px-8 sm:py-6">
-              <span className="flex items-center gap-2">
-                <span className="size-1 rounded-full bg-[#070a33]" />
-                <span className="label-mono text-[#070a33]">TL;DR</span>
-              </span>
               <div
-                className="prose-daftime mt-3 text-[16px] leading-relaxed sm:text-[17px]"
+                className="prose-daftime text-[16px] leading-relaxed sm:text-[17px]"
                 dangerouslySetInnerHTML={{ __html: article.tldr }}
               />
             </div>
