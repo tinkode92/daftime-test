@@ -26,7 +26,7 @@ const LEGAL_ILLUSTRATIONS: Record<LegalCardKey, IllustrationKind> = {
   corporate: "shield",
 };
 
-type AccountingPlanVariant = "white" | "yellow" | "gray";
+type AccountingPlanVariant = "white" | "yellow";
 type AccountingPlanKey = "basic" | "intermediate" | "premium" | "large";
 const ACCOUNTING_PLAN_KEYS: AccountingPlanKey[] = [
   "basic",
@@ -34,13 +34,6 @@ const ACCOUNTING_PLAN_KEYS: AccountingPlanKey[] = [
   "premium",
   "large",
 ];
-const ACCOUNTING_PLAN_VARIANTS: Record<AccountingPlanKey, AccountingPlanVariant> =
-  {
-    basic: "white",
-    intermediate: "yellow",
-    premium: "gray",
-    large: "white",
-  };
 
 type CFOPlanKey = "reporting" | "office" | "fractional";
 const CFO_PLAN_KEYS: CFOPlanKey[] = ["reporting", "office", "fractional"];
@@ -210,6 +203,7 @@ function AccountingContent({ locale }: { locale: Locale }) {
   const country = useStoredCountry();
   const showPrice = country === "AE";
   const tr = t(locale).serviceTabs.accounting;
+  const [selected, setSelected] = useState<AccountingPlanKey>("intermediate");
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_482px]">
@@ -239,7 +233,9 @@ function AccountingContent({ locale }: { locale: Locale }) {
           <Reveal key={planKey} delay={idx * 100}>
             <PricingCard
               plan={tr.plans[planKey]}
-              variant={ACCOUNTING_PLAN_VARIANTS[planKey]}
+              variant={selected === planKey ? "yellow" : "white"}
+              isSelected={selected === planKey}
+              onSelect={() => setSelected(planKey)}
               showPrice={showPrice}
             />
           </Reveal>
@@ -300,10 +296,14 @@ type AccountingPlanData = {
 function PricingCard({
   plan,
   variant,
+  isSelected,
+  onSelect,
   showPrice,
 }: {
   plan: AccountingPlanData;
   variant: AccountingPlanVariant;
+  isSelected: boolean;
+  onSelect: () => void;
   showPrice: boolean;
 }) {
   const palette = {
@@ -319,17 +319,14 @@ function PricingCard({
       rangeColor: "text-black",
       iconBg: "bg-[#b79b0b]",
     },
-    gray: {
-      bg: "bg-[#e6e6e6]",
-      titleColor: "text-black",
-      rangeColor: "text-daftime-gray-mute",
-      iconBg: "bg-daftime-yellow",
-    },
   }[variant];
 
   return (
-    <div
-      className={`card-hover flex h-full min-h-[340px] flex-col gap-6 rounded-2xl p-2 ${palette.bg}`}
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={isSelected}
+      className={`card-hover flex h-full min-h-[340px] w-full flex-col gap-6 rounded-2xl p-2 text-left transition-colors duration-300 ${palette.bg}`}
     >
       <div className="flex flex-col gap-3 px-2 pt-2">
         <div className="flex items-center gap-3">
@@ -364,7 +361,7 @@ function PricingCard({
           </li>
         ))}
       </ul>
-    </div>
+    </button>
   );
 }
 
