@@ -1,0 +1,89 @@
+# robots.txt for daftime.ae
+# Strategy: maximize SEO + GEO visibility, block AI training only.
+#
+# Content Signals (Cloudflare / EU Directive 2019/790 art. 4):
+# search=yes  -> indexing for search results allowed
+# ai-input=yes -> real-time retrieval for AI answers allowed (GEO)
+# ai-train=no -> training/fine-tuning AI models NOT allowed
+#
+# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF
+# RIGHTS UNDER ARTICLE 4 OF EU DIRECTIVE 2019/790 ON COPYRIGHT AND RELATED
+# RIGHTS IN THE DIGITAL SINGLE MARKET.
+
+
+# === Default: open to everyone, training opt-out via signal ===
+User-agent: *
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+Allow: /
+
+
+# === AI SEARCH & RETRIEVAL bots: ALLOWED (GEO visibility) ===
+
+
+# OpenAI — ChatGPT Search index
+User-agent: OAI-SearchBot
+Allow: /
+
+
+# OpenAI — real-time fetch when user asks ChatGPT
+User-agent: ChatGPT-User
+Allow: /
+
+
+# Anthropic — Claude Search index
+User-agent: Claude-SearchBot
+Allow: /
+
+
+# Anthropic — real-time fetch when user asks Claude
+User-agent: Claude-User
+Allow: /
+
+
+# Perplexity — index
+User-agent: PerplexityBot
+Allow: /
+
+
+# Perplexity — real-time user fetch
+User-agent: Perplexity-User
+Allow: /
+
+
+# Google — controls Gemini / Vertex AI usage (does NOT affect Googlebot or AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+
+# === AI TRAINING bots: BLOCKED (no training on this site) ===
+
+
+User-agent: GPTBot
+Disallow: /
+
+
+User-agent: ClaudeBot
+Disallow: /
+
+
+User-agent: CCBot
+Disallow: /
+
+
+User-agent: Applebot-Extended
+Disallow: /
+
+
+User-agent: Bytespider
+Disallow: /
+
+
+User-agent: meta-externalagent
+Disallow: /
+
+
+User-agent: Amazonbot
+Disallow: /
+
+
+Sitemap: https://daftime.ae/sitemap.xml

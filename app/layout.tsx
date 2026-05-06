@@ -17,9 +17,13 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://daftime.ae"),
   title: "Daftime — Your international partner for structuring your business",
   description:
     "Where law meets accounting, and strategy drives growth. Daftime supports entrepreneurs and investors with legal, tax, accounting and advisory services in Dubai and abroad.",
+  verification: {
+    google: "ShYnqNUN1H5zpRiJoS4raQTtH9nhuMKVoRBZ1YiazpU",
+  },
 };
 
 export default function RootLayout({
