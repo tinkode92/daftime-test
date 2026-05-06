@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import { getYouTubeId, type Podcast } from "@/lib/blog";
 import { t } from "@/lib/translations";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
+import { useLangPrefix } from "@/lib/useLangPrefix";
 
 export default function PodcastDetail({
   episode,
@@ -18,6 +19,7 @@ export default function PodcastDetail({
 }) {
   const locale = useEffectiveLocale("en");
   const tr = t(locale).podcastPage;
+  const langPrefix = useLangPrefix();
   const videoId = getYouTubeId(episode.content);
 
   return (
@@ -55,7 +57,7 @@ export default function PodcastDetail({
                 </span>
               </span>
               <Link
-                href="/podcast"
+                href={`${langPrefix}/podcast`}
                 className="font-mono text-[12px] uppercase tracking-[0.12em] text-white/55 transition-colors hover:text-daftime-yellow"
               >
                 {tr.backToList}
@@ -142,8 +144,18 @@ export default function PodcastDetail({
       {/* Prev / Next navigation */}
       <section className="bg-daftime-gray-bg px-4 py-12 sm:px-8 sm:py-16 md:px-16">
         <div className="mx-auto grid max-w-[1152px] grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-          <NeighborCard direction="prev" episode={prev} tr={tr} />
-          <NeighborCard direction="next" episode={next} tr={tr} />
+          <NeighborCard
+            direction="prev"
+            episode={prev}
+            tr={tr}
+            langPrefix={langPrefix}
+          />
+          <NeighborCard
+            direction="next"
+            episode={next}
+            tr={tr}
+            langPrefix={langPrefix}
+          />
         </div>
       </section>
     </>
@@ -154,10 +166,12 @@ function NeighborCard({
   direction,
   episode,
   tr,
+  langPrefix,
 }: {
   direction: "prev" | "next";
   episode: Podcast | null;
   tr: ReturnType<typeof t>["podcastPage"];
+  langPrefix: string;
 }) {
   const isNext = direction === "next";
 
@@ -174,7 +188,7 @@ function NeighborCard({
 
   return (
     <Link
-      href={`/podcast/${episode.slug}`}
+      href={`${langPrefix}/podcast/${episode.slug}`}
       className={
         "card-hover group flex min-h-[120px] flex-col gap-2 rounded-2xl border border-daftime-gray-border bg-white p-5 sm:p-6 " +
         (isNext ? "sm:items-end sm:text-right" : "")

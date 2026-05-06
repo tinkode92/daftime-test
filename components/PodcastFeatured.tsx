@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getYouTubeId, type Podcast } from "@/lib/blog";
 import { t } from "@/lib/translations";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
+import { useLangPrefix } from "@/lib/useLangPrefix";
 
 export default function PodcastFeatured({
   episode,
@@ -13,6 +14,7 @@ export default function PodcastFeatured({
 }) {
   const locale = useEffectiveLocale("en");
   const tr = t(locale).podcastPage;
+  const langPrefix = useLangPrefix();
   const hasVideo = !!getYouTubeId(episode.content);
 
   return (
@@ -40,7 +42,7 @@ export default function PodcastFeatured({
 
         {/* Featured player card */}
         <Link
-          href={`/podcast/${episode.slug}`}
+          href={`${langPrefix}/podcast/${episode.slug}`}
           className="card-hover mt-12 grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-daftime-gray-border bg-white text-left lg:grid-cols-[640px_1fr]"
         >
           <div className="group relative aspect-video lg:aspect-auto lg:min-h-[360px]">

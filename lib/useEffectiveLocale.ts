@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import type { Locale } from "@/lib/translations";
 
 const STORAGE_KEY = "daftime-language";
@@ -19,29 +20,38 @@ function readStored(): Locale | null {
   return null;
 }
 
+function localeFromPath(path: string | null): Locale | null {
+  if (!path) return null;
+  if (path === "/fr" || path.startsWith("/fr/")) return "fr";
+  if (path === "/pt" || path.startsWith("/pt/")) return "pt";
+  return null;
+}
+
 /**
  * Resolves the active text locale for a component.
  *
- * - SSR / first paint  → uses the `serverLocale` (matches the URL).
- * - After hydration    → if the user picked a language in the popup,
- *                        that choice is read from localStorage and
- *                        overrides the URL-based default.
- * - Live updates       → re-reads on the "daftime-locale-changed"
- *                        custom event so every consumer re-renders
- *                        the moment the user confirms a new language.
+ * Priority order:
+ *   1. localStorage choice (set by the country/language gate)
+ *   2. URL prefix (/fr/* → fr, /pt/* → pt, else EN)
+ *   3. The serverLocale fallback the component was mounted with
+ *
+ * Re-reads on the "daftime-locale-changed" custom event so every
+ * consumer re-renders the moment the user confirms a new language.
  */
-export function useEffectiveLocale(serverLocale: Locale): Locale {
-  const [locale, setLocale] = useState<Locale>(serverLocale);
+export function useEffectiveLocale(serverLocale: Locale = "en"): Locale {
+  const pathname = usePathname();
+  const urlLocale = localeFromPath(pathname);
+  const [locale, setLocale] = useState<Locale>(urlLocale ?? serverLocale);
 
   useEffect(() => {
     const sync = () => {
       const stored = readStored();
-      setLocale(stored ?? serverLocale);
+      setLocale(stored ?? urlLocale ?? serverLocale);
     };
     sync();
     window.addEventListener(EVENT, sync);
     return () => window.removeEventListener(EVENT, sync);
-  }, [serverLocale]);
+  }, [serverLocale, urlLocale]);
 
   return locale;
 }

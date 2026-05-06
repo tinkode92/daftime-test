@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { getYouTubeId, type Podcast } from "@/lib/blog";
 import { t } from "@/lib/translations";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
+import { useLangPrefix } from "@/lib/useLangPrefix";
 
 export default function PodcastGrid({
   episodes,
@@ -75,6 +76,7 @@ function PodcastCard({
   podcastTag: string;
 }) {
   const hasVideo = !!getYouTubeId(episode.content);
+  const langPrefix = useLangPrefix();
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -87,7 +89,7 @@ function PodcastCard({
       }}
     >
       <Link
-        href={`/podcast/${episode.slug}`}
+        href={`${langPrefix}/podcast/${episode.slug}`}
         className="card-hover group flex h-full flex-col overflow-hidden rounded-2xl border border-daftime-gray-border bg-white text-left"
       >
         <div className="relative aspect-video overflow-hidden bg-daftime-dark">

@@ -25,11 +25,16 @@ export default function Navigation() {
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const resourcesRef = useRef<HTMLLIElement>(null);
   const pathname = usePathname();
-  // The home (URL) we link back to follows the chosen COUNTRY (URL routing).
-  // The displayed text follows the chosen LANGUAGE (preference).
+  // Internal links keep the URL's locale prefix so the user stays in
+  // their language context as they navigate. The flag pill below still
+  // shows the user's stored COUNTRY for the popup.
   const country = useStoredCountry();
-  const home =
-    country === "FR" ? "/fr" : country === "PT" ? "/pt" : "/";
+  const langPrefix = pathname?.startsWith("/fr")
+    ? "/fr"
+    : pathname?.startsWith("/pt")
+      ? "/pt"
+      : "";
+  const home = langPrefix || "/";
   const locale = useEffectiveLocale(localeFromPath(pathname || "/"));
   const tr = t(locale).nav;
   const currentLocale = locale.toUpperCase();
@@ -109,7 +114,7 @@ export default function Navigation() {
               >
                 <Link
                   role="menuitem"
-                  href="/podcast"
+                  href={`${langPrefix}/podcast`}
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
@@ -117,7 +122,7 @@ export default function Navigation() {
                 </Link>
                 <Link
                   role="menuitem"
-                  href="/guide"
+                  href={`${langPrefix}/guide`}
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
@@ -125,7 +130,7 @@ export default function Navigation() {
                 </Link>
                 <Link
                   role="menuitem"
-                  href="/wps-sif-generator"
+                  href={`${langPrefix}/wps-sif-generator`}
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
@@ -242,7 +247,7 @@ export default function Navigation() {
               <li>
                 <Link
                   onClick={() => setOpen(false)}
-                  href="/podcast"
+                  href={`${langPrefix}/podcast`}
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
                   → {tr.podcast}
@@ -251,7 +256,7 @@ export default function Navigation() {
               <li>
                 <Link
                   onClick={() => setOpen(false)}
-                  href="/guide"
+                  href={`${langPrefix}/guide`}
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
                   → {tr.guide2026}
@@ -260,7 +265,7 @@ export default function Navigation() {
               <li>
                 <Link
                   onClick={() => setOpen(false)}
-                  href="/wps-sif-generator"
+                  href={`${langPrefix}/wps-sif-generator`}
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
                   → WPS SIF Generator

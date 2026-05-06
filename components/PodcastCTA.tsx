@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useLangPrefix } from "@/lib/useLangPrefix";
 
 // Deterministic bar heights so server + client render identically.
 const BAR_HEIGHTS = Array.from({ length: 28 }, (_, i) =>
@@ -16,6 +17,7 @@ const BAR_HEIGHTS = Array.from({ length: 28 }, (_, i) =>
 );
 
 export default function PodcastCTA() {
+  const langPrefix = useLangPrefix();
   return (
     <section className="bg-white px-2 py-2 sm:px-3 sm:py-3">
       <motion.div
@@ -59,7 +61,7 @@ export default function PodcastCTA() {
           </h2>
           <div>
             <Link
-              href="/podcast"
+              href={`${langPrefix}/podcast`}
               className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-daftime-yellow px-6 text-[14px] tracking-tight text-black transition-all duration-300 hover:scale-[1.04] hover:opacity-90"
             >
               Watch Podcast

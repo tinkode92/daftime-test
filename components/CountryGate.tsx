@@ -156,19 +156,28 @@ export default function CountryGate() {
     setOpen(false);
     // The URL prefix follows the LANGUAGE (per the SEO team's setup):
     //   EN → /        FR → /fr        PT → /pt
-    // The COUNTRY is independent — it just drives content variations
+    // Country is independent — it just drives content variations
     // (offices, AED prices, etc.) and does not change the URL.
     //
-    // We only navigate when:
-    //  (a) the user is on a country-root page (/, /fr, /pt) and
-    //  (b) the language's expected prefix differs from where they are.
-    // Inner pages (/podcast, /new-article/<slug>, /guide, tools…) keep
-    // their preserved URL — only the text re-renders via
-    // LOCALE_CHANGED_EVENT.
-    const langPrefix = language === "FR" ? "/fr" : language === "PT" ? "/pt" : "/";
-    const onCountryRoot = ["/", "/fr", "/pt"].includes(pathname || "/");
-    if (onCountryRoot && pathname !== langPrefix) {
-      router.push(langPrefix);
+    // Articles (/new-article/<slug> and /fr/new-article/<slug>) keep
+    // their preserved SEO URL — those URLs are fixed, so the language
+    // switch only re-renders text via LOCALE_CHANGED_EVENT and the
+    // user stays put.
+    //
+    // Every other page (home, podcast, guide, tools) has /fr/* and
+    // /pt/* mirrors, so the language switch swaps the prefix in place.
+    const currentPath = pathname || "/";
+    const isArticle = /^\/(?:fr\/)?new-article\//.test(currentPath);
+    let target = currentPath;
+    if (!isArticle) {
+      const base =
+        currentPath.replace(/^\/(fr|pt)(?=\/|$)/, "") || "/";
+      const langPrefix =
+        language === "FR" ? "/fr" : language === "PT" ? "/pt" : "";
+      target = (langPrefix + (base === "/" ? "" : base)) || "/";
+    }
+    if (target !== currentPath) {
+      router.push(target);
     } else {
       router.refresh();
     }
