@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const meta = [
   { label: "Founder", value: "Sami Sehrine" },
@@ -32,18 +35,34 @@ export default function GuideVision() {
         {/* Two-column body */}
         <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2 lg:gap-6">
           {/* Photo */}
-          <div className="relative aspect-[580/377] overflow-hidden rounded-xl bg-daftime-gray-card lg:aspect-auto lg:h-[377px]">
+          <motion.div
+            initial={{ opacity: 0, x: -32 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative aspect-[580/377] overflow-hidden rounded-xl bg-daftime-gray-card lg:aspect-auto lg:h-[377px]"
+          >
             <Image
               src="/assets/guide-vision-sami.svg"
               alt="Sami Sehrine"
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-700 hover:scale-[1.04]"
               sizes="(min-width: 1024px) 580px, 100vw"
             />
-          </div>
+          </motion.div>
 
           {/* Quote card */}
-          <div className="relative overflow-hidden rounded-xl bg-[#f4f4f4] px-6 py-6 lg:h-[377px]">
+          <motion.div
+            initial={{ opacity: 0, x: 32 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+              duration: 0.7,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="relative overflow-hidden rounded-xl bg-[#f4f4f4] px-6 py-6 lg:h-[377px]"
+          >
             {/* Big opening quote */}
             <span
               className="block text-[64px] leading-[44px] tracking-[-0.04em] text-black"
@@ -80,7 +99,7 @@ export default function GuideVision() {
                 ”
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Footer meta row */}

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { t, type Locale } from "@/lib/translations";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
@@ -9,7 +10,13 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
   const tr = t(effectiveLocale).footer;
   return (
     <footer className="bg-white p-2 sm:p-4">
-      <div className="relative overflow-hidden rounded-2xl bg-daftime-yellow px-5 py-8 sm:px-6 sm:py-10 md:h-[254px]">
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="relative overflow-hidden rounded-2xl bg-daftime-yellow px-5 py-8 sm:px-6 sm:py-10 md:h-[254px]"
+      >
         <div className="pointer-events-none absolute inset-0 -translate-y-[40%] opacity-[0.06]">
           <Image
             src="/assets/logo-daftime.png"
@@ -67,7 +74,7 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

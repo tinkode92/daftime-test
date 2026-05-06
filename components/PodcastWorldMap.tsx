@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import { CALENDAR_URLS } from "@/lib/calendarUrl";
 
@@ -84,10 +87,19 @@ export default function PodcastWorldMap() {
 
         {/* Office cards */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {offices.map((o) => (
-            <article
+          {offices.map((o, idx) => (
+            <motion.article
               key={o.country}
-              className="flex flex-col justify-between gap-12 overflow-hidden rounded-[15px] border border-[#e5e5e5] bg-[#f3f3f3] p-6"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{
+                duration: 0.6,
+                delay: idx * 0.12,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{ y: -4 }}
+              className="card-hover flex flex-col justify-between gap-12 overflow-hidden rounded-[15px] border border-[#e5e5e5] bg-[#f3f3f3] p-6"
             >
               <div className="flex items-center gap-5">
                 <span className="size-8 shrink-0">{o.flag}</span>
@@ -111,7 +123,7 @@ export default function PodcastWorldMap() {
                   Schedule a call
                 </a>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>
