@@ -111,6 +111,22 @@ export function getAllPodcasts(): Podcast[] {
   return podcasts;
 }
 
+export function getPodcastBySlug(slug: string): Podcast | null {
+  return podcasts.find((p) => p.slug === slug) ?? null;
+}
+
+export function getPodcastNeighbors(slug: string): {
+  prev: Podcast | null;
+  next: Podcast | null;
+} {
+  const idx = podcasts.findIndex((p) => p.slug === slug);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx > 0 ? podcasts[idx - 1] : null,
+    next: idx < podcasts.length - 1 ? podcasts[idx + 1] : null,
+  };
+}
+
 /**
  * Extracts the YouTube video ID from a podcast's `content` HTML
  * (which is the original Framer `<iframe src="https://www.youtube.com/embed/...">`).

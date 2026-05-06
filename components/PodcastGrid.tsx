@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import YouTubeModal from "./YouTubeModal";
 import { getYouTubeId, type Podcast } from "@/lib/blog";
 
 export default function PodcastGrid({
@@ -12,9 +12,6 @@ export default function PodcastGrid({
   episodes: Podcast[];
 }) {
   const [visible, setVisible] = useState(9);
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const [activeTitle, setActiveTitle] = useState<string>("");
-
   const shown = episodes.slice(0, visible);
   const hasMore = visible < episodes.length;
 
@@ -43,10 +40,6 @@ export default function PodcastGrid({
               key={ep.slug + i}
               episode={ep}
               delay={(i % 3) * 80}
-              onPlay={(id, title) => {
-                setActiveId(id);
-                setActiveTitle(title);
-              }}
             />
           ))}
         </div>
@@ -64,12 +57,6 @@ export default function PodcastGrid({
           </div>
         )}
       </div>
-
-      <YouTubeModal
-        videoId={activeId}
-        title={activeTitle}
-        onClose={() => setActiveId(null)}
-      />
     </section>
   );
 }
@@ -77,18 +64,13 @@ export default function PodcastGrid({
 function PodcastCard({
   episode,
   delay,
-  onPlay,
 }: {
   episode: Podcast;
   delay: number;
-  onPlay: (id: string, title: string) => void;
 }) {
-  const videoId = getYouTubeId(episode.content);
+  const hasVideo = !!getYouTubeId(episode.content);
   return (
-    <motion.button
-      type="button"
-      onClick={() => videoId && onPlay(videoId, episode.title)}
-      disabled={!videoId}
+    <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -97,49 +79,53 @@ function PodcastCard({
         delay: delay / 1000,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="card-hover group flex flex-col overflow-hidden rounded-2xl border border-daftime-gray-border bg-white text-left"
     >
-      <div className="relative aspect-video overflow-hidden bg-daftime-dark">
-        {episode.image ? (
-          <Image
-            src={episode.image}
-            alt={episode.imageAlt || episode.title}
-            fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-          />
-        ) : null}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
-        {videoId && (
-          <span className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <span className="grid size-14 place-items-center rounded-full bg-daftime-yellow text-black shadow-xl">
-              <svg width="16" height="18" viewBox="0 0 16 18" fill="currentColor">
-                <path d="M2 1l12 8L2 17V1z" />
-              </svg>
+      <Link
+        href={`/resources/podcast/${episode.slug}`}
+        className="card-hover group flex h-full flex-col overflow-hidden rounded-2xl border border-daftime-gray-border bg-white text-left"
+      >
+        <div className="relative aspect-video overflow-hidden bg-daftime-dark">
+          {episode.image ? (
+            <Image
+              src={episode.image}
+              alt={episode.imageAlt || episode.title}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+            />
+          ) : null}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
+          {hasVideo && (
+            <span className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <span className="grid size-14 place-items-center rounded-full bg-daftime-yellow text-black shadow-xl">
+                <svg width="16" height="18" viewBox="0 0 16 18" fill="currentColor">
+                  <path d="M2 1l12 8L2 17V1z" />
+                </svg>
+              </span>
             </span>
+          )}
+          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[#070a33]">
+            Podcast
           </span>
-        )}
-        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[#070a33]">
-          Podcast
-        </span>
-      </div>
+        </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
-        <h3 className="line-clamp-2 text-[16px] font-medium leading-snug tracking-tight text-black">
-          {episode.title}
-        </h3>
-        {episode.description && (
-          <p className="line-clamp-2 text-[13px] leading-relaxed text-daftime-gray-text">
-            {episode.description}
-          </p>
-        )}
-        {episode.guestName && (
-          <div className="mt-auto flex items-center gap-2 pt-2 text-[12px] tracking-tight text-daftime-gray-mute">
-            <span className="size-1 rounded-full bg-daftime-yellow" />
-            <span>{episode.guestName}</span>
-          </div>
-        )}
-      </div>
-    </motion.button>
+        <div className="flex flex-1 flex-col gap-3 p-5">
+          <h3 className="line-clamp-2 text-[16px] font-medium leading-snug tracking-tight text-black">
+            {episode.title}
+          </h3>
+          {episode.description && (
+            <p className="line-clamp-2 text-[13px] leading-relaxed text-daftime-gray-text">
+              {episode.description}
+            </p>
+          )}
+          {episode.guestName && (
+            <div className="mt-auto flex items-center gap-2 pt-2 text-[12px] tracking-tight text-daftime-gray-mute">
+              <span className="size-1 rounded-full bg-daftime-yellow" />
+              <span>{episode.guestName}</span>
+            </div>
+          )}
+        </div>
+      </Link>
+    </motion.div>
   );
 }

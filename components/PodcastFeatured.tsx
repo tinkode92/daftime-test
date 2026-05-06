@@ -1,9 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import YouTubeModal from "./YouTubeModal";
+import Link from "next/link";
 import { getYouTubeId, type Podcast } from "@/lib/blog";
 
 export default function PodcastFeatured({
@@ -11,8 +7,7 @@ export default function PodcastFeatured({
 }: {
   episode: Podcast;
 }) {
-  const [open, setOpen] = useState(false);
-  const videoId = getYouTubeId(episode.content);
+  const hasVideo = !!getYouTubeId(episode.content);
 
   return (
     <section className="bg-daftime-gray-bg px-4 py-16 sm:px-8 sm:py-20 md:px-16 md:py-24">
@@ -38,15 +33,9 @@ export default function PodcastFeatured({
         </div>
 
         {/* Featured player card */}
-        <motion.button
-          type="button"
-          onClick={() => videoId && setOpen(true)}
-          disabled={!videoId}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-12 grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-daftime-gray-border bg-white text-left lg:grid-cols-[640px_1fr]"
+        <Link
+          href={`/resources/podcast/${episode.slug}`}
+          className="card-hover mt-12 grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-daftime-gray-border bg-white text-left lg:grid-cols-[640px_1fr]"
         >
           <div className="group relative aspect-video lg:aspect-auto lg:min-h-[360px]">
             {episode.image ? (
@@ -61,7 +50,7 @@ export default function PodcastFeatured({
               <div className="size-full bg-daftime-dark" />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            {videoId && (
+            {hasVideo && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="grid size-16 place-items-center rounded-full bg-daftime-yellow text-black shadow-2xl transition-transform duration-300 group-hover:scale-110 sm:size-20">
                   <svg width="22" height="24" viewBox="0 0 22 24" fill="currentColor">
@@ -120,14 +109,8 @@ export default function PodcastFeatured({
               </svg>
             </span>
           </div>
-        </motion.button>
+        </Link>
       </div>
-
-      <YouTubeModal
-        videoId={open ? videoId : null}
-        title={episode.title}
-        onClose={() => setOpen(false)}
-      />
     </section>
   );
 }
