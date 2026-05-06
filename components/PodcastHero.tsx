@@ -21,18 +21,16 @@ export default function PodcastHero() {
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
-        {/* Planet background */}
-        <div className="pointer-events-none absolute inset-x-0 top-[6%] flex justify-center sm:top-[8%]">
-          <div className="float-slow w-[140%] sm:w-[120%] md:w-[110%]">
-            <Image
-              src="/assets/hero-planet.png"
-              alt=""
-              width={1379}
-              height={1332}
-              priority
-              className="w-full max-w-none object-contain opacity-90"
-            />
-          </div>
+        {/* Hero background art */}
+        <div className="pointer-events-none absolute inset-0">
+          <Image
+            src="/assets/podcast-hero-background.svg"
+            alt=""
+            fill
+            priority
+            unoptimized
+            className="object-cover"
+          />
         </div>
 
         {/* Vertical lines */}
