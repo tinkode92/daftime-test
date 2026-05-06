@@ -426,5 +426,24 @@
 })();
 </script>
 ________________
+<script>
+(function () {
+  // Tool widgets are loaded inside same-origin iframes, so localStorage
+  // is shared with the parent. Pick the right Daftime calendar based on
+  // the user's stored country (default AE).
+  try {
+    var country = localStorage.getItem('daftime-country') || 'AE';
+    var URLS = {
+      AE: 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1oFNxdK2fpuC4-T5Up6Pjn8hOUfYsylts0SpYM9qh3SY8elkuZZoQBOHaKiwKUy7kZYMvD1ZAb?gv=true',
+      FR: 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3pjx3qqtSmHJuJF4P_ClCHPMM1zTS9dpjc_JL4d3DgcV-S5bWcQmPK-FEYogHUS6RMpSftIr-r?gv=true',
+      PT: 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1oFNxdK2fpuC4-T5Up6Pjn8hOUfYsylts0SpYM9qh3SY8elkuZZoQBOHaKiwKUy7kZYMvD1ZAb?gv=true'
+    };
+    var target = URLS[country] || URLS.AE;
+    document
+      .querySelectorAll('a[href*="calendar.google.com"][href*="appointments/schedules"]')
+      .forEach(function (a) { a.href = target; });
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>

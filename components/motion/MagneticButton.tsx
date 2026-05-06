@@ -24,6 +24,8 @@ type ButtonProps = CommonProps & {
 type AnchorProps = CommonProps & {
   as: "a";
   href: string;
+  target?: string;
+  rel?: string;
   type?: undefined;
   onClick?: () => void;
 };
@@ -81,6 +83,8 @@ export default function MagneticButton(props: Props) {
       {props.as === "a" ? (
         <a
           href={props.href}
+          target={props.target}
+          rel={props.rel}
           onClick={props.onClick}
           className={props.className}
         >

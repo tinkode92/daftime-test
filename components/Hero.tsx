@@ -18,6 +18,7 @@ import AnimatedCounter from "./motion/AnimatedCounter";
 import MagneticButton from "./motion/MagneticButton";
 import { t, type Locale } from "@/lib/translations";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
+import { useCalendarUrl } from "@/lib/useCalendarUrl";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -38,6 +39,7 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
   const [modalOpen, setModalOpen] = useState(false);
   const effectiveLocale = useEffectiveLocale(locale);
   const tr = t(effectiveLocale).hero;
+  const calendarUrl = useCalendarUrl();
 
   // Parallax: as the user scrolls past the hero, the globe drifts up
   // slower and fades, while the headline column lifts a touch — gives
@@ -203,7 +205,9 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
               </MagneticButton>
               <MagneticButton
                 as="a"
-                href="#contact"
+                href={calendarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 strength={10}
                 className="btn-pill border border-white/10 bg-black/10 text-white backdrop-blur hover:bg-white/10"
               >

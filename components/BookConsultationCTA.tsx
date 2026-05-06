@@ -4,6 +4,7 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
+import { useCalendarUrl } from "@/lib/useCalendarUrl";
 
 export default function BookConsultationCTA({
   locale = "en",
@@ -12,6 +13,7 @@ export default function BookConsultationCTA({
 }) {
   const effectiveLocale = useEffectiveLocale(locale);
   const tr = t(effectiveLocale).book;
+  const calendarUrl = useCalendarUrl();
   return (
     <section id="contact" className="bg-white px-2 pt-3 sm:px-4 sm:pt-4">
       <Reveal
@@ -39,7 +41,9 @@ export default function BookConsultationCTA({
               {tr.heading}
             </h2>
             <a
-              href="#schedule"
+              href={calendarUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-pill cta-shimmer bg-white text-black hover:opacity-90"
             >
               {tr.cta}

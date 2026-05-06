@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ToolEmbed from "./ToolEmbed";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
+import { useCalendarUrl } from "@/lib/useCalendarUrl";
 import type { Tool } from "@/lib/blog";
 
 const ui = {
@@ -21,11 +22,9 @@ const ui = {
   },
 };
 
-const CALENDAR_URL =
-  "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1oFNxdK2fpuC4-T5Up6Pjn8hOUfYsylts0SpYM9qh3SY8elkuZZoQBOHaKiwKUy7kZYMvD1ZAb?gv=true";
-
 export default function ToolShell({ tool }: { tool: Tool }) {
   const locale = useEffectiveLocale("en");
+  const calendarUrl = useCalendarUrl();
   const isFr = locale === "fr";
   const t = ui[isFr ? "fr" : "en"];
   const headline = isFr ? tool.cta.headlineFr : tool.cta.headlineEn;
@@ -90,7 +89,7 @@ export default function ToolShell({ tool }: { tool: Tool }) {
                 </p>
               )}
               <a
-                href={CALENDAR_URL}
+                href={calendarUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-pill cta-shimmer mt-2 bg-daftime-yellow text-[#070a33] hover:opacity-95"

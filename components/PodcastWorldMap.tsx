@@ -1,11 +1,14 @@
 import Image from "next/image";
 
+import { CALENDAR_URLS } from "@/lib/calendarUrl";
+
 type Office = {
   country: string;
   flag: React.ReactNode;
   address: React.ReactNode;
   phone: string;
   email: string;
+  calendarUrl: string;
 };
 
 const offices: Office[] = [
@@ -15,6 +18,7 @@ const offices: Office[] = [
     address: "33 Place du Général Leclerc, 80480 Pont-de-Metz",
     phone: "+33 7 86 27 28 23",
     email: "Stephane@daftime.fr",
+    calendarUrl: CALENDAR_URLS.FR,
   },
   {
     country: "United Arab Emirates",
@@ -28,6 +32,7 @@ const offices: Office[] = [
     ),
     phone: "+971 5 05 28 43 43",
     email: "Hello@daftime.ae",
+    calendarUrl: CALENDAR_URLS.AE,
   },
   {
     country: "Portugal",
@@ -35,6 +40,7 @@ const offices: Office[] = [
     address: "Address upon request",
     phone: "+ 00",
     email: "Hello@daftime.pr",
+    calendarUrl: CALENDAR_URLS.PT,
   },
 ];
 
@@ -96,12 +102,14 @@ export default function PodcastWorldMap() {
                   <Row icon={<PhoneIcon />}>{o.phone}</Row>
                   <Row icon={<MailIcon />}>{o.email}</Row>
                 </div>
-                <button
-                  type="button"
+                <a
+                  href={o.calendarUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex h-10 items-center justify-center self-start rounded-lg bg-daftime-yellow px-4 text-[14px] tracking-tight text-black transition-opacity hover:opacity-90"
                 >
                   Schedule a call
-                </button>
+                </a>
               </div>
             </article>
           ))}
