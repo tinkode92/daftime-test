@@ -154,13 +154,18 @@ export default function CountryGate() {
     // pill, ServiceTabs price visibility, …) to re-read storage.
     window.dispatchEvent(new CustomEvent(LOCALE_CHANGED_EVENT));
     setOpen(false);
-    // The URL follows the COUNTRY (AE → /, FR → /fr, PT → /pt). We only
-    // navigate when the country *actually* changed — otherwise the user
-    // stays on the page they were on (e.g. /resources/podcast) and the
-    // LOCALE_CHANGED_EVENT broadcast above is enough to re-render the UI
-    // in the new language.
+    // The URL follows the COUNTRY (AE → /, FR → /fr, PT → /pt). Only
+    // navigate when:
+    //  (a) the country actually changed AND
+    //  (b) the user is on a country-root page (/, /fr, /pt).
+    //
+    // If they are on an inner page (e.g. /resources/podcast,
+    // /new-article/<slug>, /guide), stay there and let the
+    // LOCALE_CHANGED_EVENT re-render the UI in the new language —
+    // sending them back to the home would lose their place.
     const currentCountry = countryFromPath(pathname || "/");
-    if (currentCountry !== country) {
+    const onCountryRoot = ["/", "/fr", "/pt"].includes(pathname || "/");
+    if (currentCountry !== country && onCountryRoot) {
       router.push(pathForCountry(country));
     } else {
       router.refresh();
@@ -286,7 +291,17 @@ export default function CountryGate() {
                     <button
                       key={l.code}
                       type="button"
-                      onClick={() => setLanguage(l.code)}
+                      onClick={() => {
+                        setLanguage(l.code);
+                        // Auto-sync the country so the URL matches the language:
+                        //   FR language → FR country (URL /fr)
+                        //   PT language → PT country (URL /pt)
+                        //   EN language → AE country (URL /)
+                        // The user can still override the country radio after.
+                        if (l.code === "FR") setCountry("FR");
+                        else if (l.code === "PT") setCountry("PT");
+                        else if (l.code === "EN") setCountry("AE");
+                      }}
                       aria-pressed={active}
                       className={
                         "rounded-2xl border px-3 py-3 text-left transition-all duration-200 " +
