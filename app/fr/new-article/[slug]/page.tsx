@@ -1,11 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ArticleHero from "@/components/blog/ArticleHero";
 import ArticleBody from "@/components/blog/ArticleBody";
 import ArticleFAQ from "@/components/blog/ArticleFAQ";
-import ArticleAuthor from "@/components/blog/ArticleAuthor";
 import ArticleToolCTA from "@/components/blog/ArticleToolCTA";
 import { getArticle, getArticleSlugs, getToolBySlug } from "@/lib/blog";
 
@@ -41,12 +39,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   const tool = article.tool ? getToolBySlug(article.tool) : null;
   return (
     <main className="min-h-screen w-full bg-white">
-      <Navigation />
       <ArticleHero article={article} />
       <ArticleBody article={article} />
       {tool && <ArticleToolCTA article={article} tool={tool} />}
       <ArticleFAQ article={article} />
-      <ArticleAuthor article={article} />
       <Footer locale="fr" />
     </main>
   );
