@@ -15,16 +15,14 @@ export default function ArticleFAQ({ article }: { article: Article }) {
   if (article.faqs.length === 0) return null;
 
   return (
-    <section className="bg-daftime-gray-bg px-4 py-16 sm:px-8 sm:py-20 md:px-16">
+    <section className="bg-daftime-gray-bg px-4 py-16 sm:px-8 sm:py-20 md:px-16 md:py-24">
       <div className="mx-auto flex max-w-[920px] flex-col gap-8">
-        <div className="flex flex-col gap-3">
-          <span className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.12em] text-[#070a33]">
+        <div className="flex flex-col gap-4">
+          <span className="flex items-center gap-2">
             <span className="size-1 rounded-full bg-[#070a33]" />
-            {l.eyebrow}
+            <span className="label-mono text-[#070a33]">{l.eyebrow}</span>
           </span>
-          <h2 className="text-[32px] leading-[1.1] tracking-[-0.04em] text-black sm:text-[40px]">
-            {l.heading}
-          </h2>
+          <h2 className="h-display text-black">{l.heading}</h2>
         </div>
         <div className="flex flex-col gap-3">
           {article.faqs.map((f, i) => {

@@ -3,8 +3,16 @@ import Navigation from "@/components/Navigation";
 import type { Article } from "@/lib/blog";
 
 const labels = {
-  en: { back: "← All insights", readTime: "min read", published: "Published" },
-  fr: { back: "← Tous les articles", readTime: "min de lecture", published: "Publié le" },
+  en: {
+    back: "← All insights",
+    readTime: "min read",
+    eyebrow: "Insights",
+  },
+  fr: {
+    back: "← Tous les articles",
+    readTime: "min de lecture",
+    eyebrow: "Ressources",
+  },
 };
 
 export default function ArticleHero({ article }: { article: Article }) {
@@ -12,7 +20,7 @@ export default function ArticleHero({ article }: { article: Article }) {
 
   return (
     <header className="relative overflow-hidden bg-[#070a33] text-white">
-      {/* Decorative glows */}
+      {/* Decorative glows — match Hero's atmosphere */}
       <div className="pointer-events-none absolute -right-20 -top-20 size-[400px] rounded-full bg-daftime-yellow/12 blur-[120px]" />
       <div className="pointer-events-none absolute -left-20 bottom-0 size-[320px] rounded-full bg-white/[0.04] blur-[100px]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
@@ -25,14 +33,21 @@ export default function ArticleHero({ article }: { article: Article }) {
       </div>
 
       {/* Hero content */}
-      <div className="relative z-10 px-4 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20 md:px-16 md:pb-24 md:pt-24">
-        <div className="mx-auto flex max-w-[920px] flex-col gap-7">
-          <a
-            href="/#blog"
-            className="self-start font-mono text-[12px] uppercase tracking-[0.12em] text-white/55 transition-colors hover:text-daftime-yellow"
-          >
-            {l.back}
-          </a>
+      <div className="relative z-10 px-4 pb-16 pt-14 sm:px-8 sm:pb-20 sm:pt-20 md:px-16 md:pb-24 md:pt-24">
+        <div className="mx-auto flex max-w-[1152px] flex-col gap-7">
+          {/* Eyebrow + back link */}
+          <div className="flex items-center justify-between gap-4">
+            <span className="flex items-center gap-2">
+              <span className="size-1 rounded-full bg-daftime-yellow" />
+              <span className="label-mono text-daftime-yellow">{l.eyebrow}</span>
+            </span>
+            <a
+              href="/#blog"
+              className="font-mono text-[12px] uppercase tracking-[0.12em] text-white/55 transition-colors hover:text-daftime-yellow"
+            >
+              {l.back}
+            </a>
+          </div>
 
           {article.categories.length > 0 && (
             <div className="flex flex-wrap gap-2">
@@ -47,7 +62,7 @@ export default function ArticleHero({ article }: { article: Article }) {
             </div>
           )}
 
-          <h1 className="text-balance text-[34px] font-medium leading-[1.05] tracking-[-0.035em] sm:text-[48px] md:text-[60px]">
+          <h1 className="h-display max-w-[18ch] text-balance text-white">
             {article.title}
           </h1>
 
@@ -69,10 +84,10 @@ export default function ArticleHero({ article }: { article: Article }) {
         </div>
       </div>
 
-      {/* Hero image — sits at the bottom of the navy band, overlapping into the white section below */}
+      {/* Hero image — overlaps into the white section below */}
       {article.image && (
         <div className="relative z-10 px-4 sm:px-8 md:px-16">
-          <div className="mx-auto max-w-[1100px]">
+          <div className="mx-auto max-w-[1152px]">
             <div className="relative -mb-24 aspect-[16/9] overflow-hidden rounded-2xl bg-daftime-gray-card shadow-[0_30px_80px_-20px_rgba(0,0,0,0.45)] sm:-mb-32 sm:rounded-3xl">
               <Image
                 src={article.image}
@@ -80,34 +95,34 @@ export default function ArticleHero({ article }: { article: Article }) {
                 fill
                 priority
                 className="object-cover"
-                sizes="(min-width: 1024px) 1100px, 100vw"
+                sizes="(min-width: 1024px) 1152px, 100vw"
               />
             </div>
           </div>
         </div>
       )}
 
-      {/* Bottom: white spacer that matches the overlap */}
+      {/* White spacer matching the image overlap */}
       <div
         className={
-          (article.image
-            ? "h-24 sm:h-32 "
-            : "h-0 ") + "bg-white"
+          (article.image ? "h-24 sm:h-32 " : "h-0 ") + "bg-white"
         }
         aria-hidden
       />
 
-      {/* TLDR callout, white background */}
+      {/* TLDR callout (yellow-light, matches site language) */}
       {article.tldr && (
         <div className="bg-white px-4 pt-12 sm:px-8 sm:pt-16 md:px-16">
           <div className="mx-auto max-w-[760px]">
-            <div className="rounded-2xl border-l-[3px] border-daftime-yellow bg-daftime-yellow-light px-6 py-5 sm:px-8 sm:py-6">
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#070a33]">
-                TL;DR
-              </p>
-              <p className="mt-2 text-[16px] leading-relaxed tracking-tight text-[#2a2a2a] sm:text-[17px]">
-                {article.tldr}
-              </p>
+            <div className="overflow-hidden rounded-2xl border-l-[3px] border-daftime-yellow bg-daftime-yellow-light px-6 py-5 sm:px-8 sm:py-6">
+              <span className="flex items-center gap-2">
+                <span className="size-1 rounded-full bg-[#070a33]" />
+                <span className="label-mono text-[#070a33]">TL;DR</span>
+              </span>
+              <div
+                className="prose-daftime mt-3 text-[16px] leading-relaxed sm:text-[17px]"
+                dangerouslySetInnerHTML={{ __html: article.tldr }}
+              />
             </div>
           </div>
         </div>
