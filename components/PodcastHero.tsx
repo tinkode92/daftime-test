@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Navigation from "./Navigation";
 import BrandMarquee from "./BrandMarquee";
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -12,6 +16,8 @@ const avatars = [
 ];
 
 export default function PodcastHero() {
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).podcastPage;
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
@@ -65,7 +71,7 @@ export default function PodcastHero() {
                 ))}
               </div>
               <p className="text-[15px] tracking-tight text-white sm:text-[18px] md:text-[20px]">
-                The Daftime Podcast
+                {tr.heroEyebrow}
               </p>
             </div>
 
@@ -74,7 +80,7 @@ export default function PodcastHero() {
               className="h-hero fade-up max-w-[860px] text-balance text-white"
               style={{ animationDelay: "120ms" }}
             >
-              Voices behind smarter business
+              {tr.heroHeading}
             </h1>
           </div>
 

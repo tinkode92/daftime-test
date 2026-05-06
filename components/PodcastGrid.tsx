@@ -5,12 +5,16 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { getYouTubeId, type Podcast } from "@/lib/blog";
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 export default function PodcastGrid({
   episodes,
 }: {
   episodes: Podcast[];
 }) {
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).podcastPage;
   const [visible, setVisible] = useState(9);
   const shown = episodes.slice(0, visible);
   const hasMore = visible < episodes.length;
@@ -22,14 +26,13 @@ export default function PodcastGrid({
         <div className="flex flex-col gap-3">
           <span className="flex items-center gap-2">
             <span className="size-1 rounded-full bg-daftime-yellow" />
-            <span className="label-mono text-daftime-yellow">All episodes</span>
+            <span className="label-mono text-daftime-yellow">{tr.gridEyebrow}</span>
           </span>
           <h2 className="h-display max-w-[760px] text-balance text-black">
-            Built for business without borders
+            {tr.gridHeading}
           </h2>
           <p className="mt-2 max-w-[480px] text-[15px] leading-relaxed text-daftime-gray-text">
-            Founders, accountants and lawyers share what&apos;s working today
-            across France, the UAE and Portugal.
+            {tr.gridSubtitle}
           </p>
         </div>
 
@@ -40,6 +43,7 @@ export default function PodcastGrid({
               key={ep.slug + i}
               episode={ep}
               delay={(i % 3) * 80}
+              podcastTag={tr.podcastTag}
             />
           ))}
         </div>
@@ -52,7 +56,7 @@ export default function PodcastGrid({
               onClick={() => setVisible((v) => v + 6)}
               className="flex h-11 items-center justify-center rounded-lg border border-daftime-gray-border bg-white px-6 text-[14px] tracking-tight text-black transition-colors hover:bg-daftime-gray-bg"
             >
-              Load more
+              {tr.loadMore}
             </button>
           </div>
         )}
@@ -64,9 +68,11 @@ export default function PodcastGrid({
 function PodcastCard({
   episode,
   delay,
+  podcastTag,
 }: {
   episode: Podcast;
   delay: number;
+  podcastTag: string;
 }) {
   const hasVideo = !!getYouTubeId(episode.content);
   return (
@@ -105,7 +111,7 @@ function PodcastCard({
             </span>
           )}
           <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[#070a33]">
-            Podcast
+            {podcastTag}
           </span>
         </div>
 

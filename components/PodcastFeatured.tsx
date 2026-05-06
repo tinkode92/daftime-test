@@ -1,12 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { getYouTubeId, type Podcast } from "@/lib/blog";
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 export default function PodcastFeatured({
   episode,
 }: {
   episode: Podcast;
 }) {
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).podcastPage;
   const hasVideo = !!getYouTubeId(episode.content);
 
   return (
@@ -18,7 +24,7 @@ export default function PodcastFeatured({
             <span className="flex items-center gap-2">
               <span className="size-1 rounded-full bg-daftime-yellow" />
               <span className="label-mono text-daftime-yellow">
-                Latest episode
+                {tr.featuredEyebrow}
               </span>
             </span>
             <h2 className="h-display max-w-[560px] text-balance text-black">
@@ -97,7 +103,7 @@ export default function PodcastFeatured({
               )}
             </div>
             <span className="inline-flex items-center gap-2 text-[13px] font-medium tracking-tight text-black">
-              Watch episode
+              {tr.watchEpisode}
               <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
                 <path
                   d="M1 5h12M9 1l4 4-4 4"

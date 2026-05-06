@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import { getYouTubeId, type Podcast } from "@/lib/blog";
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 export default function PodcastDetail({
   episode,
@@ -12,6 +16,8 @@ export default function PodcastDetail({
   prev: Podcast | null;
   next: Podcast | null;
 }) {
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).podcastPage;
   const videoId = getYouTubeId(episode.content);
 
   return (
@@ -44,13 +50,15 @@ export default function PodcastDetail({
             <div className="mx-auto mt-12 flex w-full max-w-[1100px] items-center justify-between gap-4 sm:mt-16">
               <span className="flex items-center gap-2">
                 <span className="size-1 rounded-full bg-daftime-yellow" />
-                <span className="label-mono text-daftime-yellow">Podcast</span>
+                <span className="label-mono text-daftime-yellow">
+                  {tr.episodeEyebrow}
+                </span>
               </span>
               <Link
                 href="/resources/podcast"
                 className="font-mono text-[12px] uppercase tracking-[0.12em] text-white/55 transition-colors hover:text-daftime-yellow"
               >
-                ← All episodes
+                {tr.backToList}
               </Link>
             </div>
 
@@ -120,7 +128,7 @@ export default function PodcastDetail({
               <span className="flex items-center gap-2">
                 <span className="size-1 rounded-full bg-daftime-yellow" />
                 <span className="label-mono text-[#070a33]">
-                  About this episode
+                  {tr.aboutEyebrow}
                 </span>
               </span>
               <p className="prose-daftime text-[16px] leading-relaxed sm:text-[17px]">
@@ -134,8 +142,8 @@ export default function PodcastDetail({
       {/* Prev / Next navigation */}
       <section className="bg-daftime-gray-bg px-4 py-12 sm:px-8 sm:py-16 md:px-16">
         <div className="mx-auto grid max-w-[1152px] grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-          <NeighborCard direction="prev" episode={prev} />
-          <NeighborCard direction="next" episode={next} />
+          <NeighborCard direction="prev" episode={prev} tr={tr} />
+          <NeighborCard direction="next" episode={next} tr={tr} />
         </div>
       </section>
     </>
@@ -145,9 +153,11 @@ export default function PodcastDetail({
 function NeighborCard({
   direction,
   episode,
+  tr,
 }: {
   direction: "prev" | "next";
   episode: Podcast | null;
+  tr: ReturnType<typeof t>["podcastPage"];
 }) {
   const isNext = direction === "next";
 
@@ -157,7 +167,7 @@ function NeighborCard({
         aria-hidden
         className="flex min-h-[120px] items-center justify-center rounded-2xl border border-daftime-gray-border bg-white/40 p-6 text-[13px] text-daftime-gray-mute"
       >
-        {isNext ? "End of the series" : "First episode"}
+        {isNext ? tr.endOfSeries : tr.firstEpisode}
       </div>
     );
   }
@@ -177,7 +187,7 @@ function NeighborCard({
         }
       >
         <span className="size-1 rounded-full bg-daftime-yellow" />
-        {isNext ? "Next episode" : "Previous episode"}
+        {isNext ? tr.nextEpisode : tr.previousEpisode}
       </span>
       <h3 className="line-clamp-2 text-[16px] leading-snug tracking-tight text-black transition-colors group-hover:text-[#070a33] sm:text-[17px]">
         {episode.title}
@@ -204,7 +214,7 @@ function NeighborCard({
             strokeLinejoin="round"
           />
         </svg>
-        {isNext ? "Watch next" : "Watch previous"}
+        {isNext ? tr.watchNext : tr.watchPrevious}
       </span>
     </Link>
   );

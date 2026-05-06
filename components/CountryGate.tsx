@@ -154,14 +154,16 @@ export default function CountryGate() {
     // pill, ServiceTabs price visibility, …) to re-read storage.
     window.dispatchEvent(new CustomEvent(LOCALE_CHANGED_EVENT));
     setOpen(false);
-    // The URL follows the COUNTRY: AE → /, FR → /fr, PT → /pt.
-    // Each route is its own page (today they are copies, later they
-    // can diverge per office).
-    const targetPath = pathForCountry(country);
-    if (targetPath === pathname) {
-      router.refresh();
+    // The URL follows the COUNTRY (AE → /, FR → /fr, PT → /pt). We only
+    // navigate when the country *actually* changed — otherwise the user
+    // stays on the page they were on (e.g. /resources/podcast) and the
+    // LOCALE_CHANGED_EVENT broadcast above is enough to re-render the UI
+    // in the new language.
+    const currentCountry = countryFromPath(pathname || "/");
+    if (currentCountry !== country) {
+      router.push(pathForCountry(country));
     } else {
-      router.push(targetPath);
+      router.refresh();
     }
   };
 
