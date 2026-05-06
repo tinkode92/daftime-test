@@ -51,7 +51,12 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
               >
                 Instagram
               </a>
-              <a href="#" className="transition-opacity hover:opacity-60">
+              <a
+                href="https://www.linkedin.com/in/sami-sehrine-9287b860/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-60"
+              >
                 LinkedIn
               </a>
               <a

@@ -123,6 +123,14 @@ export default function Navigation() {
                 >
                   {tr.guide2026}
                 </Link>
+                <Link
+                  role="menuitem"
+                  href="/wps-sif-generator"
+                  onClick={() => setResourcesOpen(false)}
+                  className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
+                >
+                  WPS SIF Generator
+                </Link>
                 {country === "AE" && (
                   <Link
                     role="menuitem"
@@ -247,6 +255,15 @@ export default function Navigation() {
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
                   → {tr.guide2026}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  onClick={() => setOpen(false)}
+                  href="/wps-sif-generator"
+                  className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
+                >
+                  → WPS SIF Generator
                 </Link>
               </li>
               {country === "AE" && (
