@@ -46,18 +46,15 @@ export default function PodcastFeatured({
           className="card-hover mt-12 grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-daftime-gray-border bg-white text-left lg:grid-cols-[640px_1fr]"
         >
           <div className="group relative aspect-video lg:aspect-auto lg:min-h-[360px]">
-            {episode.image ? (
-              <Image
-                src={episode.image}
-                alt={episode.imageAlt || episode.title}
-                fill
-                className="object-cover transition-transform duration-700 [filter:saturate(0)_brightness(0.55)] group-hover:scale-[1.03]"
-                sizes="(min-width: 1024px) 640px, 100vw"
-              />
-            ) : (
-              <div className="size-full bg-daftime-dark" />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/30" />
+            <Image
+              src="/assets/podcast-card-background.svg"
+              alt={episode.imageAlt || episode.title}
+              fill
+              unoptimized
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              sizes="(min-width: 1024px) 640px, 100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             {hasVideo && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="grid size-16 place-items-center rounded-full bg-daftime-yellow text-black shadow-2xl transition-transform duration-300 group-hover:scale-110 sm:size-20">

@@ -147,8 +147,8 @@
 <stop offset="0.48356" stop-color="white" stop-opacity="0"/>
 </radialGradient>
 <radialGradient id="paint8_radial_6333_607" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(197.863 -16.8694) rotate(90) scale(450.159 576.608)">
-<stop stop-color="#2935FF"/>
-<stop offset="0.160936" stop-color="#2935FF" stop-opacity="0"/>
+<stop stop-color="#000000"/>
+<stop offset="0.160936" stop-color="#000000" stop-opacity="0"/>
 </radialGradient>
 <radialGradient id="paint9_radial_6333_607" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(197.863 -16.8694) rotate(90) scale(450.159 576.608)">
 <stop stop-color="white"/>
