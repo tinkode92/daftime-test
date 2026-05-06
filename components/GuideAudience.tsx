@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 const dotPattern = {
   backgroundImage:
@@ -17,6 +19,8 @@ export default function GuideAudience() {
     offset: ["start end", "end start"],
   });
   const dotShift = useTransform(scrollYProgress, [0, 1], ["0px", "-60px"]);
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).guidePage;
 
   return (
     <section
@@ -47,7 +51,7 @@ export default function GuideAudience() {
             className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-daftime-dark"
           >
             <span className="size-1 bg-daftime-dark" />
-            Who It for
+            {tr.audienceEyebrow}
           </motion.span>
           <motion.h2
             variants={{
@@ -61,7 +65,7 @@ export default function GuideAudience() {
             }}
             className="h-display text-balance text-daftime-dark"
           >
-            Who this guide is for
+            {tr.audienceHeading}
           </motion.h2>
           <motion.p
             variants={{
@@ -74,8 +78,7 @@ export default function GuideAudience() {
             }}
             className="text-[16px] leading-[1.5] tracking-tight text-daftime-gray-text"
           >
-            A publication designed for decision-makers structuring, operating,
-            or expanding businesses in the United Arab Emirates.
+            {tr.audienceSubtitle}
           </motion.p>
         </motion.div>
 
@@ -93,26 +96,26 @@ export default function GuideAudience() {
           className="grid grid-cols-1 gap-4 md:grid-cols-2"
         >
           <Card
-            title="Entrepreneurs"
-            description="Structuring or restructuring their presence in the UAE and seeking clarity on Free Zone, Mainland, compliance, and long-term flexibility."
+            title={tr.audience.entrepreneurs.title}
+            description={tr.audience.entrepreneurs.description}
             illustration={<EntrepreneursViz />}
             dotShift={dotShift}
           />
           <Card
-            title="Executives"
-            description="Leading expansion into the Emirates and requiring alignment between legal architecture, fiscal obligations, and governance frameworks."
+            title={tr.audience.executives.title}
+            description={tr.audience.executives.description}
             illustration={<ExecutivesViz />}
             dotShift={dotShift}
           />
           <Card
-            title="Investors"
-            description="Assessing regulatory exposure, economic substance, and structural coherence before committing capital."
+            title={tr.audience.investors.title}
+            description={tr.audience.investors.description}
             illustration={<InvestorsViz />}
             dotShift={dotShift}
           />
           <Card
-            title="Founders & Business Owners"
-            description="Navigating Corporate Tax developments and ensuring their structure remains aligned with long-term growth objectives."
+            title={tr.audience.founders.title}
+            description={tr.audience.founders.description}
             illustration={<FoundersViz />}
             dotShift={dotShift}
           />

@@ -218,6 +218,99 @@ const en = {
       bookEdition: "2026 Edition",
       bookTitle: "The 2026 Daftime Guide",
     },
+    guidePage: {
+      heroCounter: "10K+ Client Collaboration",
+      heroHeading: "Structuring businesses in the UAE with clarity and vision",
+      heroSubtitle:
+        "Editorial overviews from Daftime experts: legal, accounting and advisory foundations to set up and grow in the UAE.",
+      heroCta: "Download the Daftime Guide 2026",
+      sectionsEyebrow: "What's covered",
+      sectionsHeading: "What this guide is about",
+      sectionsSubtitle:
+        "A structured editorial overview of the legal, financial, and strategic foundations required to build and grow a company in the UAE.",
+      sections: {
+        legal: {
+          title: "Legal",
+          description:
+            "Setting up the right foundation: choosing the structure, securing visas, and ensuring long-term compliance — from incorporation to restructuring across borders.",
+          topics: [
+            "Free Zone vs Mainland",
+            "Legal structuring",
+            "Compliance obligations",
+            "Visas & statuses",
+            "Restructuring over time",
+          ],
+        },
+        accounting: {
+          title: "Accounting",
+          description:
+            "Mastering financial and fiscal obligations in a rapidly evolving regulatory environment. This section clarifies how accounting, VAT, and Corporate Tax work in practice — beyond theory — and how financial coherence protects the business over time.",
+          topics: [
+            "VAT rules & thresholds",
+            "Corporate Tax principles",
+            "QFZP regime",
+            "Accounting standards",
+            "Financial consistency",
+          ],
+        },
+        advisory: {
+          title: "Advisory",
+          description:
+            "From data to decision-making. This section focuses on using financial information as a strategic tool, helping founders and executives anticipate risks, pilot performance, and make informed long-term decisions.",
+          topics: [
+            "Financial analysis",
+            "Performance indicators",
+            "Reporting & dashboards",
+            "Forecasting",
+            "Strategic decision-making",
+          ],
+        },
+      },
+      audienceEyebrow: "Who it's for",
+      audienceHeading: "Who this guide is for",
+      audienceSubtitle:
+        "A publication designed for decision-makers structuring, operating, or expanding businesses in the United Arab Emirates.",
+      audience: {
+        entrepreneurs: {
+          title: "Entrepreneurs",
+          description:
+            "Structuring or restructuring their presence in the UAE and seeking clarity on Free Zone, Mainland, compliance, and long-term flexibility.",
+        },
+        executives: {
+          title: "Executives",
+          description:
+            "Leading expansion into the Emirates and requiring alignment between legal architecture, fiscal obligations, and governance frameworks.",
+        },
+        investors: {
+          title: "Investors",
+          description:
+            "Assessing regulatory exposure, economic substance, and structural coherence before committing capital.",
+        },
+        founders: {
+          title: "Founders & Business Owners",
+          description:
+            "Navigating Corporate Tax developments and ensuring their structure remains aligned with long-term growth objectives.",
+        },
+      },
+      visionEyebrow: "Why it exists",
+      visionHeading: "A Structured Vision",
+      visionSubtitle:
+        "A reflection on why clarity, legal coherence, and long-term alignment are essential to building sustainable businesses in the UAE.",
+      visionQuote1:
+        "Every project begins with a clear vision and a solid structure. Through this guide, we share the essential foundations for creating, structuring and developing a company in the UAE — with method, rigor and long-term perspective.",
+      visionQuote2:
+        "Our objective is not to simplify complexity, but to bring clarity to it.",
+      visionMeta: {
+        founder: "Founder",
+        founderName: "Sami Sehrine",
+        brand: "Brand",
+        brandName: "Daftime",
+        location: "Location",
+        locationName: "Dubai",
+        year: "Year",
+        yearValue: "—",
+      },
+    },
     download: {
       title: ["Access the 2026", "Daftime Guide"],
       subtitle: "Enter your details to receive the full edition in PDF format.",
@@ -495,6 +588,100 @@ const fr: typeof en = {
       bookEdition: "Édition 2026",
       bookTitle: "Le Guide Daftime 2026",
     },
+    guidePage: {
+      heroCounter: "+10k collaborations clients",
+      heroHeading:
+        "Structurer son activité aux Émirats avec clarté et vision",
+      heroSubtitle:
+        "Des analyses éditoriales signées par les experts Daftime : fondations juridiques, comptables et stratégiques pour s'implanter et croître aux Émirats.",
+      heroCta: "Télécharger le Guide Daftime 2026",
+      sectionsEyebrow: "Ce qu'il couvre",
+      sectionsHeading: "À propos de ce guide",
+      sectionsSubtitle:
+        "Un panorama éditorial structuré des fondations juridiques, financières et stratégiques nécessaires pour bâtir et faire croître une société aux Émirats.",
+      sections: {
+        legal: {
+          title: "Juridique",
+          description:
+            "Poser les bonnes fondations : choisir la structure, sécuriser les visas et assurer une conformité durable — de la création à la restructuration transfrontalière.",
+          topics: [
+            "Free Zone vs Mainland",
+            "Structuration juridique",
+            "Obligations de conformité",
+            "Visas et statuts",
+            "Restructuration dans le temps",
+          ],
+        },
+        accounting: {
+          title: "Comptabilité",
+          description:
+            "Maîtriser les obligations financières et fiscales dans un environnement réglementaire en rapide évolution. Cette section clarifie le fonctionnement concret de la comptabilité, de la TVA et du Corporate Tax — au-delà de la théorie — et comment la cohérence financière protège l'entreprise dans la durée.",
+          topics: [
+            "Règles et seuils TVA",
+            "Principes du Corporate Tax",
+            "Régime QFZP",
+            "Normes comptables",
+            "Cohérence financière",
+          ],
+        },
+        advisory: {
+          title: "Conseil",
+          description:
+            "De la donnée à la décision. Cette section utilise l'information financière comme un levier stratégique, pour aider fondateurs et dirigeants à anticiper les risques, piloter la performance et prendre des décisions éclairées sur le long terme.",
+          topics: [
+            "Analyse financière",
+            "Indicateurs de performance",
+            "Reporting et tableaux de bord",
+            "Prévision",
+            "Décision stratégique",
+          ],
+        },
+      },
+      audienceEyebrow: "À qui c'est destiné",
+      audienceHeading: "À qui ce guide s'adresse",
+      audienceSubtitle:
+        "Une publication pensée pour les décideurs qui structurent, exploitent ou développent une activité aux Émirats arabes unis.",
+      audience: {
+        entrepreneurs: {
+          title: "Entrepreneurs",
+          description:
+            "Qui structurent ou restructurent leur présence aux Émirats et cherchent de la clarté sur Free Zone, Mainland, conformité et flexibilité long terme.",
+        },
+        executives: {
+          title: "Dirigeants",
+          description:
+            "Qui pilotent l'expansion vers les Émirats et ont besoin d'aligner architecture juridique, obligations fiscales et cadres de gouvernance.",
+        },
+        investors: {
+          title: "Investisseurs",
+          description:
+            "Qui évaluent l'exposition réglementaire, la substance économique et la cohérence structurelle avant d'engager des capitaux.",
+        },
+        founders: {
+          title: "Fondateurs et chefs d'entreprise",
+          description:
+            "Qui naviguent les évolutions du Corporate Tax et veulent maintenir leur structure alignée sur leurs objectifs de croissance.",
+        },
+      },
+      visionEyebrow: "Pourquoi il existe",
+      visionHeading: "Une vision structurée",
+      visionSubtitle:
+        "Une réflexion sur l'importance de la clarté, de la cohérence juridique et de l'alignement long terme pour bâtir des entreprises pérennes aux Émirats.",
+      visionQuote1:
+        "Chaque projet commence par une vision claire et une structure solide. À travers ce guide, nous partageons les fondations essentielles pour créer, structurer et développer une société aux Émirats — avec méthode, rigueur et perspective long terme.",
+      visionQuote2:
+        "Notre objectif n'est pas de simplifier la complexité, mais d'y apporter de la clarté.",
+      visionMeta: {
+        founder: "Fondateur",
+        founderName: "Sami Sehrine",
+        brand: "Marque",
+        brandName: "Daftime",
+        location: "Localisation",
+        locationName: "Dubaï",
+        year: "Année",
+        yearValue: "—",
+      },
+    },
     download: {
       title: ["Accédez au Guide", "Daftime 2026"],
       subtitle:
@@ -769,6 +956,99 @@ const pt: typeof en = {
     counter: "+12 mil colaborações com clientes",
     bookEdition: "Edição 2026",
     bookTitle: "O Guia Daftime 2026",
+  },
+  guidePage: {
+    heroCounter: "+10 mil colaborações com clientes",
+    heroHeading: "Estruturar negócios nos Emirados com clareza e visão",
+    heroSubtitle:
+      "Análises editoriais dos especialistas Daftime: bases jurídicas, contabilísticas e estratégicas para se implantar e crescer nos Emirados.",
+    heroCta: "Descarregar o Guia Daftime 2026",
+    sectionsEyebrow: "O que cobre",
+    sectionsHeading: "Sobre este guia",
+    sectionsSubtitle:
+      "Um panorama editorial estruturado das fundações jurídicas, financeiras e estratégicas necessárias para construir e fazer crescer uma empresa nos Emirados.",
+    sections: {
+      legal: {
+        title: "Jurídico",
+        description:
+          "Construir as bases certas: escolher a estrutura, garantir os vistos e assegurar a conformidade a longo prazo — desde a constituição até à reestruturação transfronteiriça.",
+        topics: [
+          "Free Zone vs Mainland",
+          "Estruturação jurídica",
+          "Obrigações de conformidade",
+          "Vistos e estatutos",
+          "Reestruturação ao longo do tempo",
+        ],
+      },
+      accounting: {
+        title: "Contabilidade",
+        description:
+          "Dominar as obrigações financeiras e fiscais num ambiente regulamentar em rápida evolução. Esta secção esclarece como funcionam, na prática, a contabilidade, o IVA e o Corporate Tax — e como a coerência financeira protege o negócio ao longo do tempo.",
+        topics: [
+          "Regras e limiares de IVA",
+          "Princípios do Corporate Tax",
+          "Regime QFZP",
+          "Normas contabilísticas",
+          "Coerência financeira",
+        ],
+      },
+      advisory: {
+        title: "Consultoria",
+        description:
+          "Dos dados à decisão. Esta secção utiliza a informação financeira como ferramenta estratégica para ajudar fundadores e dirigentes a antecipar riscos, pilotar a performance e tomar decisões fundamentadas a longo prazo.",
+        topics: [
+          "Análise financeira",
+          "Indicadores de performance",
+          "Reporting e dashboards",
+          "Previsão",
+          "Decisão estratégica",
+        ],
+      },
+    },
+    audienceEyebrow: "A quem se destina",
+    audienceHeading: "Para quem é este guia",
+    audienceSubtitle:
+      "Uma publicação concebida para decisores que estruturam, operam ou expandem negócios nos Emirados Árabes Unidos.",
+    audience: {
+      entrepreneurs: {
+        title: "Empreendedores",
+        description:
+          "Que estruturam ou reestruturam a sua presença nos Emirados e procuram clareza sobre Free Zone, Mainland, conformidade e flexibilidade a longo prazo.",
+      },
+      executives: {
+        title: "Dirigentes",
+        description:
+          "Que lideram a expansão para os Emirados e precisam de alinhar a arquitetura jurídica, as obrigações fiscais e a governação.",
+      },
+      investors: {
+        title: "Investidores",
+        description:
+          "Que avaliam a exposição regulamentar, a substância económica e a coerência estrutural antes de comprometerem capital.",
+      },
+      founders: {
+        title: "Fundadores e Empresários",
+        description:
+          "Que navegam pelas evoluções do Corporate Tax e querem manter a sua estrutura alinhada com os objetivos de crescimento.",
+      },
+    },
+    visionEyebrow: "Porque existe",
+    visionHeading: "Uma visão estruturada",
+    visionSubtitle:
+      "Uma reflexão sobre porque a clareza, a coerência jurídica e o alinhamento a longo prazo são essenciais para construir negócios sustentáveis nos Emirados.",
+    visionQuote1:
+      "Cada projeto começa com uma visão clara e uma estrutura sólida. Através deste guia, partilhamos as bases essenciais para criar, estruturar e desenvolver uma empresa nos Emirados — com método, rigor e perspetiva de longo prazo.",
+    visionQuote2:
+      "O nosso objetivo não é simplificar a complexidade, mas trazer-lhe clareza.",
+    visionMeta: {
+      founder: "Fundador",
+      founderName: "Sami Sehrine",
+      brand: "Marca",
+      brandName: "Daftime",
+      location: "Localização",
+      locationName: "Dubai",
+      year: "Ano",
+      yearValue: "—",
+    },
   },
   download: {
     title: ["Aceda ao Guia", "Daftime 2026"],

@@ -2,6 +2,8 @@
 
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 type Section = {
   title: string;
@@ -9,47 +11,15 @@ type Section = {
   topics: string[];
 };
 
-const sections: Section[] = [
-  {
-    title: "Legal",
-    description:
-      "Setting up the right foundation: choosing the structure, securing visas, and ensuring long-term compliance — from incorporation to restructuring across borders.",
-    topics: [
-      "Free Zone vs Mainland",
-      "Legal structuring",
-      "Compliance obligations",
-      "Visas & statuses",
-      "Restructuring over time",
-    ],
-  },
-  {
-    title: "Accounting",
-    description:
-      "Mastering financial and fiscal obligations in a rapidly evolving regulatory environment. This section clarifies how accounting, VAT, and Corporate Tax work in practice — beyond theory — and how financial coherence protects the business over time.",
-    topics: [
-      "VAT rules & thresholds",
-      "Corporate Tax principles",
-      "QFZP regime",
-      "Accounting standards",
-      "Financial consistency",
-    ],
-  },
-  {
-    title: "Advisory",
-    description:
-      "From data to decision-making. This section focuses on using financial information as a strategic tool, helping founders and executives anticipate risks, pilot performance, and make informed long-term decisions.",
-    topics: [
-      "Financial analysis",
-      "Performance indicators",
-      "Reporting & dashboards",
-      "Forecasting",
-      "Strategic decision-making",
-    ],
-  },
-];
-
 export default function GuideSections() {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).guidePage;
+  const sections: Section[] = [
+    tr.sections.legal,
+    tr.sections.accounting,
+    tr.sections.advisory,
+  ];
 
   // Track scroll progress through the entire stack of cards.
   const { scrollYProgress } = useScroll({
@@ -80,7 +50,7 @@ export default function GuideSections() {
             className="flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-daftime-yellow"
           >
             <span className="size-1 rounded-full bg-daftime-yellow" />
-            What covers
+            {tr.sectionsEyebrow}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 18 }}
@@ -93,7 +63,7 @@ export default function GuideSections() {
             }}
             className="h-display mt-3 text-balance text-daftime-dark"
           >
-            What this guide is about
+            {tr.sectionsHeading}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -106,13 +76,15 @@ export default function GuideSections() {
             }}
             className="mt-5 max-w-[320px] text-[14px] leading-relaxed text-daftime-gray-text"
           >
-            A structured editorial overview of the legal, financial, and
-            strategic foundations required to build and grow a company in the
-            UAE.
+            {tr.sectionsSubtitle}
           </motion.p>
 
           {/* Scroll-driven indicator nav (lg+) */}
-          <ScrollIndicator progress={progress} count={sections.length} />
+          <ScrollIndicator
+            progress={progress}
+            count={sections.length}
+            sections={sections}
+          />
         </div>
 
         {/* Right column: cards with timeline */}
@@ -151,9 +123,11 @@ export default function GuideSections() {
 function ScrollIndicator({
   progress,
   count,
+  sections,
 }: {
   progress: ReturnType<typeof useSpring>;
   count: number;
+  sections: Section[];
 }) {
   return (
     <nav

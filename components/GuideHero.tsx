@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Navigation from "./Navigation";
 import BrandMarquee from "./BrandMarquee";
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 const avatars = [
   { src: "/assets/avatar-1.png", bg: "#ebebeb" },
@@ -12,6 +16,8 @@ const avatars = [
 ];
 
 export default function GuideHero() {
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).guidePage;
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
@@ -60,7 +66,7 @@ export default function GuideHero() {
                 ))}
               </div>
               <p className="text-[15px] tracking-tight text-white sm:text-[18px] md:text-[20px]">
-                10K+ Client Collaboration
+                {tr.heroCounter}
               </p>
             </div>
 
@@ -69,14 +75,13 @@ export default function GuideHero() {
               className="h-hero fade-up max-w-[860px] text-balance text-white"
               style={{ animationDelay: "120ms" }}
             >
-              Structuring businesses in the UAE with clarity and vision
+              {tr.heroHeading}
             </h1>
             <p
               className="fade-up mt-4 max-w-[640px] text-[15px] tracking-tight text-white/80 sm:mt-6 sm:text-[16px]"
               style={{ animationDelay: "240ms" }}
             >
-              Editorial overviews from Daftime experts: legal, accounting and
-              advisory foundations to set up and grow in the UAE.
+              {tr.heroSubtitle}
             </p>
 
             {/* CTA */}
@@ -88,7 +93,7 @@ export default function GuideHero() {
                 href="#download"
                 className="btn-pill cta-shimmer bg-daftime-yellow text-black hover:opacity-90"
               >
-                Download the Daftime Guide 2026
+                {tr.heroCta}
                 <ArrowRight />
               </a>
             </div>

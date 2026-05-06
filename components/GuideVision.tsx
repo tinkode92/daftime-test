@@ -2,15 +2,18 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-
-const meta = [
-  { label: "Founder", value: "Sami Sehrine" },
-  { label: "Brand", value: "Daftime" },
-  { label: "Location", value: "Dubai" },
-  { label: "Year", value: "-" },
-];
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 export default function GuideVision() {
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).guidePage;
+  const meta = [
+    { label: tr.visionMeta.founder, value: tr.visionMeta.founderName },
+    { label: tr.visionMeta.brand, value: tr.visionMeta.brandName },
+    { label: tr.visionMeta.location, value: tr.visionMeta.locationName },
+    { label: tr.visionMeta.year, value: tr.visionMeta.yearValue },
+  ];
   return (
     <section className="bg-white px-4 py-16 sm:px-8 sm:py-20 md:px-16 md:py-24">
       <div className="mx-auto flex max-w-[1176px] flex-col gap-10">
@@ -18,16 +21,14 @@ export default function GuideVision() {
         <div className="flex flex-col gap-3">
           <span className="flex items-center gap-2 font-mono text-[14px] uppercase leading-[20px] tracking-[0.12em] text-[#070a33]">
             <span className="size-1 rounded-full bg-[#070a33]" />
-            Why It Exists
+            {tr.visionEyebrow}
           </span>
           <div className="flex flex-col items-start gap-3 md:flex-row md:items-end md:justify-between md:gap-12">
             <h2 className="flex-1 text-[40px] leading-[1.1] tracking-[-0.04em] text-black sm:text-[48px]">
-              A Structured Vision
+              {tr.visionHeading}
             </h2>
             <p className="max-w-[319px] text-[16px] leading-[1.5] tracking-tight text-[#595959]">
-              A reflection on why clarity, legal coherence, and long-term
-              alignment are essential to building sustainable businesses in
-              the UAE.
+              {tr.visionSubtitle}
             </p>
           </div>
         </div>
@@ -85,17 +86,9 @@ export default function GuideVision() {
 
             {/* Quote body */}
             <div className="mt-6 flex flex-col gap-5 text-[16px] leading-[1.5] tracking-tight text-[#595959] sm:text-[18px]">
+              <p>“{tr.visionQuote1}</p>
               <p>
-                “Every project begins with a clear vision and a solid
-                structure. Through this guide, we share the essential
-                foundations for creating, structuring and developing a company
-                in the UAE — with method, rigor and long-term perspective.
-              </p>
-              <p>
-                <span className="text-black">
-                  Our objective is not to simplify complexity, but to bring
-                  clarity to it.
-                </span>
+                <span className="text-black">{tr.visionQuote2}</span>
                 ”
               </p>
             </div>
