@@ -123,11 +123,8 @@ export default function Blog({
                     {a.locale === "fr" ? "FR" : "EN"}
                   </span>
                 </div>
-                <div className="flex flex-1 flex-col px-3 pb-4 pt-0 sm:px-4">
-                  <p className="text-[14px] tracking-tight text-daftime-gray-text">
-                    {a.date}
-                  </p>
-                  <h3 className="mt-2 line-clamp-3 flex-1 text-[18px] leading-tight tracking-tight text-black sm:text-[20px]">
+                <div className="flex flex-1 flex-col px-3 pb-4 pt-3 sm:px-4 sm:pt-4">
+                  <h3 className="line-clamp-3 flex-1 text-[18px] leading-tight tracking-tight text-black sm:text-[20px]">
                     {a.title}
                   </h3>
                   <span className="mt-4 inline-flex items-center gap-2 self-start rounded-xl border border-black/10 bg-black/[0.04] px-5 py-3 text-[14px] tracking-tight text-black transition-colors group-hover:bg-black/10">
