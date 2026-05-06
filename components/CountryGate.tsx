@@ -159,7 +159,7 @@ export default function CountryGate() {
     //  (a) the country actually changed AND
     //  (b) the user is on a country-root page (/, /fr, /pt).
     //
-    // If they are on an inner page (e.g. /resources/podcast,
+    // If they are on an inner page (e.g. /podcast,
     // /new-article/<slug>, /guide), stay there and let the
     // LOCALE_CHANGED_EVENT re-render the UI in the new language —
     // sending them back to the home would lose their place.

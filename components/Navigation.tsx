@@ -109,7 +109,7 @@ export default function Navigation() {
               >
                 <Link
                   role="menuitem"
-                  href="/resources/podcast"
+                  href="/podcast"
                   onClick={() => setResourcesOpen(false)}
                   className="block rounded-lg px-3 py-2 text-[14px] text-white transition-colors hover:bg-white/10"
                 >
@@ -234,7 +234,7 @@ export default function Navigation() {
               <li>
                 <Link
                   onClick={() => setOpen(false)}
-                  href="/resources/podcast"
+                  href="/podcast"
                   className="block rounded-lg px-3 py-3 pl-6 text-white/80 hover:bg-white/10"
                 >
                   → {tr.podcast}

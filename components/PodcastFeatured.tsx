@@ -40,7 +40,7 @@ export default function PodcastFeatured({
 
         {/* Featured player card */}
         <Link
-          href={`/resources/podcast/${episode.slug}`}
+          href={`/podcast/${episode.slug}`}
           className="card-hover mt-12 grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-daftime-gray-border bg-white text-left lg:grid-cols-[640px_1fr]"
         >
           <div className="group relative aspect-video lg:aspect-auto lg:min-h-[360px]">

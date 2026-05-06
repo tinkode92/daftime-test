@@ -87,7 +87,7 @@ function PodcastCard({
       }}
     >
       <Link
-        href={`/resources/podcast/${episode.slug}`}
+        href={`/podcast/${episode.slug}`}
         className="card-hover group flex h-full flex-col overflow-hidden rounded-2xl border border-daftime-gray-border bg-white text-left"
       >
         <div className="relative aspect-video overflow-hidden bg-daftime-dark">

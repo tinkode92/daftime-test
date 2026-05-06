@@ -55,7 +55,7 @@ export default function PodcastDetail({
                 </span>
               </span>
               <Link
-                href="/resources/podcast"
+                href="/podcast"
                 className="font-mono text-[12px] uppercase tracking-[0.12em] text-white/55 transition-colors hover:text-daftime-yellow"
               >
                 {tr.backToList}
@@ -174,7 +174,7 @@ function NeighborCard({
 
   return (
     <Link
-      href={`/resources/podcast/${episode.slug}`}
+      href={`/podcast/${episode.slug}`}
       className={
         "card-hover group flex min-h-[120px] flex-col gap-2 rounded-2xl border border-daftime-gray-border bg-white p-5 sm:p-6 " +
         (isNext ? "sm:items-end sm:text-right" : "")

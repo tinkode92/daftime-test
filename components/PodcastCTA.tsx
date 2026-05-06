@@ -59,7 +59,7 @@ export default function PodcastCTA() {
           </h2>
           <div>
             <Link
-              href="/resources/podcast"
+              href="/podcast"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-daftime-yellow px-6 text-[14px] tracking-tight text-black transition-all duration-300 hover:scale-[1.04] hover:opacity-90"
             >
               Watch Podcast

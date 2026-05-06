@@ -15,6 +15,16 @@ const nextConfig = {
         destination: "/guide",
         permanent: true,
       },
+      {
+        source: "/resources/podcast",
+        destination: "/podcast",
+        permanent: true,
+      },
+      {
+        source: "/resources/podcast/:slug",
+        destination: "/podcast/:slug",
+        permanent: true,
+      },
     ];
   },
 };
