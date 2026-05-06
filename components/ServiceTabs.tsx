@@ -26,7 +26,6 @@ const LEGAL_ILLUSTRATIONS: Record<LegalCardKey, IllustrationKind> = {
   corporate: "shield",
 };
 
-type AccountingPlanVariant = "white" | "yellow";
 type AccountingPlanKey = "basic" | "intermediate" | "premium" | "large";
 const ACCOUNTING_PLAN_KEYS: AccountingPlanKey[] = [
   "basic",
@@ -203,7 +202,6 @@ function AccountingContent({ locale }: { locale: Locale }) {
   const country = useStoredCountry();
   const showPrice = country === "AE";
   const tr = t(locale).serviceTabs.accounting;
-  const [selected, setSelected] = useState<AccountingPlanKey>("intermediate");
   return (
     <>
       <div className="grid grid-cols-1 gap-1 lg:grid-cols-[1fr_482px]">
@@ -231,13 +229,7 @@ function AccountingContent({ locale }: { locale: Locale }) {
       <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-4">
         {ACCOUNTING_PLAN_KEYS.map((planKey, idx) => (
           <Reveal key={planKey} delay={idx * 100}>
-            <PricingCard
-              plan={tr.plans[planKey]}
-              variant={selected === planKey ? "yellow" : "white"}
-              isSelected={selected === planKey}
-              onSelect={() => setSelected(planKey)}
-              showPrice={showPrice}
-            />
+            <PricingCard plan={tr.plans[planKey]} showPrice={showPrice} />
           </Reveal>
         ))}
       </div>
@@ -295,56 +287,28 @@ type AccountingPlanData = {
 
 function PricingCard({
   plan,
-  variant,
-  isSelected,
-  onSelect,
   showPrice,
 }: {
   plan: AccountingPlanData;
-  variant: AccountingPlanVariant;
-  isSelected: boolean;
-  onSelect: () => void;
   showPrice: boolean;
 }) {
-  const palette = {
-    white: {
-      bg: "bg-white",
-      titleColor: "text-black",
-      rangeColor: "text-daftime-gray-mute",
-      iconBg: "bg-daftime-yellow",
-    },
-    yellow: {
-      bg: "bg-daftime-yellow",
-      titleColor: "text-black",
-      rangeColor: "text-black",
-      iconBg: "bg-[#b79b0b]",
-    },
-  }[variant];
-
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-pressed={isSelected}
-      className={`card-hover flex h-full min-h-[340px] w-full flex-col gap-6 rounded-2xl p-2 text-left transition-colors duration-300 ${palette.bg}`}
+    <div
+      className="group card-hover flex h-full min-h-[340px] flex-col gap-6 rounded-2xl bg-white p-2 transition-colors duration-300 hover:bg-daftime-yellow"
     >
       <div className="flex flex-col gap-3 px-2 pt-2">
         <div className="flex items-center gap-3">
-          <div
-            className={`flex size-10 items-center justify-center rounded-xl ${palette.iconBg}`}
-          >
+          <div className="flex size-10 items-center justify-center rounded-xl bg-daftime-yellow transition-colors duration-300 group-hover:bg-[#b79b0b]">
             <RocketIcon />
           </div>
-          <p className={`label-mono ${palette.titleColor}`}>{plan.name}</p>
+          <p className="label-mono text-black">{plan.name}</p>
         </div>
         <div className="flex flex-col gap-1">
-          <p className={`text-[16px] tracking-tight ${palette.rangeColor}`}>
+          <p className="text-[16px] tracking-tight text-daftime-gray-mute transition-colors duration-300 group-hover:text-black">
             {plan.range}
           </p>
           {showPrice && plan.price && (
-            <p
-              className={`text-[15px] font-semibold tracking-tight ${palette.titleColor}`}
-            >
+            <p className="text-[15px] font-semibold tracking-tight text-black">
               {plan.price}
             </p>
           )}
@@ -361,7 +325,7 @@ function PricingCard({
           </li>
         ))}
       </ul>
-    </button>
+    </div>
   );
 }
 
