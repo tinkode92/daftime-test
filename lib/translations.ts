@@ -347,6 +347,14 @@ const en = {
       firstEpisode: "First episode",
       endOfSeries: "End of the series",
       podcastTag: "Podcast",
+      ctaHeading: "Chartered Accountant\n& Lawyers | FR - UAE",
+      ctaButton: "Watch Podcast",
+      worldEyebrow: "Global Presence",
+      worldHeading: "Your cross-border business partner",
+      worldSubtitle:
+        "Bridging Europe and the Middle East with integrated accounting, legal, and advisory expertise.",
+      scheduleCall: "Schedule a call",
+      addressUponRequest: "Address upon request",
     },
     footer: {
       rights: "© 2026 Daftime All Rights Reserved",
@@ -719,6 +727,14 @@ const fr: typeof en = {
       firstEpisode: "Premier épisode",
       endOfSeries: "Fin de la série",
       podcastTag: "Podcast",
+      ctaHeading: "Experts-comptables\n& juristes | FR - UAE",
+      ctaButton: "Voir le podcast",
+      worldEyebrow: "Présence mondiale",
+      worldHeading: "Votre partenaire business transfrontalier",
+      worldSubtitle:
+        "Un pont entre l'Europe et le Moyen-Orient avec une expertise intégrée en comptabilité, droit et conseil.",
+      scheduleCall: "Planifier un appel",
+      addressUponRequest: "Adresse sur demande",
     },
     footer: {
       rights: "© 2026 Daftime — Tous droits réservés",
@@ -1087,6 +1103,14 @@ const pt: typeof en = {
     firstEpisode: "Primeiro episódio",
     endOfSeries: "Fim da série",
     podcastTag: "Podcast",
+    ctaHeading: "Contabilistas\n& Juristas | FR - UAE",
+    ctaButton: "Ver o podcast",
+    worldEyebrow: "Presença global",
+    worldHeading: "O seu parceiro de negócios transfronteiriço",
+    worldSubtitle:
+      "Uma ponte entre a Europa e o Médio Oriente com expertise integrada em contabilidade, direito e consultoria.",
+    scheduleCall: "Agendar uma chamada",
+    addressUponRequest: "Endereço a pedido",
   },
   footer: {
     rights: "© 2026 Daftime — Todos os direitos reservados",

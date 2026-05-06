@@ -4,6 +4,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { CALENDAR_URLS } from "@/lib/calendarUrl";
+import { t } from "@/lib/translations";
+import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 type Office = {
   country: string;
@@ -40,7 +42,7 @@ const offices: Office[] = [
   {
     country: "Portugal",
     flag: <PortugalFlag />,
-    address: "Address upon request",
+    address: "__ADDRESS_UPON_REQUEST__",
     phone: "+ 00",
     email: "Hello@daftime.pr",
     calendarUrl: CALENDAR_URLS.PT,
@@ -51,6 +53,8 @@ const offices: Office[] = [
 // itself and pulse via SMIL animations baked into the file.
 
 export default function PodcastWorldMap() {
+  const locale = useEffectiveLocale("en");
+  const tr = t(locale).podcastPage;
   return (
     <section className="bg-white px-4 py-9 sm:px-6 md:px-9">
       <div className="mx-auto flex max-w-[1248px] flex-col gap-12">
@@ -58,15 +62,14 @@ export default function PodcastWorldMap() {
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <span className="flex items-center gap-2 font-mono text-[14px] uppercase leading-[20px] tracking-[0.12em] text-black">
             <span className="size-1 rounded-full bg-black" />
-            Global Presence
+            {tr.worldEyebrow}
           </span>
           <div className="flex max-w-[694px] flex-col gap-4">
             <h2 className="text-[40px] leading-[1.1] tracking-[-0.04em] text-black sm:text-[48px]">
-              Your cross-border business partner
+              {tr.worldHeading}
             </h2>
             <p className="text-[16px] leading-[1.5] tracking-tight text-[#939393]">
-              Bridging Europe and the Middle East with integrated accounting,
-              legal, and advisory expertise.
+              {tr.worldSubtitle}
             </p>
           </div>
         </div>
@@ -110,7 +113,11 @@ export default function PodcastWorldMap() {
 
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-3 text-[14px] leading-[1.4] tracking-tight text-black sm:text-[16px]">
-                  <Row icon={<MapPinIcon />}>{o.address}</Row>
+                  <Row icon={<MapPinIcon />}>
+                    {o.address === "__ADDRESS_UPON_REQUEST__"
+                      ? tr.addressUponRequest
+                      : o.address}
+                  </Row>
                   <Row icon={<PhoneIcon />}>{o.phone}</Row>
                   <Row icon={<MailIcon />}>{o.email}</Row>
                 </div>
@@ -120,7 +127,7 @@ export default function PodcastWorldMap() {
                   rel="noopener noreferrer"
                   className="flex h-10 items-center justify-center self-start rounded-lg bg-daftime-yellow px-4 text-[14px] tracking-tight text-black transition-opacity hover:opacity-90"
                 >
-                  Schedule a call
+                  {tr.scheduleCall}
                 </a>
               </div>
             </motion.article>

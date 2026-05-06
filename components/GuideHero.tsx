@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Navigation from "./Navigation";
 import BrandMarquee from "./BrandMarquee";
 import { t } from "@/lib/translations";
@@ -18,11 +20,26 @@ const avatars = [
 export default function GuideHero() {
   const locale = useEffectiveLocale("en");
   const tr = t(locale).guidePage;
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
+
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
-      <div className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl">
-        {/* Guide-specific background art */}
-        <div className="pointer-events-none absolute inset-0">
+      <div
+        ref={ref}
+        className="relative overflow-hidden rounded-2xl bg-black sm:rounded-3xl"
+      >
+        {/* Guide-specific background art (parallax) */}
+        <motion.div
+          style={{ y: bgY, scale: bgScale }}
+          className="pointer-events-none absolute inset-0"
+        >
           <Image
             src="/assets/daftime-guide-background.svg"
             alt=""
@@ -31,7 +48,7 @@ export default function GuideHero() {
             unoptimized
             className="object-cover"
           />
-        </div>
+        </motion.div>
 
         {/* Vertical lines */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-[1100px] -translate-x-1/2 justify-between md:flex">
@@ -40,7 +57,10 @@ export default function GuideHero() {
           ))}
         </div>
 
-        <div className="relative flex min-h-[560px] flex-col px-4 pt-5 pb-0 sm:px-6 sm:pt-7 md:min-h-[620px] md:px-10 md:pt-9 lg:min-h-[660px]">
+        <motion.div
+          style={{ y: contentY }}
+          className="relative flex min-h-[560px] flex-col px-4 pt-5 pb-0 sm:px-6 sm:pt-7 md:min-h-[620px] md:px-10 md:pt-9 lg:min-h-[660px]"
+        >
           <div className="flex justify-center">
             <Navigation />
           </div>
@@ -103,7 +123,7 @@ export default function GuideHero() {
           <div className="relative">
             <BrandMarquee />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
