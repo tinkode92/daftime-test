@@ -1,0 +1,320 @@
+﻿Données Structurées
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://daftime.ae/#organization",
+      "name": "Daftime Accounting L.L.C",
+      "alternateName": "Daftime",
+      "url": "https://daftime.ae",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://daftime.ae/#logo",
+        "url": "{{LOGO_URL}}",
+        "contentUrl": "{{LOGO_URL}}",
+        "caption": "Daftime Accounting L.L.C",
+        "inLanguage": "en"
+      },
+      "image": { "@id": "https://daftime.ae/#logo" },
+      "description": "Daftime Accounting L.L.C provides tax, accounting and company setup services for businesses operating in Dubai and the UAE.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Arab Emirates"
+      },
+      "sameAs": [
+        "https://www.instagram.com/daftime.ae/",
+        "https://www.linkedin.com/in/sami-sehrine-9287b860/",
+        "https://www.youtube.com/@Daftime"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://daftime.ae/#website",
+      "url": "https://daftime.ae",
+      "name": "Daftime",
+      "publisher": { "@id": "https://daftime.ae/#organization" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://daftime.ae/#sami-sehrine",
+      "name": "Sami Sehrine",
+      "url": "https://www.linkedin.com/in/sami-sehrine-9287b860/",
+      "sameAs": ["https://www.linkedin.com/in/sami-sehrine-9287b860/"],
+      "worksFor": { "@id": "https://daftime.ae/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ARTICLE_URL}}#webpage",
+      "url": "{{ARTICLE_URL}}",
+      "name": "{{META_TITLE}}",
+      "isPartOf": { "@id": "https://daftime.ae/#website" },
+      "about": { "@id": "https://daftime.ae/#organization" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "{{FEATURED_IMAGE_URL}}",
+        "width": {{IMAGE_WIDTH}},
+        "height": {{IMAGE_HEIGHT}}
+      },
+      "inLanguage": "en",
+      "breadcrumb": { "@id": "{{ARTICLE_URL}}#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ARTICLE_URL}}#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://daftime.ae"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://daftime.ae/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ARTICLE_BREADCRUMB_TITLE}}"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "{{ARTICLE_URL}}#article",
+      "isPartOf": { "@id": "{{ARTICLE_URL}}#webpage" },
+      "mainEntityOfPage": { "@id": "{{ARTICLE_URL}}#webpage" },
+      "headline": "{{ARTICLE_HEADLINE}}",
+      "description": "{{META_DESCRIPTION}}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{FEATURED_IMAGE_URL}}",
+        "width": {{IMAGE_WIDTH}},
+        "height": {{IMAGE_HEIGHT}}
+      },
+      "datePublished": "{{DATE_PUBLISHED_ISO}}",
+      "dateModified": "{{DATE_MODIFIED_ISO}}",
+      "author": { "@id": "https://daftime.ae/#sami-sehrine" },
+      "publisher": { "@id": "https://daftime.ae/#organization" },
+      "inLanguage": "en",
+      "articleSection": [{{ARTICLE_CATEGORIES}}],
+      "keywords": [{{ARTICLE_KEYWORDS}}],
+      "url": "{{ARTICLE_URL}}"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "{{ARTICLE_URL}}#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "{{FAQ_Q1}}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{FAQ_A1}}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "{{FAQ_Q2}}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{FAQ_A2}}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "{{FAQ_Q3}}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{FAQ_A3}}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "{{FAQ_Q4}}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{FAQ_A4}}"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+________________
+
+
+Exemple de DS
+https://daftime.ae/new-article/vat-registration-uae-guide
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://daftime.ae/#organization",
+      "name": "Daftime Accounting L.L.C",
+      "alternateName": "Daftime",
+      "url": "https://daftime.ae",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://daftime.ae/#logo",
+        "url": "URL_DU_LOGO_A_REMPLACER",
+        "contentUrl": "URL_DU_LOGO_A_REMPLACER",
+        "caption": "Daftime Accounting L.L.C",
+        "inLanguage": "en"
+      },
+      "image": { "@id": "https://daftime.ae/#logo" },
+      "description": "Daftime Accounting L.L.C provides tax, accounting and company setup services for businesses operating in Dubai and the UAE.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Arab Emirates"
+      },
+      "sameAs": [
+        "https://www.instagram.com/daftime.ae/",
+        "https://www.linkedin.com/in/sami-sehrine-9287b860/",
+        "https://www.youtube.com/@Daftime"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://daftime.ae/#website",
+      "url": "https://daftime.ae",
+      "name": "Daftime",
+      "publisher": { "@id": "https://daftime.ae/#organization" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://daftime.ae/#sami-sehrine",
+      "name": "Sami Sehrine",
+      "url": "https://www.linkedin.com/in/sami-sehrine-9287b860/",
+      "sameAs": ["https://www.linkedin.com/in/sami-sehrine-9287b860/"],
+      "worksFor": { "@id": "https://daftime.ae/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://daftime.ae/new-article/vat-registration-uae-guide#webpage",
+      "url": "https://daftime.ae/new-article/vat-registration-uae-guide",
+      "name": "VAT registration UAE : 2026 Guide Pro FTA Compliance - Daftime",
+      "isPartOf": { "@id": "https://daftime.ae/#website" },
+      "about": { "@id": "https://daftime.ae/#organization" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://framerusercontent.com/images/XMSea5FiSJtIkBCv7Ko1rRD6FA.png?width=1280&height=720",
+        "width": 1280,
+        "height": 720
+      },
+      "inLanguage": "en",
+      "breadcrumb": { "@id": "https://daftime.ae/new-article/vat-registration-uae-guide#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://daftime.ae/new-article/vat-registration-uae-guide#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://daftime.ae"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://daftime.ae/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "VAT registration UAE : 2026 Guide"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://daftime.ae/new-article/vat-registration-uae-guide#article",
+      "isPartOf": { "@id": "https://daftime.ae/new-article/vat-registration-uae-guide#webpage" },
+      "mainEntityOfPage": { "@id": "https://daftime.ae/new-article/vat-registration-uae-guide#webpage" },
+      "headline": "VAT registration UAE : 2026 Guide Pro FTA Compliance",
+      "description": "Master VAT registration UAE in 2026. Follow our expert guide to EmaraTax, thresholds, and FTA compliance to secure your business and avoid penalties.",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://framerusercontent.com/images/XMSea5FiSJtIkBCv7Ko1rRD6FA.png?width=1280&height=720",
+        "width": 1280,
+        "height": 720
+      },
+      "datePublished": "2026-04-25T00:00:00+04:00",
+      "dateModified": "2026-04-25T00:00:00+04:00",
+      "author": { "@id": "https://daftime.ae/#sami-sehrine" },
+      "publisher": { "@id": "https://daftime.ae/#organization" },
+      "inLanguage": "en",
+      "articleSection": ["Guide", "Basics"],
+      "keywords": [
+        "VAT registration UAE",
+        "VAT registration Dubai",
+        "EmaraTax portal",
+        "FTA compliance UAE",
+        "Federal Tax Authority registration",
+        "UAE VAT threshold 2026",
+        "AED 375000 mandatory VAT",
+        "AED 187500 voluntary VAT",
+        "Tax Registration Number UAE",
+        "TRN Dubai",
+        "UAE Pass VAT registration",
+        "VAT compliance 2026",
+        "Non-resident VAT UAE",
+        "VAT penalties UAE",
+        "VAT 5% UAE"
+      ],
+      "url": "https://daftime.ae/new-article/vat-registration-uae-guide"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://daftime.ae/new-article/vat-registration-uae-guide#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the mandatory VAT registration thresholds for UAE businesses in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For many resident businesses, VAT registration may become mandatory once taxable supplies and imports exceed AED 375,000 under the applicable rules. Voluntary registration may also be available from AED 187,500 where the legal conditions are met."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which documents are required to complete the VAT registration process?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To ensure a successful application through the EmaraTax portal, you must provide clear and valid corporate documentation. This includes your Trade License, Certificate of Incorporation, and the Articles of Association. Furthermore, you must submit passport copies and Emirates IDs for the company's owners and managers to verify the legal structure. Financial transparency is equally paramount. You are required to provide proof of business activities, such as invoices or contracts, along with detailed revenue projections for the next 30 days for new entities. Providing accurate bank account details and your Customs Registration Number (if applicable) is essential to avoid administrative delays or rejections by the Federal Tax Authority (FTA)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I access the official portal to register for VAT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The registration process is fully digital and managed via the EmaraTax platform. Accessing the system requires authentication through UAE Pass, which serves as your secure digital identity. This integration ensures that your personal credentials and business profile are correctly linked, providing a streamlined and secure environment for all tax-related transactions. Once logged in, you must carefully navigate the application sections, ensuring all contact information, specifically your official email and mobile number, is accurate. The FTA utilizes these channels for all formal correspondence and security OTPs. For professional guidance during this transition, daftime.ae offers expert support to ensure your data aligns with local accounting obligations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the expected timeline for the FTA to approve a VAT application?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Processing times vary depending on the quality of the application and whether additional information is requested. Businesses should monitor EmaraTax for status updates and requests from the Federal Tax Authority."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
