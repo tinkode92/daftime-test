@@ -154,19 +154,21 @@ export default function CountryGate() {
     // pill, ServiceTabs price visibility, …) to re-read storage.
     window.dispatchEvent(new CustomEvent(LOCALE_CHANGED_EVENT));
     setOpen(false);
-    // The URL follows the COUNTRY (AE → /, FR → /fr, PT → /pt). Only
-    // navigate when:
-    //  (a) the country actually changed AND
-    //  (b) the user is on a country-root page (/, /fr, /pt).
+    // The URL prefix follows the LANGUAGE (per the SEO team's setup):
+    //   EN → /        FR → /fr        PT → /pt
+    // The COUNTRY is independent — it just drives content variations
+    // (offices, AED prices, etc.) and does not change the URL.
     //
-    // If they are on an inner page (e.g. /podcast,
-    // /new-article/<slug>, /guide), stay there and let the
-    // LOCALE_CHANGED_EVENT re-render the UI in the new language —
-    // sending them back to the home would lose their place.
-    const currentCountry = countryFromPath(pathname || "/");
+    // We only navigate when:
+    //  (a) the user is on a country-root page (/, /fr, /pt) and
+    //  (b) the language's expected prefix differs from where they are.
+    // Inner pages (/podcast, /new-article/<slug>, /guide, tools…) keep
+    // their preserved URL — only the text re-renders via
+    // LOCALE_CHANGED_EVENT.
+    const langPrefix = language === "FR" ? "/fr" : language === "PT" ? "/pt" : "/";
     const onCountryRoot = ["/", "/fr", "/pt"].includes(pathname || "/");
-    if (currentCountry !== country && onCountryRoot) {
-      router.push(pathForCountry(country));
+    if (onCountryRoot && pathname !== langPrefix) {
+      router.push(langPrefix);
     } else {
       router.refresh();
     }

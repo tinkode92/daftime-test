@@ -25,6 +25,12 @@ const nextConfig = {
         destination: "/podcast/:slug",
         permanent: true,
       },
+      // SEO typo from the original URL list: 'imppts' → 'impots'
+      {
+        source: "/new-article/expatrie-imppts-guide-imposition-dubai",
+        destination: "/new-article/expatrie-impots-guide-imposition-dubai",
+        permanent: true,
+      },
     ];
   },
 };
