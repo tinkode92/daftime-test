@@ -36,11 +36,12 @@ const offices: Office[] = [
   },
 ];
 
-// Lat/long roughly mapped to %
+// Real lat/lng for the 3 offices, projected onto the world-map.svg viewBox
+// (1000×500, equirectangular: x = (lng+180)/360 * 100, y = (90-lat)/180 * 100)
 const dots = [
-  { left: 47, top: 32, label: "Paris" }, // France
-  { left: 60, top: 48, label: "Dubai" }, // UAE
-  { left: 44, top: 38, label: "Lisbon" }, // Portugal
+  { left: 50.65, top: 22.86, label: "Paris" }, // France 48.85, 2.35
+  { left: 47.46, top: 28.49, label: "Lisbon" }, // Portugal 38.72, -9.13
+  { left: 65.36, top: 35.96, label: "Dubai" }, // UAE 25.27, 55.30
 ];
 
 export default function PodcastWorldMap() {
@@ -65,26 +66,19 @@ export default function PodcastWorldMap() {
         </div>
 
         {/* World map */}
-        <div className="relative h-[300px] overflow-hidden rounded-2xl bg-black sm:h-[380px] md:h-[454px]">
-          {/* Vertical lines */}
+        <div className="relative aspect-[2/1] overflow-hidden rounded-2xl bg-black">
+          {/* Vertical decorative lines */}
           <div className="pointer-events-none absolute inset-0 flex justify-between px-12 opacity-[0.06]">
             {Array.from({ length: 6 }).map((_, i) => (
               <span key={i} className="h-full w-px bg-white" />
             ))}
           </div>
 
-          {/* Dotted world map */}
+          {/* Continent silhouette (real world map) */}
           <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)",
-              backgroundSize: "8px 8px",
-              maskImage:
-                "radial-gradient(ellipse 80% 70% at center, black 40%, transparent 75%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 80% 70% at center, black 40%, transparent 75%)",
-            }}
+            className="absolute inset-0 bg-no-repeat bg-center bg-contain"
+            style={{ backgroundImage: "url(/assets/world-map.svg)" }}
+            aria-hidden
           />
 
           {/* Yellow location dots with pulse */}

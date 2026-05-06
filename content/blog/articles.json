@@ -3823,6 +3823,230 @@
           "a": "La convention fiscale de 1989 vise à éviter la double imposition entre les deux États. Pour un entrepreneur français à Dubaï, la détermination de la résidence fiscale repose sur des critères précis comme le foyer d'habitation permanent et le centre des intérêts vitaux. Une structure expert-comptable saine est primordiale pour justifier la réalité de votre activité locale (Economic Substance Regulations) et sécuriser vos flux financiers. Daftime accompagne les entrepreneurs francophones dans la maîtrise de cette double culture juridique. Nous veillons à ce que vos transferts de dividendes et vos prix de transfert soient conformes aux exigences de Tracfin et des administrations fiscales, assurant une sérénité totale dans vos relations avec l'Hexagone."
         }
       ]
+    },
+    {
+      "slug": "tva-aux-émirats-arabes-unis",
+      "locale": "en",
+      "urlPrefix": "",
+      "title": "VAT in the United Arab Emirates: rules, thresholds, and obligations for businesses",
+      "tool": "vat-calculator",
+      "date": "2025-12-12T00:00:00.000Z",
+      "image": "https://framerusercontent.com/images/ftwXB2Pcqa3sglRcJRpYcUj0H4k.png",
+      "imageAlt": "TVA",
+      "youtube": "https://www.youtube.com/watch?v=LmcxuXstRwE",
+      "tldr": "",
+      "categories": [
+        "featured-episode"
+      ],
+      "readingTime": "6",
+      "description": "How businesses misinterpret VAT thresholds, zero-rated transactions, or registration deadlines — and how to remain fully compliant while optimizing cash flow.",
+      "author": {
+        "name": "Sami Sehrine",
+        "description": "Accountant and Co-founder of Daftime",
+        "image": "https://framerusercontent.com/images/D4xV15URLEkg44VKf8dQWEokdI.jpeg",
+        "imageAlt": ""
+      },
+      "sections": [
+        {
+          "title": "",
+          "body": "<iframe src=\"https://www.youtube.com/embed/8AHPXm9Y6mI?iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autoplay=0&amp;mute=1\" data-thumbnail=\"Medium Quality\" frameborder=\"0\" allow=\"presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\"></iframe>"
+        },
+        {
+          "title": "VAT rates applicable in the United Arab Emirates",
+          "body": "<p>The United Arab Emirates apply only two VAT rates:</p><ul><li data-preset-tag=\"p\"><p>a standard rate of 5%,</p></li><li data-preset-tag=\"p\"><p>a zero rate for certain specific transactions.</p></li></ul><p>Both rates are taken into account when calculating the VAT registration thresholds, which means a business may be required to register even if part of its transactions are taxed at 0%.</p><p>In addition, there are two specific regimes:</p><p>exemption, where the transaction is not subject to VAT, and exception, which applies to specific cases provided for under the regulations.</p>"
+        },
+        {
+          "title": "When is a business required to register for VAT?",
+          "body": "<p>Two thresholds determine whether VAT registration is mandatory or optional:</p><h4>Mandatory threshold</h4><p>A business is required to register for VAT once its taxable turnover exceeds AED 375,000. Crossing this threshold triggers a mandatory registration obligation within the timeframe set by the Federal Tax Authority.</p><h4>Optional threshold</h4><p>A business may choose to register voluntarily if its turnover reaches AED 187,500.</p><p>This option is particularly useful for companies that want to recover VAT on their expenses or enhance their commercial credibility.</p><p>Note: transactions taxed at 0% are included in both thresholds.</p>"
+        },
+        {
+          "title": "Cases where a business is considered “outside the scope” of VAT",
+          "body": "<p>Certain transactions fall outside the scope of UAE VAT because they have no territorial connection with the United Arab Emirates.</p><p>A typical example is a company that purchases goods in China and resells them in Côte d’Ivoire, without the goods ever passing through the UAE.</p><p>In this case, the business is considered outside the scope of VAT:</p><p>it is not required to register, file VAT returns, or apply any local VAT rate.</p><p>Understanding this concept is essential for companies involved in international trade or goods flows that do not involve the UAE.</p>"
+        },
+        {
+          "title": "VAT returns: frequency and obligations",
+          "body": "<p>Once registered, a business must file a VAT return on a quarterly basis.</p><p>This return includes:</p><ul><li data-preset-tag=\"p\"><p>the amount of VAT collected on sales,</p></li><li data-preset-tag=\"p\"><p>the recoverable VAT on purchases,</p></li><li data-preset-tag=\"p\"><p>the net balance payable or refundable.</p></li></ul><p>Meeting filing deadlines is essential, as the UAE applies a strict tax compliance regime.</p>"
+        },
+        {
+          "title": "Penalties for late registration or failure to register",
+          "body": "<p>The most heavily penalized violation is failure to register for VAT, which can result in a fine of up to AED 10,000.</p><p>Late filing or late payment also leads to penalties, calculated based on the amount due and the length of the delay.</p><p>VAT registration and filings should therefore be anticipated in order to avoid any administrative sanctions.</p>"
+        },
+        {
+          "title": "Conclusion",
+          "body": "<p>Contrary to common misconceptions, VAT in the United Arab Emirates is based on simple rules: two rates, two registration thresholds, and a quarterly reporting system. The key for every entrepreneur is to quickly identify whether their activity falls within the scope of local VAT, whether the thresholds are exceeded, and how to organize compliance to avoid penalties.</p><p>For growing businesses or those involved in international operations, it can be useful to have their situation reviewed to determine whether VAT registration is required and to optimize tax management.</p>"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "test",
+          "a": "test"
+        }
+      ]
+    },
+    {
+      "slug": "free-zone-ou-mainland",
+      "locale": "en",
+      "urlPrefix": "",
+      "title": "Free Zone vs Mainland: Which Should You Choose? Advice from a French Accountant and Lawyer!",
+      "tool": "qfzp-eligibility-test",
+      "date": "2025-12-12T00:00:00.000Z",
+      "image": "https://framerusercontent.com/images/FEQozAevAOZoOm44N714akOeI.png",
+      "imageAlt": "Free Zone? Mainland?",
+      "youtube": "https://www.youtube.com/watch?v=T9xLyc8L-gY",
+      "tldr": "",
+      "categories": [
+        "basics",
+        "guide"
+      ],
+      "readingTime": "8",
+      "description": "Why many entrepreneurs underestimate the real differences between Free Zone and Mainland — and how the wrong choice can limit market access, increase costs, or create legal risks.",
+      "author": {
+        "name": "Sami Sehrine",
+        "description": "Accountant and Co-founder of Daftime",
+        "image": "https://framerusercontent.com/images/Jlidfe4dFAOSfCRfYnDiG9jLcw.jpeg",
+        "imageAlt": ""
+      },
+      "sections": [
+        {
+          "title": "",
+          "body": "<p>When an entrepreneur decides to set up in the United Arab Emirates, one question always comes up: should the company be incorporated in a Free Zone or on the Mainland? These two structures have coexisted for a long time, but how they are used has evolved significantly. To clarify the differences and help founders make an informed choice, we spoke with Maître Justine Basilio, a lawyer specializing in business law and taxation.</p><p>This article summarizes the key points discussed in the video and offers a structured analysis to better understand the legal, tax, and operational implications of choosing a Free Zone or Mainland license.</p>"
+        },
+        {
+          "title": "Free Zone and Mainland: origins and initial objectives",
+          "body": "<p>When an entrepreneur decides to set up business in the United Arab Emirates, one question always comes up: should they establish their company in a Free Zone or on the Mainland? These two structures have coexisted for a long time, but their use has changed significantly. To shed light on the differences and help entrepreneurs make an informed choice, we spoke with Justine Basilio, a lawyer specializing in business and tax law.</p><p>This article summarizes the main points discussed in the video and provides a structured analysis to better understand the legal, tax, and operational issues involved in choosing between a Free Zone or Mainland license.</p>"
+        },
+        {
+          "title": "The importance of office location",
+          "body": "<p>Geographic location remains one of the main differences between a Free Zone company and a Mainland company.</p><p>A company incorporated in a Free Zone cannot rent offices outside its designated zone. The arrangements offered by certain business centers do not constitute a valid Ejari and are not recognized as a lease that can be used to justify the company’s premises.</p><p>In Mainland, a company can rent offices anywhere in the United Arab Emirates—except in Free Zones—provided it submits a valid Ejari when renewing its commercial license. This point is crucial, as attempting to bypass these requirements exposes the business to legal risks, particularly in the event of an inspection or dispute.</p><p>For entrepreneurs who need genuine commercial premises, retail space, or offices accessible to their teams and clients, a Mainland license offers far greater flexibility.</p>"
+        },
+        {
+          "title": "Access to the local market and participation in tenders",
+          "body": "<p>The choice between Free Zone and Mainland also affects access to government markets. A Mainland company can respond to public tenders and work freely with local authorities.</p><p>Free Zone companies only have access if their zone specializes in the sector concerned. For example, a media company based in a Free Zone dedicated to the sector benefits from this right, but a company registered in a generalist Free Zone will not have access.</p><p>For companies wishing to work with public institutions, respond to tenders, or develop a strong presence in the territory, Mainland is generally the most suitable structure.</p>"
+        },
+        {
+          "title": "Taxation: largely similar treatment between Free Zone and Mainland",
+          "body": "<p>From a tax perspective, the differences between Free Zone and Mainland are often overstated. In most cases, both structures are subject to the same regime, especially since the introduction of Corporate Tax in the UAE.</p><p>Some Free Zones may offer tax advantages, but only for activities that meet specific criteria, particularly those related to Qualifying Income. For the majority of entrepreneurs, the tax burden will be equivalent whether they choose a Free Zone or a Mainland license.</p><p>It is therefore essential to assess the actual activity being carried out, rather than relying solely on the tax reputation of Free Zones.</p>"
+        },
+        {
+          "title": "Company setup process: more advanced digitalization in Free Zones",
+          "body": "<p>For entrepreneurs who are not yet physically present in the UAE, Free Zones offer a clear advantage: a more advanced, digitalized setup process. Many formalities can be completed remotely.</p><p>By contrast, setting up a Mainland company often requires the physical presence of shareholders or the use of a notarized power of attorney (POA) to sign the incorporation documents. This can extend timelines and add complexity for entrepreneurs based abroad.</p><p>As a result, for projects that require a fast setup or a remote launch, a Free Zone can be a simpler and more efficient solution.</p>"
+        },
+        {
+          "title": "Costs: differences depending on the structure and number of visas",
+          "body": "<p>The cost of a Mainland company is on average slightly higher than that of a Free Zone company, mainly due to higher government fees. However, when the entrepreneur needs a large number of visas, a Free Zone may ultimately prove more expensive than a Mainland structure.</p><p>The actual cost therefore depends on the business model, the company's visa requirements, the number of employees, and the office space required. The two options may be comparable in terms of budget, depending on the scenario.</p>"
+        },
+        {
+          "title": "Free Zone or Mainland: how to make the right choice?",
+          "body": "<p>The choice mainly depends on the nature of the activity and the planned setup.</p><ul><li data-preset-tag=\"p\"><p>For a project that requires a strong local presence—such as retail stores, physical offices, or on-site sales—a Mainland license is more appropriate.</p></li><li data-preset-tag=\"p\"><p>For digital, international, or early-stage projects, a Free Zone offers greater administrative flexibility and a faster setup process.</p></li><li data-preset-tag=\"p\"><p>For service providers, a Free Zone is often sufficient.</p></li><li data-preset-tag=\"p\"><p>For activities that require accessible premises or retail operations, Mainland remains the reference.</p></li></ul><p>The key is to analyze the nature of the activity, the growth strategy, the expected number of visas, and any potential requirements related to Ejari or access to the public market.</p>"
+        },
+        {
+          "title": "Conclusion",
+          "body": "<p>The choice between Free Zone and Mainland is no longer solely a matter of share ownership or tax advantages. It now depends on the project itself, the activity carried out, the desired level of local presence, and the company’s operational needs.</p><p>For a project with a genuine economic and physical presence, tied to a specific location in Dubai or elsewhere in the United Arab Emirates, a Mainland license is often the most coherent solution. For a digital entrepreneur or consultant looking to launch quickly, a Free Zone remains a flexible and efficient alternative.</p>"
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "slug": "excise-tax-aux-émirats-arabes-unis",
+      "locale": "en",
+      "urlPrefix": "",
+      "title": "Excise Tax in the United Arab Emirates: understanding the surcharge on harmful products",
+      "tool": "contact-us",
+      "date": "2025-12-12T00:00:00.000Z",
+      "image": "https://framerusercontent.com/images/v5qm1u7Npes3CKj2Kk9MsyYmY.png",
+      "imageAlt": "Excise TAX",
+      "youtube": "https://www.youtube.com/watch?v=aFNm5M8tQME",
+      "tldr": "",
+      "categories": [
+        "basics",
+        "guide"
+      ],
+      "readingTime": "5",
+      "description": "Why businesses often underestimate the impact of Excise Tax — and how this 50% to 100% surcharge can reshape pricing, margins, and import strategies.",
+      "author": {
+        "name": "Sami Sehrine",
+        "description": "Accountant and Co-founder of Daftime",
+        "image": "https://framerusercontent.com/images/wMugLLvjT40QXR6vSRd50SeBs.jpeg",
+        "imageAlt": ""
+      },
+      "sections": [
+        {
+          "title": "",
+          "body": "<p>The United Arab Emirates apply a specific form of taxation to certain products considered harmful to health or the environment. This tax, known as Excise Tax, is often overlooked by both entrepreneurs and consumers, even though it can represent a significant cost when importing or selling certain goods.</p><p>In the video above, we explain the core principles of this surcharge. This article revisits the key points to understand its scope of application and its economic impact.</p>"
+        },
+        {
+          "title": "What is Excise Tax in the United Arab Emirates?",
+          "body": "<p>Excise Tax is a fiscal surcharge applied to products considered harmful or detrimental.</p><p>It was introduced for two main reasons:</p><ul><li data-preset-tag=\"p\"><p>to reduce the consumption of harmful products,</p></li><li data-preset-tag=\"p\"><p>to offset their health and environmental impact.</p></li></ul><p>It is a tax separate from VAT or customs duties and is added on top of other tax obligations when goods are imported or sold.</p>"
+        },
+        {
+          "title": "Which products are subject to Excise Tax?",
+          "body": "<p>In the United Arab Emirates, Excise Tax applies in particular to:</p><ul><li data-preset-tag=\"p\"><p>tobacco and all related products,</p></li><li data-preset-tag=\"p\"><p>electronic cigarettes,</p></li><li data-preset-tag=\"p\"><p>e-liquids for electronic cigarettes,</p></li><li data-preset-tag=\"p\"><p>energy drinks,</p></li><li data-preset-tag=\"p\"><p>sugary or heavily sweetened beverages.</p></li></ul><p>These categories may evolve depending on decisions by the Federal Tax Authority (FTA), but the principle remains the same: any product that has a negative impact on health or the environment may be subject to this surcharge.</p>"
+        },
+        {
+          "title": "What is the applicable surcharge rate?",
+          "body": "<p>The Excise Tax rate generally ranges between 50% and 100%, depending on the type of product.</p><p>This taxation can therefore double the cost of a product even before VAT or commercial margins are applied.</p><p>The objective is not purely fiscal: Excise Tax also aims to limit consumption, encourage more responsible behavior, and reduce the importation of harmful products.</p><p>It is important to note that this surcharge is not a customs duty. It is an internal UAE tax, calculated independently of any applicable customs fees.</p>"
+        },
+        {
+          "title": "Why is this tax important for businesses?",
+          "body": "<p>Any business that imports, manufactures, or sells products subject to Excise Tax must:</p><p>register with the Federal Tax Authority,</p><ul><li data-preset-tag=\"p\"><p>register with the Federal Tax Authority, </p></li><li data-preset-tag=\"p\"><p>declare the relevant quantities, </p></li><li data-preset-tag=\"p\"><p>pay the surcharge before the products are released onto the market.</p></li></ul><p>Failure to comply with these obligations can lead to significant penalties, and above all, customs or logistical blockages.</p><p>This tax must therefore be factored in upfront when designing the business model, pricing structure, and margin forecasts.</p>"
+        },
+        {
+          "title": "Conclusion",
+          "body": "<p>Excise Tax is an important component of the UAE tax system. It applies to high-risk products and can reach up to 100% of their value. For distribution, import, or e-commerce businesses, it is essential to understand this surcharge, verify whether the products they sell fall within its scope, and properly factor its impact into their pricing strategy.</p><p>A solid understanding of this regulation helps avoid costly mistakes and ensures full compliance when importing or selling goods.</p>"
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "slug": "corporate-tax-aux-émirats-arabes-unis",
+      "locale": "en",
+      "urlPrefix": "",
+      "title": "Corporate Tax in the United Arab Emirates: understanding the business tax introduced in 2023",
+      "tool": "corporate-tax",
+      "date": "2025-12-11T00:00:00.000Z",
+      "image": "https://framerusercontent.com/images/INPUl27aWzV6aRbi8YB1UzwgkQ.png",
+      "imageAlt": "Corporate TAX",
+      "youtube": "https://www.youtube.com/watch?v=EXwPvalD2eA",
+      "tldr": "",
+      "categories": [
+        "pro-tips",
+        "guide"
+      ],
+      "readingTime": "7",
+      "description": "How the new Corporate Tax affects financial planning, which expenses genuinely reduce taxable profit, and how to avoid unpleasant surprises when the 9% rate applies.",
+      "author": {
+        "name": "Sami Sehrine",
+        "description": "Accountant and Co-founder of Daftime",
+        "image": "https://framerusercontent.com/images/5x38LgCgZDY7VDK496sp83Enc.jpeg",
+        "imageAlt": ""
+      },
+      "sections": [
+        {
+          "title": "",
+          "body": "<p>The introduction of Corporate Tax in the United Arab Emirates on June 30, 2023 marked a major turning point for the local entrepreneurial ecosystem. Often perceived as a complex or worrying measure, this tax is in fact relatively straightforward once its mechanics are properly understood.</p><p>This article reviews the main points discussed in the video above and provides a clear explanation of how the tax works, how taxable profit is calculated, and the applicable filing deadlines.</p>"
+        },
+        {
+          "title": "What is Corporate Tax in the United Arab Emirates?",
+          "body": "<p>Corporate Tax is a corporate income tax that applies to businesses operating in the United Arab Emirates, whether they generate their revenue domestically or internationally.</p><p>Its objective is to align local taxation with international standards while maintaining a competitive regime for investors.</p><p>It is not a tax on turnover, but rather a tax calculated on net taxable profit.</p>"
+        },
+        {
+          "title": "How is Corporate Tax calculated?",
+          "body": "<p>The taxation structure is straightforward:</p><h4>Step 1: determine turnover (revenue)</h4><p>The revenue taken into account includes the company’s entire turnover, whether generated in the United Arab Emirates or abroad.</p><h4>Step 2: deduct allowable expenses</h4><p>Business expenses that are necessary for the activity are deductible:</p><p>operating costs, salaries, rent, overheads, depreciation, etc.</p><h4>Step 3: determine the taxable profit</h4><p>Once expenses are deducted, the company arrives at a result that, in principle, is a profit.</p><h4>Step 4: apply the exemption and the tax rate</h4><p>The tax rules provide for an exemption on the first tranche of profit.</p><p>The profit is not taxed up to AED 375,000, which is approximately:</p><ul><li data-preset-tag=\"p\"><p>USD 100,000</p></li><li data-preset-tag=\"p\"><p>EUR 90,000</p><p>Beyond this threshold, the remaining profit is taxed at the standard rate of 9%.</p></li></ul>"
+        },
+        {
+          "title": "Who is subject to Corporate Tax?",
+          "body": "<p>Most companies registered in the UAE are subject to Corporate Tax, whether they are established in a Free Zone or on the Mainland. Some Free Zones benefit from special regimes, but only under strict conditions, particularly those related to Qualifying Income.</p><p>In most cases, companies must therefore factor this tax into their annual financial planning.</p>"
+        },
+        {
+          "title": "When must Corporate Tax be declared?",
+          "body": "<p>The return is filed annually.</p><p>It must be filed within nine months following the end of the financial year.</p><p>For example, if the financial year ends on December 31, the return must be submitted by September 30 of the following year.</p><p>Meeting these deadlines is essential to avoid administrative penalties.</p>"
+        },
+        {
+          "title": "Conclusion",
+          "body": "<p>Although its introduction raised many questions, Corporate Tax is in fact based on a clear mechanism: net profit taxed at 9% above a threshold of AED 375,000, with an annual return filed within nine months of the financial year-end.</p><p>Understanding how this system works allows entrepreneurs to anticipate their tax obligations, structure their expenses more effectively, and integrate this tax into their financial strategy. For any company established in the UAE, mastering this mechanism is now essential.</p>"
+        }
+      ],
+      "faqs": []
     }
   ],
   "tools": [

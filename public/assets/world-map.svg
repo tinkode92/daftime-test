@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+  <!--
+    Simplified continents silhouette, low-detail.
+    Coordinates use a roughly equirectangular projection on a 1000×500 canvas
+    so screen coords scale linearly with longitude/latitude:
+       x = (lng + 180) / 360 * 1000
+       y = (90 - lat) / 180 * 500
+  -->
+  <g fill="rgba(255,255,255,0.12)">
+    <!-- North America -->
+    <path d="M170 120 Q 130 95 165 90 L 240 75 L 290 80 L 320 95 L 360 105 L 365 130 L 350 150 L 320 165 L 295 175 L 290 200 L 270 225 L 250 240 L 230 230 L 215 210 L 205 195 L 195 175 L 180 155 Z" />
+    <path d="M155 165 L 175 165 L 175 200 L 158 215 L 145 200 Z" />
+    <path d="M285 240 L 320 245 L 330 270 L 305 285 L 280 275 Z" />
+
+    <!-- Greenland -->
+    <path d="M385 80 Q 400 70 415 80 L 425 105 L 415 125 L 395 130 L 380 110 Z" />
+
+    <!-- South America -->
+    <path d="M310 290 L 345 285 L 365 305 L 360 345 L 350 380 L 335 415 L 318 440 L 305 425 L 295 395 L 295 360 L 305 325 Z" />
+
+    <!-- Europe -->
+    <path d="M480 130 L 500 120 L 520 125 L 535 140 L 545 150 L 555 145 L 560 160 L 545 175 L 525 175 L 510 170 L 495 175 L 480 165 L 475 145 Z" />
+    <path d="M475 110 L 495 108 L 500 122 L 480 125 Z" />
+
+    <!-- UK + Ireland -->
+    <path d="M468 135 L 480 132 L 482 150 L 472 152 Z" />
+
+    <!-- Africa -->
+    <path d="M500 200 L 530 195 L 555 200 L 575 215 L 590 245 L 595 280 L 580 310 L 555 335 L 525 345 L 505 335 L 495 315 L 490 285 L 495 255 L 498 225 Z" />
+    <path d="M510 175 L 540 175 L 555 192 L 540 200 L 515 198 Z" />
+    <!-- Madagascar -->
+    <path d="M610 305 L 620 320 L 615 335 L 605 325 Z" />
+
+    <!-- Middle East -->
+    <path d="M555 195 L 580 195 L 600 210 L 605 230 L 595 245 L 580 250 L 565 245 L 555 230 L 555 215 Z" />
+
+    <!-- Asia (large blob) -->
+    <path d="M555 130 L 600 115 L 650 110 L 700 115 L 750 125 L 800 140 L 830 160 L 845 185 L 840 210 L 825 230 L 810 245 L 790 260 L 770 270 L 755 265 L 740 250 L 720 245 L 700 250 L 680 245 L 660 235 L 645 220 L 625 215 L 610 205 L 600 195 L 590 180 L 575 170 L 565 155 Z" />
+    <!-- India -->
+    <path d="M695 235 L 720 230 L 730 250 L 720 275 L 705 280 L 695 265 Z" />
+    <!-- SE Asia -->
+    <path d="M790 260 L 815 265 L 835 280 L 825 300 L 800 305 L 785 290 Z" />
+    <path d="M820 305 L 850 310 L 860 330 L 845 340 L 830 335 Z" />
+    <!-- Japan -->
+    <path d="M865 195 L 880 200 L 880 230 L 870 240 L 858 230 L 858 210 Z" />
+
+    <!-- Australia -->
+    <path d="M810 340 L 855 335 L 880 345 L 880 370 L 865 380 L 835 380 L 815 370 Z" />
+    <!-- New Zealand -->
+    <path d="M910 380 L 925 385 L 925 405 L 912 405 Z" />
+  </g>
+</svg>
