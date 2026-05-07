@@ -42,7 +42,7 @@ export default function ArticleHero({ article }: { article: Article }) {
         </div>
 
         <div className="relative flex min-h-[480px] flex-col px-4 pt-5 pb-12 sm:px-6 sm:pt-7 sm:pb-16 md:min-h-[540px] md:px-10 md:pt-9 md:pb-20">
-          <div className="flex justify-center">
+          <div className="relative z-50 flex justify-center">
             <Navigation />
           </div>
 

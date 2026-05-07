@@ -112,7 +112,7 @@ export default function Hero({ locale = "en" }: { locale?: Locale }) {
           style={{ y: contentY }}
           className="relative z-[2] flex min-h-[640px] flex-col px-4 pt-5 pb-0 sm:px-6 sm:pt-7 md:min-h-[720px] md:px-10 md:pt-9 lg:min-h-[800px]"
         >
-          <div className="flex justify-center">
+          <div className="relative z-50 flex justify-center">
             <Navigation />
           </div>
 

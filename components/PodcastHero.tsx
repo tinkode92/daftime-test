@@ -44,7 +44,7 @@ export default function PodcastHero() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[160px] rounded-b-2xl bg-gradient-to-b from-transparent to-black/50 backdrop-blur-[2px] sm:h-[240px] sm:rounded-b-3xl" />
 
         <div className="relative flex min-h-[560px] flex-col px-4 pt-5 pb-0 sm:px-6 sm:pt-7 md:min-h-[620px] md:px-10 md:pt-9 lg:min-h-[660px]">
-          <div className="flex justify-center">
+          <div className="relative z-50 flex justify-center">
             <Navigation />
           </div>
 
