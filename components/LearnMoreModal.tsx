@@ -15,6 +15,12 @@ const services = [
   "International Setup",
 ];
 
+const countries = [
+  "United Arab Emirates",
+  "France",
+  "Portugal",
+];
+
 const offices = [
   {
     country: "France",
@@ -59,6 +65,7 @@ const offices = [
 
 export default function LearnMoreModal({ open, onClose }: Props) {
   const [service, setService] = useState("");
+  const [country, setCountry] = useState("");
 
   useEffect(() => {
     if (!open) return;
@@ -211,6 +218,41 @@ export default function LearnMoreModal({ open, onClose }: Props) {
                   </div>
                 </Field>
               </div>
+
+              <Field label="Country You Are Interested In">
+                <div className="flex w-full items-center gap-2">
+                  <select
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="w-full appearance-none bg-transparent text-sm tracking-tight text-[#1b1b1b] focus:outline-none"
+                  >
+                    <option value="" disabled>
+                      Select...
+                    </option>
+                    {countries.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden
+                    className="shrink-0"
+                  >
+                    <path
+                      d="M4 6l4 4 4-4"
+                      stroke="#1b1b1b"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </Field>
 
               <Field label="Describe what you're interested in">
                 <textarea
