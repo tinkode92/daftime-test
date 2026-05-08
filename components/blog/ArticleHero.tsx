@@ -15,8 +15,20 @@ const labels = {
   },
 };
 
+function formatDate(raw: string, locale: "en" | "fr"): string {
+  if (!raw) return "";
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) return raw;
+  return new Intl.DateTimeFormat(locale === "fr" ? "fr-FR" : "en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(d);
+}
+
 export default function ArticleHero({ article }: { article: Article }) {
   const l = labels[article.locale];
+  const formattedDate = formatDate(article.date, article.locale);
 
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
@@ -86,14 +98,16 @@ export default function ArticleHero({ article }: { article: Article }) {
               className="fade-up flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[14px] tracking-tight text-white/60"
               style={{ animationDelay: "240ms" }}
             >
+              {formattedDate && <span>{formattedDate}</span>}
               {article.readingTime && (
-                <span>
-                  {article.readingTime} {l.readTime}
-                </span>
+                <>
+                  <span className="size-1 rounded-full bg-white/30" aria-hidden />
+                  <span>
+                    {article.readingTime} {l.readTime}
+                  </span>
+                </>
               )}
-              {article.readingTime && (
-                <span className="size-1 rounded-full bg-white/30" aria-hidden />
-              )}
+              <span className="size-1 rounded-full bg-white/30" aria-hidden />
               <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-daftime-yellow">
                 {article.locale === "fr" ? "Français" : "English"}
               </span>
