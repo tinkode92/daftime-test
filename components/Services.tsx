@@ -177,10 +177,11 @@ function CompassLabel({
       type="button"
       onClick={onActivate}
       onMouseEnter={onActivate}
+      onPointerEnter={onActivate}
       onFocus={onActivate}
       className={
         (className || "") +
-        " whitespace-nowrap text-[22px] leading-[1.1] tracking-[-0.04em] transition-colors duration-300 sm:text-[28px] md:text-[34px] " +
+        " cursor-pointer whitespace-nowrap px-3 py-2 text-[22px] leading-[1.1] tracking-[-0.04em] transition-colors duration-300 sm:text-[28px] md:text-[34px] " +
         (active ? "text-daftime-yellow" : "text-white hover:text-white/80")
       }
     >
