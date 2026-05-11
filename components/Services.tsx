@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
@@ -15,12 +16,14 @@ const order: ServiceKey[] = ["legal", "advisory", "accounting"];
 // convention (negative deg rotates the needle tip CW around the
 // dial), we map each label position to:
 //   legal      → SW (default)        → 0
-//   advisory   → SE  (CW 90°)        → -90
-//   accounting → N   (CW 225°)       → 135 (i.e. -225)
+//   advisory   → SE  (CCW 90°)       → -90
+//   accounting → N   (CCW 225°)      → -225
+// (-225 instead of +135 so the rotation animates through the
+// advisory/east arc rather than re-crossing legal.)
 const compassRotation: Record<ServiceKey, number> = {
   legal: 0,
   advisory: -90,
-  accounting: 135,
+  accounting: -225,
 };
 
 export default function Services({ locale = "en" }: { locale?: Locale }) {
@@ -119,13 +122,11 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
 
             {/* Compass */}
             <div className="absolute left-1/2 top-1/2 w-[60%] -translate-x-1/2 -translate-y-1/2">
-              <div
+              <motion.div
                 className="aspect-square"
-                style={{
-                  transform: `rotate(${compassRotation[active]}deg)`,
-                  transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
-                  willChange: "transform",
-                }}
+                animate={{ rotate: compassRotation[active] }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                style={{ willChange: "transform" }}
               >
                 <Image
                   src="/assets/compass.svg"
@@ -135,7 +136,7 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
                   className="size-full object-contain"
                   priority={false}
                 />
-              </div>
+              </motion.div>
             </div>
 
             {/* Legal — bottom-left */}
