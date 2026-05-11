@@ -15,7 +15,7 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative overflow-hidden rounded-2xl bg-black px-5 py-8 sm:px-6 sm:py-10 md:h-[254px]"
+        className="relative overflow-hidden rounded-2xl bg-black px-5 py-10 sm:px-6 sm:py-14 md:h-[420px] md:py-16"
       >
         {/* World-map dotted background */}
         <div className="pointer-events-none absolute inset-0">
