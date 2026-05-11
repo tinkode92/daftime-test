@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "./Reveal";
 import { t, type Locale } from "@/lib/translations";
@@ -11,15 +12,18 @@ type ServiceKey = "legal" | "advisory" | "accounting";
 const order: ServiceKey[] = ["legal", "advisory", "accounting"];
 
 // Compass needle natural direction is south-west (lower-left), which
-// matches the "Legal" label position. From there we rotate the needle
-// clockwise to point at each label:
-//   legal      → SW (default)
-//   advisory   → SE  → +90°
-//   accounting → N   → +225° (or -135°)
+// matches the "Legal" label position. Following the existing SVG
+// convention (negative deg rotates the needle tip CW around the
+// dial), we map each label position to:
+//   legal      → SW (default)        → 0
+//   advisory   → SE  (CCW 90°)       → -90
+//   accounting → N   (CCW 225°)      → -225
+// (-225 instead of +135 so the rotation animates through the
+// advisory/east arc rather than re-crossing legal.)
 const compassRotation: Record<ServiceKey, number> = {
   legal: 0,
-  advisory: 90,
-  accounting: -135,
+  advisory: -90,
+  accounting: -225,
 };
 
 export default function Services({ locale = "en" }: { locale?: Locale }) {
@@ -44,39 +48,39 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
         </div>
 
         {/* Header: eyebrow left, heading right */}
-        <div className="relative flex flex-col items-start justify-between gap-6 px-5 pt-10 sm:gap-8 sm:px-8 sm:pt-12 md:flex-row md:items-center md:px-10 md:pt-14">
+        <div className="relative flex flex-col items-start justify-between gap-4 px-5 pt-8 sm:gap-6 sm:px-7 sm:pt-9 md:flex-row md:items-center md:px-9 md:pt-10">
           <Reveal className="flex shrink-0 items-center gap-2">
             <div className="size-1 rounded-full bg-white" />
             <p className="label-mono text-white">{tr.eyebrow}</p>
           </Reveal>
-          <Reveal as="h2" delay={120} className="min-w-0 max-w-[874px] flex-1">
-            <span className="h-display block text-balance text-white md:text-right">
+          <Reveal as="h2" delay={120} className="min-w-0 max-w-[720px] flex-1">
+            <span className="block text-balance text-[28px] leading-[1.1] tracking-[-0.04em] text-white sm:text-[34px] md:text-right md:text-[40px]">
               {tr.heading}
             </span>
           </Reveal>
         </div>
 
         {/* Body: text left, compass right */}
-        <div className="relative grid grid-cols-1 gap-10 px-5 pb-12 pt-10 sm:px-8 sm:pb-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:items-center md:gap-12 md:px-10 md:pb-20 md:pt-16">
+        <div className="relative grid grid-cols-1 gap-8 px-5 pb-10 pt-8 sm:px-7 sm:pb-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:items-center md:gap-10 md:px-9 md:pb-14 md:pt-10">
           {/* Left column */}
-          <Reveal className="flex flex-col gap-12 md:gap-[80px]">
-            <div className="flex flex-col gap-5">
+          <Reveal className="flex flex-col gap-8 md:gap-[60px]">
+            <div className="flex flex-col gap-4">
               <p
                 key={`num-${active}`}
-                className="fade-up text-[64px] leading-[1.05] tracking-[-0.04em] text-[#3f3d3d] sm:text-[80px] md:text-[100px]"
+                className="fade-up text-[52px] leading-[1.05] tracking-[-0.04em] text-[#3f3d3d] sm:text-[64px] md:text-[80px]"
               >
                 {String(activeIdx + 1).padStart(2, "0")}
               </p>
-              <div className="flex flex-col gap-4 text-white">
+              <div className="flex flex-col gap-3 text-white">
                 <h3
                   key={`title-${active}`}
-                  className="fade-up h-display text-white"
+                  className="fade-up text-[32px] leading-[1.1] tracking-[-0.04em] text-white sm:text-[38px] md:text-[44px]"
                 >
                   {tr.cards[active].title}
                 </h3>
                 <p
                   key={`desc-${active}`}
-                  className="fade-up max-w-[542px] text-[16px] leading-[1.4] tracking-tight text-white/90 sm:text-[18px] md:text-[20px]"
+                  className="fade-up max-w-[480px] text-[15px] leading-[1.4] tracking-tight text-white/90 sm:text-[16px] md:text-[18px]"
                 >
                   {tr.cards[active].description}
                 </p>
@@ -106,25 +110,23 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
           {/* Right column: compass + labels */}
           <Reveal
             delay={120}
-            className="relative mx-auto aspect-square w-full max-w-[520px]"
+            className="relative mx-auto aspect-square w-full max-w-[420px]"
           >
             {/* Accounting label — top center */}
             <CompassLabel
               label={tr.cards.accounting.title}
               active={active === "accounting"}
-              onClick={() => setActive("accounting")}
+              onActivate={() => setActive("accounting")}
               className="absolute left-1/2 top-0 -translate-x-1/2"
             />
 
             {/* Compass */}
             <div className="absolute left-1/2 top-1/2 w-[60%] -translate-x-1/2 -translate-y-1/2">
-              <div
+              <motion.div
                 className="aspect-square"
-                style={{
-                  transform: `rotate(${compassRotation[active]}deg)`,
-                  transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
-                  willChange: "transform",
-                }}
+                animate={{ rotate: compassRotation[active] }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                style={{ willChange: "transform" }}
               >
                 <Image
                   src="/assets/compass.svg"
@@ -134,14 +136,14 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
                   className="size-full object-contain"
                   priority={false}
                 />
-              </div>
+              </motion.div>
             </div>
 
             {/* Legal — bottom-left */}
             <CompassLabel
               label={tr.cards.legal.title}
               active={active === "legal"}
-              onClick={() => setActive("legal")}
+              onActivate={() => setActive("legal")}
               className="absolute bottom-0 left-0"
             />
 
@@ -149,7 +151,7 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
             <CompassLabel
               label={tr.cards.advisory.title}
               active={active === "advisory"}
-              onClick={() => setActive("advisory")}
+              onActivate={() => setActive("advisory")}
               className="absolute bottom-0 right-0"
             />
           </Reveal>
@@ -162,21 +164,24 @@ export default function Services({ locale = "en" }: { locale?: Locale }) {
 function CompassLabel({
   label,
   active,
-  onClick,
+  onActivate,
   className,
 }: {
   label: string;
   active: boolean;
-  onClick: () => void;
+  onActivate: () => void;
   className?: string;
 }) {
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={onActivate}
+      onMouseEnter={onActivate}
+      onPointerEnter={onActivate}
+      onFocus={onActivate}
       className={
         (className || "") +
-        " whitespace-nowrap text-[28px] leading-[1.1] tracking-[-0.04em] transition-colors duration-300 sm:text-[34px] md:text-[42px] " +
+        " cursor-pointer whitespace-nowrap px-3 py-2 text-[22px] leading-[1.1] tracking-[-0.04em] transition-colors duration-300 sm:text-[28px] md:text-[34px] " +
         (active ? "text-daftime-yellow" : "text-white hover:text-white/80")
       }
     >
