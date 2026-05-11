@@ -15,16 +15,24 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative overflow-hidden rounded-2xl bg-daftime-yellow px-5 py-8 sm:px-6 sm:py-10 md:h-[254px]"
+        className="relative overflow-hidden rounded-2xl bg-black px-5 py-8 sm:px-6 sm:py-10 md:h-[254px]"
       >
-        <div className="pointer-events-none absolute inset-0 -translate-y-[40%] opacity-[0.06]">
+        {/* World-map dotted background */}
+        <div className="pointer-events-none absolute inset-0">
           <Image
-            src="/assets/logo-daftime.png"
+            src="/assets/footer-background.svg"
             alt=""
-            width={1263}
-            height={1290}
-            className="h-auto w-full object-contain"
+            fill
+            unoptimized
+            className="object-cover object-bottom opacity-30"
           />
+        </div>
+
+        {/* Vertical lines decoration */}
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-[1176px] -translate-x-1/2 justify-between md:flex">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="h-full w-px bg-white/[0.04]" />
+          ))}
         </div>
 
         <div className="relative flex h-full flex-col justify-between gap-8 md:gap-0">
@@ -34,14 +42,14 @@ export default function Footer({ locale = "en" }: { locale?: Locale }) {
               alt="Daftime"
               width={144}
               height={40}
-              className="h-9 w-auto object-contain sm:h-10"
+              className="h-9 w-auto object-contain brightness-0 invert sm:h-10"
             />
-            <p className="text-[12px] uppercase tracking-wider text-black sm:text-[14px] md:text-[16px]">
+            <p className="text-[12px] uppercase tracking-wider text-white sm:text-[14px] md:text-[16px]">
               {tr.rights}
             </p>
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-6 text-[14px] uppercase tracking-wider text-black sm:text-[16px] md:flex-row md:items-end">
+          <div className="flex flex-col items-start justify-between gap-6 text-[14px] uppercase tracking-wider text-white sm:text-[16px] md:flex-row md:items-end">
             <div className="flex flex-wrap items-center gap-6 sm:gap-12">
               <a
                 href="https://www.instagram.com/daftime.ae/"
