@@ -3,180 +3,205 @@
 import Image from "next/image";
 import { useState } from "react";
 import Reveal from "./Reveal";
-import TiltCard from "./motion/TiltCard";
 import { t, type Locale } from "@/lib/translations";
 import { useEffectiveLocale } from "@/lib/useEffectiveLocale";
 
 type ServiceKey = "legal" | "advisory" | "accounting";
 
-const serviceIcons: Record<ServiceKey, string> = {
-  legal: "/assets/icon-legal.svg",
-  advisory: "/assets/icon-advisory.svg",
-  accounting: "/assets/icon-accounting.svg",
-};
+const order: ServiceKey[] = ["legal", "advisory", "accounting"];
 
-// Compass needle natural direction is south-west (lower-left).
-// Rotating counterclockwise (negative deg) moves the tip clockwise around
-// the dial: SW (legal) → S (advisory) → SE (accounting).
+// Compass needle natural direction is south-west (lower-left), which
+// matches the "Legal" label position. From there we rotate the needle
+// clockwise to point at each label:
+//   legal      → SW (default)
+//   advisory   → SE  → +90°
+//   accounting → N   → +225° (or -135°)
 const compassRotation: Record<ServiceKey, number> = {
   legal: 0,
-  advisory: -45,
-  accounting: -90,
+  advisory: 90,
+  accounting: -135,
 };
 
 export default function Services({ locale = "en" }: { locale?: Locale }) {
   const [active, setActive] = useState<ServiceKey>("legal");
   const effectiveLocale = useEffectiveLocale(locale);
   const tr = t(effectiveLocale).services;
-  const orderedServices: ServiceKey[] = ["legal", "advisory", "accounting"];
-  const marqueeWords = [
-    tr.cards.legal.title,
-    tr.cards.advisory.title,
-    tr.cards.accounting.title,
-    tr.cards.advisory.title,
-    tr.cards.legal.title,
-    tr.cards.accounting.title,
-  ];
+
+  const activeIdx = order.indexOf(active);
+  const goTo = (delta: number) => {
+    const next = (activeIdx + delta + order.length) % order.length;
+    setActive(order[next]);
+  };
 
   return (
     <section id="what" className="bg-white px-2 pt-3 sm:px-4 sm:pt-4">
-      {/* Yellow card with marquee */}
-      <div className="relative overflow-hidden rounded-2xl bg-daftime-yellow">
-        {/* Vertical lines decoration (hidden on small) */}
+      <div className="relative overflow-hidden rounded-2xl bg-black">
+        {/* Vertical lines decoration */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-[1176px] -translate-x-1/2 justify-between md:flex">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="h-full w-px bg-black/[0.04]" />
+            <div key={i} className="h-full w-px bg-white/[0.04]" />
           ))}
         </div>
 
-        {/* Marquee */}
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 overflow-hidden">
-          <div className="marquee-track items-center gap-4 sm:gap-6">
-            {[...marqueeWords, ...marqueeWords, ...marqueeWords].map(
-              (word, idx) => (
-                <div
-                  key={idx}
-                  className="flex shrink-0 items-center gap-4 sm:gap-6"
-                >
-                  <span className="whitespace-nowrap text-[36px] leading-[1.1] tracking-[-0.04em] text-daftime-yellow-dark sm:text-[48px] md:text-[64px]">
-                    {word}
-                  </span>
-                  <span className="size-[10px] shrink-0 rounded-full bg-daftime-yellow-dark/70 sm:size-[13px]" />
-                </div>
-              ),
-            )}
-          </div>
-        </div>
-
-        {/* Compass (interactive: rotates toward the active service card) */}
-        <div className="pointer-events-none absolute left-1/2 top-[46%] -translate-x-1/2 sm:top-[36%] md:top-[28%]">
-          <div
-            className="size-[120px] sm:size-[180px] md:size-[260px] lg:size-[309px]"
-            style={{
-              transform: `rotate(${compassRotation[active]}deg)`,
-              transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
-              willChange: "transform",
-            }}
-          >
-            <Image
-              src="/assets/compass.svg"
-              alt=""
-              width={309}
-              height={309}
-              className="size-full object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
-              priority={false}
-            />
-          </div>
-        </div>
-
-        {/* Header */}
-        <div className="relative flex flex-col items-start justify-between gap-6 px-5 pt-10 pb-[260px] sm:gap-8 sm:px-8 sm:pt-12 sm:pb-[340px] md:flex-row md:items-center md:px-10 md:pt-14 md:pb-[420px]">
+        {/* Header: eyebrow left, heading right */}
+        <div className="relative flex flex-col items-start justify-between gap-6 px-5 pt-10 sm:gap-8 sm:px-8 sm:pt-12 md:flex-row md:items-center md:px-10 md:pt-14">
           <Reveal className="flex shrink-0 items-center gap-2">
-            <div className="size-1 rounded-full bg-[#070a33]" />
-            <p className="label-mono text-[#070a33]">{tr.eyebrow}</p>
+            <div className="size-1 rounded-full bg-white" />
+            <p className="label-mono text-white">{tr.eyebrow}</p>
           </Reveal>
-          <Reveal as="h2" delay={120} className="min-w-0 flex-1">
-            <span className="h-display block text-balance text-black md:text-right">
+          <Reveal as="h2" delay={120} className="min-w-0 max-w-[874px] flex-1">
+            <span className="h-display block text-balance text-white md:text-right">
               {tr.heading}
             </span>
           </Reveal>
         </div>
 
-        {/* Subtext at bottom */}
-        <div className="relative px-5 pb-8 sm:px-8 sm:pb-10 md:px-10 md:pb-12">
-          <Reveal>
-            <p className="text-[18px] leading-snug tracking-tight text-black sm:text-[20px] md:text-[24px]">
-              {tr.subtitle}
-            </p>
+        {/* Body: text left, compass right */}
+        <div className="relative grid grid-cols-1 gap-10 px-5 pb-12 pt-10 sm:px-8 sm:pb-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:items-center md:gap-12 md:px-10 md:pb-20 md:pt-16">
+          {/* Left column */}
+          <Reveal className="flex flex-col gap-12 md:gap-[80px]">
+            <div className="flex flex-col gap-5">
+              <p
+                key={`num-${active}`}
+                className="fade-up text-[64px] leading-[1.05] tracking-[-0.04em] text-[#3f3d3d] sm:text-[80px] md:text-[100px]"
+              >
+                {String(activeIdx + 1).padStart(2, "0")}
+              </p>
+              <div className="flex flex-col gap-4 text-white">
+                <h3
+                  key={`title-${active}`}
+                  className="fade-up h-display text-white"
+                >
+                  {tr.cards[active].title}
+                </h3>
+                <p
+                  key={`desc-${active}`}
+                  className="fade-up max-w-[542px] text-[16px] leading-[1.4] tracking-tight text-white/90 sm:text-[18px] md:text-[20px]"
+                >
+                  {tr.cards[active].description}
+                </p>
+              </div>
+            </div>
+            {/* Pagination */}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Previous service"
+                onClick={() => goTo(-1)}
+                className="flex size-9 items-center justify-center rounded-lg bg-white text-black transition-opacity hover:opacity-90"
+              >
+                <ArrowIcon className="rotate-180" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next service"
+                onClick={() => goTo(1)}
+                className="flex size-9 items-center justify-center rounded-lg bg-white text-black transition-opacity hover:opacity-90"
+              >
+                <ArrowIcon />
+              </button>
+            </div>
+          </Reveal>
+
+          {/* Right column: compass + labels */}
+          <Reveal
+            delay={120}
+            className="relative mx-auto aspect-square w-full max-w-[520px]"
+          >
+            {/* Accounting label — top center */}
+            <CompassLabel
+              label={tr.cards.accounting.title}
+              active={active === "accounting"}
+              onClick={() => setActive("accounting")}
+              className="absolute left-1/2 top-0 -translate-x-1/2"
+            />
+
+            {/* Compass */}
+            <div className="absolute left-1/2 top-1/2 w-[60%] -translate-x-1/2 -translate-y-1/2">
+              <div
+                className="aspect-square"
+                style={{
+                  transform: `rotate(${compassRotation[active]}deg)`,
+                  transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
+                  willChange: "transform",
+                }}
+              >
+                <Image
+                  src="/assets/compass.svg"
+                  alt=""
+                  width={309}
+                  height={309}
+                  className="size-full object-contain"
+                  priority={false}
+                />
+              </div>
+            </div>
+
+            {/* Legal — bottom-left */}
+            <CompassLabel
+              label={tr.cards.legal.title}
+              active={active === "legal"}
+              onClick={() => setActive("legal")}
+              className="absolute bottom-0 left-0"
+            />
+
+            {/* Advisory — bottom-right */}
+            <CompassLabel
+              label={tr.cards.advisory.title}
+              active={active === "advisory"}
+              onClick={() => setActive("advisory")}
+              className="absolute bottom-0 right-0"
+            />
           </Reveal>
         </div>
       </div>
-
-      {/* Three cards below */}
-      <div
-        className="grid grid-cols-1 gap-10 px-2 py-12 sm:px-4 md:grid-cols-3 md:gap-12 md:px-12 md:py-16"
-        style={{ perspective: 1000 }}
-      >
-        {orderedServices.map((key, idx) => (
-          <Reveal
-            key={key}
-            delay={idx * 120}
-            className="flex flex-col gap-5 sm:gap-6"
-          >
-            <TiltCard
-              intensity={6}
-              glare={false}
-              className="rounded-2xl"
-              style={{ transformStyle: "preserve-3d" } as never}
-            >
-              <div
-                role="button"
-                tabIndex={0}
-                onMouseEnter={() => setActive(key)}
-                onFocus={() => setActive(key)}
-                onClick={() => setActive(key)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActive(key);
-                  }
-                }}
-                className={
-                  "flex cursor-pointer flex-col gap-5 transition-all duration-300 sm:gap-6 " +
-                  (active === key
-                    ? "opacity-100"
-                    : "opacity-80 hover:opacity-100")
-                }
-              >
-              <div className="flex items-center gap-4 sm:gap-6">
-                <div
-                  className={
-                    "flex size-16 items-center justify-center overflow-hidden rounded-xl border transition-all duration-300 sm:size-20 " +
-                    (active === key
-                      ? "scale-105 border-daftime-yellow bg-daftime-yellow/15"
-                      : "border-daftime-gray-border")
-                  }
-                >
-                  <Image
-                    src={serviceIcons[key]}
-                    alt=""
-                    width={48}
-                    height={48}
-                    className="size-10 object-contain sm:size-12"
-                  />
-                </div>
-                <h3 className="text-[22px] tracking-tight text-black sm:text-[25px]">
-                  {tr.cards[key].title}
-                </h3>
-              </div>
-              <p className="text-[15px] leading-relaxed tracking-tight text-black sm:text-[16px]">
-                {tr.cards[key].description}
-              </p>
-              </div>
-            </TiltCard>
-          </Reveal>
-        ))}
-      </div>
     </section>
+  );
+}
+
+function CompassLabel({
+  label,
+  active,
+  onClick,
+  className,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={
+        (className || "") +
+        " whitespace-nowrap text-[28px] leading-[1.1] tracking-[-0.04em] transition-colors duration-300 sm:text-[34px] md:text-[42px] " +
+        (active ? "text-daftime-yellow" : "text-white hover:text-white/80")
+      }
+    >
+      {label}
+    </button>
+  );
+}
+
+function ArrowIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      className={className}
+      aria-hidden
+    >
+      <path
+        d="M2.5 6h7M6.5 2.5L10 6l-3.5 3.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
